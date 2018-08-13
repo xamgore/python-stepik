@@ -1,0 +1,102 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/stripe-plans",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/stripe-plans",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Stripe_Plan_list",
+          "notes": "",
+          "type": "StripePlanSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "tariff",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-plans/{pk}/compute-price",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteStripePlanSerializer": {
+      "id": "WriteStripePlanSerializer",
+      "required": [
+        "code",
+        "currency"
+      ],
+      "properties": {
+        "code": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "currency": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    "StripePlanSerializer": {
+      "id": "StripePlanSerializer",
+      "required": [
+        "id",
+        "code",
+        "currency"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "code": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "currency": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            1,
+            2
+          ]
+        }
+      }
+    }
+  }
+}

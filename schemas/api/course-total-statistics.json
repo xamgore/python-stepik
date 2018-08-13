@@ -1,0 +1,252 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-total-statistics",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-total-statistics",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Total_Statistics_list",
+          "notes": "",
+          "type": "CourseTotalStatisticsSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-total-statistics/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Total_Statistics_retrieve",
+          "notes": "",
+          "type": "CourseTotalStatisticsSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseTotalStatisticsSerializer": {
+      "id": "WriteCourseTotalStatisticsSerializer",
+      "required": [
+        "course",
+        "learners_count",
+        "moderators_count",
+        "testers_count",
+        "enrollments_count",
+        "dropouts_count",
+        "certificates_count"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "learners_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "moderators_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "testers_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "enrollments_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "dropouts_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "certificates_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseTotalStatisticsSerializer": {
+      "id": "CourseTotalStatisticsSerializer",
+      "required": [
+        "id",
+        "course",
+        "learners_count",
+        "moderators_count",
+        "testers_count",
+        "enrollments_count",
+        "dropouts_count",
+        "certificates_count",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "learners_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "moderators_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "testers_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "enrollments_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "dropouts_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "certificates_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

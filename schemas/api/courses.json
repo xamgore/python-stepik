@@ -1,0 +1,1871 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/courses",
+  "apis": [
+    {
+      "description": "Course resource",
+      "path": "/api/courses",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course resource",
+          "nickname": "Course_list",
+          "notes": "Course resource.\nCourse is a list of lessons.",
+          "type": "CourseSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "tag",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "language",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "af",
+                "ar",
+                "ast",
+                "az",
+                "bg",
+                "be",
+                "bn",
+                "br",
+                "bs",
+                "ca",
+                "cs",
+                "cy",
+                "da",
+                "de",
+                "dsb",
+                "el",
+                "en",
+                "en-au",
+                "en-gb",
+                "eo",
+                "es",
+                "es-ar",
+                "es-co",
+                "es-mx",
+                "es-ni",
+                "es-ve",
+                "et",
+                "eu",
+                "fa",
+                "fi",
+                "fr",
+                "fy",
+                "ga",
+                "gd",
+                "gl",
+                "he",
+                "hi",
+                "hr",
+                "hsb",
+                "hu",
+                "ia",
+                "id",
+                "io",
+                "is",
+                "it",
+                "ja",
+                "ka",
+                "kk",
+                "km",
+                "kn",
+                "ko",
+                "lb",
+                "lt",
+                "lv",
+                "mk",
+                "ml",
+                "mn",
+                "mr",
+                "my",
+                "nb",
+                "ne",
+                "nl",
+                "nn",
+                "os",
+                "pa",
+                "pl",
+                "pt",
+                "pt-br",
+                "ro",
+                "ru",
+                "sk",
+                "sl",
+                "sq",
+                "sr",
+                "sr-latn",
+                "sv",
+                "sw",
+                "ta",
+                "te",
+                "th",
+                "tr",
+                "tt",
+                "udm",
+                "uk",
+                "ur",
+                "vi",
+                "zh-hans",
+                "zh-hant"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "owner",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_idea_compatible",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_public",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_promoted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_ended",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_popular",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unsuitable",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_paid",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "enrolled",
+              "description": "all courses current user is enrolled to (learners).",
+              "type": "boolean",
+              "format": "boolean",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Course resource",
+      "path": "/api/courses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course resource",
+          "nickname": "Course_retrieve",
+          "notes": "Course resource.\nCourse is a list of lessons.",
+          "type": "CourseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "tag",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "language",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "af",
+                "ar",
+                "ast",
+                "az",
+                "bg",
+                "be",
+                "bn",
+                "br",
+                "bs",
+                "ca",
+                "cs",
+                "cy",
+                "da",
+                "de",
+                "dsb",
+                "el",
+                "en",
+                "en-au",
+                "en-gb",
+                "eo",
+                "es",
+                "es-ar",
+                "es-co",
+                "es-mx",
+                "es-ni",
+                "es-ve",
+                "et",
+                "eu",
+                "fa",
+                "fi",
+                "fr",
+                "fy",
+                "ga",
+                "gd",
+                "gl",
+                "he",
+                "hi",
+                "hr",
+                "hsb",
+                "hu",
+                "ia",
+                "id",
+                "io",
+                "is",
+                "it",
+                "ja",
+                "ka",
+                "kk",
+                "km",
+                "kn",
+                "ko",
+                "lb",
+                "lt",
+                "lv",
+                "mk",
+                "ml",
+                "mn",
+                "mr",
+                "my",
+                "nb",
+                "ne",
+                "nl",
+                "nn",
+                "os",
+                "pa",
+                "pl",
+                "pt",
+                "pt-br",
+                "ro",
+                "ru",
+                "sk",
+                "sl",
+                "sq",
+                "sr",
+                "sr-latn",
+                "sv",
+                "sw",
+                "ta",
+                "te",
+                "th",
+                "tr",
+                "tt",
+                "udm",
+                "uk",
+                "ur",
+                "vi",
+                "zh-hans",
+                "zh-hant"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "owner",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_idea_compatible",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_public",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_promoted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_ended",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_popular",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unsuitable",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_paid",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Course resource",
+      "path": "/api/courses/{pk}/distinction",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course resource",
+          "nickname": "Course_distinction",
+          "notes": "Course resource.\nCourse is a list of lessons.",
+          "type": "CourseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "tag",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "language",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "af",
+                "ar",
+                "ast",
+                "az",
+                "bg",
+                "be",
+                "bn",
+                "br",
+                "bs",
+                "ca",
+                "cs",
+                "cy",
+                "da",
+                "de",
+                "dsb",
+                "el",
+                "en",
+                "en-au",
+                "en-gb",
+                "eo",
+                "es",
+                "es-ar",
+                "es-co",
+                "es-mx",
+                "es-ni",
+                "es-ve",
+                "et",
+                "eu",
+                "fa",
+                "fi",
+                "fr",
+                "fy",
+                "ga",
+                "gd",
+                "gl",
+                "he",
+                "hi",
+                "hr",
+                "hsb",
+                "hu",
+                "ia",
+                "id",
+                "io",
+                "is",
+                "it",
+                "ja",
+                "ka",
+                "kk",
+                "km",
+                "kn",
+                "ko",
+                "lb",
+                "lt",
+                "lv",
+                "mk",
+                "ml",
+                "mn",
+                "mr",
+                "my",
+                "nb",
+                "ne",
+                "nl",
+                "nn",
+                "os",
+                "pa",
+                "pl",
+                "pt",
+                "pt-br",
+                "ro",
+                "ru",
+                "sk",
+                "sl",
+                "sq",
+                "sr",
+                "sr-latn",
+                "sv",
+                "sw",
+                "ta",
+                "te",
+                "th",
+                "tr",
+                "tt",
+                "udm",
+                "uk",
+                "ur",
+                "vi",
+                "zh-hans",
+                "zh-hant"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "owner",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_idea_compatible",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_public",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_promoted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_ended",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_popular",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unsuitable",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_paid",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Course resource",
+      "path": "/api/courses/{pk}/regular",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course resource",
+          "nickname": "Course_regular",
+          "notes": "Course resource.\nCourse is a list of lessons.",
+          "type": "CourseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "is_featured",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "tag",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "language",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "af",
+                "ar",
+                "ast",
+                "az",
+                "bg",
+                "be",
+                "bn",
+                "br",
+                "bs",
+                "ca",
+                "cs",
+                "cy",
+                "da",
+                "de",
+                "dsb",
+                "el",
+                "en",
+                "en-au",
+                "en-gb",
+                "eo",
+                "es",
+                "es-ar",
+                "es-co",
+                "es-mx",
+                "es-ni",
+                "es-ve",
+                "et",
+                "eu",
+                "fa",
+                "fi",
+                "fr",
+                "fy",
+                "ga",
+                "gd",
+                "gl",
+                "he",
+                "hi",
+                "hr",
+                "hsb",
+                "hu",
+                "ia",
+                "id",
+                "io",
+                "is",
+                "it",
+                "ja",
+                "ka",
+                "kk",
+                "km",
+                "kn",
+                "ko",
+                "lb",
+                "lt",
+                "lv",
+                "mk",
+                "ml",
+                "mn",
+                "mr",
+                "my",
+                "nb",
+                "ne",
+                "nl",
+                "nn",
+                "os",
+                "pa",
+                "pl",
+                "pt",
+                "pt-br",
+                "ro",
+                "ru",
+                "sk",
+                "sl",
+                "sq",
+                "sr",
+                "sr-latn",
+                "sv",
+                "sw",
+                "ta",
+                "te",
+                "th",
+                "tr",
+                "tt",
+                "udm",
+                "uk",
+                "ur",
+                "vi",
+                "zh-hans",
+                "zh-hant"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "owner",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_idea_compatible",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_public",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_promoted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "schedule_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_ended",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_popular",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unsuitable",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_paid",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseSerializer": {
+      "id": "WriteCourseSerializer",
+      "required": [
+        "sections",
+        "language",
+        "title"
+      ],
+      "properties": {
+        "summary": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "workload": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "intro": {
+          "description": null,
+          "type": "url",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "course_format": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "target_audience": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "is_certificate_auto_issued": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "certificate_regular_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "certificate_distinction_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "instructors": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "certificate": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "requirements": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "sections": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_adaptive": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_idea_compatible": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "intro_video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "authors": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "tags": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "is_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "language": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "en",
+          "readOnly": false,
+          "enum": [
+            "af",
+            "ar",
+            "ast",
+            "az",
+            "bg",
+            "be",
+            "bn",
+            "br",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "dsb",
+            "el",
+            "en",
+            "en-au",
+            "en-gb",
+            "eo",
+            "es",
+            "es-ar",
+            "es-co",
+            "es-mx",
+            "es-ni",
+            "es-ve",
+            "et",
+            "eu",
+            "fa",
+            "fi",
+            "fr",
+            "fy",
+            "ga",
+            "gd",
+            "gl",
+            "he",
+            "hi",
+            "hr",
+            "hsb",
+            "hu",
+            "ia",
+            "id",
+            "io",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "km",
+            "kn",
+            "ko",
+            "lb",
+            "lt",
+            "lv",
+            "mk",
+            "ml",
+            "mn",
+            "mr",
+            "my",
+            "nb",
+            "ne",
+            "nl",
+            "nn",
+            "os",
+            "pa",
+            "pl",
+            "pt",
+            "pt-br",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sq",
+            "sr",
+            "sr-latn",
+            "sv",
+            "sw",
+            "ta",
+            "te",
+            "th",
+            "tr",
+            "tt",
+            "udm",
+            "uk",
+            "ur",
+            "vi",
+            "zh-hans",
+            "zh-hant"
+          ]
+        },
+        "is_public": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": false
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "lti_consumer_key": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lti_secret_key": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseSerializer": {
+      "id": "CourseSerializer",
+      "required": [
+        "id",
+        "summary",
+        "workload",
+        "cover",
+        "intro",
+        "course_format",
+        "target_audience",
+        "certificate_footer",
+        "certificate_cover_org",
+        "is_certificate_auto_issued",
+        "certificate_regular_threshold",
+        "certificate_distinction_threshold",
+        "instructors",
+        "certificate",
+        "requirements",
+        "description",
+        "sections",
+        "total_units",
+        "enrollment",
+        "is_favorite",
+        "actions",
+        "progress",
+        "first_lesson",
+        "first_unit",
+        "certificate_link",
+        "certificate_regular_link",
+        "certificate_distinction_link",
+        "schedule_link",
+        "schedule_long_link",
+        "first_deadline",
+        "last_deadline",
+        "subscriptions",
+        "announcements",
+        "is_contest",
+        "is_self_paced",
+        "is_adaptive",
+        "is_idea_compatible",
+        "last_step",
+        "intro_video",
+        "social_providers",
+        "authors",
+        "tags",
+        "has_tutors",
+        "is_promoted",
+        "is_enabled",
+        "is_proctored",
+        "proctor_url",
+        "review_summary",
+        "schedule_type",
+        "certificates_count",
+        "learners_count",
+        "time_to_complete",
+        "is_popular",
+        "similar_courses",
+        "is_unsuitable",
+        "is_paid",
+        "price",
+        "currency_code",
+        "display_price",
+        "continue_url",
+        "readiness",
+        "owner",
+        "language",
+        "is_featured",
+        "is_public",
+        "title",
+        "slug",
+        "begin_date",
+        "end_date",
+        "soft_deadline",
+        "hard_deadline",
+        "grading_policy",
+        "begin_date_source",
+        "end_date_source",
+        "soft_deadline_source",
+        "hard_deadline_source",
+        "grading_policy_source",
+        "is_active",
+        "create_date",
+        "update_date",
+        "learners_group",
+        "testers_group",
+        "moderators_group",
+        "teachers_group",
+        "admins_group",
+        "discussions_count",
+        "discussion_proxy",
+        "discussion_threads",
+        "lti_consumer_key",
+        "lti_secret_key"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "summary": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "workload": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "cover": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "intro": {
+          "description": "text, shown on the about page of the course",
+          "type": "url",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "course_format": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "target_audience": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "certificate_footer": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_cover_org": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_certificate_auto_issued": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "certificate_regular_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "certificate_distinction_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "instructors": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "certificate": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "requirements": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "sections": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "total_units": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "enrollment": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_favorite": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "actions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "progress": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "first_lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "first_unit": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_link": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_regular_link": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_distinction_link": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "schedule_link": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "schedule_long_link": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "first_deadline": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "last_deadline": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "subscriptions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "announcements": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_contest": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_self_paced": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_adaptive": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_idea_compatible": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "last_step": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "intro_video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "social_providers": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "authors": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "tags": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "has_tutors": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_promoted": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "is_proctored": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "proctor_url": {
+          "description": null,
+          "type": "url",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "review_summary": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "schedule_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "certificates_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "learners_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "time_to_complete": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "is_popular": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "similar_courses": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_unsuitable": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_paid": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "price": {
+          "description": null,
+          "type": "decimal",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "currency_code": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "display_price": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "continue_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "readiness": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "owner": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "language": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "en",
+          "readOnly": false,
+          "enum": [
+            "af",
+            "ar",
+            "ast",
+            "az",
+            "bg",
+            "be",
+            "bn",
+            "br",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "dsb",
+            "el",
+            "en",
+            "en-au",
+            "en-gb",
+            "eo",
+            "es",
+            "es-ar",
+            "es-co",
+            "es-mx",
+            "es-ni",
+            "es-ve",
+            "et",
+            "eu",
+            "fa",
+            "fi",
+            "fr",
+            "fy",
+            "ga",
+            "gd",
+            "gl",
+            "he",
+            "hi",
+            "hr",
+            "hsb",
+            "hu",
+            "ia",
+            "id",
+            "io",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "km",
+            "kn",
+            "ko",
+            "lb",
+            "lt",
+            "lv",
+            "mk",
+            "ml",
+            "mn",
+            "mr",
+            "my",
+            "nb",
+            "ne",
+            "nl",
+            "nn",
+            "os",
+            "pa",
+            "pl",
+            "pt",
+            "pt-br",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sq",
+            "sr",
+            "sr-latn",
+            "sv",
+            "sw",
+            "ta",
+            "te",
+            "th",
+            "tr",
+            "tt",
+            "udm",
+            "uk",
+            "ur",
+            "vi",
+            "zh-hans",
+            "zh-hant"
+          ]
+        },
+        "is_featured": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_public": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": false
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "slug": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "begin_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "end_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "soft_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "hard_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "grading_policy": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "learners_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "testers_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "moderators_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "teachers_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "admins_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussions_count": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussion_proxy": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussion_threads": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "lti_consumer_key": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lti_secret_key": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

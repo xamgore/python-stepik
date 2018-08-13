@@ -1,0 +1,104 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/followers",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/followers",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Follower_list",
+          "notes": "",
+          "type": "FollowerSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/followers/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Follower_retrieve",
+          "notes": "",
+          "type": "FollowerSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteFollowerSerializer": {
+      "id": "WriteFollowerSerializer",
+      "required": [
+        "followee"
+      ],
+      "properties": {
+        "followee": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "FollowerSerializer": {
+      "id": "FollowerSerializer",
+      "required": [
+        "id",
+        "followee",
+        "user",
+        "date_joined"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "followee": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "date_joined": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:52.623Z",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/rubrics",
+  "apis": [
+    {
+      "description": "Rubric resource",
+      "path": "/api/rubrics",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Rubric resource",
+          "nickname": "Rubric_list",
+          "notes": "Rubric resource.\nRubric is an element of instruction",
+          "type": "RubricSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Rubric resource",
+      "path": "/api/rubrics/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Rubric resource",
+          "nickname": "Rubric_retrieve",
+          "notes": "Rubric resource.\nRubric is an element of instruction",
+          "type": "RubricSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteRubricSerializer": {
+      "id": "WriteRubricSerializer",
+      "required": [
+        "instruction",
+        "text",
+        "cost",
+        "position"
+      ],
+      "properties": {
+        "instruction": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        }
+      }
+    },
+    "RubricSerializer": {
+      "id": "RubricSerializer",
+      "required": [
+        "id",
+        "instruction",
+        "text",
+        "cost",
+        "position"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "instruction": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

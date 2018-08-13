@@ -1,0 +1,147 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-reviews",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-reviews",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Review_list",
+          "notes": "",
+          "type": "CourseReviewSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-reviews/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Review_retrieve",
+          "notes": "",
+          "type": "CourseReviewSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseReviewSerializer": {
+      "id": "WriteCourseReviewSerializer",
+      "required": [
+        "course",
+        "score"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseReviewSerializer": {
+      "id": "CourseReviewSerializer",
+      "required": [
+        "id",
+        "course",
+        "user",
+        "score",
+        "text",
+        "create_date",
+        "update_date",
+        "translations"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "translations": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

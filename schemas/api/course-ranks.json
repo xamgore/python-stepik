@@ -1,0 +1,172 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-ranks",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-ranks",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Rank_list",
+          "notes": "",
+          "type": "CourseRankSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-ranks/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Rank_retrieve",
+          "notes": "",
+          "type": "CourseRankSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseRankSerializer": {
+      "id": "WriteCourseRankSerializer",
+      "required": [
+        "course",
+        "user",
+        "score"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "users_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseRankSerializer": {
+      "id": "CourseRankSerializer",
+      "required": [
+        "id",
+        "course",
+        "user",
+        "score",
+        "rank",
+        "rank_max",
+        "position",
+        "users_count"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "users_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

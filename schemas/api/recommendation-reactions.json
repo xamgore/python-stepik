@@ -1,0 +1,119 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/recommendation-reactions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/recommendation-reactions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Recommendation_Reaction_list",
+          "notes": "",
+          "type": "RecommendationReactionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteRecommendationReactionSerializer": {
+      "id": "WriteRecommendationReactionSerializer",
+      "required": [
+        "user",
+        "lesson",
+        "reaction",
+        "time"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "reaction": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            2,
+            1,
+            0,
+            -1
+          ]
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:48:13.586Z",
+          "readOnly": false
+        }
+      }
+    },
+    "RecommendationReactionSerializer": {
+      "id": "RecommendationReactionSerializer",
+      "required": [
+        "user",
+        "lesson",
+        "reaction",
+        "time"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "reaction": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            2,
+            1,
+            0,
+            -1
+          ]
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:48:13.586Z",
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

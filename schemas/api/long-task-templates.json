@@ -1,0 +1,22 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/long-task-templates",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/long-task-templates",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Long_Task_Template_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

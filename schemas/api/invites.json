@@ -1,0 +1,51 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/invites",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/invites",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteInviteSerializer": {
+      "id": "WriteInviteSerializer",
+      "required": [
+        "invite_key"
+      ],
+      "properties": {
+        "invite_key": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "InviteSerializer": {
+      "id": "InviteSerializer",
+      "required": [
+        "id",
+        "invite_key"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "invite_key": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

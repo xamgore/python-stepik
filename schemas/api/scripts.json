@@ -1,0 +1,100 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/scripts",
+  "apis": [
+    {
+      "description": "Script resource",
+      "path": "/api/scripts",
+      "operations": []
+    },
+    {
+      "description": "Script resource",
+      "path": "/api/scripts/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Script resource",
+          "nickname": "Script_retrieve",
+          "notes": "Script resource.",
+          "type": "ScriptSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteScriptSerializer": {
+      "id": "WriteScriptSerializer",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ScriptSerializer": {
+      "id": "ScriptSerializer",
+      "required": [
+        "id",
+        "code",
+        "stdout",
+        "stderr",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "code": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "stdout": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "stderr": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            10,
+            20,
+            30
+          ]
+        }
+      }
+    }
+  }
+}

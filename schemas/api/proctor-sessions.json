@@ -1,0 +1,207 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/proctor-sessions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/proctor-sessions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Proctor_Session_list",
+          "notes": "",
+          "type": "ProctorSessionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "section",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "status",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/proctor-sessions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Proctor_Session_retrieve",
+          "notes": "",
+          "type": "ProctorSessionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "section",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "status",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/proctor-sessions/{pk}/start",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/proctor-sessions/{pk}/stop",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/proctor-sessions/{pk}/submit",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteProctorSessionSerializer": {
+      "id": "WriteProctorSessionSerializer",
+      "required": [
+        "section"
+      ],
+      "properties": {
+        "section": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ProctorSessionSerializer": {
+      "id": "ProctorSessionSerializer",
+      "required": [
+        "id",
+        "user",
+        "section",
+        "create_date",
+        "start_date",
+        "stop_date",
+        "submit_date",
+        "comment",
+        "score"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "section": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:48:08.790Z",
+          "readOnly": true
+        },
+        "start_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "stop_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "submit_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "comment": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

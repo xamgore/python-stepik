@@ -1,0 +1,129 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/class-plans",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/class-plans",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Class_Plan_list",
+          "notes": "",
+          "type": "ClassPlanSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/class-plans/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Class_Plan_retrieve",
+          "notes": "",
+          "type": "ClassPlanSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteClassPlanSerializer": {
+      "id": "WriteClassPlanSerializer",
+      "required": [
+        "user",
+        "allowed_students_count",
+        "students_count"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "allowed_students_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "students_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    },
+    "ClassPlanSerializer": {
+      "id": "ClassPlanSerializer",
+      "required": [
+        "id",
+        "user",
+        "allowed_students_count",
+        "students_count",
+        "is_access_restricted"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "allowed_students_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "students_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "is_access_restricted": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

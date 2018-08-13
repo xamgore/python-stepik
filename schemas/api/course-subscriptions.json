@@ -1,0 +1,132 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-subscriptions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-subscriptions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Subscription_list",
+          "notes": "",
+          "type": "CourseSubscriptionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-subscriptions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Subscription_retrieve",
+          "notes": "",
+          "type": "CourseSubscriptionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseSubscriptionSerializer": {
+      "id": "WriteCourseSubscriptionSerializer",
+      "required": [],
+      "properties": {
+        "to_reminders": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "to_announcements": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "to_comments": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseSubscriptionSerializer": {
+      "id": "CourseSubscriptionSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "to_reminders",
+        "to_announcements",
+        "to_comments"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "to_reminders": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "to_announcements": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "to_comments": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

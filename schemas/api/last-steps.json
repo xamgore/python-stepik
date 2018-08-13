@@ -1,0 +1,43 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/last-steps",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/last-steps",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Last_Step_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/last-steps/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Last_Step_retrieve",
+          "notes": "",
+          "type": "object",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

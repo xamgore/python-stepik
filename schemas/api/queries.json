@@ -1,0 +1,59 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/queries",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/queries",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Query_list",
+          "notes": "",
+          "type": "QuerySerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteQuerySerializer": {
+      "id": "WriteQuerySerializer",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "QuerySerializer": {
+      "id": "QuerySerializer",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

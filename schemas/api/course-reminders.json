@@ -1,0 +1,125 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-reminders",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-reminders",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Reminder_list",
+          "notes": "",
+          "type": "CourseReminderSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-reminders/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Reminder_retrieve",
+          "notes": "",
+          "type": "CourseReminderSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseReminderSerializer": {
+      "id": "WriteCourseReminderSerializer",
+      "required": [
+        "course"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseReminderSerializer": {
+      "id": "CourseReminderSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "create_date",
+        "is_active",
+        "payload"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "payload": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/users",
+  "apis": [
+    {
+      "description": "User resource",
+      "path": "/api/users",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "User resource",
+          "nickname": "User_list",
+          "notes": "User resource.",
+          "type": "UserSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "alias",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "User resource",
+      "path": "/api/users/login",
+      "operations": []
+    },
+    {
+      "description": "User resource",
+      "path": "/api/users/logout",
+      "operations": []
+    },
+    {
+      "description": "User resource",
+      "path": "/api/users/reset-password",
+      "operations": []
+    },
+    {
+      "description": "User resource",
+      "path": "/api/users/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "User resource",
+          "nickname": "User_retrieve",
+          "notes": "User resource.",
+          "type": "UserSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "alias",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteUserSerializer": {
+      "id": "WriteUserSerializer",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "is_private": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "short_bio": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "details": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "first_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "last_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "password": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "UserSerializer": {
+      "id": "UserSerializer",
+      "required": [
+        "id",
+        "profile",
+        "is_private",
+        "is_active",
+        "is_guest",
+        "is_organization",
+        "short_bio",
+        "details",
+        "first_name",
+        "last_name",
+        "full_name",
+        "alias",
+        "avatar",
+        "cover",
+        "city",
+        "level",
+        "level_title",
+        "knowledge",
+        "knowledge_rank",
+        "reputation",
+        "reputation_rank",
+        "join_date",
+        "social_profiles",
+        "solved_steps_count",
+        "created_courses_count",
+        "created_lessons_count",
+        "issued_certificates_count",
+        "followers_count"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "profile": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_private": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_active": {
+          "description": "Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": true
+        },
+        "is_guest": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_organization": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "short_bio": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "details": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "first_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "last_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "full_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "alias": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "avatar": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "cover": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "city": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "level": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "level_title": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "knowledge": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "knowledge_rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "reputation": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "reputation_rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "join_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "social_profiles": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "solved_steps_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "created_courses_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "created_lessons_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "issued_certificates_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "followers_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

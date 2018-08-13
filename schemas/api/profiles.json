@@ -1,0 +1,646 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/profiles",
+  "apis": [
+    {
+      "description": "User profile resource",
+      "path": "/api/profiles",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "User profile resource",
+          "nickname": "Profile_list",
+          "notes": "User profile resource.",
+          "type": "ProfileSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "User profile resource",
+      "path": "/api/profiles/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "User profile resource",
+          "nickname": "Profile_retrieve",
+          "notes": "User profile resource.",
+          "type": "ProfileSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "User profile resource",
+      "path": "/api/profiles/{pk}/change-password",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteProfileSerializer": {
+      "id": "WriteProfileSerializer",
+      "required": [
+        "first_name",
+        "last_name",
+        "language",
+        "bit_field"
+      ],
+      "properties": {
+        "first_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "last_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_private": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "language": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "en",
+          "readOnly": false,
+          "enum": [
+            "af",
+            "ar",
+            "ast",
+            "az",
+            "bg",
+            "be",
+            "bn",
+            "br",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "dsb",
+            "el",
+            "en",
+            "en-au",
+            "en-gb",
+            "eo",
+            "es",
+            "es-ar",
+            "es-co",
+            "es-mx",
+            "es-ni",
+            "es-ve",
+            "et",
+            "eu",
+            "fa",
+            "fi",
+            "fr",
+            "fy",
+            "ga",
+            "gd",
+            "gl",
+            "he",
+            "hi",
+            "hr",
+            "hsb",
+            "hu",
+            "ia",
+            "id",
+            "io",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "km",
+            "kn",
+            "ko",
+            "lb",
+            "lt",
+            "lv",
+            "mk",
+            "ml",
+            "mn",
+            "mr",
+            "my",
+            "nb",
+            "ne",
+            "nl",
+            "nn",
+            "os",
+            "pa",
+            "pl",
+            "pt",
+            "pt-br",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sq",
+            "sr",
+            "sr-latn",
+            "sv",
+            "sw",
+            "ta",
+            "te",
+            "th",
+            "tr",
+            "tt",
+            "udm",
+            "uk",
+            "ur",
+            "vi",
+            "zh-hans",
+            "zh-hant"
+          ]
+        },
+        "city": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "short_bio": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "details": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "subscribed_for_mail": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "notification_email_delay": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            300,
+            1800,
+            3600,
+            10800,
+            21600,
+            43200,
+            86400
+          ]
+        },
+        "subscribed_for_marketing": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "subscribed_for_partners": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "subscribed_for_news_en": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "subscribed_for_news_ru": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "bit_field": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "is_web_push_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ProfileSerializer": {
+      "id": "ProfileSerializer",
+      "required": [
+        "id",
+        "first_name",
+        "last_name",
+        "full_name",
+        "is_private",
+        "avatar",
+        "language",
+        "city",
+        "short_bio",
+        "details",
+        "subscribed_for_mail",
+        "notification_email_delay",
+        "notification_status",
+        "is_staff",
+        "is_guest",
+        "can_add_lesson",
+        "can_add_course",
+        "can_add_group",
+        "subscribed_for_marketing",
+        "subscribed_for_partners",
+        "subscribed_for_news_en",
+        "subscribed_for_news_ru",
+        "bit_field",
+        "level",
+        "level_title",
+        "level_abilities",
+        "has_password",
+        "social_accounts",
+        "email_addresses",
+        "is_email_verified",
+        "invite_url",
+        "telegram_bot_url",
+        "subscription_plan",
+        "experiment_choices",
+        "allowed_private_courses_count",
+        "is_web_push_enabled"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "first_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "last_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "full_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_private": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "avatar": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "language": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "en",
+          "readOnly": false,
+          "enum": [
+            "af",
+            "ar",
+            "ast",
+            "az",
+            "bg",
+            "be",
+            "bn",
+            "br",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "dsb",
+            "el",
+            "en",
+            "en-au",
+            "en-gb",
+            "eo",
+            "es",
+            "es-ar",
+            "es-co",
+            "es-mx",
+            "es-ni",
+            "es-ve",
+            "et",
+            "eu",
+            "fa",
+            "fi",
+            "fr",
+            "fy",
+            "ga",
+            "gd",
+            "gl",
+            "he",
+            "hi",
+            "hr",
+            "hsb",
+            "hu",
+            "ia",
+            "id",
+            "io",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "km",
+            "kn",
+            "ko",
+            "lb",
+            "lt",
+            "lv",
+            "mk",
+            "ml",
+            "mn",
+            "mr",
+            "my",
+            "nb",
+            "ne",
+            "nl",
+            "nn",
+            "os",
+            "pa",
+            "pl",
+            "pt",
+            "pt-br",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sq",
+            "sr",
+            "sr-latn",
+            "sv",
+            "sw",
+            "ta",
+            "te",
+            "th",
+            "tr",
+            "tt",
+            "udm",
+            "uk",
+            "ur",
+            "vi",
+            "zh-hans",
+            "zh-hant"
+          ]
+        },
+        "city": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "short_bio": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "details": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "subscribed_for_mail": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "notification_email_delay": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            300,
+            1800,
+            3600,
+            10800,
+            21600,
+            43200,
+            86400
+          ]
+        },
+        "notification_status": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_staff": {
+          "description": "Designates whether the user can log into this admin site.",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_guest": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "can_add_lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "can_add_course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "can_add_group": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "subscribed_for_marketing": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "subscribed_for_partners": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "subscribed_for_news_en": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "subscribed_for_news_ru": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "bit_field": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "level": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "level_title": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "level_abilities": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "has_password": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "social_accounts": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "email_addresses": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_email_verified": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "invite_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "telegram_bot_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "subscription_plan": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "experiment_choices": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "allowed_private_courses_count": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_web_push_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

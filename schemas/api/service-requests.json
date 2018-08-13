@@ -1,0 +1,129 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/service-requests",
+  "apis": [
+    {
+      "description": "ServiceRequest resource",
+      "path": "/api/service-requests",
+      "operations": []
+    },
+    {
+      "description": "ServiceRequest resource",
+      "path": "/api/service-requests/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "ServiceRequest resource",
+          "nickname": "Service_Request_retrieve",
+          "notes": "ServiceRequest resource.",
+          "type": "ServiceRequestSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteServiceRequestSerializer": {
+      "id": "WriteServiceRequestSerializer",
+      "required": [
+        "target",
+        "method"
+      ],
+      "properties": {
+        "target": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "method": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "args": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "kwargs": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceRequestSerializer": {
+      "id": "ServiceRequestSerializer",
+      "required": [
+        "id",
+        "target",
+        "method",
+        "args",
+        "kwargs",
+        "status",
+        "result"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "target": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "method": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "args": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "kwargs": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "status": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "result": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

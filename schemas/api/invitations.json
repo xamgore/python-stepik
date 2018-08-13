@@ -1,0 +1,137 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/invitations",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/invitations",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Invitation_list",
+          "notes": "",
+          "type": "InvitationSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/invitations/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Invitation_retrieve",
+          "notes": "",
+          "type": "InvitationSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteInvitationSerializer": {
+      "id": "WriteInvitationSerializer",
+      "required": [
+        "group"
+      ],
+      "properties": {
+        "group": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "limit": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "InvitationSerializer": {
+      "id": "InvitationSerializer",
+      "required": [
+        "id",
+        "group",
+        "name",
+        "url",
+        "description",
+        "limit"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "group": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "limit": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

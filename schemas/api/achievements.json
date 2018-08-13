@@ -1,0 +1,125 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/achievements",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/achievements",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Achievement_list",
+          "notes": "",
+          "type": "AchievementSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/achievements/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Achievement_retrieve",
+          "notes": "",
+          "type": "AchievementSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteAchievementSerializer": {
+      "id": "WriteAchievementSerializer",
+      "required": [
+        "kind",
+        "target_score",
+        "icon_uploadcare_uuid"
+      ],
+      "properties": {
+        "kind": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "target_score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "icon_uploadcare_uuid": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "AchievementSerializer": {
+      "id": "AchievementSerializer",
+      "required": [
+        "id",
+        "kind",
+        "target_score",
+        "icon_uploadcare_uuid",
+        "icon_urls"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "kind": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "target_score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "icon_uploadcare_uuid": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "icon_urls": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/metrics",
+  "apis": [
+    {
+      "description": "Metric resource",
+      "path": "/api/metrics",
+      "operations": []
+    },
+    {
+      "description": "Metric resource",
+      "path": "/api/metrics/batch",
+      "operations": []
+    }
+  ],
+  "models": {}
+}

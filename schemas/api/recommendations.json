@@ -1,0 +1,64 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/recommendations",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/recommendations",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Recommendation_list",
+          "notes": "",
+          "type": "RecommendationSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteRecommendationSerializer": {
+      "id": "WriteRecommendationSerializer",
+      "required": [],
+      "properties": {}
+    },
+    "RecommendationSerializer": {
+      "id": "RecommendationSerializer",
+      "required": [
+        "id",
+        "lesson",
+        "reasons"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "reasons": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/devices",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/devices",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Device_list",
+          "notes": "",
+          "type": "DeviceSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/devices/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Device_retrieve",
+          "notes": "",
+          "type": "DeviceSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteDeviceSerializer": {
+      "id": "WriteDeviceSerializer",
+      "required": [
+        "registration_id",
+        "description",
+        "client_type"
+      ],
+      "properties": {
+        "registration_id": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "client_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "ios",
+          "readOnly": false,
+          "enum": [
+            "ios",
+            "android",
+            "web"
+          ]
+        },
+        "is_badges_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "DeviceSerializer": {
+      "id": "DeviceSerializer",
+      "required": [
+        "id",
+        "registration_id",
+        "user",
+        "description",
+        "client_type",
+        "is_badges_enabled"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "registration_id": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "client_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "ios",
+          "readOnly": false,
+          "enum": [
+            "ios",
+            "android",
+            "web"
+          ]
+        },
+        "is_badges_enabled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

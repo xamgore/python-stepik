@@ -1,0 +1,268 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/submissions",
+  "apis": [
+    {
+      "description": "Submission resource",
+      "path": "/api/submissions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Submission resource",
+          "nickname": "Submission_list",
+          "notes": "Submission resource.",
+          "type": "SubmissionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "status",
+              "description": "filter by status field. Possible values are 'correct', 'wrong', 'evaluation'",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "user_name",
+              "description": "filter by user name.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "step",
+              "description": "filter by step id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": "filter by user id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "attempt",
+              "description": "filter by attempt id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "search",
+              "description": "search by user name, user email, user id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": "sort by time. Possible values are 'asc' and 'desc'.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "review_status",
+              "description": "filter by review session status. Possible values are 'done' and 'awaiting'.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Submission resource",
+      "path": "/api/submissions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Submission resource",
+          "nickname": "Submission_retrieve",
+          "notes": "Submission resource.",
+          "type": "SubmissionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Submission resource",
+      "path": "/api/submissions/{pk}/file",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Submission resource",
+          "nickname": "Submission_file",
+          "notes": "Submission resource.",
+          "type": "SubmissionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Submission resource",
+      "path": "/api/submissions/{pk}/use-tip",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteSubmissionSerializer": {
+      "id": "WriteSubmissionSerializer",
+      "required": [
+        "attempt"
+      ],
+      "properties": {
+        "reply": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "attempt": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "SubmissionSerializer": {
+      "id": "SubmissionSerializer",
+      "required": [
+        "id",
+        "status",
+        "score",
+        "hint",
+        "feedback",
+        "time",
+        "reply",
+        "reply_url",
+        "attempt",
+        "session",
+        "eta"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            10,
+            20,
+            30
+          ]
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "hint": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "feedback": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "reply": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "reply_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "attempt": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "eta": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

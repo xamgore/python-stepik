@@ -1,0 +1,81 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-images",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-images/{pk}",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteCourseImageSerializer": {
+      "id": "WriteCourseImageSerializer",
+      "required": [],
+      "properties": {
+        "certificate_footer": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "certificate_cover_org": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "cover": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseImageSerializer": {
+      "id": "CourseImageSerializer",
+      "required": [
+        "id",
+        "certificate_footer",
+        "certificate_cover_org",
+        "cover"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_footer": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "certificate_cover_org": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "cover": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

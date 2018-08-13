@@ -1,0 +1,438 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/sections",
+  "apis": [
+    {
+      "description": "Returns a single section",
+      "path": "/api/sections",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single section",
+          "nickname": "Section_list",
+          "notes": "Returns a single section.\nSection is a collection of lessons within a course.",
+          "type": "SectionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Returns a single section",
+      "path": "/api/sections/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single section",
+          "nickname": "Section_retrieve",
+          "notes": "Returns a single section.\nSection is a collection of lessons within a course.",
+          "type": "SectionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteSectionSerializer": {
+      "id": "WriteSectionSerializer",
+      "required": [
+        "course",
+        "units",
+        "position",
+        "required_percent",
+        "exam_duration_minutes",
+        "title"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "units": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "discounting_policy": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "required_section": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "required_percent": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 100,
+          "readOnly": false
+        },
+        "is_exam": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "exam_duration_minutes": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 60,
+          "readOnly": false
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    "SectionSerializer": {
+      "id": "SectionSerializer",
+      "required": [
+        "id",
+        "course",
+        "units",
+        "position",
+        "discounting_policy",
+        "progress",
+        "actions",
+        "required_section",
+        "required_percent",
+        "is_requirement_satisfied",
+        "is_exam",
+        "exam_duration_minutes",
+        "exam_session",
+        "proctor_session",
+        "description",
+        "title",
+        "slug",
+        "begin_date",
+        "end_date",
+        "soft_deadline",
+        "hard_deadline",
+        "grading_policy",
+        "begin_date_source",
+        "end_date_source",
+        "soft_deadline_source",
+        "hard_deadline_source",
+        "grading_policy_source",
+        "is_active",
+        "create_date",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "units": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "discounting_policy": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "progress": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "actions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "required_section": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "required_percent": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 100,
+          "readOnly": false
+        },
+        "is_requirement_satisfied": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_exam": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "exam_duration_minutes": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 60,
+          "readOnly": false
+        },
+        "exam_session": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "proctor_session": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "description": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "slug": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "begin_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "end_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "soft_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "hard_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "grading_policy": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

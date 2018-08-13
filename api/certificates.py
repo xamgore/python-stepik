@@ -1,0 +1,128 @@
+# This file is generated
+from common import required, readonly
+from typing import List
+
+
+class WriteCertificate:
+    def __init__(self, data):
+        self.__data = data
+
+
+    @property
+    def is_public(self) -> bool:
+        """
+        default value: True
+        """
+        return self.__data.setdefault('is_public', True)
+
+
+    @is_public.setter
+    def is_public(self, value: bool):
+        """
+        default value: True
+        """
+        self.__data['is_public'] = value
+
+
+class Certificate:
+    def __init__(self, data):
+        self.__data = data
+
+
+    @readonly
+    @property
+    def id(self) -> int:
+        return self.__data['id']
+
+
+    @required
+    @readonly
+    @property
+    def user(self) -> str:
+        return self.__data['user']
+
+
+    @required
+    @readonly
+    @property
+    def course(self) -> str:
+        return self.__data['course']
+
+
+    @required
+    @readonly
+    @property
+    def issue_date(self) -> str:
+        """
+        default value: "2018-08-10T09:47:18.845Z"
+        """
+        return self.__data.setdefault('issue_date', "2018-08-10T09:47:18.845Z")
+
+
+    @readonly
+    @property
+    def update_date(self) -> str:
+        """
+        Type: datetime
+        """
+        return self.__data['update_date']
+
+
+    @readonly
+    @property
+    def grade(self) -> str:
+        return self.__data['grade']
+
+
+    @readonly
+    @property
+    def type(self) -> str:
+        return self.__data['type']
+
+
+    @readonly
+    @property
+    def url(self) -> str:
+        return self.__data['url']
+
+
+    @readonly
+    @property
+    def preview_url(self) -> str:
+        return self.__data['preview_url']
+
+
+    @property
+    def is_public(self) -> bool:
+        """
+        default value: True
+        """
+        return self.__data.setdefault('is_public', True)
+
+
+    @is_public.setter
+    def is_public(self, value: bool):
+        """
+        default value: True
+        """
+        self.__data['is_public'] = value
+
+
+    @readonly
+    @property
+    def user_rank(self) -> str:
+        return self.__data['user_rank']
+
+
+    @readonly
+    @property
+    def user_rank_max(self) -> str:
+        return self.__data['user_rank_max']
+
+
+    @readonly
+    @property
+    def leaderboard_size(self) -> str:
+        return self.__data['leaderboard_size']
+
+

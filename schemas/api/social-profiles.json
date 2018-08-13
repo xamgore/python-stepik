@@ -1,0 +1,146 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/social-profiles",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/social-profiles",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Social_Profile_list",
+          "notes": "",
+          "type": "SocialProfileSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/social-profiles/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Social_Profile_retrieve",
+          "notes": "",
+          "type": "SocialProfileSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteSocialProfileSerializer": {
+      "id": "WriteSocialProfileSerializer",
+      "required": [
+        "provider",
+        "name"
+      ],
+      "properties": {
+        "provider": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            "facebook",
+            "github",
+            "google",
+            "vk",
+            "coursera",
+            "edx",
+            "twitter",
+            "itmailru",
+            "onlineeduru",
+            "skype",
+            "website",
+            "telegram"
+          ]
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "SocialProfileSerializer": {
+      "id": "SocialProfileSerializer",
+      "required": [
+        "id",
+        "user",
+        "provider",
+        "name",
+        "url"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "provider": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            "facebook",
+            "github",
+            "google",
+            "vk",
+            "coursera",
+            "edx",
+            "twitter",
+            "itmailru",
+            "onlineeduru",
+            "skype",
+            "website",
+            "telegram"
+          ]
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/long-tasks",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/long-tasks",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Long_Task_list",
+          "notes": "",
+          "type": "LongTaskSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                4,
+                5,
+                10,
+                11,
+                12,
+                13,
+                3,
+                14,
+                15,
+                16,
+                17,
+                18,
+                20,
+                21,
+                22,
+                23,
+                19,
+                30,
+                31,
+                40,
+                41,
+                50,
+                51,
+                52,
+                100,
+                101,
+                102,
+                103,
+                104,
+                130
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "step",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "klass",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/long-tasks/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Long_Task_retrieve",
+          "notes": "",
+          "type": "LongTaskSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                1,
+                2,
+                4,
+                5,
+                10,
+                11,
+                12,
+                13,
+                3,
+                14,
+                15,
+                16,
+                17,
+                18,
+                20,
+                21,
+                22,
+                23,
+                19,
+                30,
+                31,
+                40,
+                41,
+                50,
+                51,
+                52,
+                100,
+                101,
+                102,
+                103,
+                104,
+                130
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "step",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "klass",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteLongTaskSerializer": {
+      "id": "WriteLongTaskSerializer",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            1,
+            2,
+            4,
+            5,
+            10,
+            11,
+            12,
+            13,
+            3,
+            14,
+            15,
+            16,
+            17,
+            18,
+            20,
+            21,
+            22,
+            23,
+            19,
+            30,
+            31,
+            40,
+            41,
+            50,
+            51,
+            52,
+            100,
+            101,
+            102,
+            103,
+            104,
+            130
+          ]
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "klass": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "LongTaskSerializer": {
+      "id": "LongTaskSerializer",
+      "required": [
+        "id",
+        "queue_date",
+        "start_date",
+        "finish_date",
+        "user",
+        "type",
+        "status",
+        "result",
+        "course",
+        "lesson",
+        "step",
+        "klass"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "queue_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "start_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "finish_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            1,
+            2,
+            4,
+            5,
+            10,
+            11,
+            12,
+            13,
+            3,
+            14,
+            15,
+            16,
+            17,
+            18,
+            20,
+            21,
+            22,
+            23,
+            19,
+            30,
+            31,
+            40,
+            41,
+            50,
+            51,
+            52,
+            100,
+            101,
+            102,
+            103,
+            104,
+            130
+          ]
+        },
+        "status": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "result": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "klass": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

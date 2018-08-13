@@ -1,0 +1,411 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/announcements",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/announcements",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Announcement_list",
+          "notes": "",
+          "type": "AnnouncementSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/announcements/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Announcement_retrieve",
+          "notes": "",
+          "type": "AnnouncementSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/announcements/{pk}/abort",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/announcements/{pk}/send",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/announcements/{pk}/test",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteAnnouncementSerializer": {
+      "id": "WriteAnnouncementSerializer",
+      "required": [
+        "subject",
+        "text",
+        "score_percent_min",
+        "score_percent_max",
+        "mail_period_days",
+        "mail_quantity"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "subject": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_restricted_by_score": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "score_percent_min": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "score_percent_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 100,
+          "readOnly": false
+        },
+        "email_template": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "is_scheduled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "start_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "mail_period_days": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 7,
+          "readOnly": false
+        },
+        "mail_quantity": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "is_infinite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "on_enroll": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "AnnouncementSerializer": {
+      "id": "AnnouncementSerializer",
+      "required": [
+        "id",
+        "course",
+        "user",
+        "subject",
+        "text",
+        "create_date",
+        "next_date",
+        "sent_date",
+        "status",
+        "is_restricted_by_score",
+        "score_percent_min",
+        "score_percent_max",
+        "email_template",
+        "is_scheduled",
+        "start_date",
+        "mail_period_days",
+        "mail_quantity",
+        "is_infinite",
+        "on_enroll",
+        "publish_count",
+        "queue_count",
+        "sent_count",
+        "open_count",
+        "click_count",
+        "estimated_start_date",
+        "estimated_finish_date",
+        "notice_dates"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "subject": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "next_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "sent_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            7,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "is_restricted_by_score": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "score_percent_min": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "score_percent_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 100,
+          "readOnly": false
+        },
+        "email_template": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "is_scheduled": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "start_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "mail_period_days": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 7,
+          "readOnly": false
+        },
+        "mail_quantity": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "is_infinite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "on_enroll": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "publish_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "queue_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "sent_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "open_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "click_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "estimated_start_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "estimated_finish_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "notice_dates": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

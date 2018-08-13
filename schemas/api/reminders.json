@@ -1,0 +1,22 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/reminders",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/reminders",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Reminder_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

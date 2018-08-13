@@ -1,0 +1,111 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-review-summaries",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-review-summaries",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Review_Summary_list",
+          "notes": "",
+          "type": "CourseReviewSummarySerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-review-summaries/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Review_Summary_retrieve",
+          "notes": "",
+          "type": "CourseReviewSummarySerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseReviewSummarySerializer": {
+      "id": "WriteCourseReviewSummarySerializer",
+      "required": [],
+      "properties": {}
+    },
+    "CourseReviewSummarySerializer": {
+      "id": "CourseReviewSummarySerializer",
+      "required": [
+        "id",
+        "course",
+        "average",
+        "count",
+        "distribution"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "average": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "distribution": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

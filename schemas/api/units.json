@@ -1,0 +1,324 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/units",
+  "apis": [
+    {
+      "description": "Returns a single unit",
+      "path": "/api/units",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single unit",
+          "nickname": "Unit_list",
+          "notes": "Returns a single unit.\nUnit is a lesson within a course.",
+          "type": "UnitSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": "all units with this lesson.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Returns a single unit",
+      "path": "/api/units/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single unit",
+          "nickname": "Unit_retrieve",
+          "notes": "Returns a single unit.\nUnit is a lesson within a course.",
+          "type": "UnitSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteUnitSerializer": {
+      "id": "WriteUnitSerializer",
+      "required": [
+        "section",
+        "lesson",
+        "assignments",
+        "position"
+      ],
+      "properties": {
+        "section": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "assignments": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    "UnitSerializer": {
+      "id": "UnitSerializer",
+      "required": [
+        "id",
+        "section",
+        "lesson",
+        "assignments",
+        "position",
+        "progress",
+        "begin_date",
+        "end_date",
+        "soft_deadline",
+        "hard_deadline",
+        "grading_policy",
+        "begin_date_source",
+        "end_date_source",
+        "soft_deadline_source",
+        "hard_deadline_source",
+        "grading_policy_source",
+        "is_active",
+        "create_date",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "section": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "assignments": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "progress": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "begin_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "end_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "soft_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "hard_deadline": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "grading_policy": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "begin_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "end_date_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "soft_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "hard_deadline_source": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "grading_policy_source": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2,
+            3
+          ]
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

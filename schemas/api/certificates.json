@@ -1,0 +1,168 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/certificates",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/certificates",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Certificate_list",
+          "notes": "",
+          "type": "CertificateSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/certificates/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Certificate_retrieve",
+          "notes": "",
+          "type": "CertificateSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCertificateSerializer": {
+      "id": "WriteCertificateSerializer",
+      "required": [],
+      "properties": {
+        "is_public": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        }
+      }
+    },
+    "CertificateSerializer": {
+      "id": "CertificateSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "issue_date",
+        "update_date",
+        "grade",
+        "type",
+        "url",
+        "preview_url",
+        "is_public",
+        "user_rank",
+        "user_rank_max",
+        "leaderboard_size"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "issue_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:18.845Z",
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "grade": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "type": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "preview_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_public": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "user_rank": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "user_rank_max": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "leaderboard_size": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

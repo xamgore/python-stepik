@@ -1,0 +1,525 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/step-sources",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/step-sources",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Step_Source_list",
+          "notes": "",
+          "type": "StepSourceSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/step-sources/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Step_Source_retrieve",
+          "notes": "",
+          "type": "StepSourceSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/step-sources/{pk}/tests",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Step_Source_tests",
+          "notes": "",
+          "type": "StepSourceSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteStepSourceSerializer": {
+      "id": "WriteStepSourceSerializer",
+      "required": [
+        "position",
+        "block",
+        "solutions_unlocked_attempts",
+        "max_submissions_count",
+        "cost"
+      ],
+      "properties": {
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "block": {
+          "description": null,
+          "type": "BlockEditSerializer",
+          "required": true,
+          "readOnly": false
+        },
+        "is_solutions_unlocked": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "solutions_unlocked_attempts": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "has_submissions_restrictions": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "max_submissions_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    },
+    "StepSourceSerializer": {
+      "id": "StepSourceSerializer",
+      "required": [
+        "id",
+        "lesson",
+        "position",
+        "status",
+        "block",
+        "actions",
+        "progress",
+        "subscriptions",
+        "instruction",
+        "session",
+        "instruction_type",
+        "viewed_by",
+        "passed_by",
+        "correct_ratio",
+        "worth",
+        "is_solutions_unlocked",
+        "solutions_unlocked_attempts",
+        "has_submissions_restrictions",
+        "max_submissions_count",
+        "variation",
+        "variations_count",
+        "create_date",
+        "update_date",
+        "discussions_count",
+        "discussion_proxy",
+        "discussion_threads",
+        "reason_of_failure",
+        "error",
+        "warnings",
+        "cost"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 1,
+          "readOnly": false
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            10,
+            1000,
+            1010
+          ]
+        },
+        "block": {
+          "description": null,
+          "type": "BlockEditSerializer",
+          "required": true,
+          "readOnly": false
+        },
+        "actions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "progress": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "subscriptions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "instruction": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "instruction_type": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "viewed_by": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "passed_by": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "correct_ratio": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "worth": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_solutions_unlocked": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "solutions_unlocked_attempts": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "has_submissions_restrictions": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "max_submissions_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "variation": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "variations_count": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussions_count": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussion_proxy": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discussion_threads": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "reason_of_failure": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "error": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {
+            "text": "",
+            "code": "",
+            "params": {}
+          },
+          "readOnly": true
+        },
+        "warnings": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": true,
+          "defaultValue": [],
+          "readOnly": true
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    },
+    "WriteBlockEditSerializer": {
+      "id": "WriteBlockEditSerializer",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "animation": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "source": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "subtitles": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "feedback_correct": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "feedback_wrong": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "BlockEditSerializer": {
+      "id": "BlockEditSerializer",
+      "required": [
+        "name",
+        "text",
+        "video",
+        "animation",
+        "options",
+        "subtitle_files",
+        "source",
+        "subtitles",
+        "tests_archive",
+        "feedback_correct",
+        "feedback_wrong"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "animation": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "options": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": true
+        },
+        "subtitle_files": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "source": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "subtitles": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "tests_archive": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "feedback_correct": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "feedback_wrong": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

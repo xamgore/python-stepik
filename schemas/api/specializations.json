@@ -1,0 +1,117 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/specializations",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/specializations",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Specialization_list",
+          "notes": "",
+          "type": "SpecializationSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/specializations/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Specialization_retrieve",
+          "notes": "",
+          "type": "SpecializationSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteSpecializationSerializer": {
+      "id": "WriteSpecializationSerializer",
+      "required": [
+        "title",
+        "details_url"
+      ],
+      "properties": {
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "details_url": {
+          "description": null,
+          "type": "url",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "courses": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "SpecializationSerializer": {
+      "id": "SpecializationSerializer",
+      "required": [
+        "id",
+        "title",
+        "details_url",
+        "courses"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "details_url": {
+          "description": null,
+          "type": "url",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "courses": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

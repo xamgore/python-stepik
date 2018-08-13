@@ -1,0 +1,305 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-progress-changes",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-progress-changes",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Progress_Change_list",
+          "notes": "",
+          "type": "CourseProgressChangeSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-progress-changes/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Progress_Change_retrieve",
+          "notes": "",
+          "type": "CourseProgressChangeSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseProgressChangeSerializer": {
+      "id": "WriteCourseProgressChangeSerializer",
+      "required": [
+        "user",
+        "course",
+        "time",
+        "score",
+        "cost",
+        "n_steps",
+        "n_steps_passed",
+        "best_score"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:31.030Z",
+          "readOnly": false
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "n_steps": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "n_steps_passed": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "best_score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "users_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "is_teacher": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "date_joined": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "last_viewed": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CourseProgressChangeSerializer": {
+      "id": "CourseProgressChangeSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "time",
+        "score",
+        "cost",
+        "n_steps",
+        "n_steps_passed",
+        "best_score",
+        "rank",
+        "rank_max",
+        "rank_position",
+        "users_count",
+        "is_teacher",
+        "date_joined",
+        "last_viewed"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:31.030Z",
+          "readOnly": false
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "cost": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "n_steps": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "n_steps_passed": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        },
+        "best_score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "rank_position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "users_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": false
+        },
+        "is_teacher": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "date_joined": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "last_viewed": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

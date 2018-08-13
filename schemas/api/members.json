@@ -1,0 +1,132 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/members",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/members",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Member_list",
+          "notes": "",
+          "type": "MemberSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/members/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Member_retrieve",
+          "notes": "",
+          "type": "MemberSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteMemberSerializer": {
+      "id": "WriteMemberSerializer",
+      "required": [
+        "group"
+      ],
+      "properties": {
+        "group": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "is_synced": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "MemberSerializer": {
+      "id": "MemberSerializer",
+      "required": [
+        "id",
+        "group",
+        "user",
+        "date_joined",
+        "is_synced"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "group": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "date_joined": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:48:04.316Z",
+          "readOnly": true
+        },
+        "is_synced": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

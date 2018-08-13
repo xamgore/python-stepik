@@ -1,0 +1,69 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/stripe-coupons",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/stripe-coupons",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Stripe_Coupon_list",
+          "notes": "",
+          "type": "StripeCouponSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteStripeCouponSerializer": {
+      "id": "WriteStripeCouponSerializer",
+      "required": [
+        "percent_off"
+      ],
+      "properties": {
+        "percent_off": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "StripeCouponSerializer": {
+      "id": "StripeCouponSerializer",
+      "required": [
+        "id",
+        "percent_off"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "percent_off": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

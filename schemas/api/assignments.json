@@ -1,0 +1,118 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/assignments",
+  "apis": [
+    {
+      "description": "Returns a single assignment",
+      "path": "/api/assignments",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single assignment",
+          "nickname": "Assignment_list",
+          "notes": "Returns a single assignment.\nAssignment is a step within a course.",
+          "type": "AssignmentSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Returns a single assignment",
+      "path": "/api/assignments/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns a single assignment",
+          "nickname": "Assignment_retrieve",
+          "notes": "Returns a single assignment.\nAssignment is a step within a course.",
+          "type": "AssignmentSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteAssignmentSerializer": {
+      "id": "WriteAssignmentSerializer",
+      "required": [
+        "step"
+      ],
+      "properties": {
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "AssignmentSerializer": {
+      "id": "AssignmentSerializer",
+      "required": [
+        "id",
+        "unit",
+        "step",
+        "progress",
+        "create_date",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "unit": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "progress": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/stripe-subscriptions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Stripe_Subscription_list",
+          "notes": "",
+          "type": "StripeSubscriptionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions/subscribe-advanced",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions/subscribe-simple",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Stripe_Subscription_retrieve",
+          "notes": "",
+          "type": "StripeSubscriptionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions/{pk}/unsubscribe",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/stripe-subscriptions/{pk}/update-card",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteStripeSubscriptionSerializer": {
+      "id": "WriteStripeSubscriptionSerializer",
+      "required": [],
+      "properties": {
+        "customer_email": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "coupon_code": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "StripeSubscriptionSerializer": {
+      "id": "StripeSubscriptionSerializer",
+      "required": [
+        "id",
+        "user",
+        "customer_email",
+        "subscription_id",
+        "update_date",
+        "valid_until",
+        "coupon_code",
+        "private_courses",
+        "card_digits",
+        "discount_end",
+        "display_amount"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "customer_email": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "subscription_id": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "valid_until": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "coupon_code": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "private_courses": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "card_digits": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "discount_end": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "display_amount": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

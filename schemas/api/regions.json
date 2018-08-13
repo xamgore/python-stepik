@@ -1,0 +1,165 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/regions",
+  "apis": [
+    {
+      "description": "Region resource",
+      "path": "/api/regions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Region resource",
+          "nickname": "Region_list",
+          "notes": "Region resource.",
+          "type": "RegionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Region resource",
+      "path": "/api/regions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Region resource",
+          "nickname": "Region_retrieve",
+          "notes": "Region resource.",
+          "type": "RegionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteRegionSerializer": {
+      "id": "WriteRegionSerializer",
+      "required": [
+        "name_std",
+        "alt_names"
+      ],
+      "properties": {
+        "name_std": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionSerializer": {
+      "id": "RegionSerializer",
+      "required": [
+        "id",
+        "name_std",
+        "alt_names"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "name_std": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WriteAlternativeNameSerializer": {
+      "id": "WriteAlternativeNameSerializer",
+      "required": [
+        "name",
+        "language"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "language": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_preferred": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "AlternativeNameSerializer": {
+      "id": "AlternativeNameSerializer",
+      "required": [
+        "name",
+        "language",
+        "is_preferred"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "language": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_preferred": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

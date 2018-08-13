@@ -1,0 +1,43 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/search-reactions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/search-reactions",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteSearchReactionSerializer": {
+      "id": "WriteSearchReactionSerializer",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "SearchReactionSerializer": {
+      "id": "SearchReactionSerializer",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

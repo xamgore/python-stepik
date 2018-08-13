@@ -1,0 +1,61 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/goal-metrics",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/goal-metrics",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteGoalMetricSerializer": {
+      "id": "WriteGoalMetricSerializer",
+      "required": [
+        "goal_name",
+        "value"
+      ],
+      "properties": {
+        "goal_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "value": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    },
+    "GoalMetricSerializer": {
+      "id": "GoalMetricSerializer",
+      "required": [
+        "goal_name",
+        "value"
+      ],
+      "properties": {
+        "goal_name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "value": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

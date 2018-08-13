@@ -1,0 +1,268 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-grades",
+  "apis": [
+    {
+      "description": "Course grade resource",
+      "path": "/api/course-grades",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course grade resource",
+          "nickname": "Course_Grade_list",
+          "notes": "Course grade resource.",
+          "type": "CourseGradeSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": "filter by course id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": "filter by user id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "is_teacher",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "klass",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "search",
+              "description": "search by user id, name and email.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Course grade resource",
+      "path": "/api/course-grades/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Course grade resource",
+          "nickname": "Course_Grade_retrieve",
+          "notes": "Course grade resource.",
+          "type": "CourseGradeSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_teacher",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "klass",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCourseGradeSerializer": {
+      "id": "WriteCourseGradeSerializer",
+      "required": [],
+      "properties": {}
+    },
+    "CourseGradeSerializer": {
+      "id": "CourseGradeSerializer",
+      "required": [
+        "id",
+        "course",
+        "user",
+        "results",
+        "score",
+        "rank",
+        "rank_max",
+        "rank_position",
+        "users_count",
+        "is_teacher",
+        "date_joined",
+        "last_viewed",
+        "certificate_issue_date",
+        "certificate_issue_regular_date",
+        "certificate_issue_distinction_date",
+        "certificate_update_date",
+        "certificate_url"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "results": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "score": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "rank": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "rank_max": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "rank_position": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "users_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "is_teacher": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "date_joined": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "last_viewed": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_issue_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_issue_regular_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_issue_distinction_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_update_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "certificate_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

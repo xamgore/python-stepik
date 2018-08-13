@@ -1,0 +1,43 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/user-activities",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/user-activities",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "User_Activity_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/user-activities/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "User_Activity_retrieve",
+          "notes": "",
+          "type": "object",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

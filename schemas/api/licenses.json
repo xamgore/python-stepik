@@ -1,0 +1,79 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/licenses",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/licenses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "User_License_retrieve",
+          "notes": "",
+          "type": "UserLicenseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteUserLicenseSerializer": {
+      "id": "WriteUserLicenseSerializer",
+      "required": [],
+      "properties": {}
+    },
+    "UserLicenseSerializer": {
+      "id": "UserLicenseSerializer",
+      "required": [
+        "id",
+        "activation_code",
+        "expire_date",
+        "is_personal",
+        "user"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "activation_code": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "expire_date": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_personal": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

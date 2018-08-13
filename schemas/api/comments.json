@@ -1,0 +1,423 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/comments",
+  "apis": [
+    {
+      "description": "Comments resource",
+      "path": "/api/comments",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Comments resource",
+          "nickname": "Comment_list",
+          "notes": "Comments resource.",
+          "type": "CommentSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "parent",
+              "description": "id of the parent comment. Use `parent=null` or `parent=` to select top-level comments (aka discussions)",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "target",
+              "description": "id of the target Step.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Comments resource",
+      "path": "/api/comments/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Comments resource",
+          "nickname": "Comment_retrieve",
+          "notes": "Comments resource.",
+          "type": "CommentSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "parent",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "target",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCommentSerializer": {
+      "id": "WriteCommentSerializer",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "parent": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "target": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_pinned": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_reported": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "attachments": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "thread": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "submission": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CommentSerializer": {
+      "id": "CommentSerializer",
+      "required": [
+        "id",
+        "parent",
+        "user",
+        "user_role",
+        "time",
+        "last_time",
+        "text",
+        "reply_count",
+        "is_deleted",
+        "deleted_by",
+        "deleted_at",
+        "can_edit",
+        "can_moderate",
+        "can_delete",
+        "actions",
+        "target",
+        "replies",
+        "subscriptions",
+        "is_pinned",
+        "pinned_by",
+        "pinned_at",
+        "is_staff_replied",
+        "is_reported",
+        "attachments",
+        "thread",
+        "submission",
+        "edited_by",
+        "edited_at",
+        "epic_count",
+        "abuse_count",
+        "vote",
+        "translations"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "parent": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "user_role": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "last_time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "reply_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "is_deleted": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "deleted_by": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "deleted_at": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "can_edit": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "can_moderate": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "can_delete": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "actions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "target": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "replies": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "subscriptions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_pinned": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "pinned_by": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "pinned_at": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_staff_replied": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        },
+        "is_reported": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "attachments": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "thread": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "submission": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "edited_by": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "edited_at": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "epic_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "abuse_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "vote": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "translations": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/attachments",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/attachments",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Attachment_list",
+          "notes": "",
+          "type": "AttachmentSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/attachments/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Attachment_retrieve",
+          "notes": "",
+          "type": "AttachmentSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "lesson",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteAttachmentSerializer": {
+      "id": "WriteAttachmentSerializer",
+      "required": [
+        "file"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "file": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "AttachmentSerializer": {
+      "id": "AttachmentSerializer",
+      "required": [
+        "id",
+        "name",
+        "size",
+        "course",
+        "lesson",
+        "file",
+        "has_clones"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "size": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "file": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "has_clones": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

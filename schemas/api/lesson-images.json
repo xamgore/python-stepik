@@ -1,0 +1,22 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/lesson-images",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/lesson-images",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Lesson_Image_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

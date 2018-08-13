@@ -1,0 +1,152 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/reviews",
+  "apis": [
+    {
+      "description": "Review resource",
+      "path": "/api/reviews",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Review resource",
+          "nickname": "Review_list",
+          "notes": "Review resource.\nReview represents a student's assessments of someone else submission and mirrors instruction.",
+          "type": "ReviewSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Review resource",
+      "path": "/api/reviews/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Review resource",
+          "nickname": "Review_retrieve",
+          "notes": "Review resource.\nReview represents a student's assessments of someone else submission and mirrors instruction.",
+          "type": "ReviewSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteReviewSerializer": {
+      "id": "WriteReviewSerializer",
+      "required": [
+        "session",
+        "rubric_scores"
+      ],
+      "properties": {
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "target_session": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "rubric_scores": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ReviewSerializer": {
+      "id": "ReviewSerializer",
+      "required": [
+        "id",
+        "session",
+        "target_session",
+        "text",
+        "rubric_scores",
+        "submission",
+        "when_finished",
+        "is_verified"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "target_session": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "rubric_scores": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "submission": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "when_finished": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_verified": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/profile-images",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/profile-images/{pk}",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteProfileImageSerializer": {
+      "id": "WriteProfileImageSerializer",
+      "required": [],
+      "properties": {
+        "avatar": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "ProfileImageSerializer": {
+      "id": "ProfileImageSerializer",
+      "required": [
+        "id",
+        "avatar"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "avatar": {
+          "description": null,
+          "type": "image upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

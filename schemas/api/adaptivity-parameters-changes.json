@@ -1,0 +1,286 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/adaptivity-parameters-changes",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/adaptivity-parameters-changes",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Adaptivity_Parameters_Change_list",
+          "notes": "",
+          "type": "AdaptivityParametersChangeSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/adaptivity-parameters-changes/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Adaptivity_Parameters_Change_retrieve",
+          "notes": "",
+          "type": "AdaptivityParametersChangeSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteAdaptivityParametersChangeSerializer": {
+      "id": "WriteAdaptivityParametersChangeSerializer",
+      "required": [
+        "time"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "tag": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:12.240Z",
+          "readOnly": false
+        },
+        "old_user_skill": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_user_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_lesson_difficulty": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_lesson_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_user_skill": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_user_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_lesson_difficulty": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_lesson_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "AdaptivityParametersChangeSerializer": {
+      "id": "AdaptivityParametersChangeSerializer",
+      "required": [
+        "id",
+        "user",
+        "lesson",
+        "tag",
+        "time",
+        "reason",
+        "predicted_score",
+        "real_score",
+        "solving_time",
+        "attempt_num",
+        "old_user_skill",
+        "old_user_confidence",
+        "old_lesson_difficulty",
+        "old_lesson_confidence",
+        "new_user_skill",
+        "new_user_confidence",
+        "new_lesson_difficulty",
+        "new_lesson_confidence"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "tag": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:47:12.240Z",
+          "readOnly": false
+        },
+        "reason": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "predicted_score": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "real_score": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "solving_time": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "attempt_num": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "old_user_skill": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_user_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_lesson_difficulty": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "old_lesson_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_user_skill": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_user_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_lesson_difficulty": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "new_lesson_confidence": {
+          "description": null,
+          "type": "float",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

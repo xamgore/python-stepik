@@ -1,0 +1,30 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/search-results",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/search-results",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Search_Result_list",
+          "notes": "",
+          "type": "object",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

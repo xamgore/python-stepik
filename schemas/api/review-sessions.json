@@ -1,0 +1,205 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/review-sessions",
+  "apis": [
+    {
+      "description": "ReviewSession resource",
+      "path": "/api/review-sessions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "ReviewSession resource",
+          "nickname": "Session_list",
+          "notes": "ReviewSession resource.\nReviewSession represents a state of reviewing process.",
+          "type": "SessionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "ReviewSession resource",
+      "path": "/api/review-sessions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "ReviewSession resource",
+          "nickname": "Session_retrieve",
+          "notes": "ReviewSession resource.\nReviewSession represents a state of reviewing process.",
+          "type": "SessionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "ReviewSession resource",
+      "path": "/api/review-sessions/{pk}/finish",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteSessionSerializer": {
+      "id": "WriteSessionSerializer",
+      "required": [],
+      "properties": {
+        "instruction": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "submission": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "SessionSerializer": {
+      "id": "SessionSerializer",
+      "required": [
+        "id",
+        "instruction",
+        "submission",
+        "given_reviews",
+        "is_giving_started",
+        "is_giving_finished",
+        "taken_reviews",
+        "is_taking_started",
+        "is_taking_finished",
+        "is_taking_finished_by_teacher",
+        "when_taking_finished_by_teacher",
+        "is_review_available",
+        "is_finished",
+        "score",
+        "available_reviews_count",
+        "active_review",
+        "actions"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "instruction": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "submission": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "given_reviews": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_giving_started": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_giving_finished": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "taken_reviews": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_taking_started": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_taking_finished": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_taking_finished_by_teacher": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "when_taking_finished_by_teacher": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_review_available": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_finished": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "available_reviews_count": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "active_review": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "actions": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

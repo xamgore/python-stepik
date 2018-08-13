@@ -1,0 +1,165 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/instructions",
+  "apis": [
+    {
+      "description": "Instruction resource",
+      "path": "/api/instructions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Instruction resource",
+          "nickname": "Instruction_list",
+          "notes": "Instruction resource.\nInstruction enables peer review for the step.",
+          "type": "InstructionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Instruction resource",
+      "path": "/api/instructions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Instruction resource",
+          "nickname": "Instruction_retrieve",
+          "notes": "Instruction resource.\nInstruction enables peer review for the step.",
+          "type": "InstructionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteInstructionSerializer": {
+      "id": "WriteInstructionSerializer",
+      "required": [
+        "step",
+        "min_reviews",
+        "rubrics"
+      ],
+      "properties": {
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "min_reviews": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "strategy_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "rubrics": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "InstructionSerializer": {
+      "id": "InstructionSerializer",
+      "required": [
+        "id",
+        "step",
+        "min_reviews",
+        "strategy_type",
+        "rubrics",
+        "is_frozen",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "min_reviews": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 3,
+          "readOnly": false
+        },
+        "strategy_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "rubrics": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_frozen": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

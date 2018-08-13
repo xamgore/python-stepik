@@ -1,0 +1,287 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/notifications",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/notifications",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Notification_list",
+          "notes": "",
+          "type": "NotificationSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "is_muted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unread",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_favorite",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/notifications/mark-as-read",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/notifications/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Notification_retrieve",
+          "notes": "",
+          "type": "NotificationSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "is_muted",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_unread",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_favorite",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteNotificationSerializer": {
+      "id": "WriteNotificationSerializer",
+      "required": [],
+      "properties": {
+        "is_unread": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "is_muted": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_favorite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "NotificationSerializer": {
+      "id": "NotificationSerializer",
+      "required": [
+        "id",
+        "is_unread",
+        "is_muted",
+        "is_favorite",
+        "time",
+        "type",
+        "action",
+        "level",
+        "priority",
+        "html_text"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "is_unread": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true,
+          "readOnly": false
+        },
+        "is_muted": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "is_favorite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "type": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "action": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4,
+            8,
+            7,
+            5,
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            20,
+            21,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            40,
+            41,
+            42,
+            43,
+            44,
+            50,
+            51,
+            60,
+            68,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            70,
+            71,
+            72,
+            73,
+            90,
+            100,
+            110,
+            111,
+            112,
+            113,
+            120,
+            125,
+            131,
+            154,
+            155,
+            161
+          ]
+        },
+        "level": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            20,
+            25,
+            30,
+            40
+          ]
+        },
+        "priority": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            10,
+            20,
+            30,
+            40
+          ]
+        },
+        "html_text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/ws",
+  "apis": [
+    {
+      "description": "SockJS server settings",
+      "path": "/api/ws",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "SockJS server settings",
+          "nickname": "Ws_list",
+          "notes": "SockJS server settings.",
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

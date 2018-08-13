@@ -1,0 +1,111 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/user-courses",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/user-courses",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "User_Course_list",
+          "notes": "",
+          "type": "UserCourseSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/user-courses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "User_Course_retrieve",
+          "notes": "",
+          "type": "UserCourseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteUserCourseSerializer": {
+      "id": "WriteUserCourseSerializer",
+      "required": [],
+      "properties": {
+        "is_favorite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "UserCourseSerializer": {
+      "id": "UserCourseSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "is_favorite",
+        "last_viewed"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "is_favorite": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "last_viewed": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": true,
+          "defaultValue": "2018-08-10T09:48:51.981Z",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

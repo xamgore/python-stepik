@@ -1,0 +1,43 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/progresses",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/progresses",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Progress_list",
+          "notes": "",
+          "type": "object"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/progresses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Progress_retrieve",
+          "notes": "",
+          "type": "object",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

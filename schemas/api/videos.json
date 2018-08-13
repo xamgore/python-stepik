@@ -1,0 +1,120 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/videos",
+  "apis": [
+    {
+      "description": "Video resource",
+      "path": "/api/videos",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteVideoSourceSerializer": {
+      "id": "WriteVideoSourceSerializer",
+      "required": [],
+      "properties": {
+        "upload_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "filename": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "lesson": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "source": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "source_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "VideoSourceSerializer": {
+      "id": "VideoSourceSerializer",
+      "required": [
+        "id",
+        "thumbnail",
+        "urls",
+        "duration",
+        "status",
+        "upload_date",
+        "filename"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "thumbnail": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "urls": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": true,
+          "defaultValue": [],
+          "readOnly": true
+        },
+        "duration": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "upload_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "filename": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

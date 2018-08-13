@@ -1,0 +1,268 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/social-accounts",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/social-accounts",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Social_Account_list",
+          "notes": "",
+          "type": "SocialAccountSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "provider",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "uid",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/social-accounts/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Social_Account_retrieve",
+          "notes": "",
+          "type": "SocialAccountSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "provider",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "uid",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteSocialAccountSerializer": {
+      "id": "WriteSocialAccountSerializer",
+      "required": [
+        "provider",
+        "uid"
+      ],
+      "properties": {
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "provider": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "uid": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "first_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "last_name": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "language": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": false,
+          "enum": [
+            "",
+            "af",
+            "ar",
+            "ast",
+            "az",
+            "bg",
+            "be",
+            "bn",
+            "br",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "dsb",
+            "el",
+            "en",
+            "en-au",
+            "en-gb",
+            "eo",
+            "es",
+            "es-ar",
+            "es-co",
+            "es-mx",
+            "es-ni",
+            "es-ve",
+            "et",
+            "eu",
+            "fa",
+            "fi",
+            "fr",
+            "fy",
+            "ga",
+            "gd",
+            "gl",
+            "he",
+            "hi",
+            "hr",
+            "hsb",
+            "hu",
+            "ia",
+            "id",
+            "io",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kk",
+            "km",
+            "kn",
+            "ko",
+            "lb",
+            "lt",
+            "lv",
+            "mk",
+            "ml",
+            "mn",
+            "mr",
+            "my",
+            "nb",
+            "ne",
+            "nl",
+            "nn",
+            "os",
+            "pa",
+            "pl",
+            "pt",
+            "pt-br",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sq",
+            "sr",
+            "sr-latn",
+            "sv",
+            "sw",
+            "ta",
+            "te",
+            "th",
+            "tr",
+            "tt",
+            "udm",
+            "uk",
+            "ur",
+            "vi",
+            "zh-hans",
+            "zh-hant"
+          ]
+        }
+      }
+    },
+    "SocialAccountSerializer": {
+      "id": "SocialAccountSerializer",
+      "required": [
+        "id",
+        "user",
+        "provider",
+        "uid"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "provider": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "uid": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

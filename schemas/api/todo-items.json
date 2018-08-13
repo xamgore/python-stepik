@@ -1,0 +1,174 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/todo-items",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/todo-items",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Todo_Item_list",
+          "notes": "",
+          "type": "TodoItemSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/todo-items/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Todo_Item_retrieve",
+          "notes": "",
+          "type": "TodoItemSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteTodoItemSerializer": {
+      "id": "WriteTodoItemSerializer",
+      "required": [
+        "course",
+        "kind"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "kind": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100
+          ]
+        },
+        "is_complete": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "context": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        }
+      }
+    },
+    "TodoItemSerializer": {
+      "id": "TodoItemSerializer",
+      "required": [
+        "id",
+        "course",
+        "kind",
+        "is_complete",
+        "context",
+        "create_date",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "kind": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "readOnly": false,
+          "enum": [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100
+          ]
+        },
+        "is_complete": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "context": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/score-files",
+  "apis": [
+    {
+      "description": "ScoreFile resource",
+      "path": "/api/score-files",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "ScoreFile resource",
+          "nickname": "Score_File_list",
+          "notes": "ScoreFile resource.\nScoreFile represents an uploaded file with a list of scores assigned to users by instructor.",
+          "type": "ScoreFileSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "session",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "instruction",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "ScoreFile resource",
+      "path": "/api/score-files/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "ScoreFile resource",
+          "nickname": "Score_File_retrieve",
+          "notes": "ScoreFile resource.\nScoreFile represents an uploaded file with a list of scores assigned to users by instructor.",
+          "type": "ScoreFileSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "session",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "instruction",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteScoreFileSerializer": {
+      "id": "WriteScoreFileSerializer",
+      "required": [
+        "session",
+        "file"
+      ],
+      "properties": {
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "file": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ScoreFileSerializer": {
+      "id": "ScoreFileSerializer",
+      "required": [
+        "id",
+        "session",
+        "file",
+        "error",
+        "create_date",
+        "process_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "session": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "file": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "error": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "process_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

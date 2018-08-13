@@ -1,0 +1,178 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/attempts",
+  "apis": [
+    {
+      "description": "Attempt resource",
+      "path": "/api/attempts",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Attempt resource",
+          "nickname": "Attempt_list",
+          "notes": "Attempt resource.\nTo pass a quiz, user needs to create an attempt and then a submission for the attempt.\nAttempts are only allowed on quiz steps.",
+          "type": "AttemptSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": "filter by user id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            },
+            {
+              "paramType": "query",
+              "name": "step",
+              "description": "filter by step id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Attempt resource",
+      "path": "/api/attempts/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Attempt resource",
+          "nickname": "Attempt_retrieve",
+          "notes": "Attempt resource.\nTo pass a quiz, user needs to create an attempt and then a submission for the attempt.\nAttempts are only allowed on quiz steps.",
+          "type": "AttemptSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Attempt resource",
+      "path": "/api/attempts/{pk}/file",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Returns file part of dataset for a quiz",
+          "nickname": "Attempt_file",
+          "notes": "Attempt resource.\nTo pass a quiz, user needs to create an attempt and then a submission for the attempt.\nAttempts are only allowed on quiz steps.  <br/>Returns file part of dataset for a quiz.",
+          "type": "AttemptSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteAttemptSerializer": {
+      "id": "WriteAttemptSerializer",
+      "required": [
+        "step"
+      ],
+      "properties": {
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "AttemptSerializer": {
+      "id": "AttemptSerializer",
+      "required": [
+        "id",
+        "dataset",
+        "dataset_url",
+        "time",
+        "status",
+        "time_left",
+        "step",
+        "user"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "dataset": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "dataset_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "time": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            3,
+            4
+          ]
+        },
+        "time_left": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "step": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

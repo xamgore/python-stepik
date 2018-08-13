@@ -1,0 +1,46 @@
+# This file is generated
+from common import required, readonly
+from typing import List
+
+
+{% for model, struct in models.items() -%}
+class {{ model | replace('Serializer', '') }}:
+    def __init__(self, data):
+        self.__data = data
+
+
+{% for prop, at in struct['properties'].items() %}
+{% if at['required'] %}
+    @required
+{% endif %}
+{% if at['readOnly'] %}
+    @readonly
+{% endif %}
+    @property
+    def {{ prop }}(self) -> {{ at['type'] }}:
+    {% if at['docstring'] %}
+        """
+        {{ at['docstring'] | indent(width=8) }}
+        """
+    {% endif %}
+    {% if at['defaultValue'] %}
+        return self.__data.setdefault('{{ prop }}', {{ at['defaultValue'] }})
+    {% else %}
+        return self.__data['{{ prop }}']
+    {% endif %}
+
+
+{% if not at['readOnly'] %}
+    @{{ prop }}.setter
+    def {{ prop }}(self, value: {{ at['type'] }}):
+    {% if at['docstring'] %}
+        """
+        {{ at['docstring'] | indent(width=8) }}
+        """
+    {% endif %}
+        self.__data['{{ prop }}'] = value
+
+
+{% endif %}
+{% endfor %}
+{% endfor %}

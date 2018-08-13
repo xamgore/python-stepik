@@ -1,0 +1,63 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/groups",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/groups/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Group_retrieve",
+          "notes": "",
+          "type": "GroupSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/groups/{pk}/sync",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteGroupSerializer": {
+      "id": "WriteGroupSerializer",
+      "required": [],
+      "properties": {}
+    },
+    "GroupSerializer": {
+      "id": "GroupSerializer",
+      "required": [
+        "id",
+        "users"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "users": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/rubric-scores",
+  "apis": [
+    {
+      "description": "RubricScore resource",
+      "path": "/api/rubric-scores",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "RubricScore resource",
+          "nickname": "Rubric_Score_list",
+          "notes": "RubricScore resource.\nRubricScore mirrors Rubric",
+          "type": "RubricScoreSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "RubricScore resource",
+      "path": "/api/rubric-scores/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "RubricScore resource",
+          "nickname": "Rubric_Score_retrieve",
+          "notes": "RubricScore resource.\nRubricScore mirrors Rubric",
+          "type": "RubricScoreSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteRubricScoreSerializer": {
+      "id": "WriteRubricScoreSerializer",
+      "required": [
+        "score"
+      ],
+      "properties": {
+        "score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "RubricScoreSerializer": {
+      "id": "RubricScoreSerializer",
+      "required": [
+        "id",
+        "review",
+        "rubric",
+        "score",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "review": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "rubric": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "score": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": true,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

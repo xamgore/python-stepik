@@ -1,0 +1,163 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/email-templates",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/email-templates",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Email_Template_list",
+          "notes": "",
+          "type": "EmailTemplateSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "mail_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "announcement"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/email-templates/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Email_Template_retrieve",
+          "notes": "",
+          "type": "EmailTemplateSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "mail_type",
+              "description": null,
+              "dataType": "enum",
+              "enum": [
+                "",
+                "announcement"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "course",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteEmailTemplateSerializer": {
+      "id": "WriteEmailTemplateSerializer",
+      "required": [
+        "mail_type",
+        "name"
+      ],
+      "properties": {
+        "mail_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "announcement",
+          "readOnly": false,
+          "enum": [
+            "announcement"
+          ]
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "EmailTemplateSerializer": {
+      "id": "EmailTemplateSerializer",
+      "required": [
+        "id",
+        "user",
+        "mail_type",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "mail_type": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": true,
+          "defaultValue": "announcement",
+          "readOnly": false,
+          "enum": [
+            "announcement"
+          ]
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

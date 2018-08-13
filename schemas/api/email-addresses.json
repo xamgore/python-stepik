@@ -1,0 +1,169 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/email-addresses",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/email-addresses",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Email_Address_list",
+          "notes": "",
+          "type": "EmailAddressSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_verified",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_primary",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/email-addresses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Email_Address_retrieve",
+          "notes": "",
+          "type": "EmailAddressSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "user",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "email",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_verified",
+              "description": null,
+              "dataType": ""
+            },
+            {
+              "paramType": "query",
+              "name": "is_primary",
+              "description": null,
+              "dataType": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/email-addresses/{pk}/send-confirmation",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/email-addresses/{pk}/set-as-primary",
+      "operations": []
+    }
+  ],
+  "models": {
+    "WriteEmailAddressSerializer": {
+      "id": "WriteEmailAddressSerializer",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "EmailAddressSerializer": {
+      "id": "EmailAddressSerializer",
+      "required": [
+        "id",
+        "user",
+        "email",
+        "is_verified",
+        "is_primary"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "email": {
+          "description": null,
+          "type": "email",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_verified": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "is_primary": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

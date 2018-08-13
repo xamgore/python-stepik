@@ -1,0 +1,43 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/discussion-proxies",
+  "apis": [
+    {
+      "description": "Discussion proxy resource",
+      "path": "/api/discussion-proxies",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Discussion proxy resource",
+          "nickname": "Discussion_Proxy_list",
+          "notes": "Discussion proxy resource.",
+          "type": "object"
+        }
+      ]
+    },
+    {
+      "description": "Discussion proxy resource",
+      "path": "/api/discussion-proxies/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Discussion proxy resource",
+          "nickname": "Discussion_Proxy_retrieve",
+          "notes": "Discussion proxy resource.",
+          "type": "object",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

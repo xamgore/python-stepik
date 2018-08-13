@@ -1,0 +1,22 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/status-services",
+  "apis": [
+    {
+      "description": "Service resource for the status page",
+      "path": "/api/status-services",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Service resource for the status page",
+          "nickname": "Status_Service_list",
+          "notes": "Service resource for the status page.",
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

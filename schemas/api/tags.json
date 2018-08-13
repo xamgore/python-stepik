@@ -1,0 +1,88 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/tags",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/tags",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Tag_list",
+          "notes": "",
+          "type": "TagSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/tags/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Tag_retrieve",
+          "notes": "",
+          "type": "TagSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteTagSerializer": {
+      "id": "WriteTagSerializer",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "TagSerializer": {
+      "id": "TagSerializer",
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

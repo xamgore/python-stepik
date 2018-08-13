@@ -1,0 +1,103 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/favorite-courses",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/favorite-courses",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Favorite_Course_list",
+          "notes": "",
+          "type": "FavoriteCourseSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/favorite-courses/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Favorite_Course_retrieve",
+          "notes": "",
+          "type": "FavoriteCourseSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteFavoriteCourseSerializer": {
+      "id": "WriteFavoriteCourseSerializer",
+      "required": [
+        "course"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "FavoriteCourseSerializer": {
+      "id": "FavoriteCourseSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "create_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

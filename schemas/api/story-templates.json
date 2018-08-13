@@ -1,0 +1,135 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/story-templates",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/story-templates",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Story_Template_list",
+          "notes": "",
+          "type": "StoryTemplateSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/story-templates/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Story_Template_retrieve",
+          "notes": "",
+          "type": "StoryTemplateSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteStoryTemplateSerializer": {
+      "id": "WriteStoryTemplateSerializer",
+      "required": [
+        "title",
+        "parts",
+        "cover"
+      ],
+      "properties": {
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "parts": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": true,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "cover": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_published": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    },
+    "StoryTemplateSerializer": {
+      "id": "StoryTemplateSerializer",
+      "required": [
+        "id",
+        "title",
+        "parts",
+        "cover",
+        "is_published"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "title": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "parts": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": true,
+          "defaultValue": [],
+          "readOnly": false
+        },
+        "cover": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "is_published": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

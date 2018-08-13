@@ -1,0 +1,33 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/step-snapshots",
+  "apis": [
+    {
+      "description": "StepSnapshot resource",
+      "path": "/api/step-snapshots",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "StepSnapshot resource",
+          "nickname": "Step_Snapshot_list",
+          "notes": "StepSnapshot resource.",
+          "type": "object",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "step",
+              "description": "id of the step to show snapshots for",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

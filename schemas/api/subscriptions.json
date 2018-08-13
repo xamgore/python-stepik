@@ -1,0 +1,149 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/subscriptions",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/subscriptions",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Subscription_list",
+          "notes": "",
+          "type": "SubscriptionSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/subscriptions/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Subscription_retrieve",
+          "notes": "",
+          "type": "SubscriptionSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteSubscriptionSerializer": {
+      "id": "WriteSubscriptionSerializer",
+      "required": [],
+      "properties": {
+        "is_active": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "SubscriptionSerializer": {
+      "id": "SubscriptionSerializer",
+      "required": [
+        "id",
+        "action",
+        "is_active"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "action": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4,
+            8,
+            7,
+            5,
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            20,
+            21,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            40,
+            41,
+            42,
+            43,
+            44,
+            50,
+            51,
+            60,
+            68,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            70,
+            71,
+            72,
+            73,
+            90,
+            100,
+            110,
+            111,
+            112,
+            113,
+            120,
+            125,
+            131,
+            154,
+            155,
+            161
+          ]
+        },
+        "is_active": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    }
+  }
+}

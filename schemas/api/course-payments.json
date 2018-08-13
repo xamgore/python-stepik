@@ -1,0 +1,181 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/course-payments",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/course-payments",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Payment_list",
+          "notes": "",
+          "type": "CoursePaymentSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/course-payments/refresh-payment",
+      "operations": []
+    },
+    {
+      "description": "",
+      "path": "/api/course-payments/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Course_Payment_retrieve",
+          "notes": "",
+          "type": "CoursePaymentSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteCoursePaymentSerializer": {
+      "id": "WriteCoursePaymentSerializer",
+      "required": [
+        "course"
+      ],
+      "properties": {
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "amount": {
+          "description": null,
+          "type": "decimal",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "CoursePaymentSerializer": {
+      "id": "CoursePaymentSerializer",
+      "required": [
+        "id",
+        "user",
+        "course",
+        "redirect_url",
+        "amount",
+        "currency_code",
+        "payment_date",
+        "cancel_date",
+        "status",
+        "comment",
+        "is_paid"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "course": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "redirect_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "amount": {
+          "description": null,
+          "type": "decimal",
+          "format": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "currency_code": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2
+          ]
+        },
+        "payment_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "cancel_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "status": {
+          "description": null,
+          "type": "choice",
+          "format": "string",
+          "required": false,
+          "readOnly": true,
+          "enum": [
+            null,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "comment": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_paid": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

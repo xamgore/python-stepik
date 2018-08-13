@@ -1,0 +1,126 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/storage-records",
+  "apis": [
+    {
+      "description": "",
+      "path": "/api/storage-records",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Storage_Record_list",
+          "notes": "",
+          "type": "StorageRecordSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "",
+      "path": "/api/storage-records/{pk}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "",
+          "nickname": "Storage_Record_retrieve",
+          "notes": "",
+          "type": "StorageRecordSerializer",
+          "parameters": [
+            {
+              "name": "pk",
+              "type": "string",
+              "paramType": "path",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteStorageRecordSerializer": {
+      "id": "WriteStorageRecordSerializer",
+      "required": [],
+      "properties": {
+        "kind": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "readOnly": false
+        },
+        "data": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        }
+      }
+    },
+    "StorageRecordSerializer": {
+      "id": "StorageRecordSerializer",
+      "required": [
+        "id",
+        "user",
+        "kind",
+        "data",
+        "create_date",
+        "update_date"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "user": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": true
+        },
+        "kind": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "defaultValue": "",
+          "readOnly": false
+        },
+        "data": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "create_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "update_date": {
+          "description": null,
+          "type": "datetime",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "apiVersion": "",
+  "swaggerVersion": "1.2",
+  "basePath": "https://stepik.org",
+  "resourcePath": "/api/short-urls",
+  "apis": [
+    {
+      "description": "Current shortifyer's events resource",
+      "path": "/api/short-urls",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Current shortifyer's events resource",
+          "nickname": "Short_Url_list",
+          "notes": "Current shortifyer's events resource.",
+          "type": "ShortUrlSerializer",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "page",
+              "description": null,
+              "dataType": "integer"
+            },
+            {
+              "paramType": "query",
+              "name": "key",
+              "description": "get by short id.",
+              "type": "string",
+              "format": "string",
+              "required": false,
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "WriteShortUrlSerializer": {
+      "id": "WriteShortUrlSerializer",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        }
+      }
+    },
+    "ShortUrlSerializer": {
+      "id": "ShortUrlSerializer",
+      "required": [
+        "id",
+        "key",
+        "url",
+        "short_url"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "key": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "url": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "short_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
