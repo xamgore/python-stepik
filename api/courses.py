@@ -567,12 +567,18 @@ class Course:
 
     @required
     @property
-    def sections(self) -> str:
+    def sections(self) -> List[int]:
+        """
+        List of sections' ids
+        """
         return self.__data['sections']
 
 
     @sections.setter
-    def sections(self, value: str):
+    def sections(self, value: List[int]):
+        """
+        List of sections' ids
+        """
         self.__data['sections'] = value
 
 

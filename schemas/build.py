@@ -1,3 +1,4 @@
+import yaml
 from jinja2 import Template
 
 from schemas import structure
@@ -36,6 +37,27 @@ def refine_doc_string_with_default_value(p):
     p['docstring'] = f'{description}\n\ndefault value: {p["defaultValue"]}'.lstrip()
 
 
+def expand_with_meta_data(model_name, model):
+    name = model_name.replace('Serializer', '')
+
+    try:
+        with open(f'docs/{name}.yaml') as f:
+            docs = yaml.load(f)
+
+            for prop_name, prop in model['properties'].items():
+                if prop_name not in docs:
+                    continue
+
+                doc_prop = docs[prop_name]
+
+                prop['type'] =\
+                    doc_prop.get('type', prop.get('type', 'None'))
+                prop['docstring'] = \
+                    (doc_prop.get('docs', '') + '\n' + (prop['docstring'] or '')).strip()
+    except:
+        pass
+
+
 def refine_default_value(p):
     """Surround the default value with commas if type is string"""
     if ('format' in p) and p['format'] == 'string':
@@ -43,8 +65,7 @@ def refine_default_value(p):
 
 
 for schema in structure.schemas():
-    for model in schema['models'].values():
-
+    for name, model in schema['models'].items():
         for p in model['properties'].values():
             p['docstring'] = p['description']
             p['type'] = refine_type(p)
@@ -52,6 +73,8 @@ for schema in structure.schemas():
             if 'defaultValue' in p:
                 refine_default_value(p)
                 refine_doc_string_with_default_value(p)
+
+        expand_with_meta_data(name, model)
 
     with open('data-class.jinja2') as t:
         with open(f'../{schema["resourcePath"]}.py', 'w') as out:

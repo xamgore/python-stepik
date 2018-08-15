@@ -248,12 +248,18 @@ class Section:
 
     @required
     @property
-    def units(self) -> str:
+    def units(self) -> List[int]:
+        """
+        List of units' ids
+        """
         return self.__data['units']
 
 
     @units.setter
-    def units(self, value: str):
+    def units(self, value: List[int]):
+        """
+        List of units' ids
+        """
         self.__data['units'] = value
 
 

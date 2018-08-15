@@ -162,12 +162,18 @@ class Unit:
 
     @required
     @property
-    def lesson(self) -> str:
+    def lesson(self) -> int:
+        """
+        Lesson id, associated with the unit
+        """
         return self.__data['lesson']
 
 
     @lesson.setter
-    def lesson(self, value: str):
+    def lesson(self, value: int):
+        """
+        Lesson id, associated with the unit
+        """
         self.__data['lesson'] = value
 
 
