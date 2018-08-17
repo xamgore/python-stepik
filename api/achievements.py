@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteAchievement:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAchievement(id={self.id!r})'
 
 
     @required
@@ -41,9 +47,16 @@ class WriteAchievement:
         self.__data['icon_uploadcare_uuid'] = value
 
 
+
+
 class Achievement:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Achievement(id={self.id!r})'
 
 
     @readonly

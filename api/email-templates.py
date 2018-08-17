@@ -3,16 +3,22 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteEmailTemplate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteEmailTemplate(id={self.id!r})'
 
 
     @required
     @property
     def mail_type(self) -> str:
         """
-        default value: "announcement"
+        Default value: "announcement"
         """
         return self.__data.setdefault('mail_type', "announcement")
 
@@ -20,7 +26,7 @@ class WriteEmailTemplate:
     @mail_type.setter
     def mail_type(self, value: str):
         """
-        default value: "announcement"
+        Default value: "announcement"
         """
         self.__data['mail_type'] = value
 
@@ -36,9 +42,16 @@ class WriteEmailTemplate:
         self.__data['name'] = value
 
 
+
+
 class EmailTemplate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'EmailTemplate(id={self.id!r})'
 
 
     @readonly
@@ -58,7 +71,7 @@ class EmailTemplate:
     @property
     def mail_type(self) -> str:
         """
-        default value: "announcement"
+        Default value: "announcement"
         """
         return self.__data.setdefault('mail_type', "announcement")
 
@@ -66,7 +79,7 @@ class EmailTemplate:
     @mail_type.setter
     def mail_type(self, value: str):
         """
-        default value: "announcement"
+        Default value: "announcement"
         """
         self.__data['mail_type'] = value
 

@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteUser:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteUser(id={self.id!r})'
 
 
     @property
     def is_private(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_private']
 
@@ -19,7 +25,7 @@ class WriteUser:
     @is_private.setter
     def is_private(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_private'] = value
 
@@ -91,9 +97,16 @@ class WriteUser:
         self.__data['password'] = value
 
 
+
+
 class User:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'User(id={self.id!r})'
 
 
     @readonly
@@ -111,7 +124,7 @@ class User:
     @property
     def is_private(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_private']
 
@@ -119,7 +132,7 @@ class User:
     @is_private.setter
     def is_private(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_private'] = value
 
@@ -130,7 +143,7 @@ class User:
         """
         Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
 
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_active', True)
 
@@ -139,7 +152,7 @@ class User:
     @property
     def is_guest(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_guest']
 
@@ -148,7 +161,7 @@ class User:
     @property
     def is_organization(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_organization']
 
@@ -231,7 +244,7 @@ class User:
     @property
     def level(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['level']
 
@@ -247,7 +260,7 @@ class User:
     @property
     def knowledge(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['knowledge']
 
@@ -263,7 +276,7 @@ class User:
     @property
     def reputation(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['reputation']
 
@@ -291,7 +304,7 @@ class User:
     @property
     def solved_steps_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['solved_steps_count']
 
@@ -301,7 +314,7 @@ class User:
     @property
     def created_courses_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['created_courses_count']
 
@@ -311,7 +324,7 @@ class User:
     @property
     def created_lessons_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['created_lessons_count']
 
@@ -321,7 +334,7 @@ class User:
     @property
     def issued_certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['issued_certificates_count']
 
@@ -331,7 +344,7 @@ class User:
     @property
     def followers_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['followers_count']
 

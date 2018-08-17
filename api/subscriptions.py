@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSubscription:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSubscription(id={self.id!r})'
 
 
     @property
@@ -18,9 +24,16 @@ class WriteSubscription:
         self.__data['is_active'] = value
 
 
+
+
 class Subscription:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Subscription(id={self.id!r})'
 
 
     @readonly

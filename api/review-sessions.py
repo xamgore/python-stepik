@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSession:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSession(id={self.id!r})'
 
 
     @property
@@ -28,9 +34,16 @@ class WriteSession:
         self.__data['submission'] = value
 
 
+
+
 class Session:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Session(id={self.id!r})'
 
 
     @readonly
@@ -127,7 +140,7 @@ class Session:
     @property
     def score(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['score']
 

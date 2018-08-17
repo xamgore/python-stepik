@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteAttachment:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAttachment(id={self.id!r})'
 
 
     @property
@@ -45,9 +51,16 @@ class WriteAttachment:
         self.__data['file'] = value
 
 
+
+
 class Attachment:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Attachment(id={self.id!r})'
 
 
     @readonly

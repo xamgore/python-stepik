@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseByLanguageStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseByLanguageStatistics(id={self.id!r})'
 
 
     @required
@@ -40,7 +46,7 @@ class WriteCourseByLanguageStatistics:
     @property
     def learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['learners_count']
 
@@ -48,14 +54,21 @@ class WriteCourseByLanguageStatistics:
     @learners_count.setter
     def learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['learners_count'] = value
 
 
+
+
 class CourseByLanguageStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseByLanguageStatistics(id={self.id!r})'
 
 
     @readonly
@@ -96,7 +109,7 @@ class CourseByLanguageStatistics:
     @property
     def learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['learners_count']
 
@@ -104,7 +117,7 @@ class CourseByLanguageStatistics:
     @learners_count.setter
     def learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['learners_count'] = value
 

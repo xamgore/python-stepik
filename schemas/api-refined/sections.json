@@ -1,0 +1,108 @@
+{
+  "models": {
+    "SectionSerializer": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier of sections\n\nThe object of type ``Section`` can be accessed through ``stepik.sections.get(id)`` function."
+        },
+        "course": {
+          "description": "Id of the course",
+          "type": "integer"
+        },
+        "position": {
+          "description": "Position in the syllabus"
+        },
+        "discounting_policy": {
+          "description": "How to change points depending on number of tries:\n\n* ``\"no_discount\"`` — do not change\n* ``\"inverse\"`` — decrease to 1/N\n* ``\"first_one\"`` — zero after first attempt\n* ``\"first_third\"`` — zero after third attempt"
+        },
+        "progress": {
+          "description": "The progress object identifier, for internal needs."
+        },
+        "units": {
+          "type": "List[int]",
+          "rename": "units_ids",
+          "object_type": "List[Unit]"
+        },
+        "actions": {
+          "description": "Contains a dict of ``<action : link to the page>``\n\nOn the summer 2018 contains only ``test_section`` if user has the `test` permission (is a tester).",
+          "type": "dict"
+        },
+        "required_section": {
+          "description": "Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)",
+          "type": "integer"
+        },
+        "required_percent": {
+          "description": "Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)"
+        },
+        "is_requirement_satisfied": {
+          "description": "Whether the section is open for a user. True if the score in the `required_section` is more than `required_percent` from the total score.",
+          "type": "boolean"
+        },
+        "is_exam": {
+          "description": "Whether the section is exam"
+        },
+        "exam_duration_minutes": {
+          "description": "Duration of the exam. Used when ``is_exam`` is true"
+        },
+        "exam_session": {
+          "description": "Unique identifier of the :class:`ExamSession`",
+          "type": "integer"
+        },
+        "proctor_session": {
+          "description": "Unique identifier of the :class:`ProctorSession`.\n\nIt is used to control the user that he does not cheat during the exam.",
+          "type": "integer"
+        },
+        "description": {
+          "description": "Description is display on the \"Syllabus\" page of the course, under the title",
+          "defaultValue": "",
+          "format": "string"
+        },
+        "title": {
+          "description": "Title is displayed on the \"Syllabus\" page of the course"
+        },
+        "slug": {
+          "description": "A string of format \"title-id\", with hyphens instead of spaces"
+        },
+        "begin_date": {
+          "description": "Open date: when the module starts for enrolled users.\n\nInherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value."
+        },
+        "end_date": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nInherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value."
+        },
+        "soft_deadline": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nInherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value."
+        },
+        "hard_deadline": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nInherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value."
+        },
+        "grading_policy": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nInherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value."
+        },
+        "begin_date_source": {
+          "description": "Open date: when the module starts for enrolled users\n\nInherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value."
+        },
+        "end_date_source": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nInherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value."
+        },
+        "soft_deadline_source": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nInherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value."
+        },
+        "hard_deadline_source": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nInherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value."
+        },
+        "grading_policy_source": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nInherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value."
+        },
+        "is_active": {
+          "description": "True, if the section is open, i.e. the server's current date is between `begin_date` and `end_date`"
+        },
+        "create_date": {
+          "description": "Creation time"
+        },
+        "update_date": {
+          "description": "Time of the last update"
+        }
+      }
+    }
+  }
+}

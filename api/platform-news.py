@@ -3,16 +3,22 @@ from common import required, readonly
 from typing import List
 
 
+
 class WritePlatformNews:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WritePlatformNews(id={self.id!r})'
 
 
     @required
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -20,7 +26,7 @@ class WritePlatformNews:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -36,9 +42,16 @@ class WritePlatformNews:
         self.__data['text'] = value
 
 
+
+
 class PlatformNews:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'PlatformNews(id={self.id!r})'
 
 
     @readonly
@@ -51,7 +64,7 @@ class PlatformNews:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -59,7 +72,7 @@ class PlatformNews:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 

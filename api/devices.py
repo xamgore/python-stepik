@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteDevice:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteDevice(id={self.id!r})'
 
 
     @required
@@ -34,7 +40,7 @@ class WriteDevice:
     @property
     def client_type(self) -> str:
         """
-        default value: "ios"
+        Default value: "ios"
         """
         return self.__data.setdefault('client_type', "ios")
 
@@ -42,7 +48,7 @@ class WriteDevice:
     @client_type.setter
     def client_type(self, value: str):
         """
-        default value: "ios"
+        Default value: "ios"
         """
         self.__data['client_type'] = value
 
@@ -50,7 +56,7 @@ class WriteDevice:
     @property
     def is_badges_enabled(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_badges_enabled']
 
@@ -58,14 +64,21 @@ class WriteDevice:
     @is_badges_enabled.setter
     def is_badges_enabled(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_badges_enabled'] = value
 
 
+
+
 class Device:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Device(id={self.id!r})'
 
 
     @readonly
@@ -107,7 +120,7 @@ class Device:
     @property
     def client_type(self) -> str:
         """
-        default value: "ios"
+        Default value: "ios"
         """
         return self.__data.setdefault('client_type', "ios")
 
@@ -115,7 +128,7 @@ class Device:
     @client_type.setter
     def client_type(self, value: str):
         """
-        default value: "ios"
+        Default value: "ios"
         """
         self.__data['client_type'] = value
 
@@ -123,7 +136,7 @@ class Device:
     @property
     def is_badges_enabled(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_badges_enabled']
 
@@ -131,7 +144,7 @@ class Device:
     @is_badges_enabled.setter
     def is_badges_enabled(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_badges_enabled'] = value
 

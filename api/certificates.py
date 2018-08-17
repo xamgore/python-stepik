@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCertificate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCertificate(id={self.id!r})'
 
 
     @property
     def is_public(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_public', True)
 
@@ -19,14 +25,21 @@ class WriteCertificate:
     @is_public.setter
     def is_public(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_public'] = value
 
 
+
+
 class Certificate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Certificate(id={self.id!r})'
 
 
     @readonly
@@ -54,7 +67,7 @@ class Certificate:
     @property
     def issue_date(self) -> str:
         """
-        default value: "2018-08-10T09:47:18.845Z"
+        Default value: "2018-08-10T09:47:18.845Z"
         """
         return self.__data.setdefault('issue_date', "2018-08-10T09:47:18.845Z")
 
@@ -95,7 +108,7 @@ class Certificate:
     @property
     def is_public(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_public', True)
 
@@ -103,7 +116,7 @@ class Certificate:
     @is_public.setter
     def is_public(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_public'] = value
 

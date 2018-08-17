@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSpecialization:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSpecialization(id={self.id!r})'
 
 
     @required
@@ -46,9 +52,16 @@ class WriteSpecialization:
         self.__data['courses'] = value
 
 
+
+
 class Specialization:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Specialization(id={self.id!r})'
 
 
     @readonly

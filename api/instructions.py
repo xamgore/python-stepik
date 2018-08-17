@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteInstruction:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteInstruction(id={self.id!r})'
 
 
     @required
@@ -23,7 +29,7 @@ class WriteInstruction:
     @property
     def min_reviews(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('min_reviews', 3)
 
@@ -31,7 +37,7 @@ class WriteInstruction:
     @min_reviews.setter
     def min_reviews(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['min_reviews'] = value
 
@@ -73,9 +79,16 @@ class WriteInstruction:
         self.__data['text'] = value
 
 
+
+
 class Instruction:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Instruction(id={self.id!r})'
 
 
     @readonly
@@ -99,7 +112,7 @@ class Instruction:
     @property
     def min_reviews(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('min_reviews', 3)
 
@@ -107,7 +120,7 @@ class Instruction:
     @min_reviews.setter
     def min_reviews(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['min_reviews'] = value
 

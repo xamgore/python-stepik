@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseSubscription:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseSubscription(id={self.id!r})'
 
 
     @property
     def to_reminders(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_reminders', True)
 
@@ -19,7 +25,7 @@ class WriteCourseSubscription:
     @to_reminders.setter
     def to_reminders(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_reminders'] = value
 
@@ -27,7 +33,7 @@ class WriteCourseSubscription:
     @property
     def to_announcements(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_announcements', True)
 
@@ -35,7 +41,7 @@ class WriteCourseSubscription:
     @to_announcements.setter
     def to_announcements(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_announcements'] = value
 
@@ -43,7 +49,7 @@ class WriteCourseSubscription:
     @property
     def to_comments(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_comments', True)
 
@@ -51,14 +57,21 @@ class WriteCourseSubscription:
     @to_comments.setter
     def to_comments(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_comments'] = value
 
 
+
+
 class CourseSubscription:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseSubscription(id={self.id!r})'
 
 
     @readonly
@@ -84,7 +97,7 @@ class CourseSubscription:
     @property
     def to_reminders(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_reminders', True)
 
@@ -92,7 +105,7 @@ class CourseSubscription:
     @to_reminders.setter
     def to_reminders(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_reminders'] = value
 
@@ -100,7 +113,7 @@ class CourseSubscription:
     @property
     def to_announcements(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_announcements', True)
 
@@ -108,7 +121,7 @@ class CourseSubscription:
     @to_announcements.setter
     def to_announcements(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_announcements'] = value
 
@@ -116,7 +129,7 @@ class CourseSubscription:
     @property
     def to_comments(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('to_comments', True)
 
@@ -124,7 +137,7 @@ class CourseSubscription:
     @to_comments.setter
     def to_comments(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['to_comments'] = value
 

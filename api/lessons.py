@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteLesson:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteLesson(id={self.id!r})'
 
 
     @required
@@ -38,7 +44,7 @@ class WriteLesson:
     @property
     def is_comments_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_comments_enabled', True)
 
@@ -46,7 +52,7 @@ class WriteLesson:
     @is_comments_enabled.setter
     def is_comments_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_comments_enabled'] = value
 
@@ -55,7 +61,7 @@ class WriteLesson:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -63,7 +69,7 @@ class WriteLesson:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -109,9 +115,16 @@ class WriteLesson:
         self.__data['lti_secret_key'] = value
 
 
+
+
 class Lesson:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Lesson(id={self.id!r})'
 
 
     @readonly
@@ -186,7 +199,7 @@ class Lesson:
     @property
     def is_comments_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_comments_enabled', True)
 
@@ -194,7 +207,7 @@ class Lesson:
     @is_comments_enabled.setter
     def is_comments_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_comments_enabled'] = value
 
@@ -209,7 +222,7 @@ class Lesson:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -217,7 +230,7 @@ class Lesson:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -226,7 +239,7 @@ class Lesson:
     @property
     def is_featured(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_featured']
 

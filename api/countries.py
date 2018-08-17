@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCountry:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCountry(id={self.id!r})'
 
 
     @required
@@ -36,9 +42,16 @@ class WriteCountry:
         self.__data['alt_names'] = value
 
 
+
+
 class Country:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Country(id={self.id!r})'
 
 
     @readonly
@@ -75,9 +88,16 @@ class Country:
         self.__data['alt_names'] = value
 
 
+
+
 class WriteAlternativeName:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAlternativeName(id={self.id!r})'
 
 
     @required
@@ -105,7 +125,7 @@ class WriteAlternativeName:
     @property
     def is_preferred(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_preferred']
 
@@ -113,14 +133,21 @@ class WriteAlternativeName:
     @is_preferred.setter
     def is_preferred(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_preferred'] = value
 
 
+
+
 class AlternativeName:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'AlternativeName(id={self.id!r})'
 
 
     @required
@@ -148,7 +175,7 @@ class AlternativeName:
     @property
     def is_preferred(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_preferred']
 
@@ -156,7 +183,7 @@ class AlternativeName:
     @is_preferred.setter
     def is_preferred(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_preferred'] = value
 

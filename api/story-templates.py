@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStoryTemplate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStoryTemplate(id={self.id!r})'
 
 
     @required
@@ -23,7 +29,7 @@ class WriteStoryTemplate:
     @property
     def parts(self) -> List:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['parts']
 
@@ -31,7 +37,7 @@ class WriteStoryTemplate:
     @parts.setter
     def parts(self, value: List):
         """
-        default value: []
+        Default value: []
         """
         self.__data['parts'] = value
 
@@ -56,7 +62,7 @@ class WriteStoryTemplate:
     @property
     def is_published(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_published']
 
@@ -64,14 +70,21 @@ class WriteStoryTemplate:
     @is_published.setter
     def is_published(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_published'] = value
 
 
+
+
 class StoryTemplate:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'StoryTemplate(id={self.id!r})'
 
 
     @readonly
@@ -95,7 +108,7 @@ class StoryTemplate:
     @property
     def parts(self) -> List:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['parts']
 
@@ -103,7 +116,7 @@ class StoryTemplate:
     @parts.setter
     def parts(self, value: List):
         """
-        default value: []
+        Default value: []
         """
         self.__data['parts'] = value
 
@@ -128,7 +141,7 @@ class StoryTemplate:
     @property
     def is_published(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_published']
 
@@ -136,7 +149,7 @@ class StoryTemplate:
     @is_published.setter
     def is_published(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_published'] = value
 

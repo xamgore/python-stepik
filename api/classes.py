@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteClass:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteClass(id={self.id!r})'
 
 
     @required
@@ -39,9 +45,16 @@ class WriteClass:
         self.__data['description'] = value
 
 
+
+
 class Class:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Class(id={self.id!r})'
 
 
     @readonly

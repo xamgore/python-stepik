@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteFavoriteCourse:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteFavoriteCourse(id={self.id!r})'
 
 
     @required
@@ -19,9 +25,16 @@ class WriteFavoriteCourse:
         self.__data['course'] = value
 
 
+
+
 class FavoriteCourse:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'FavoriteCourse(id={self.id!r})'
 
 
     @readonly

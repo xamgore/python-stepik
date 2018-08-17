@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteProfileImage:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteProfileImage(id={self.id!r})'
 
 
     @property
@@ -24,9 +30,16 @@ class WriteProfileImage:
         self.__data['avatar'] = value
 
 
+
+
 class ProfileImage:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'ProfileImage(id={self.id!r})'
 
 
     @readonly

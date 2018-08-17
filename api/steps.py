@@ -3,16 +3,22 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStep:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStep(id={self.id!r})'
 
 
     @required
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -20,7 +26,7 @@ class WriteStep:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 
@@ -28,7 +34,7 @@ class WriteStep:
     @property
     def is_solutions_unlocked(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_solutions_unlocked']
 
@@ -36,7 +42,7 @@ class WriteStep:
     @is_solutions_unlocked.setter
     def is_solutions_unlocked(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_solutions_unlocked'] = value
 
@@ -45,7 +51,7 @@ class WriteStep:
     @property
     def solutions_unlocked_attempts(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('solutions_unlocked_attempts', 3)
 
@@ -53,7 +59,7 @@ class WriteStep:
     @solutions_unlocked_attempts.setter
     def solutions_unlocked_attempts(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['solutions_unlocked_attempts'] = value
 
@@ -61,7 +67,7 @@ class WriteStep:
     @property
     def has_submissions_restrictions(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_submissions_restrictions']
 
@@ -69,7 +75,7 @@ class WriteStep:
     @has_submissions_restrictions.setter
     def has_submissions_restrictions(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_submissions_restrictions'] = value
 
@@ -78,7 +84,7 @@ class WriteStep:
     @property
     def max_submissions_count(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('max_submissions_count', 3)
 
@@ -86,14 +92,21 @@ class WriteStep:
     @max_submissions_count.setter
     def max_submissions_count(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['max_submissions_count'] = value
 
 
+
+
 class Step:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Step(id={self.id!r})'
 
 
     @readonly
@@ -113,7 +126,7 @@ class Step:
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -121,7 +134,7 @@ class Step:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 
@@ -208,7 +221,7 @@ class Step:
     @property
     def is_solutions_unlocked(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_solutions_unlocked']
 
@@ -216,7 +229,7 @@ class Step:
     @is_solutions_unlocked.setter
     def is_solutions_unlocked(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_solutions_unlocked'] = value
 
@@ -225,7 +238,7 @@ class Step:
     @property
     def solutions_unlocked_attempts(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('solutions_unlocked_attempts', 3)
 
@@ -233,7 +246,7 @@ class Step:
     @solutions_unlocked_attempts.setter
     def solutions_unlocked_attempts(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['solutions_unlocked_attempts'] = value
 
@@ -241,7 +254,7 @@ class Step:
     @property
     def has_submissions_restrictions(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_submissions_restrictions']
 
@@ -249,7 +262,7 @@ class Step:
     @has_submissions_restrictions.setter
     def has_submissions_restrictions(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_submissions_restrictions'] = value
 
@@ -258,7 +271,7 @@ class Step:
     @property
     def max_submissions_count(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('max_submissions_count', 3)
 
@@ -266,7 +279,7 @@ class Step:
     @max_submissions_count.setter
     def max_submissions_count(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['max_submissions_count'] = value
 
@@ -319,9 +332,16 @@ class Step:
         return self.__data['discussion_threads']
 
 
+
+
 class WriteBlockView:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteBlockView(id={self.id!r})'
 
 
     @required
@@ -365,9 +385,16 @@ class WriteBlockView:
         self.__data['animation'] = value
 
 
+
+
 class BlockView:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'BlockView(id={self.id!r})'
 
 
     @required
@@ -415,7 +442,7 @@ class BlockView:
     @property
     def options(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['options']
 

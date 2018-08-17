@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseProgressChange:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseProgressChange(id={self.id!r})'
 
 
     @required
@@ -34,7 +40,7 @@ class WriteCourseProgressChange:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:47:31.030Z"
+        Default value: "2018-08-10T09:47:31.030Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:31.030Z")
 
@@ -42,7 +48,7 @@ class WriteCourseProgressChange:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:47:31.030Z"
+        Default value: "2018-08-10T09:47:31.030Z"
         """
         self.__data['time'] = value
 
@@ -157,7 +163,7 @@ class WriteCourseProgressChange:
     @property
     def is_teacher(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_teacher']
 
@@ -165,7 +171,7 @@ class WriteCourseProgressChange:
     @is_teacher.setter
     def is_teacher(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_teacher'] = value
 
@@ -202,9 +208,16 @@ class WriteCourseProgressChange:
         self.__data['last_viewed'] = value
 
 
+
+
 class CourseProgressChange:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseProgressChange(id={self.id!r})'
 
 
     @readonly
@@ -239,7 +252,7 @@ class CourseProgressChange:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:47:31.030Z"
+        Default value: "2018-08-10T09:47:31.030Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:31.030Z")
 
@@ -247,7 +260,7 @@ class CourseProgressChange:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:47:31.030Z"
+        Default value: "2018-08-10T09:47:31.030Z"
         """
         self.__data['time'] = value
 
@@ -362,7 +375,7 @@ class CourseProgressChange:
     @property
     def is_teacher(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_teacher']
 
@@ -370,7 +383,7 @@ class CourseProgressChange:
     @is_teacher.setter
     def is_teacher(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_teacher'] = value
 

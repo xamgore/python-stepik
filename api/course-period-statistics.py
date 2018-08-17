@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCoursePeriodStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCoursePeriodStatistics(id={self.id!r})'
 
 
     @required
@@ -55,7 +61,7 @@ class WriteCoursePeriodStatistics:
     @property
     def active_learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['active_learners_count']
 
@@ -63,7 +69,7 @@ class WriteCoursePeriodStatistics:
     @active_learners_count.setter
     def active_learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['active_learners_count'] = value
 
@@ -72,7 +78,7 @@ class WriteCoursePeriodStatistics:
     @property
     def active_learners_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['active_learners_delta']
 
@@ -80,7 +86,7 @@ class WriteCoursePeriodStatistics:
     @active_learners_delta.setter
     def active_learners_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['active_learners_delta'] = value
 
@@ -89,7 +95,7 @@ class WriteCoursePeriodStatistics:
     @property
     def submissions_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['submissions_count']
 
@@ -97,7 +103,7 @@ class WriteCoursePeriodStatistics:
     @submissions_count.setter
     def submissions_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['submissions_count'] = value
 
@@ -106,7 +112,7 @@ class WriteCoursePeriodStatistics:
     @property
     def submissions_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['submissions_delta']
 
@@ -114,7 +120,7 @@ class WriteCoursePeriodStatistics:
     @submissions_delta.setter
     def submissions_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['submissions_delta'] = value
 
@@ -123,7 +129,7 @@ class WriteCoursePeriodStatistics:
     @property
     def certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_count']
 
@@ -131,7 +137,7 @@ class WriteCoursePeriodStatistics:
     @certificates_count.setter
     def certificates_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_count'] = value
 
@@ -140,7 +146,7 @@ class WriteCoursePeriodStatistics:
     @property
     def certificates_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_delta']
 
@@ -148,7 +154,7 @@ class WriteCoursePeriodStatistics:
     @certificates_delta.setter
     def certificates_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_delta'] = value
 
@@ -157,7 +163,7 @@ class WriteCoursePeriodStatistics:
     @property
     def comments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['comments_count']
 
@@ -165,7 +171,7 @@ class WriteCoursePeriodStatistics:
     @comments_count.setter
     def comments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['comments_count'] = value
 
@@ -174,7 +180,7 @@ class WriteCoursePeriodStatistics:
     @property
     def comments_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['comments_delta']
 
@@ -182,7 +188,7 @@ class WriteCoursePeriodStatistics:
     @comments_delta.setter
     def comments_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['comments_delta'] = value
 
@@ -191,7 +197,7 @@ class WriteCoursePeriodStatistics:
     @property
     def enrollments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_count']
 
@@ -199,7 +205,7 @@ class WriteCoursePeriodStatistics:
     @enrollments_count.setter
     def enrollments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_count'] = value
 
@@ -208,7 +214,7 @@ class WriteCoursePeriodStatistics:
     @property
     def enrollments_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_delta']
 
@@ -216,7 +222,7 @@ class WriteCoursePeriodStatistics:
     @enrollments_delta.setter
     def enrollments_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_delta'] = value
 
@@ -225,7 +231,7 @@ class WriteCoursePeriodStatistics:
     @property
     def dropouts_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_count']
 
@@ -233,7 +239,7 @@ class WriteCoursePeriodStatistics:
     @dropouts_count.setter
     def dropouts_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_count'] = value
 
@@ -242,7 +248,7 @@ class WriteCoursePeriodStatistics:
     @property
     def dropouts_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_delta']
 
@@ -250,14 +256,21 @@ class WriteCoursePeriodStatistics:
     @dropouts_delta.setter
     def dropouts_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_delta'] = value
 
 
+
+
 class CoursePeriodStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CoursePeriodStatistics(id={self.id!r})'
 
 
     @readonly
@@ -313,7 +326,7 @@ class CoursePeriodStatistics:
     @property
     def active_learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['active_learners_count']
 
@@ -321,7 +334,7 @@ class CoursePeriodStatistics:
     @active_learners_count.setter
     def active_learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['active_learners_count'] = value
 
@@ -330,7 +343,7 @@ class CoursePeriodStatistics:
     @property
     def active_learners_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['active_learners_delta']
 
@@ -338,7 +351,7 @@ class CoursePeriodStatistics:
     @active_learners_delta.setter
     def active_learners_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['active_learners_delta'] = value
 
@@ -347,7 +360,7 @@ class CoursePeriodStatistics:
     @property
     def submissions_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['submissions_count']
 
@@ -355,7 +368,7 @@ class CoursePeriodStatistics:
     @submissions_count.setter
     def submissions_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['submissions_count'] = value
 
@@ -364,7 +377,7 @@ class CoursePeriodStatistics:
     @property
     def submissions_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['submissions_delta']
 
@@ -372,7 +385,7 @@ class CoursePeriodStatistics:
     @submissions_delta.setter
     def submissions_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['submissions_delta'] = value
 
@@ -381,7 +394,7 @@ class CoursePeriodStatistics:
     @property
     def certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_count']
 
@@ -389,7 +402,7 @@ class CoursePeriodStatistics:
     @certificates_count.setter
     def certificates_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_count'] = value
 
@@ -398,7 +411,7 @@ class CoursePeriodStatistics:
     @property
     def certificates_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_delta']
 
@@ -406,7 +419,7 @@ class CoursePeriodStatistics:
     @certificates_delta.setter
     def certificates_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_delta'] = value
 
@@ -415,7 +428,7 @@ class CoursePeriodStatistics:
     @property
     def comments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['comments_count']
 
@@ -423,7 +436,7 @@ class CoursePeriodStatistics:
     @comments_count.setter
     def comments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['comments_count'] = value
 
@@ -432,7 +445,7 @@ class CoursePeriodStatistics:
     @property
     def comments_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['comments_delta']
 
@@ -440,7 +453,7 @@ class CoursePeriodStatistics:
     @comments_delta.setter
     def comments_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['comments_delta'] = value
 
@@ -449,7 +462,7 @@ class CoursePeriodStatistics:
     @property
     def enrollments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_count']
 
@@ -457,7 +470,7 @@ class CoursePeriodStatistics:
     @enrollments_count.setter
     def enrollments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_count'] = value
 
@@ -466,7 +479,7 @@ class CoursePeriodStatistics:
     @property
     def enrollments_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_delta']
 
@@ -474,7 +487,7 @@ class CoursePeriodStatistics:
     @enrollments_delta.setter
     def enrollments_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_delta'] = value
 
@@ -483,7 +496,7 @@ class CoursePeriodStatistics:
     @property
     def dropouts_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_count']
 
@@ -491,7 +504,7 @@ class CoursePeriodStatistics:
     @dropouts_count.setter
     def dropouts_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_count'] = value
 
@@ -500,7 +513,7 @@ class CoursePeriodStatistics:
     @property
     def dropouts_delta(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_delta']
 
@@ -508,7 +521,7 @@ class CoursePeriodStatistics:
     @dropouts_delta.setter
     def dropouts_delta(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_delta'] = value
 

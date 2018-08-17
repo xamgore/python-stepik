@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteAchievementProgress:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAchievementProgress(id={self.id!r})'
 
 
     @required
@@ -57,9 +63,16 @@ class WriteAchievementProgress:
         self.__data['obtain_date'] = value
 
 
+
+
 class AchievementProgress:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'AchievementProgress(id={self.id!r})'
 
 
     @readonly

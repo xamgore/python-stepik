@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteServiceRequest:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteServiceRequest(id={self.id!r})'
 
 
     @required
@@ -33,7 +39,7 @@ class WriteServiceRequest:
     @property
     def args(self) -> str:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['args']
 
@@ -41,7 +47,7 @@ class WriteServiceRequest:
     @args.setter
     def args(self, value: str):
         """
-        default value: []
+        Default value: []
         """
         self.__data['args'] = value
 
@@ -49,7 +55,7 @@ class WriteServiceRequest:
     @property
     def kwargs(self) -> str:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['kwargs']
 
@@ -57,14 +63,21 @@ class WriteServiceRequest:
     @kwargs.setter
     def kwargs(self, value: str):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['kwargs'] = value
 
 
+
+
 class ServiceRequest:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'ServiceRequest(id={self.id!r})'
 
 
     @readonly
@@ -98,7 +111,7 @@ class ServiceRequest:
     @property
     def args(self) -> str:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['args']
 
@@ -106,7 +119,7 @@ class ServiceRequest:
     @args.setter
     def args(self, value: str):
         """
-        default value: []
+        Default value: []
         """
         self.__data['args'] = value
 
@@ -114,7 +127,7 @@ class ServiceRequest:
     @property
     def kwargs(self) -> str:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['kwargs']
 
@@ -122,7 +135,7 @@ class ServiceRequest:
     @kwargs.setter
     def kwargs(self, value: str):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['kwargs'] = value
 

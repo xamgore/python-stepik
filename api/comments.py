@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteComment:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteComment(id={self.id!r})'
 
 
     @property
@@ -42,7 +48,7 @@ class WriteComment:
     @property
     def is_pinned(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_pinned']
 
@@ -50,7 +56,7 @@ class WriteComment:
     @is_pinned.setter
     def is_pinned(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_pinned'] = value
 
@@ -58,7 +64,7 @@ class WriteComment:
     @property
     def is_reported(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_reported']
 
@@ -66,7 +72,7 @@ class WriteComment:
     @is_reported.setter
     def is_reported(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_reported'] = value
 
@@ -74,7 +80,7 @@ class WriteComment:
     @property
     def attachments(self) -> List:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['attachments']
 
@@ -82,7 +88,7 @@ class WriteComment:
     @attachments.setter
     def attachments(self, value: List):
         """
-        default value: []
+        Default value: []
         """
         self.__data['attachments'] = value
 
@@ -113,9 +119,16 @@ class WriteComment:
         self.__data['submission'] = value
 
 
+
+
 class Comment:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Comment(id={self.id!r})'
 
 
     @readonly
@@ -179,7 +192,7 @@ class Comment:
     @property
     def reply_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['reply_count']
 
@@ -188,7 +201,7 @@ class Comment:
     @property
     def is_deleted(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_deleted']
 
@@ -258,7 +271,7 @@ class Comment:
     @property
     def is_pinned(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_pinned']
 
@@ -266,7 +279,7 @@ class Comment:
     @is_pinned.setter
     def is_pinned(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_pinned'] = value
 
@@ -290,7 +303,7 @@ class Comment:
     @property
     def is_staff_replied(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_staff_replied']
 
@@ -298,7 +311,7 @@ class Comment:
     @property
     def is_reported(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_reported']
 
@@ -306,7 +319,7 @@ class Comment:
     @is_reported.setter
     def is_reported(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_reported'] = value
 
@@ -314,7 +327,7 @@ class Comment:
     @property
     def attachments(self) -> List:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['attachments']
 
@@ -322,7 +335,7 @@ class Comment:
     @attachments.setter
     def attachments(self, value: List):
         """
-        default value: []
+        Default value: []
         """
         self.__data['attachments'] = value
 

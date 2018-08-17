@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStepIssue:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStepIssue(id={self.id!r})'
 
 
     @required
@@ -23,7 +29,7 @@ class WriteStepIssue:
     @property
     def epoch_time(self) -> str:
         """
-        default value: "2018-08-10T09:48:33.702Z"
+        Default value: "2018-08-10T09:48:33.702Z"
         """
         return self.__data.setdefault('epoch_time', "2018-08-10T09:48:33.702Z")
 
@@ -31,7 +37,7 @@ class WriteStepIssue:
     @epoch_time.setter
     def epoch_time(self, value: str):
         """
-        default value: "2018-08-10T09:48:33.702Z"
+        Default value: "2018-08-10T09:48:33.702Z"
         """
         self.__data['epoch_time'] = value
 
@@ -39,7 +45,7 @@ class WriteStepIssue:
     @property
     def has_quiz_error(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_quiz_error']
 
@@ -47,7 +53,7 @@ class WriteStepIssue:
     @has_quiz_error.setter
     def has_quiz_error(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_quiz_error'] = value
 
@@ -55,7 +61,7 @@ class WriteStepIssue:
     @property
     def has_quiz_warning(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_quiz_warning']
 
@@ -63,7 +69,7 @@ class WriteStepIssue:
     @has_quiz_warning.setter
     def has_quiz_warning(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_quiz_warning'] = value
 
@@ -72,7 +78,7 @@ class WriteStepIssue:
     @property
     def unique_views(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_views']
 
@@ -80,7 +86,7 @@ class WriteStepIssue:
     @unique_views.setter
     def unique_views(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_views'] = value
 
@@ -89,7 +95,7 @@ class WriteStepIssue:
     @property
     def total_views(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_views']
 
@@ -97,7 +103,7 @@ class WriteStepIssue:
     @total_views.setter
     def total_views(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_views'] = value
 
@@ -106,7 +112,7 @@ class WriteStepIssue:
     @property
     def unique_successes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_successes']
 
@@ -114,7 +120,7 @@ class WriteStepIssue:
     @unique_successes.setter
     def unique_successes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_successes'] = value
 
@@ -123,7 +129,7 @@ class WriteStepIssue:
     @property
     def unique_failures(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_failures']
 
@@ -131,7 +137,7 @@ class WriteStepIssue:
     @unique_failures.setter
     def unique_failures(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_failures'] = value
 
@@ -140,7 +146,7 @@ class WriteStepIssue:
     @property
     def unique_attempts(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_attempts']
 
@@ -148,7 +154,7 @@ class WriteStepIssue:
     @unique_attempts.setter
     def unique_attempts(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_attempts'] = value
 
@@ -157,7 +163,7 @@ class WriteStepIssue:
     @property
     def unique_correct_ratio(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('unique_correct_ratio', "0")
 
@@ -165,7 +171,7 @@ class WriteStepIssue:
     @unique_correct_ratio.setter
     def unique_correct_ratio(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['unique_correct_ratio'] = value
 
@@ -174,7 +180,7 @@ class WriteStepIssue:
     @property
     def total_successes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_successes']
 
@@ -182,7 +188,7 @@ class WriteStepIssue:
     @total_successes.setter
     def total_successes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_successes'] = value
 
@@ -191,7 +197,7 @@ class WriteStepIssue:
     @property
     def total_failures(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_failures']
 
@@ -199,7 +205,7 @@ class WriteStepIssue:
     @total_failures.setter
     def total_failures(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_failures'] = value
 
@@ -208,7 +214,7 @@ class WriteStepIssue:
     @property
     def total_attempts(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_attempts']
 
@@ -216,7 +222,7 @@ class WriteStepIssue:
     @total_attempts.setter
     def total_attempts(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_attempts'] = value
 
@@ -225,7 +231,7 @@ class WriteStepIssue:
     @property
     def total_correct_ratio(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('total_correct_ratio', "0")
 
@@ -233,7 +239,7 @@ class WriteStepIssue:
     @total_correct_ratio.setter
     def total_correct_ratio(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['total_correct_ratio'] = value
 
@@ -242,7 +248,7 @@ class WriteStepIssue:
     @property
     def total_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_comments']
 
@@ -250,7 +256,7 @@ class WriteStepIssue:
     @total_comments.setter
     def total_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_comments'] = value
 
@@ -259,7 +265,7 @@ class WriteStepIssue:
     @property
     def pending_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['pending_comments']
 
@@ -267,7 +273,7 @@ class WriteStepIssue:
     @pending_comments.setter
     def pending_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['pending_comments'] = value
 
@@ -276,7 +282,7 @@ class WriteStepIssue:
     @property
     def deleted_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['deleted_comments']
 
@@ -284,7 +290,7 @@ class WriteStepIssue:
     @deleted_comments.setter
     def deleted_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['deleted_comments'] = value
 
@@ -293,7 +299,7 @@ class WriteStepIssue:
     @property
     def epic_comment_votes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['epic_comment_votes']
 
@@ -301,7 +307,7 @@ class WriteStepIssue:
     @epic_comment_votes.setter
     def epic_comment_votes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['epic_comment_votes'] = value
 
@@ -310,7 +316,7 @@ class WriteStepIssue:
     @property
     def abuse_comment_votes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['abuse_comment_votes']
 
@@ -318,7 +324,7 @@ class WriteStepIssue:
     @abuse_comment_votes.setter
     def abuse_comment_votes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['abuse_comment_votes'] = value
 
@@ -327,7 +333,7 @@ class WriteStepIssue:
     @property
     def total_reviews(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_reviews']
 
@@ -335,7 +341,7 @@ class WriteStepIssue:
     @total_reviews.setter
     def total_reviews(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_reviews'] = value
 
@@ -344,7 +350,7 @@ class WriteStepIssue:
     @property
     def reviews_outliers(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['reviews_outliers']
 
@@ -352,7 +358,7 @@ class WriteStepIssue:
     @reviews_outliers.setter
     def reviews_outliers(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['reviews_outliers'] = value
 
@@ -361,7 +367,7 @@ class WriteStepIssue:
     @property
     def plagiarized_submissions(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['plagiarized_submissions']
 
@@ -369,7 +375,7 @@ class WriteStepIssue:
     @plagiarized_submissions.setter
     def plagiarized_submissions(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['plagiarized_submissions'] = value
 
@@ -378,7 +384,7 @@ class WriteStepIssue:
     @property
     def magic(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('magic', "0")
 
@@ -386,7 +392,7 @@ class WriteStepIssue:
     @magic.setter
     def magic(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['magic'] = value
 
@@ -395,7 +401,7 @@ class WriteStepIssue:
     @property
     def discrimination(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('discrimination', "0")
 
@@ -403,14 +409,21 @@ class WriteStepIssue:
     @discrimination.setter
     def discrimination(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['discrimination'] = value
 
 
+
+
 class StepIssue:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'StepIssue(id={self.id!r})'
 
 
     @readonly
@@ -434,7 +447,7 @@ class StepIssue:
     @property
     def epoch_time(self) -> str:
         """
-        default value: "2018-08-10T09:48:33.702Z"
+        Default value: "2018-08-10T09:48:33.702Z"
         """
         return self.__data.setdefault('epoch_time', "2018-08-10T09:48:33.702Z")
 
@@ -442,7 +455,7 @@ class StepIssue:
     @epoch_time.setter
     def epoch_time(self, value: str):
         """
-        default value: "2018-08-10T09:48:33.702Z"
+        Default value: "2018-08-10T09:48:33.702Z"
         """
         self.__data['epoch_time'] = value
 
@@ -450,7 +463,7 @@ class StepIssue:
     @property
     def has_quiz_error(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_quiz_error']
 
@@ -458,7 +471,7 @@ class StepIssue:
     @has_quiz_error.setter
     def has_quiz_error(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_quiz_error'] = value
 
@@ -466,7 +479,7 @@ class StepIssue:
     @property
     def has_quiz_warning(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_quiz_warning']
 
@@ -474,7 +487,7 @@ class StepIssue:
     @has_quiz_warning.setter
     def has_quiz_warning(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_quiz_warning'] = value
 
@@ -483,7 +496,7 @@ class StepIssue:
     @property
     def unique_views(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_views']
 
@@ -491,7 +504,7 @@ class StepIssue:
     @unique_views.setter
     def unique_views(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_views'] = value
 
@@ -500,7 +513,7 @@ class StepIssue:
     @property
     def total_views(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_views']
 
@@ -508,7 +521,7 @@ class StepIssue:
     @total_views.setter
     def total_views(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_views'] = value
 
@@ -517,7 +530,7 @@ class StepIssue:
     @property
     def unique_successes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_successes']
 
@@ -525,7 +538,7 @@ class StepIssue:
     @unique_successes.setter
     def unique_successes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_successes'] = value
 
@@ -534,7 +547,7 @@ class StepIssue:
     @property
     def unique_failures(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_failures']
 
@@ -542,7 +555,7 @@ class StepIssue:
     @unique_failures.setter
     def unique_failures(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_failures'] = value
 
@@ -551,7 +564,7 @@ class StepIssue:
     @property
     def unique_attempts(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['unique_attempts']
 
@@ -559,7 +572,7 @@ class StepIssue:
     @unique_attempts.setter
     def unique_attempts(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['unique_attempts'] = value
 
@@ -568,7 +581,7 @@ class StepIssue:
     @property
     def unique_correct_ratio(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('unique_correct_ratio', "0")
 
@@ -576,7 +589,7 @@ class StepIssue:
     @unique_correct_ratio.setter
     def unique_correct_ratio(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['unique_correct_ratio'] = value
 
@@ -585,7 +598,7 @@ class StepIssue:
     @property
     def total_successes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_successes']
 
@@ -593,7 +606,7 @@ class StepIssue:
     @total_successes.setter
     def total_successes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_successes'] = value
 
@@ -602,7 +615,7 @@ class StepIssue:
     @property
     def total_failures(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_failures']
 
@@ -610,7 +623,7 @@ class StepIssue:
     @total_failures.setter
     def total_failures(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_failures'] = value
 
@@ -619,7 +632,7 @@ class StepIssue:
     @property
     def total_attempts(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_attempts']
 
@@ -627,7 +640,7 @@ class StepIssue:
     @total_attempts.setter
     def total_attempts(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_attempts'] = value
 
@@ -636,7 +649,7 @@ class StepIssue:
     @property
     def total_correct_ratio(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('total_correct_ratio', "0")
 
@@ -644,7 +657,7 @@ class StepIssue:
     @total_correct_ratio.setter
     def total_correct_ratio(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['total_correct_ratio'] = value
 
@@ -653,7 +666,7 @@ class StepIssue:
     @property
     def total_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_comments']
 
@@ -661,7 +674,7 @@ class StepIssue:
     @total_comments.setter
     def total_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_comments'] = value
 
@@ -670,7 +683,7 @@ class StepIssue:
     @property
     def pending_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['pending_comments']
 
@@ -678,7 +691,7 @@ class StepIssue:
     @pending_comments.setter
     def pending_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['pending_comments'] = value
 
@@ -687,7 +700,7 @@ class StepIssue:
     @property
     def deleted_comments(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['deleted_comments']
 
@@ -695,7 +708,7 @@ class StepIssue:
     @deleted_comments.setter
     def deleted_comments(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['deleted_comments'] = value
 
@@ -704,7 +717,7 @@ class StepIssue:
     @property
     def epic_comment_votes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['epic_comment_votes']
 
@@ -712,7 +725,7 @@ class StepIssue:
     @epic_comment_votes.setter
     def epic_comment_votes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['epic_comment_votes'] = value
 
@@ -721,7 +734,7 @@ class StepIssue:
     @property
     def abuse_comment_votes(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['abuse_comment_votes']
 
@@ -729,7 +742,7 @@ class StepIssue:
     @abuse_comment_votes.setter
     def abuse_comment_votes(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['abuse_comment_votes'] = value
 
@@ -738,7 +751,7 @@ class StepIssue:
     @property
     def total_reviews(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['total_reviews']
 
@@ -746,7 +759,7 @@ class StepIssue:
     @total_reviews.setter
     def total_reviews(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['total_reviews'] = value
 
@@ -755,7 +768,7 @@ class StepIssue:
     @property
     def reviews_outliers(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['reviews_outliers']
 
@@ -763,7 +776,7 @@ class StepIssue:
     @reviews_outliers.setter
     def reviews_outliers(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['reviews_outliers'] = value
 
@@ -772,7 +785,7 @@ class StepIssue:
     @property
     def plagiarized_submissions(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['plagiarized_submissions']
 
@@ -780,7 +793,7 @@ class StepIssue:
     @plagiarized_submissions.setter
     def plagiarized_submissions(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['plagiarized_submissions'] = value
 
@@ -789,7 +802,7 @@ class StepIssue:
     @property
     def magic(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('magic', "0")
 
@@ -797,7 +810,7 @@ class StepIssue:
     @magic.setter
     def magic(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['magic'] = value
 
@@ -806,7 +819,7 @@ class StepIssue:
     @property
     def discrimination(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('discrimination', "0")
 
@@ -814,7 +827,7 @@ class StepIssue:
     @discrimination.setter
     def discrimination(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['discrimination'] = value
 

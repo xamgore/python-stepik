@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteAdaptivityParametersChange:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAdaptivityParametersChange(id={self.id!r})'
 
 
     @property
@@ -42,7 +48,7 @@ class WriteAdaptivityParametersChange:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:47:12.240Z"
+        Default value: "2018-08-10T09:47:12.240Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:12.240Z")
 
@@ -50,7 +56,7 @@ class WriteAdaptivityParametersChange:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:47:12.240Z"
+        Default value: "2018-08-10T09:47:12.240Z"
         """
         self.__data['time'] = value
 
@@ -183,9 +189,16 @@ class WriteAdaptivityParametersChange:
         self.__data['new_lesson_confidence'] = value
 
 
+
+
 class AdaptivityParametersChange:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'AdaptivityParametersChange(id={self.id!r})'
 
 
     @readonly
@@ -228,7 +241,7 @@ class AdaptivityParametersChange:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:47:12.240Z"
+        Default value: "2018-08-10T09:47:12.240Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:12.240Z")
 
@@ -236,7 +249,7 @@ class AdaptivityParametersChange:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:47:12.240Z"
+        Default value: "2018-08-10T09:47:12.240Z"
         """
         self.__data['time'] = value
 

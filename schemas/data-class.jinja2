@@ -2,13 +2,34 @@
 from common import required, readonly
 from typing import List
 
-
 {% for model, struct in models.items() -%}
+{% for class, path in struct['imports'].items() %}
+from {{ path }} import {{ class }}
+{% endfor %}
+
+
 class {{ model | replace('Serializer', '') }}:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
 
 
+    def __repr__(self):
+        return f'{{ model | replace('Serializer', '') }}(id={self.id!r})'
+
+
+{% for prop, at in struct['methods'].items() %}
+    def {{ prop }}(self) -> {{ at['object_type'] }}:
+    {% if at['docstring'] %}
+        """
+        {{ at['docstring'] | indent(width=8) }}
+        """
+    {% endif %}
+        for obj in self.__stepik.fetch_objects('{{ at['type'] | lower }}', self.__data['{{ prop }}']):
+            yield {{ at['type'] }}(self.__stepik, obj)
+
+
+{% endfor %}
 {% for prop, at in struct['properties'].items() %}
 {% if at['required'] %}
     @required
@@ -22,6 +43,9 @@ class {{ model | replace('Serializer', '') }}:
         """
         {{ at['docstring'] | indent(width=8) }}
         """
+    {% endif %}
+    {% if at['deprecated'] %}
+        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
     {% if at['defaultValue'] %}
         return self.__data.setdefault('{{ prop }}', {{ at['defaultValue'] }})
@@ -37,6 +61,9 @@ class {{ model | replace('Serializer', '') }}:
         """
         {{ at['docstring'] | indent(width=8) }}
         """
+    {% endif %}
+    {% if at['deprecated'] %}
+        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
         self.__data['{{ prop }}'] = value
 

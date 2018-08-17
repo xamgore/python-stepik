@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteProfile:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteProfile(id={self.id!r})'
 
 
     @required
@@ -33,7 +39,7 @@ class WriteProfile:
     @property
     def is_private(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_private']
 
@@ -41,7 +47,7 @@ class WriteProfile:
     @is_private.setter
     def is_private(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_private'] = value
 
@@ -50,7 +56,7 @@ class WriteProfile:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -58,7 +64,7 @@ class WriteProfile:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -96,7 +102,7 @@ class WriteProfile:
     @property
     def subscribed_for_mail(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('subscribed_for_mail', True)
 
@@ -104,7 +110,7 @@ class WriteProfile:
     @subscribed_for_mail.setter
     def subscribed_for_mail(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['subscribed_for_mail'] = value
 
@@ -128,7 +134,7 @@ class WriteProfile:
     @property
     def subscribed_for_marketing(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_marketing']
 
@@ -136,7 +142,7 @@ class WriteProfile:
     @subscribed_for_marketing.setter
     def subscribed_for_marketing(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_marketing'] = value
 
@@ -144,7 +150,7 @@ class WriteProfile:
     @property
     def subscribed_for_partners(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_partners']
 
@@ -152,7 +158,7 @@ class WriteProfile:
     @subscribed_for_partners.setter
     def subscribed_for_partners(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_partners'] = value
 
@@ -160,7 +166,7 @@ class WriteProfile:
     @property
     def subscribed_for_news_en(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('subscribed_for_news_en', True)
 
@@ -168,7 +174,7 @@ class WriteProfile:
     @subscribed_for_news_en.setter
     def subscribed_for_news_en(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['subscribed_for_news_en'] = value
 
@@ -176,7 +182,7 @@ class WriteProfile:
     @property
     def subscribed_for_news_ru(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_news_ru']
 
@@ -184,7 +190,7 @@ class WriteProfile:
     @subscribed_for_news_ru.setter
     def subscribed_for_news_ru(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_news_ru'] = value
 
@@ -193,7 +199,7 @@ class WriteProfile:
     @property
     def bit_field(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['bit_field']
 
@@ -201,7 +207,7 @@ class WriteProfile:
     @bit_field.setter
     def bit_field(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['bit_field'] = value
 
@@ -209,7 +215,7 @@ class WriteProfile:
     @property
     def is_web_push_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_web_push_enabled', True)
 
@@ -217,14 +223,21 @@ class WriteProfile:
     @is_web_push_enabled.setter
     def is_web_push_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_web_push_enabled'] = value
 
 
+
+
 class Profile:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Profile(id={self.id!r})'
 
 
     @readonly
@@ -264,7 +277,7 @@ class Profile:
     @property
     def is_private(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_private']
 
@@ -272,7 +285,7 @@ class Profile:
     @is_private.setter
     def is_private(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_private'] = value
 
@@ -287,7 +300,7 @@ class Profile:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -295,7 +308,7 @@ class Profile:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -333,7 +346,7 @@ class Profile:
     @property
     def subscribed_for_mail(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('subscribed_for_mail', True)
 
@@ -341,7 +354,7 @@ class Profile:
     @subscribed_for_mail.setter
     def subscribed_for_mail(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['subscribed_for_mail'] = value
 
@@ -374,7 +387,7 @@ class Profile:
         """
         Designates whether the user can log into this admin site.
 
-        default value: False
+        Default value: False
         """
         return self.__data['is_staff']
 
@@ -383,7 +396,7 @@ class Profile:
     @property
     def is_guest(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_guest']
 
@@ -409,7 +422,7 @@ class Profile:
     @property
     def subscribed_for_marketing(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_marketing']
 
@@ -417,7 +430,7 @@ class Profile:
     @subscribed_for_marketing.setter
     def subscribed_for_marketing(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_marketing'] = value
 
@@ -425,7 +438,7 @@ class Profile:
     @property
     def subscribed_for_partners(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_partners']
 
@@ -433,7 +446,7 @@ class Profile:
     @subscribed_for_partners.setter
     def subscribed_for_partners(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_partners'] = value
 
@@ -441,7 +454,7 @@ class Profile:
     @property
     def subscribed_for_news_en(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('subscribed_for_news_en', True)
 
@@ -449,7 +462,7 @@ class Profile:
     @subscribed_for_news_en.setter
     def subscribed_for_news_en(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['subscribed_for_news_en'] = value
 
@@ -457,7 +470,7 @@ class Profile:
     @property
     def subscribed_for_news_ru(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['subscribed_for_news_ru']
 
@@ -465,7 +478,7 @@ class Profile:
     @subscribed_for_news_ru.setter
     def subscribed_for_news_ru(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['subscribed_for_news_ru'] = value
 
@@ -474,7 +487,7 @@ class Profile:
     @property
     def bit_field(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['bit_field']
 
@@ -482,7 +495,7 @@ class Profile:
     @bit_field.setter
     def bit_field(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['bit_field'] = value
 
@@ -492,7 +505,7 @@ class Profile:
     @property
     def level(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['level']
 
@@ -567,7 +580,7 @@ class Profile:
     @property
     def is_web_push_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_web_push_enabled', True)
 
@@ -575,7 +588,7 @@ class Profile:
     @is_web_push_enabled.setter
     def is_web_push_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_web_push_enabled'] = value
 

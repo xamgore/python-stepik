@@ -1,8 +1,5 @@
 # Run with Python 3
 # Saves all step sources into foldered structure
-import datetime
-import json
-import os
 from typing import List
 
 from api.courses import Course
@@ -21,49 +18,55 @@ from config import id, secret
 
 
 class Stepik:
-    def __init__(self, client_id, client_secret):
-        token = requests \
-            .post('https://stepik.org/oauth2/token/',
-                  data={'grant_type': 'client_credentials'},
-                  auth=requests.auth.HTTPBasicAuth(client_id, client_secret)) \
-            .json() \
-            .get('access_token', None)
+    def __init__(self, client_id, client_secret, server='stepik.org'):
+        data = {'grant_type': 'client_credentials'}
+        auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
+        resp = requests.post(f'https://{server}/oauth2/token/', data, auth=auth)
+        token = resp.json().get('access_token', None)
 
         if not token:
             raise ConnectionRefusedError('Unable to authorize with provided credentials')
 
+        self.__server = server
         self.headers = {'Authorization': 'Bearer ' + token}
-        self.lel = 3
+
         self.courses = Courses(self)
         self.sections = Sections(self)
         self.units = Units(self)
         self.lessons = Lessons(self)
 
+    def _update(self, resource_name: str, id: int, data: dict):
+        """
+        :param resource_name: the name of resource
+        :param id: resource's id to grub
+        :param data: dict object
+        """
+        api_url = f'https://{self.__server}/api/{resource_name}/{id}'
+        response = requests.put(api_url, headers=self.headers, json={resource_name: data}).json()
+        return response[f'{resource_name}'][0]
+
 
     def _fetch_object(self, resource_name: str, id: int):
         """
         :param resource_name: the name of resource
-        :param id int: id of the resource to grub
-        :return: kek
+        :param id: resource's id to grub
         """
-        api_url = 'http://stepik.org/api/{}/{}'.format(resource_name, id)
+        api_url = f'https://{self.__server}/api/{resource_name}/{id}'
         response = requests.get(api_url, headers=self.headers).json()
-        return response['{}'.format(resource_name)][0]
+        return response[f'{resource_name}'][0]
 
 
-    def _fetch_objects(self, resource_name: str, obj_ids: List[int]):
-        objs = []
+    def fetch_objects(self, resource_name: str, obj_ids: List[int]):
         # Fetch objects by 30 items,
         # so we won't bump into HTTP request length limits
         step_size = 30
         for i in range(0, len(obj_ids), step_size):
             obj_ids_slice = obj_ids[i:i + step_size]
-            api_url = 'https://stepik.org/api/{}s?{}' \
-                .format(resource_name,
+            api_url = 'https://{}/api/{}s?{}' \
+                .format(self.__server, resource_name,
                         '&'.join(f'ids[]={obj_id}' for obj_id in obj_ids_slice))
             response = requests.get(api_url, headers=self.headers).json()
-            objs += response[f'{resource_name}s']
-        return objs
+            yield from response[f'{resource_name}s']
 
 
 class Courses(object):
@@ -72,7 +75,7 @@ class Courses(object):
 
 
     def get(self, course_id: int) -> Course:
-        return Course(self.stepik._fetch_object('courses', course_id))
+        return Course(self.stepik, self.stepik._fetch_object('courses', course_id))
 
 
     def update(self, course: Course):
@@ -85,7 +88,7 @@ class Sections(object):
 
 
     def get(self, id: int) -> Section:
-        return Section(self.stepik._fetch_object('sections', id))
+        return Section(self.stepik, self.stepik._fetch_object('sections', id))
 
 
 class Units(object):
@@ -94,7 +97,11 @@ class Units(object):
 
 
     def get(self, id: int) -> Unit:
-        return Unit(self.stepik._fetch_object('units', id))
+        return Unit(self.stepik, self.stepik._fetch_object('units', id))
+
+
+    def update(self, unit: Unit):
+        self.stepik._update('units', unit.id, unit._Unit__data)
 
 
 class Lessons(object):
@@ -103,38 +110,50 @@ class Lessons(object):
 
 
     def get(self, id: int) -> Lesson:
-        return Lesson(self.stepik._fetch_object('lessons', id))
+        return Lesson(self.stepik, self.stepik._fetch_object('lessons', id))
 
 
 # 1. Get your keys at https://stepik.org/oauth2/applications/
 # (client type = confidential, authorization grant type = client credentials)
-stepik = Stepik(client_id=id, client_secret=secret)
-course = stepik.courses.get(course_id=14906)
+if __name__ == '__main__':
+    stepik = Stepik(client_id=id, client_secret=secret)
+    course = stepik.courses.get(course_id=14906)
+    # course = stepik.courses.get(course_id=1612)
+    # course = stepik.courses.get(course_id=6273)
 
-for section in course.sections():
-    print(section.title + ':')
+    for sec in course.sections():
+        print(sec.title + ':')
 
-    for unit in section.units():
-        print('   - ' + unit.lesson().title)
+        for unit in sec.units():
+            lesson = stepik.lessons.get(unit.lesson)
+            print('   - ' + lesson.title)
 
-    print()
+    # unit = stepik.units.get(77169)
+    # unit.grading_policy_source = 'no_deadline'
+    # stepik.units.update(unit)
 
 
-for sec_id in course.sections:
-    section = stepik.sections.get(sec_id)
-    print(section.title + ':')
+# for section in course.sections():
+#     print(section.title + ':')
+#
+#     for unit in section.units():
+#         print('   - ' + unit.lesson().title)
+#
+#     print()
 
-    for unit_id in section.units:
-        unit = stepik.units.get(unit_id)
-        lesson = stepik.lessons.get(unit.lesson)
-        print('   - ' + lesson.title)
 
-    print()
+# for sec_id in course.sections:
+#     section = stepik.sections.get(sec_id)
+#     print(section.title + ':')
+#
+#     for unit_id in section.units:
+#         unit = stepik.units.get(unit_id)
+#         lesson = stepik.lessons.get(unit.lesson)
+#         print('   - ' + lesson.title)
+#
+#     print()
 
 exit(0)
-
-
-
 
 # course = fetch_object('course', course_id)
 # sections = fetch_objects('section', course['sections'])

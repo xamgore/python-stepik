@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteRubric:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteRubric(id={self.id!r})'
 
 
     @required
@@ -45,7 +51,7 @@ class WriteRubric:
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -53,14 +59,21 @@ class WriteRubric:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 
 
+
+
 class Rubric:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Rubric(id={self.id!r})'
 
 
     @readonly
@@ -106,7 +119,7 @@ class Rubric:
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -114,7 +127,7 @@ class Rubric:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 

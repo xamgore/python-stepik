@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSocialProfile:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSocialProfile(id={self.id!r})'
 
 
     @required
@@ -36,9 +42,16 @@ class WriteSocialProfile:
         self.__data['name'] = value
 
 
+
+
 class SocialProfile:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'SocialProfile(id={self.id!r})'
 
 
     @readonly

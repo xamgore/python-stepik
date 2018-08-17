@@ -3,14 +3,27 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseReviewSummary:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseReviewSummary(id={self.id!r})'
+
+
 
 
 class CourseReviewSummary:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseReviewSummary(id={self.id!r})'
 
 
     @readonly
@@ -31,7 +44,7 @@ class CourseReviewSummary:
     @property
     def average(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('average', "0")
 
@@ -41,7 +54,7 @@ class CourseReviewSummary:
     @property
     def count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['count']
 
@@ -50,7 +63,7 @@ class CourseReviewSummary:
     @property
     def distribution(self) -> List:
         """
-        default value: [0, 0, 0, 0, 0]
+        Default value: [0, 0, 0, 0, 0]
         """
         return self.__data.setdefault('distribution', [0, 0, 0, 0, 0])
 

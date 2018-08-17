@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteExamSession:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteExamSession(id={self.id!r})'
 
 
     @required
@@ -19,9 +25,16 @@ class WriteExamSession:
         self.__data['section'] = value
 
 
+
+
 class ExamSession:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'ExamSession(id={self.id!r})'
 
 
     @readonly
@@ -53,7 +66,7 @@ class ExamSession:
     @property
     def begin_date(self) -> str:
         """
-        default value: "2018-08-10T09:47:47.303Z"
+        Default value: "2018-08-10T09:47:47.303Z"
         """
         return self.__data.setdefault('begin_date', "2018-08-10T09:47:47.303Z")
 

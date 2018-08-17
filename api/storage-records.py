@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStorageRecord:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStorageRecord(id={self.id!r})'
 
 
     @property
     def kind(self) -> str:
         """
-        default value: 
+        Default value: 
         """
         return self.__data['kind']
 
@@ -19,7 +25,7 @@ class WriteStorageRecord:
     @kind.setter
     def kind(self, value: str):
         """
-        default value: 
+        Default value: 
         """
         self.__data['kind'] = value
 
@@ -27,7 +33,7 @@ class WriteStorageRecord:
     @property
     def data(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['data']
 
@@ -35,14 +41,21 @@ class WriteStorageRecord:
     @data.setter
     def data(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['data'] = value
 
 
+
+
 class StorageRecord:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'StorageRecord(id={self.id!r})'
 
 
     @readonly
@@ -61,7 +74,7 @@ class StorageRecord:
     @property
     def kind(self) -> str:
         """
-        default value: 
+        Default value: 
         """
         return self.__data['kind']
 
@@ -69,7 +82,7 @@ class StorageRecord:
     @kind.setter
     def kind(self, value: str):
         """
-        default value: 
+        Default value: 
         """
         self.__data['kind'] = value
 
@@ -77,7 +90,7 @@ class StorageRecord:
     @property
     def data(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['data']
 
@@ -85,7 +98,7 @@ class StorageRecord:
     @data.setter
     def data(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['data'] = value
 

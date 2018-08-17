@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseReminder:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseReminder(id={self.id!r})'
 
 
     @required
@@ -22,7 +28,7 @@ class WriteCourseReminder:
     @property
     def is_active(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_active', True)
 
@@ -30,14 +36,21 @@ class WriteCourseReminder:
     @is_active.setter
     def is_active(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_active'] = value
 
 
+
+
 class CourseReminder:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseReminder(id={self.id!r})'
 
 
     @readonly
@@ -76,7 +89,7 @@ class CourseReminder:
     @property
     def is_active(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_active', True)
 
@@ -84,7 +97,7 @@ class CourseReminder:
     @is_active.setter
     def is_active(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_active'] = value
 

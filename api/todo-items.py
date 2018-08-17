@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteTodoItem:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteTodoItem(id={self.id!r})'
 
 
     @required
@@ -39,7 +45,7 @@ class WriteTodoItem:
     @property
     def is_complete(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_complete']
 
@@ -47,7 +53,7 @@ class WriteTodoItem:
     @is_complete.setter
     def is_complete(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_complete'] = value
 
@@ -55,7 +61,7 @@ class WriteTodoItem:
     @property
     def context(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['context']
 
@@ -63,14 +69,21 @@ class WriteTodoItem:
     @context.setter
     def context(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['context'] = value
 
 
+
+
 class TodoItem:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'TodoItem(id={self.id!r})'
 
 
     @readonly
@@ -110,7 +123,7 @@ class TodoItem:
     @property
     def is_complete(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_complete']
 
@@ -118,7 +131,7 @@ class TodoItem:
     @is_complete.setter
     def is_complete(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_complete'] = value
 
@@ -126,7 +139,7 @@ class TodoItem:
     @property
     def context(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['context']
 
@@ -134,7 +147,7 @@ class TodoItem:
     @context.setter
     def context(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['context'] = value
 

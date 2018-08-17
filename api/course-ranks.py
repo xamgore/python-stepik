@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseRank:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseRank(id={self.id!r})'
 
 
     @required
@@ -34,7 +40,7 @@ class WriteCourseRank:
     @property
     def score(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('score', "0")
 
@@ -42,7 +48,7 @@ class WriteCourseRank:
     @score.setter
     def score(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['score'] = value
 
@@ -77,9 +83,16 @@ class WriteCourseRank:
         self.__data['users_count'] = value
 
 
+
+
 class CourseRank:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseRank(id={self.id!r})'
 
 
     @readonly
@@ -114,7 +127,7 @@ class CourseRank:
     @property
     def score(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('score', "0")
 
@@ -122,7 +135,7 @@ class CourseRank:
     @score.setter
     def score(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['score'] = value
 

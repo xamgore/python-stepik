@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteLongTask:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteLongTask(id={self.id!r})'
 
 
     @required
@@ -65,9 +71,16 @@ class WriteLongTask:
         self.__data['klass'] = value
 
 
+
+
 class LongTask:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'LongTask(id={self.id!r})'
 
 
     @readonly
@@ -137,7 +150,7 @@ class LongTask:
     @property
     def result(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['result']
 

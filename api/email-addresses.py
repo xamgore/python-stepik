@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteEmailAddress:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteEmailAddress(id={self.id!r})'
 
 
     @required
@@ -25,9 +31,16 @@ class WriteEmailAddress:
         self.__data['email'] = value
 
 
+
+
 class EmailAddress:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'EmailAddress(id={self.id!r})'
 
 
     @readonly

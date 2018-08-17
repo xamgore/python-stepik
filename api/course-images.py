@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseImage:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseImage(id={self.id!r})'
 
 
     @property
@@ -56,9 +62,16 @@ class WriteCourseImage:
         self.__data['cover'] = value
 
 
+
+
 class CourseImage:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseImage(id={self.id!r})'
 
 
     @readonly

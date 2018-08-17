@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteNotification:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteNotification(id={self.id!r})'
 
 
     @property
     def is_unread(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_unread', True)
 
@@ -19,7 +25,7 @@ class WriteNotification:
     @is_unread.setter
     def is_unread(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_unread'] = value
 
@@ -27,7 +33,7 @@ class WriteNotification:
     @property
     def is_muted(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_muted']
 
@@ -35,7 +41,7 @@ class WriteNotification:
     @is_muted.setter
     def is_muted(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_muted'] = value
 
@@ -43,7 +49,7 @@ class WriteNotification:
     @property
     def is_favorite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_favorite']
 
@@ -51,14 +57,21 @@ class WriteNotification:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_favorite'] = value
 
 
+
+
 class Notification:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Notification(id={self.id!r})'
 
 
     @readonly
@@ -70,7 +83,7 @@ class Notification:
     @property
     def is_unread(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_unread', True)
 
@@ -78,7 +91,7 @@ class Notification:
     @is_unread.setter
     def is_unread(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_unread'] = value
 
@@ -86,7 +99,7 @@ class Notification:
     @property
     def is_muted(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_muted']
 
@@ -94,7 +107,7 @@ class Notification:
     @is_muted.setter
     def is_muted(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_muted'] = value
 
@@ -102,7 +115,7 @@ class Notification:
     @property
     def is_favorite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_favorite']
 
@@ -110,7 +123,7 @@ class Notification:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_favorite'] = value
 

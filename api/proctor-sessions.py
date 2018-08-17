@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteProctorSession:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteProctorSession(id={self.id!r})'
 
 
     @required
@@ -19,9 +25,16 @@ class WriteProctorSession:
         self.__data['section'] = value
 
 
+
+
 class ProctorSession:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'ProctorSession(id={self.id!r})'
 
 
     @readonly
@@ -53,7 +66,7 @@ class ProctorSession:
     @property
     def create_date(self) -> str:
         """
-        default value: "2018-08-10T09:48:08.790Z"
+        Default value: "2018-08-10T09:48:08.790Z"
         """
         return self.__data.setdefault('create_date', "2018-08-10T09:48:08.790Z")
 
@@ -96,7 +109,7 @@ class ProctorSession:
     @property
     def score(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('score', "0")
 

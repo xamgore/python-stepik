@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteUserCodeRun:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteUserCodeRun(id={self.id!r})'
 
 
     @required
@@ -63,9 +69,16 @@ class WriteUserCodeRun:
         self.__data['stdin'] = value
 
 
+
+
 class UserCodeRun:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'UserCodeRun(id={self.id!r})'
 
 
     @readonly
@@ -156,7 +169,7 @@ class UserCodeRun:
     @property
     def time_limit_exceeded(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['time_limit_exceeded']
 
@@ -165,7 +178,7 @@ class UserCodeRun:
     @property
     def memory_limit_exceeded(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['memory_limit_exceeded']
 

@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteRecommendationReaction:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteRecommendationReaction(id={self.id!r})'
 
 
     @required
@@ -51,7 +57,7 @@ class WriteRecommendationReaction:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:48:13.586Z"
+        Default value: "2018-08-10T09:48:13.586Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:48:13.586Z")
 
@@ -59,14 +65,21 @@ class WriteRecommendationReaction:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:48:13.586Z"
+        Default value: "2018-08-10T09:48:13.586Z"
         """
         self.__data['time'] = value
 
 
+
+
 class RecommendationReaction:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'RecommendationReaction(id={self.id!r})'
 
 
     @required
@@ -112,7 +125,7 @@ class RecommendationReaction:
     @property
     def time(self) -> str:
         """
-        default value: "2018-08-10T09:48:13.586Z"
+        Default value: "2018-08-10T09:48:13.586Z"
         """
         return self.__data.setdefault('time', "2018-08-10T09:48:13.586Z")
 
@@ -120,7 +133,7 @@ class RecommendationReaction:
     @time.setter
     def time(self, value: str):
         """
-        default value: "2018-08-10T09:48:13.586Z"
+        Default value: "2018-08-10T09:48:13.586Z"
         """
         self.__data['time'] = value
 

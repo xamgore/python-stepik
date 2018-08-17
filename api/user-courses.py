@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteUserCourse:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteUserCourse(id={self.id!r})'
 
 
     @property
     def is_favorite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_favorite']
 
@@ -19,14 +25,21 @@ class WriteUserCourse:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_favorite'] = value
 
 
+
+
 class UserCourse:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'UserCourse(id={self.id!r})'
 
 
     @readonly
@@ -52,7 +65,7 @@ class UserCourse:
     @property
     def is_favorite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_favorite']
 
@@ -60,7 +73,7 @@ class UserCourse:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_favorite'] = value
 
@@ -70,7 +83,7 @@ class UserCourse:
     @property
     def last_viewed(self) -> str:
         """
-        default value: "2018-08-10T09:48:51.981Z"
+        Default value: "2018-08-10T09:48:51.981Z"
         """
         return self.__data.setdefault('last_viewed', "2018-08-10T09:48:51.981Z")
 

@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteMember:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteMember(id={self.id!r})'
 
 
     @required
@@ -48,7 +54,7 @@ class WriteMember:
     @property
     def is_synced(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_synced']
 
@@ -56,14 +62,21 @@ class WriteMember:
     @is_synced.setter
     def is_synced(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_synced'] = value
 
 
+
+
 class Member:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Member(id={self.id!r})'
 
 
     @readonly
@@ -98,7 +111,7 @@ class Member:
     @property
     def date_joined(self) -> str:
         """
-        default value: "2018-08-10T09:48:04.316Z"
+        Default value: "2018-08-10T09:48:04.316Z"
         """
         return self.__data.setdefault('date_joined', "2018-08-10T09:48:04.316Z")
 
@@ -106,7 +119,7 @@ class Member:
     @property
     def is_synced(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_synced']
 
@@ -114,7 +127,7 @@ class Member:
     @is_synced.setter
     def is_synced(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_synced'] = value
 

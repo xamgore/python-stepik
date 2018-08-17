@@ -3,16 +3,22 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStepSource:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStepSource(id={self.id!r})'
 
 
     @required
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -20,7 +26,7 @@ class WriteStepSource:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 
@@ -45,7 +51,7 @@ class WriteStepSource:
     @property
     def is_solutions_unlocked(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_solutions_unlocked']
 
@@ -53,7 +59,7 @@ class WriteStepSource:
     @is_solutions_unlocked.setter
     def is_solutions_unlocked(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_solutions_unlocked'] = value
 
@@ -62,7 +68,7 @@ class WriteStepSource:
     @property
     def solutions_unlocked_attempts(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('solutions_unlocked_attempts', 3)
 
@@ -70,7 +76,7 @@ class WriteStepSource:
     @solutions_unlocked_attempts.setter
     def solutions_unlocked_attempts(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['solutions_unlocked_attempts'] = value
 
@@ -78,7 +84,7 @@ class WriteStepSource:
     @property
     def has_submissions_restrictions(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_submissions_restrictions']
 
@@ -86,7 +92,7 @@ class WriteStepSource:
     @has_submissions_restrictions.setter
     def has_submissions_restrictions(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_submissions_restrictions'] = value
 
@@ -95,7 +101,7 @@ class WriteStepSource:
     @property
     def max_submissions_count(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('max_submissions_count', 3)
 
@@ -103,7 +109,7 @@ class WriteStepSource:
     @max_submissions_count.setter
     def max_submissions_count(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['max_submissions_count'] = value
 
@@ -112,7 +118,7 @@ class WriteStepSource:
     @property
     def cost(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['cost']
 
@@ -120,14 +126,21 @@ class WriteStepSource:
     @cost.setter
     def cost(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['cost'] = value
 
 
+
+
 class StepSource:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'StepSource(id={self.id!r})'
 
 
     @readonly
@@ -147,7 +160,7 @@ class StepSource:
     @property
     def position(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('position', 1)
 
@@ -155,7 +168,7 @@ class StepSource:
     @position.setter
     def position(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['position'] = value
 
@@ -250,7 +263,7 @@ class StepSource:
     @property
     def is_solutions_unlocked(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_solutions_unlocked']
 
@@ -258,7 +271,7 @@ class StepSource:
     @is_solutions_unlocked.setter
     def is_solutions_unlocked(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_solutions_unlocked'] = value
 
@@ -267,7 +280,7 @@ class StepSource:
     @property
     def solutions_unlocked_attempts(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('solutions_unlocked_attempts', 3)
 
@@ -275,7 +288,7 @@ class StepSource:
     @solutions_unlocked_attempts.setter
     def solutions_unlocked_attempts(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['solutions_unlocked_attempts'] = value
 
@@ -283,7 +296,7 @@ class StepSource:
     @property
     def has_submissions_restrictions(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_submissions_restrictions']
 
@@ -291,7 +304,7 @@ class StepSource:
     @has_submissions_restrictions.setter
     def has_submissions_restrictions(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['has_submissions_restrictions'] = value
 
@@ -300,7 +313,7 @@ class StepSource:
     @property
     def max_submissions_count(self) -> int:
         """
-        default value: 3
+        Default value: 3
         """
         return self.__data.setdefault('max_submissions_count', 3)
 
@@ -308,7 +321,7 @@ class StepSource:
     @max_submissions_count.setter
     def max_submissions_count(self, value: int):
         """
-        default value: 3
+        Default value: 3
         """
         self.__data['max_submissions_count'] = value
 
@@ -371,7 +384,7 @@ class StepSource:
     @property
     def error(self) -> List:
         """
-        default value: {'text': '', 'code': '', 'params': {}}
+        Default value: {'text': '', 'code': '', 'params': {}}
         """
         return self.__data.setdefault('error', {'text': '', 'code': '', 'params': {}})
 
@@ -381,7 +394,7 @@ class StepSource:
     @property
     def warnings(self) -> List:
         """
-        default value: []
+        Default value: []
         """
         return self.__data['warnings']
 
@@ -390,7 +403,7 @@ class StepSource:
     @property
     def cost(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['cost']
 
@@ -398,14 +411,21 @@ class StepSource:
     @cost.setter
     def cost(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['cost'] = value
 
 
+
+
 class WriteBlockEdit:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteBlockEdit(id={self.id!r})'
 
 
     @required
@@ -452,7 +472,7 @@ class WriteBlockEdit:
     @property
     def source(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['source']
 
@@ -460,7 +480,7 @@ class WriteBlockEdit:
     @source.setter
     def source(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['source'] = value
 
@@ -468,7 +488,7 @@ class WriteBlockEdit:
     @property
     def subtitles(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['subtitles']
 
@@ -476,7 +496,7 @@ class WriteBlockEdit:
     @subtitles.setter
     def subtitles(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['subtitles'] = value
 
@@ -501,9 +521,16 @@ class WriteBlockEdit:
         self.__data['feedback_wrong'] = value
 
 
+
+
 class BlockEdit:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'BlockEdit(id={self.id!r})'
 
 
     @required
@@ -551,7 +578,7 @@ class BlockEdit:
     @property
     def options(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['options']
 
@@ -565,7 +592,7 @@ class BlockEdit:
     @property
     def source(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['source']
 
@@ -573,7 +600,7 @@ class BlockEdit:
     @source.setter
     def source(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['source'] = value
 
@@ -581,7 +608,7 @@ class BlockEdit:
     @property
     def subtitles(self) -> List:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['subtitles']
 
@@ -589,7 +616,7 @@ class BlockEdit:
     @subtitles.setter
     def subtitles(self, value: List):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['subtitles'] = value
 

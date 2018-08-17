@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteAnnouncement:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteAnnouncement(id={self.id!r})'
 
 
     @property
@@ -53,7 +59,7 @@ class WriteAnnouncement:
     @property
     def is_restricted_by_score(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_restricted_by_score']
 
@@ -61,7 +67,7 @@ class WriteAnnouncement:
     @is_restricted_by_score.setter
     def is_restricted_by_score(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_restricted_by_score'] = value
 
@@ -70,7 +76,7 @@ class WriteAnnouncement:
     @property
     def score_percent_min(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['score_percent_min']
 
@@ -78,7 +84,7 @@ class WriteAnnouncement:
     @score_percent_min.setter
     def score_percent_min(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['score_percent_min'] = value
 
@@ -87,7 +93,7 @@ class WriteAnnouncement:
     @property
     def score_percent_max(self) -> int:
         """
-        default value: 100
+        Default value: 100
         """
         return self.__data.setdefault('score_percent_max', 100)
 
@@ -95,7 +101,7 @@ class WriteAnnouncement:
     @score_percent_max.setter
     def score_percent_max(self, value: int):
         """
-        default value: 100
+        Default value: 100
         """
         self.__data['score_percent_max'] = value
 
@@ -113,7 +119,7 @@ class WriteAnnouncement:
     @property
     def is_scheduled(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_scheduled']
 
@@ -121,7 +127,7 @@ class WriteAnnouncement:
     @is_scheduled.setter
     def is_scheduled(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_scheduled'] = value
 
@@ -146,7 +152,7 @@ class WriteAnnouncement:
     @property
     def mail_period_days(self) -> int:
         """
-        default value: 7
+        Default value: 7
         """
         return self.__data.setdefault('mail_period_days', 7)
 
@@ -154,7 +160,7 @@ class WriteAnnouncement:
     @mail_period_days.setter
     def mail_period_days(self, value: int):
         """
-        default value: 7
+        Default value: 7
         """
         self.__data['mail_period_days'] = value
 
@@ -163,7 +169,7 @@ class WriteAnnouncement:
     @property
     def mail_quantity(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('mail_quantity', 1)
 
@@ -171,7 +177,7 @@ class WriteAnnouncement:
     @mail_quantity.setter
     def mail_quantity(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['mail_quantity'] = value
 
@@ -179,7 +185,7 @@ class WriteAnnouncement:
     @property
     def is_infinite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_infinite']
 
@@ -187,7 +193,7 @@ class WriteAnnouncement:
     @is_infinite.setter
     def is_infinite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_infinite'] = value
 
@@ -195,7 +201,7 @@ class WriteAnnouncement:
     @property
     def on_enroll(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['on_enroll']
 
@@ -203,14 +209,21 @@ class WriteAnnouncement:
     @on_enroll.setter
     def on_enroll(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['on_enroll'] = value
 
 
+
+
 class Announcement:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Announcement(id={self.id!r})'
 
 
     @readonly
@@ -300,7 +313,7 @@ class Announcement:
     @property
     def is_restricted_by_score(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_restricted_by_score']
 
@@ -308,7 +321,7 @@ class Announcement:
     @is_restricted_by_score.setter
     def is_restricted_by_score(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_restricted_by_score'] = value
 
@@ -317,7 +330,7 @@ class Announcement:
     @property
     def score_percent_min(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['score_percent_min']
 
@@ -325,7 +338,7 @@ class Announcement:
     @score_percent_min.setter
     def score_percent_min(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['score_percent_min'] = value
 
@@ -334,7 +347,7 @@ class Announcement:
     @property
     def score_percent_max(self) -> int:
         """
-        default value: 100
+        Default value: 100
         """
         return self.__data.setdefault('score_percent_max', 100)
 
@@ -342,7 +355,7 @@ class Announcement:
     @score_percent_max.setter
     def score_percent_max(self, value: int):
         """
-        default value: 100
+        Default value: 100
         """
         self.__data['score_percent_max'] = value
 
@@ -360,7 +373,7 @@ class Announcement:
     @property
     def is_scheduled(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_scheduled']
 
@@ -368,7 +381,7 @@ class Announcement:
     @is_scheduled.setter
     def is_scheduled(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_scheduled'] = value
 
@@ -393,7 +406,7 @@ class Announcement:
     @property
     def mail_period_days(self) -> int:
         """
-        default value: 7
+        Default value: 7
         """
         return self.__data.setdefault('mail_period_days', 7)
 
@@ -401,7 +414,7 @@ class Announcement:
     @mail_period_days.setter
     def mail_period_days(self, value: int):
         """
-        default value: 7
+        Default value: 7
         """
         self.__data['mail_period_days'] = value
 
@@ -410,7 +423,7 @@ class Announcement:
     @property
     def mail_quantity(self) -> int:
         """
-        default value: 1
+        Default value: 1
         """
         return self.__data.setdefault('mail_quantity', 1)
 
@@ -418,7 +431,7 @@ class Announcement:
     @mail_quantity.setter
     def mail_quantity(self, value: int):
         """
-        default value: 1
+        Default value: 1
         """
         self.__data['mail_quantity'] = value
 
@@ -426,7 +439,7 @@ class Announcement:
     @property
     def is_infinite(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_infinite']
 
@@ -434,7 +447,7 @@ class Announcement:
     @is_infinite.setter
     def is_infinite(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_infinite'] = value
 
@@ -442,7 +455,7 @@ class Announcement:
     @property
     def on_enroll(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['on_enroll']
 
@@ -450,7 +463,7 @@ class Announcement:
     @on_enroll.setter
     def on_enroll(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['on_enroll'] = value
 
@@ -460,7 +473,7 @@ class Announcement:
     @property
     def publish_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['publish_count']
 
@@ -470,7 +483,7 @@ class Announcement:
     @property
     def queue_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['queue_count']
 
@@ -480,7 +493,7 @@ class Announcement:
     @property
     def sent_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['sent_count']
 
@@ -490,7 +503,7 @@ class Announcement:
     @property
     def open_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['open_count']
 
@@ -500,7 +513,7 @@ class Announcement:
     @property
     def click_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['click_count']
 

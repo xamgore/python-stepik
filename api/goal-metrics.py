@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteGoalMetric:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteGoalMetric(id={self.id!r})'
 
 
     @required
@@ -23,7 +29,7 @@ class WriteGoalMetric:
     @property
     def value(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('value', "0")
 
@@ -31,14 +37,21 @@ class WriteGoalMetric:
     @value.setter
     def value(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['value'] = value
 
 
+
+
 class GoalMetric:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'GoalMetric(id={self.id!r})'
 
 
     @required
@@ -56,7 +69,7 @@ class GoalMetric:
     @property
     def value(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('value', "0")
 
@@ -64,7 +77,7 @@ class GoalMetric:
     @value.setter
     def value(self, value: str):
         """
-        default value: "0"
+        Default value: "0"
         """
         self.__data['value'] = value
 

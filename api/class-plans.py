@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteClassPlan:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteClassPlan(id={self.id!r})'
 
 
     @required
@@ -34,7 +40,7 @@ class WriteClassPlan:
     @property
     def students_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['students_count']
 
@@ -42,14 +48,21 @@ class WriteClassPlan:
     @students_count.setter
     def students_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['students_count'] = value
 
 
+
+
 class ClassPlan:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'ClassPlan(id={self.id!r})'
 
 
     @readonly
@@ -84,7 +97,7 @@ class ClassPlan:
     @property
     def students_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['students_count']
 
@@ -92,7 +105,7 @@ class ClassPlan:
     @students_count.setter
     def students_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['students_count'] = value
 

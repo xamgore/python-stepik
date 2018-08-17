@@ -3,16 +3,22 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteRubricScore:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteRubricScore(id={self.id!r})'
 
 
     @required
     @property
     def score(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['score']
 
@@ -20,7 +26,7 @@ class WriteRubricScore:
     @score.setter
     def score(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['score'] = value
 
@@ -35,9 +41,16 @@ class WriteRubricScore:
         self.__data['text'] = value
 
 
+
+
 class RubricScore:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'RubricScore(id={self.id!r})'
 
 
     @readonly
@@ -64,7 +77,7 @@ class RubricScore:
     @property
     def score(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['score']
 
@@ -72,7 +85,7 @@ class RubricScore:
     @score.setter
     def score(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['score'] = value
 

@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseTotalStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseTotalStatistics(id={self.id!r})'
 
 
     @required
@@ -23,7 +29,7 @@ class WriteCourseTotalStatistics:
     @property
     def learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['learners_count']
 
@@ -31,7 +37,7 @@ class WriteCourseTotalStatistics:
     @learners_count.setter
     def learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['learners_count'] = value
 
@@ -40,7 +46,7 @@ class WriteCourseTotalStatistics:
     @property
     def moderators_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['moderators_count']
 
@@ -48,7 +54,7 @@ class WriteCourseTotalStatistics:
     @moderators_count.setter
     def moderators_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['moderators_count'] = value
 
@@ -57,7 +63,7 @@ class WriteCourseTotalStatistics:
     @property
     def testers_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['testers_count']
 
@@ -65,7 +71,7 @@ class WriteCourseTotalStatistics:
     @testers_count.setter
     def testers_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['testers_count'] = value
 
@@ -74,7 +80,7 @@ class WriteCourseTotalStatistics:
     @property
     def enrollments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_count']
 
@@ -82,7 +88,7 @@ class WriteCourseTotalStatistics:
     @enrollments_count.setter
     def enrollments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_count'] = value
 
@@ -91,7 +97,7 @@ class WriteCourseTotalStatistics:
     @property
     def dropouts_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_count']
 
@@ -99,7 +105,7 @@ class WriteCourseTotalStatistics:
     @dropouts_count.setter
     def dropouts_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_count'] = value
 
@@ -108,7 +114,7 @@ class WriteCourseTotalStatistics:
     @property
     def certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_count']
 
@@ -116,14 +122,21 @@ class WriteCourseTotalStatistics:
     @certificates_count.setter
     def certificates_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_count'] = value
 
 
+
+
 class CourseTotalStatistics:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseTotalStatistics(id={self.id!r})'
 
 
     @readonly
@@ -147,7 +160,7 @@ class CourseTotalStatistics:
     @property
     def learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['learners_count']
 
@@ -155,7 +168,7 @@ class CourseTotalStatistics:
     @learners_count.setter
     def learners_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['learners_count'] = value
 
@@ -164,7 +177,7 @@ class CourseTotalStatistics:
     @property
     def moderators_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['moderators_count']
 
@@ -172,7 +185,7 @@ class CourseTotalStatistics:
     @moderators_count.setter
     def moderators_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['moderators_count'] = value
 
@@ -181,7 +194,7 @@ class CourseTotalStatistics:
     @property
     def testers_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['testers_count']
 
@@ -189,7 +202,7 @@ class CourseTotalStatistics:
     @testers_count.setter
     def testers_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['testers_count'] = value
 
@@ -198,7 +211,7 @@ class CourseTotalStatistics:
     @property
     def enrollments_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['enrollments_count']
 
@@ -206,7 +219,7 @@ class CourseTotalStatistics:
     @enrollments_count.setter
     def enrollments_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['enrollments_count'] = value
 
@@ -215,7 +228,7 @@ class CourseTotalStatistics:
     @property
     def dropouts_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['dropouts_count']
 
@@ -223,7 +236,7 @@ class CourseTotalStatistics:
     @dropouts_count.setter
     def dropouts_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['dropouts_count'] = value
 
@@ -232,7 +245,7 @@ class CourseTotalStatistics:
     @property
     def certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_count']
 
@@ -240,7 +253,7 @@ class CourseTotalStatistics:
     @certificates_count.setter
     def certificates_count(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificates_count'] = value
 

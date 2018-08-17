@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteScript:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteScript(id={self.id!r})'
 
 
     @required
@@ -19,9 +25,16 @@ class WriteScript:
         self.__data['code'] = value
 
 
+
+
 class Script:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Script(id={self.id!r})'
 
 
     @readonly

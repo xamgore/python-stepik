@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSocialAccount:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSocialAccount(id={self.id!r})'
 
 
     @property
@@ -92,9 +98,16 @@ class WriteSocialAccount:
         self.__data['language'] = value
 
 
+
+
 class SocialAccount:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'SocialAccount(id={self.id!r})'
 
 
     @readonly

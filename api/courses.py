@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourse:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourse(id={self.id!r})'
 
 
     @property
@@ -67,7 +73,7 @@ class WriteCourse:
     @property
     def is_certificate_auto_issued(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_certificate_auto_issued']
 
@@ -75,7 +81,7 @@ class WriteCourse:
     @is_certificate_auto_issued.setter
     def is_certificate_auto_issued(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_certificate_auto_issued'] = value
 
@@ -83,7 +89,7 @@ class WriteCourse:
     @property
     def certificate_regular_threshold(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificate_regular_threshold']
 
@@ -91,7 +97,7 @@ class WriteCourse:
     @certificate_regular_threshold.setter
     def certificate_regular_threshold(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificate_regular_threshold'] = value
 
@@ -99,7 +105,7 @@ class WriteCourse:
     @property
     def certificate_distinction_threshold(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificate_distinction_threshold']
 
@@ -107,7 +113,7 @@ class WriteCourse:
     @certificate_distinction_threshold.setter
     def certificate_distinction_threshold(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificate_distinction_threshold'] = value
 
@@ -166,7 +172,7 @@ class WriteCourse:
     @property
     def is_adaptive(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_adaptive']
 
@@ -174,7 +180,7 @@ class WriteCourse:
     @is_adaptive.setter
     def is_adaptive(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_adaptive'] = value
 
@@ -182,7 +188,7 @@ class WriteCourse:
     @property
     def is_idea_compatible(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_idea_compatible']
 
@@ -190,7 +196,7 @@ class WriteCourse:
     @is_idea_compatible.setter
     def is_idea_compatible(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_idea_compatible'] = value
 
@@ -228,7 +234,7 @@ class WriteCourse:
     @property
     def is_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_enabled', True)
 
@@ -236,7 +242,7 @@ class WriteCourse:
     @is_enabled.setter
     def is_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_enabled'] = value
 
@@ -245,7 +251,7 @@ class WriteCourse:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -253,7 +259,7 @@ class WriteCourse:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -379,9 +385,39 @@ class WriteCourse:
         self.__data['lti_secret_key'] = value
 
 
+from api.users import User
+from api.tags import Tag
+from api.sections import Section
+
+
 class Course:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Course(id={self.id!r})'
+
+
+    def instructors(self) -> List[User]:
+        for obj in self.__stepik.fetch_objects('user', self.__data['instructors']):
+            yield User(self.__stepik, obj)
+
+
+    def sections(self) -> List[Section]:
+        for obj in self.__stepik.fetch_objects('section', self.__data['sections']):
+            yield Section(self.__stepik, obj)
+
+
+    def authors(self) -> List[User]:
+        for obj in self.__stepik.fetch_objects('user', self.__data['authors']):
+            yield User(self.__stepik, obj)
+
+
+    def tags(self) -> List[Tag]:
+        for obj in self.__stepik.fetch_objects('tag', self.__data['tags']):
+            yield Tag(self.__stepik, obj)
 
 
     @readonly
@@ -480,7 +516,7 @@ class Course:
     @property
     def is_certificate_auto_issued(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_certificate_auto_issued']
 
@@ -488,7 +524,7 @@ class Course:
     @is_certificate_auto_issued.setter
     def is_certificate_auto_issued(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_certificate_auto_issued'] = value
 
@@ -496,7 +532,7 @@ class Course:
     @property
     def certificate_regular_threshold(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificate_regular_threshold']
 
@@ -504,7 +540,7 @@ class Course:
     @certificate_regular_threshold.setter
     def certificate_regular_threshold(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificate_regular_threshold'] = value
 
@@ -512,7 +548,7 @@ class Course:
     @property
     def certificate_distinction_threshold(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificate_distinction_threshold']
 
@@ -520,19 +556,9 @@ class Course:
     @certificate_distinction_threshold.setter
     def certificate_distinction_threshold(self, value: int):
         """
-        default value: 0
+        Default value: 0
         """
         self.__data['certificate_distinction_threshold'] = value
-
-
-    @property
-    def instructors(self) -> str:
-        return self.__data['instructors']
-
-
-    @instructors.setter
-    def instructors(self, value: str):
-        self.__data['instructors'] = value
 
 
     @property
@@ -563,23 +589,6 @@ class Course:
     @description.setter
     def description(self, value: str):
         self.__data['description'] = value
-
-
-    @required
-    @property
-    def sections(self) -> List[int]:
-        """
-        List of sections' ids
-        """
-        return self.__data['sections']
-
-
-    @sections.setter
-    def sections(self, value: List[int]):
-        """
-        List of sections' ids
-        """
-        self.__data['sections'] = value
 
 
     @readonly
@@ -693,7 +702,7 @@ class Course:
     @property
     def is_adaptive(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_adaptive']
 
@@ -701,7 +710,7 @@ class Course:
     @is_adaptive.setter
     def is_adaptive(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_adaptive'] = value
 
@@ -709,7 +718,7 @@ class Course:
     @property
     def is_idea_compatible(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_idea_compatible']
 
@@ -717,7 +726,7 @@ class Course:
     @is_idea_compatible.setter
     def is_idea_compatible(self, value: bool):
         """
-        default value: False
+        Default value: False
         """
         self.__data['is_idea_compatible'] = value
 
@@ -744,31 +753,11 @@ class Course:
         return self.__data['social_providers']
 
 
-    @property
-    def authors(self) -> str:
-        return self.__data['authors']
-
-
-    @authors.setter
-    def authors(self, value: str):
-        self.__data['authors'] = value
-
-
-    @property
-    def tags(self) -> str:
-        return self.__data['tags']
-
-
-    @tags.setter
-    def tags(self, value: str):
-        self.__data['tags'] = value
-
-
     @readonly
     @property
     def has_tutors(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['has_tutors']
 
@@ -777,7 +766,7 @@ class Course:
     @property
     def is_promoted(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_promoted']
 
@@ -785,7 +774,7 @@ class Course:
     @property
     def is_enabled(self) -> bool:
         """
-        default value: True
+        Default value: True
         """
         return self.__data.setdefault('is_enabled', True)
 
@@ -793,7 +782,7 @@ class Course:
     @is_enabled.setter
     def is_enabled(self, value: bool):
         """
-        default value: True
+        Default value: True
         """
         self.__data['is_enabled'] = value
 
@@ -802,7 +791,7 @@ class Course:
     @property
     def is_proctored(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_proctored']
 
@@ -837,7 +826,7 @@ class Course:
     @property
     def certificates_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['certificates_count']
 
@@ -847,7 +836,7 @@ class Course:
     @property
     def learners_count(self) -> int:
         """
-        default value: 0
+        Default value: 0
         """
         return self.__data['learners_count']
 
@@ -862,7 +851,7 @@ class Course:
     @property
     def is_popular(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_popular']
 
@@ -877,7 +866,7 @@ class Course:
     @property
     def is_unsuitable(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_unsuitable']
 
@@ -886,7 +875,7 @@ class Course:
     @property
     def is_paid(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_paid']
 
@@ -923,7 +912,7 @@ class Course:
     @property
     def readiness(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('readiness', "0")
 
@@ -938,7 +927,7 @@ class Course:
     @property
     def language(self) -> str:
         """
-        default value: "en"
+        Default value: "en"
         """
         return self.__data.setdefault('language', "en")
 
@@ -946,7 +935,7 @@ class Course:
     @language.setter
     def language(self, value: str):
         """
-        default value: "en"
+        Default value: "en"
         """
         self.__data['language'] = value
 
@@ -955,7 +944,7 @@ class Course:
     @property
     def is_featured(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_featured']
 
@@ -1202,5 +1191,58 @@ class Course:
     @lti_secret_key.setter
     def lti_secret_key(self, value: str):
         self.__data['lti_secret_key'] = value
+
+
+    @property
+    def instructors_ids(self) -> List[int]:
+        return self.__data['instructors_ids']
+
+
+    @instructors_ids.setter
+    def instructors_ids(self, value: List[int]):
+        self.__data['instructors_ids'] = value
+
+
+    @required
+    @property
+    def sections_ids(self) -> List[int]:
+        """
+        List of sections
+        """
+        return self.__data['sections_ids']
+
+
+    @sections_ids.setter
+    def sections_ids(self, value: List[int]):
+        """
+        List of sections
+        """
+        self.__data['sections_ids'] = value
+
+
+    @property
+    def authors_ids(self) -> List[int]:
+        """
+        List of authors, usually from one person: the owner
+        """
+        return self.__data['authors_ids']
+
+
+    @authors_ids.setter
+    def authors_ids(self, value: List[int]):
+        """
+        List of authors, usually from one person: the owner
+        """
+        self.__data['authors_ids'] = value
+
+
+    @property
+    def tags_ids(self) -> List[int]:
+        return self.__data['tags_ids']
+
+
+    @tags_ids.setter
+    def tags_ids(self, value: List[int]):
+        self.__data['tags_ids'] = value
 
 

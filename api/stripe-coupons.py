@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteStripeCoupon:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteStripeCoupon(id={self.id!r})'
 
 
     @required
@@ -19,9 +25,16 @@ class WriteStripeCoupon:
         self.__data['percent_off'] = value
 
 
+
+
 class StripeCoupon:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'StripeCoupon(id={self.id!r})'
 
 
     @readonly

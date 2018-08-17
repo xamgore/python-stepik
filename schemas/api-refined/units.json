@@ -1,0 +1,69 @@
+{
+  "models": {
+    "UnitSerializer": {
+      "properties": {
+        "id": {
+          "description": null
+        },
+        "section": {
+          "description": "Id of the section",
+          "type": "integer"
+        },
+        "lesson": {
+          "description": "Id of the lesson associated with the unit",
+          "type": "integer"
+        },
+        "assignments": {
+          "type": "List[int]",
+          "rename": "assignments_ids",
+          "object_type": "List[Assignment]"
+        },
+        "position": {
+          "description": "Position in the syllabus"
+        },
+        "progress": {
+          "description": "The progress object identifier, for internal needs."
+        },
+        "begin_date": {
+          "description": "Open date: when the module starts for enrolled users.\n\nInherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value."
+        },
+        "end_date": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nInherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value."
+        },
+        "soft_deadline": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nInherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value."
+        },
+        "hard_deadline": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nInherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value."
+        },
+        "grading_policy": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nInherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value."
+        },
+        "begin_date_source": {
+          "description": "Open date: when the module starts for enrolled users.\n\nInherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value."
+        },
+        "end_date_source": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nInherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value."
+        },
+        "soft_deadline_source": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nInherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value."
+        },
+        "hard_deadline_source": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nInherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value."
+        },
+        "grading_policy_source": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nInherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value."
+        },
+        "is_active": {
+          "description": "True, if the section is open, i.e. the server's current date is between `begin_date` and `end_date`"
+        },
+        "create_date": {
+          "description": "Creation time"
+        },
+        "update_date": {
+          "description": "Time of the last update"
+        }
+      }
+    }
+  }
+}

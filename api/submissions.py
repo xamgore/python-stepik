@@ -3,15 +3,21 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteSubmission:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteSubmission(id={self.id!r})'
 
 
     @property
     def reply(self) -> str:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['reply']
 
@@ -19,7 +25,7 @@ class WriteSubmission:
     @reply.setter
     def reply(self, value: str):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['reply'] = value
 
@@ -35,9 +41,16 @@ class WriteSubmission:
         self.__data['attempt'] = value
 
 
+
+
 class Submission:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Submission(id={self.id!r})'
 
 
     @readonly
@@ -60,7 +73,7 @@ class Submission:
     @property
     def score(self) -> str:
         """
-        default value: "0"
+        Default value: "0"
         """
         return self.__data.setdefault('score', "0")
 
@@ -89,7 +102,7 @@ class Submission:
     @property
     def reply(self) -> str:
         """
-        default value: {}
+        Default value: {}
         """
         return self.__data['reply']
 
@@ -97,7 +110,7 @@ class Submission:
     @reply.setter
     def reply(self, value: str):
         """
-        default value: {}
+        Default value: {}
         """
         self.__data['reply'] = value
 

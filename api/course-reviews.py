@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteCourseReview:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteCourseReview(id={self.id!r})'
 
 
     @required
@@ -40,9 +46,16 @@ class WriteCourseReview:
         self.__data['text'] = value
 
 
+
+
 class CourseReview:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'CourseReview(id={self.id!r})'
 
 
     @readonly

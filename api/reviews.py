@@ -3,9 +3,15 @@ from common import required, readonly
 from typing import List
 
 
+
 class WriteReview:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'WriteReview(id={self.id!r})'
 
 
     @required
@@ -50,9 +56,16 @@ class WriteReview:
         self.__data['rubric_scores'] = value
 
 
+
+
 class Review:
-    def __init__(self, data):
+    def __init__(self, stepik, data):
+        self.__stepik = stepik
         self.__data = data
+
+
+    def __repr__(self):
+        return f'Review(id={self.id!r})'
 
 
     @readonly
@@ -122,7 +135,7 @@ class Review:
     @property
     def is_verified(self) -> bool:
         """
-        default value: False
+        Default value: False
         """
         return self.__data['is_verified']
 
