@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -29,7 +30,7 @@ class WriteInstruction:
     @property
     def min_reviews(self) -> int:
         """
-        Default value: 3
+        Default value: ``3``
         """
         return self.__data.setdefault('min_reviews', 3)
 
@@ -37,7 +38,7 @@ class WriteInstruction:
     @min_reviews.setter
     def min_reviews(self, value: int):
         """
-        Default value: 3
+        Default value: ``3``
         """
         self.__data['min_reviews'] = value
 
@@ -112,7 +113,7 @@ class Instruction:
     @property
     def min_reviews(self) -> int:
         """
-        Default value: 3
+        Default value: ``3``
         """
         return self.__data.setdefault('min_reviews', 3)
 
@@ -120,7 +121,7 @@ class Instruction:
     @min_reviews.setter
     def min_reviews(self, value: int):
         """
-        Default value: 3
+        Default value: ``3``
         """
         self.__data['min_reviews'] = value
 

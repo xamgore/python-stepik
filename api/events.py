@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -18,7 +19,7 @@ class WriteEvent:
     @property
     def time(self) -> str:
         """
-        Default value: "2018-08-10T09:47:46.439Z"
+        Default value: ``"2018-08-10T09:47:46.439Z"``
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:46.439Z")
 
@@ -26,7 +27,7 @@ class WriteEvent:
     @time.setter
     def time(self, value: str):
         """
-        Default value: "2018-08-10T09:47:46.439Z"
+        Default value: ``"2018-08-10T09:47:46.439Z"``
         """
         self.__data['time'] = value
 
@@ -53,7 +54,7 @@ class Event:
     @property
     def time(self) -> str:
         """
-        Default value: "2018-08-10T09:47:46.439Z"
+        Default value: ``"2018-08-10T09:47:46.439Z"``
         """
         return self.__data.setdefault('time', "2018-08-10T09:47:46.439Z")
 
@@ -61,7 +62,7 @@ class Event:
     @time.setter
     def time(self, value: str):
         """
-        Default value: "2018-08-10T09:47:46.439Z"
+        Default value: ``"2018-08-10T09:47:46.439Z"``
         """
         self.__data['time'] = value
 

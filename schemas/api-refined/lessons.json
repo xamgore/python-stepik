@@ -1,761 +1,112 @@
 {
-  "apiVersion": "",
-  "swaggerVersion": "1.2",
-  "basePath": "https://stepik.org",
-  "resourcePath": "/api/lessons",
-  "apis": [
-    {
-      "description": "Lesson resource",
-      "path": "/api/lessons",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Lesson resource",
-          "nickname": "Lesson_list",
-          "notes": "Lesson resource.\nLesson is a collection of steps.",
-          "type": "LessonSerializer",
-          "parameters": [
-            {
-              "paramType": "query",
-              "name": "page",
-              "description": null,
-              "dataType": "integer"
-            },
-            {
-              "paramType": "query",
-              "name": "is_featured",
-              "description": null,
-              "dataType": ""
-            },
-            {
-              "paramType": "query",
-              "name": "language",
-              "description": null,
-              "dataType": "enum",
-              "enum": [
-                "",
-                "af",
-                "ar",
-                "ast",
-                "az",
-                "bg",
-                "be",
-                "bn",
-                "br",
-                "bs",
-                "ca",
-                "cs",
-                "cy",
-                "da",
-                "de",
-                "dsb",
-                "el",
-                "en",
-                "en-au",
-                "en-gb",
-                "eo",
-                "es",
-                "es-ar",
-                "es-co",
-                "es-mx",
-                "es-ni",
-                "es-ve",
-                "et",
-                "eu",
-                "fa",
-                "fi",
-                "fr",
-                "fy",
-                "ga",
-                "gd",
-                "gl",
-                "he",
-                "hi",
-                "hr",
-                "hsb",
-                "hu",
-                "ia",
-                "id",
-                "io",
-                "is",
-                "it",
-                "ja",
-                "ka",
-                "kk",
-                "km",
-                "kn",
-                "ko",
-                "lb",
-                "lt",
-                "lv",
-                "mk",
-                "ml",
-                "mn",
-                "mr",
-                "my",
-                "nb",
-                "ne",
-                "nl",
-                "nn",
-                "os",
-                "pa",
-                "pl",
-                "pt",
-                "pt-br",
-                "ro",
-                "ru",
-                "sk",
-                "sl",
-                "sq",
-                "sr",
-                "sr-latn",
-                "sv",
-                "sw",
-                "ta",
-                "te",
-                "th",
-                "tr",
-                "tt",
-                "udm",
-                "uk",
-                "ur",
-                "vi",
-                "zh-hans",
-                "zh-hant"
-              ]
-            },
-            {
-              "paramType": "query",
-              "name": "owner",
-              "description": null,
-              "dataType": ""
-            },
-            {
-              "paramType": "query",
-              "name": "course",
-              "description": null,
-              "dataType": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Lesson resource",
-      "path": "/api/lessons/{pk}",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Lesson resource",
-          "nickname": "Lesson_retrieve",
-          "notes": "Lesson resource.\nLesson is a collection of steps.",
-          "type": "LessonSerializer",
-          "parameters": [
-            {
-              "name": "pk",
-              "type": "string",
-              "paramType": "path",
-              "required": true
-            },
-            {
-              "paramType": "query",
-              "name": "is_featured",
-              "description": null,
-              "dataType": ""
-            },
-            {
-              "paramType": "query",
-              "name": "language",
-              "description": null,
-              "dataType": "enum",
-              "enum": [
-                "",
-                "af",
-                "ar",
-                "ast",
-                "az",
-                "bg",
-                "be",
-                "bn",
-                "br",
-                "bs",
-                "ca",
-                "cs",
-                "cy",
-                "da",
-                "de",
-                "dsb",
-                "el",
-                "en",
-                "en-au",
-                "en-gb",
-                "eo",
-                "es",
-                "es-ar",
-                "es-co",
-                "es-mx",
-                "es-ni",
-                "es-ve",
-                "et",
-                "eu",
-                "fa",
-                "fi",
-                "fr",
-                "fy",
-                "ga",
-                "gd",
-                "gl",
-                "he",
-                "hi",
-                "hr",
-                "hsb",
-                "hu",
-                "ia",
-                "id",
-                "io",
-                "is",
-                "it",
-                "ja",
-                "ka",
-                "kk",
-                "km",
-                "kn",
-                "ko",
-                "lb",
-                "lt",
-                "lv",
-                "mk",
-                "ml",
-                "mn",
-                "mr",
-                "my",
-                "nb",
-                "ne",
-                "nl",
-                "nn",
-                "os",
-                "pa",
-                "pl",
-                "pt",
-                "pt-br",
-                "ro",
-                "ru",
-                "sk",
-                "sl",
-                "sq",
-                "sr",
-                "sr-latn",
-                "sv",
-                "sw",
-                "ta",
-                "te",
-                "th",
-                "tr",
-                "tt",
-                "udm",
-                "uk",
-                "ur",
-                "vi",
-                "zh-hans",
-                "zh-hant"
-              ]
-            },
-            {
-              "paramType": "query",
-              "name": "owner",
-              "description": null,
-              "dataType": ""
-            },
-            {
-              "paramType": "query",
-              "name": "course",
-              "description": null,
-              "dataType": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Lesson resource",
-      "path": "/api/lessons/{pk}/clone",
-      "operations": []
-    }
-  ],
   "models": {
-    "WriteLessonSerializer": {
-      "id": "WriteLessonSerializer",
-      "required": [
-        "steps",
-        "language",
-        "title"
-      ],
-      "properties": {
-        "steps": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "cover_url": {
-          "description": null,
-          "type": "url",
-          "format": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "is_comments_enabled": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": true,
-          "readOnly": false
-        },
-        "language": {
-          "description": null,
-          "type": "choice",
-          "format": "string",
-          "required": true,
-          "defaultValue": "en",
-          "readOnly": false,
-          "enum": [
-            "af",
-            "ar",
-            "ast",
-            "az",
-            "bg",
-            "be",
-            "bn",
-            "br",
-            "bs",
-            "ca",
-            "cs",
-            "cy",
-            "da",
-            "de",
-            "dsb",
-            "el",
-            "en",
-            "en-au",
-            "en-gb",
-            "eo",
-            "es",
-            "es-ar",
-            "es-co",
-            "es-mx",
-            "es-ni",
-            "es-ve",
-            "et",
-            "eu",
-            "fa",
-            "fi",
-            "fr",
-            "fy",
-            "ga",
-            "gd",
-            "gl",
-            "he",
-            "hi",
-            "hr",
-            "hsb",
-            "hu",
-            "ia",
-            "id",
-            "io",
-            "is",
-            "it",
-            "ja",
-            "ka",
-            "kk",
-            "km",
-            "kn",
-            "ko",
-            "lb",
-            "lt",
-            "lv",
-            "mk",
-            "ml",
-            "mn",
-            "mr",
-            "my",
-            "nb",
-            "ne",
-            "nl",
-            "nn",
-            "os",
-            "pa",
-            "pl",
-            "pt",
-            "pt-br",
-            "ro",
-            "ru",
-            "sk",
-            "sl",
-            "sq",
-            "sr",
-            "sr-latn",
-            "sv",
-            "sw",
-            "ta",
-            "te",
-            "th",
-            "tr",
-            "tt",
-            "udm",
-            "uk",
-            "ur",
-            "vi",
-            "zh-hans",
-            "zh-hant"
-          ]
-        },
-        "is_public": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "readOnly": false
-        },
-        "title": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "lti_consumer_key": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "lti_secret_key": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        }
-      }
-    },
     "LessonSerializer": {
-      "id": "LessonSerializer",
-      "required": [
-        "id",
-        "steps",
-        "actions",
-        "progress",
-        "subscriptions",
-        "viewed_by",
-        "passed_by",
-        "time_to_complete",
-        "cover_url",
-        "is_comments_enabled",
-        "owner",
-        "language",
-        "is_featured",
-        "is_public",
-        "title",
-        "slug",
-        "create_date",
-        "update_date",
-        "learners_group",
-        "testers_group",
-        "moderators_group",
-        "teachers_group",
-        "admins_group",
-        "discussions_count",
-        "discussion_proxy",
-        "discussion_threads",
-        "epic_count",
-        "abuse_count",
-        "vote",
-        "lti_consumer_key",
-        "lti_secret_key"
-      ],
       "properties": {
         "id": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
         },
         "steps": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
+          "type": "List[int]",
+          "rename": "steps_ids",
+          "object_type": "List[Step]"
         },
         "actions": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Contains a dict of ``<action : link to the page>``",
+          "type": "dict"
         },
         "progress": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "The :class:`Progress` object identifier"
         },
         "subscriptions": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "List[int]",
+          "rename": "subscriptions_ids",
+          "object_type": "List[Subscription]"
         },
         "viewed_by": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of users who checked out the lesson",
+          "type": "integer"
         },
         "passed_by": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of users who completed the lesson",
+          "type": "integer"
         },
         "time_to_complete": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Approximate time `in seconds` to complete the lesson.\n\nMay be ``None``.",
+          "type": "integer"
         },
         "cover_url": {
-          "description": null,
+          "description": "Direct link to the cover image of size 180×180. None, if there is no video steps in the lesson",
           "type": "url",
-          "format": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "is_comments_enabled": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": true,
-          "readOnly": false
+          "format": "string"
         },
         "owner": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`User`'s id of the lesson's owner",
+          "type": "integer"
         },
         "language": {
-          "description": null,
-          "type": "choice",
-          "format": "string",
-          "required": true,
-          "defaultValue": "en",
-          "readOnly": false,
-          "enum": [
-            "af",
-            "ar",
-            "ast",
-            "az",
-            "bg",
-            "be",
-            "bn",
-            "br",
-            "bs",
-            "ca",
-            "cs",
-            "cy",
-            "da",
-            "de",
-            "dsb",
-            "el",
-            "en",
-            "en-au",
-            "en-gb",
-            "eo",
-            "es",
-            "es-ar",
-            "es-co",
-            "es-mx",
-            "es-ni",
-            "es-ve",
-            "et",
-            "eu",
-            "fa",
-            "fi",
-            "fr",
-            "fy",
-            "ga",
-            "gd",
-            "gl",
-            "he",
-            "hi",
-            "hr",
-            "hsb",
-            "hu",
-            "ia",
-            "id",
-            "io",
-            "is",
-            "it",
-            "ja",
-            "ka",
-            "kk",
-            "km",
-            "kn",
-            "ko",
-            "lb",
-            "lt",
-            "lv",
-            "mk",
-            "ml",
-            "mn",
-            "mr",
-            "my",
-            "nb",
-            "ne",
-            "nl",
-            "nn",
-            "os",
-            "pa",
-            "pl",
-            "pt",
-            "pt-br",
-            "ro",
-            "ru",
-            "sk",
-            "sl",
-            "sq",
-            "sr",
-            "sr-latn",
-            "sv",
-            "sw",
-            "ta",
-            "te",
-            "th",
-            "tr",
-            "tt",
-            "udm",
-            "uk",
-            "ur",
-            "vi",
-            "zh-hans",
-            "zh-hant"
-          ]
+          "description": "Language code\n\nOne of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``"
         },
         "is_featured": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false,
-          "readOnly": true
+          "deprecated": true
         },
         "is_public": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "readOnly": false
+          "description": "Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID."
         },
         "title": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
+          "description": "Title of the lesson"
         },
         "slug": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "A string of format \"title-id\", with hyphens instead of spaces"
         },
         "create_date": {
-          "description": null,
-          "type": "datetime",
-          "format": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Creation time"
         },
         "update_date": {
-          "description": null,
-          "type": "datetime",
-          "format": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Time of the last update"
         },
         "learners_group": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer"
         },
         "testers_group": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer"
         },
         "moderators_group": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer"
         },
         "teachers_group": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer"
         },
         "admins_group": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer"
         },
         "discussions_count": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of comment trees",
+          "type": "integer",
+          "defaultValue": 0
         },
         "discussion_proxy": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Discussion tree's identifier"
         },
         "discussion_threads": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "type": "List[str]",
+          "description": "Same as ``discussion_proxy`` in most cases"
         },
         "epic_count": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
+          "description": "Number of likes"
         },
         "abuse_count": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
+          "description": "Number of dislikes"
         },
         "vote": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "The :class:`Vote` object identifier"
         },
         "lti_consumer_key": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
         },
         "lti_secret_key": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
         }
       }
     }

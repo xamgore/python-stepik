@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -81,7 +82,7 @@ class Assistant:
     @property
     def date_joined(self) -> str:
         """
-        Default value: "2018-08-10T09:47:15.843Z"
+        Default value: ``"2018-08-10T09:47:15.843Z"``
         """
         return self.__data.setdefault('date_joined', "2018-08-10T09:47:15.843Z")
 

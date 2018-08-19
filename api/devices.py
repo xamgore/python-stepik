@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -40,7 +41,7 @@ class WriteDevice:
     @property
     def client_type(self) -> str:
         """
-        Default value: "ios"
+        Default value: ``"ios"``
         """
         return self.__data.setdefault('client_type', "ios")
 
@@ -48,7 +49,7 @@ class WriteDevice:
     @client_type.setter
     def client_type(self, value: str):
         """
-        Default value: "ios"
+        Default value: ``"ios"``
         """
         self.__data['client_type'] = value
 
@@ -56,7 +57,7 @@ class WriteDevice:
     @property
     def is_badges_enabled(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_badges_enabled']
 
@@ -64,7 +65,7 @@ class WriteDevice:
     @is_badges_enabled.setter
     def is_badges_enabled(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_badges_enabled'] = value
 
@@ -120,7 +121,7 @@ class Device:
     @property
     def client_type(self) -> str:
         """
-        Default value: "ios"
+        Default value: ``"ios"``
         """
         return self.__data.setdefault('client_type', "ios")
 
@@ -128,7 +129,7 @@ class Device:
     @client_type.setter
     def client_type(self, value: str):
         """
-        Default value: "ios"
+        Default value: ``"ios"``
         """
         self.__data['client_type'] = value
 
@@ -136,7 +137,7 @@ class Device:
     @property
     def is_badges_enabled(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_badges_enabled']
 
@@ -144,7 +145,7 @@ class Device:
     @is_badges_enabled.setter
     def is_badges_enabled(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_badges_enabled'] = value
 

@@ -16,12 +16,14 @@ def rename_properties(model):
     remove_list = lambda ty: ty[5:-1] if ty.startswith('List[') and ty.endswith(']') else ty
 
     for name, prop in to_rename.items():
+        prop['from'] = name
+
         attrs[prop['rename']] = prop.copy()
         del attrs[name]
 
         prop['source'] = name
         prop['type'] = remove_list(prop['object_type'])
-        model['methods'][name] = prop
+        model['resources'][name] = prop
 
 
 def import_typings(model):
@@ -29,7 +31,7 @@ def import_typings(model):
     imports = structure.imports()
 
     prop_types = {p['type'] for p in model['properties'].values()}
-    meth_types = {p['type'] for p in model['methods'].values()}
+    meth_types = {p['type'] for p in model['resources'].values()}
 
     return {k: imports[k] for k in prop_types.union(meth_types).intersection(imports.keys())}
 
@@ -62,7 +64,7 @@ def refine_type(p):
 def refine_doc_string_with_default_value(p):
     """Add information about the default value"""
     description = p.get('description', '') or ''
-    p['docstring'] = f'{description}\n\nDefault value: {p["defaultValue"]}'.lstrip()
+    p['docstring'] = f'{description}\n\nDefault value: ``{p["defaultValue"]}``'.lstrip()
 
 
 def expand_with_meta_data(model_name, model):
@@ -85,7 +87,7 @@ def refine_default_value(p):
 if __name__ == '__main__':
     for schema in structure.schemas():
         for name, model in schema['models'].items():
-            model['methods'] = {}
+            model['resources'] = {}
             rename_properties(model)
 
             for pn, p in model['properties'].items():
@@ -99,6 +101,8 @@ if __name__ == '__main__':
             model['imports'] = import_typings(model)
 
         with open('data-class.jinja2') as t:
-            with open(f'../{schema["resourcePath"]}.py', 'w') as out:
+            output_module = schema["resourcePath"].replace('-', '_')
+
+            with open(f'../{output_module}.py', 'w') as out:
                 template = Template(t.read(), lstrip_blocks=True, trim_blocks=True)
                 out.write(template.render(models=schema['models']))

@@ -1,173 +1,15 @@
 {
-  "apiVersion": "",
-  "swaggerVersion": "1.2",
-  "basePath": "https://stepik.org",
-  "resourcePath": "/api/steps",
-  "apis": [
-    {
-      "description": "Step resource",
-      "path": "/api/steps",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Step resource",
-          "nickname": "Step_list",
-          "notes": "Step resource.\nStep is a basic learning item.",
-          "type": "StepSerializer",
-          "parameters": [
-            {
-              "paramType": "query",
-              "name": "page",
-              "description": null,
-              "dataType": "integer"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Step resource",
-      "path": "/api/steps/{pk}",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Step resource",
-          "nickname": "Step_retrieve",
-          "notes": "Step resource.\nStep is a basic learning item.",
-          "type": "StepSerializer",
-          "parameters": [
-            {
-              "name": "pk",
-              "type": "string",
-              "paramType": "path",
-              "required": true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Step resource",
-      "path": "/api/steps/{pk}/subtitles",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Step resource",
-          "nickname": "Step_subtitles",
-          "notes": "Step resource.\nStep is a basic learning item.",
-          "type": "StepSerializer",
-          "parameters": [
-            {
-              "name": "pk",
-              "type": "string",
-              "paramType": "path",
-              "required": true
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "models": {
-    "WriteStepSerializer": {
-      "id": "WriteStepSerializer",
-      "required": [
-        "position",
-        "solutions_unlocked_attempts",
-        "max_submissions_count"
-      ],
-      "properties": {
-        "position": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 1,
-          "readOnly": false
-        },
-        "is_solutions_unlocked": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false,
-          "readOnly": false
-        },
-        "solutions_unlocked_attempts": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 3,
-          "readOnly": false
-        },
-        "has_submissions_restrictions": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false,
-          "readOnly": false
-        },
-        "max_submissions_count": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 3,
-          "readOnly": false
-        }
-      }
-    },
     "StepSerializer": {
-      "id": "StepSerializer",
-      "required": [
-        "id",
-        "lesson",
-        "position",
-        "status",
-        "block",
-        "actions",
-        "progress",
-        "subscriptions",
-        "instruction",
-        "session",
-        "instruction_type",
-        "viewed_by",
-        "passed_by",
-        "correct_ratio",
-        "worth",
-        "is_solutions_unlocked",
-        "solutions_unlocked_attempts",
-        "has_submissions_restrictions",
-        "max_submissions_count",
-        "variation",
-        "variations_count",
-        "create_date",
-        "update_date",
-        "discussions_count",
-        "discussion_proxy",
-        "discussion_threads"
-      ],
       "properties": {
         "id": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
         },
         "lesson": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": true
+          "description": ":class:`Lesson`'s id ",
+          "type": "integer"
         },
         "position": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 1,
-          "readOnly": false
+          "description": "Position in the lesson's syllabus"
         },
         "status": {
           "description": null,
@@ -189,94 +31,49 @@
           "readOnly": true
         },
         "actions": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Contains a dict of ``<action : link to the page>``",
+          "type": "dict"
         },
         "progress": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "The :class:`Progress` object identifier"
         },
         "subscriptions": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "List of subscriptions' ids",
+          "type": "List[str]"
         },
         "instruction": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": true
         },
         "session": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
         },
         "instruction_type": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
         },
         "viewed_by": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of users who checked out the step",
+          "type": "integer"
         },
         "passed_by": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of users who completed the lesson",
+          "type": "integer"
         },
         "correct_ratio": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Percent of correct submissions.\n\nMay take ``None`` value.",
+          "type": "decimal"
         },
         "worth": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Equals 1 or 0",
+          "type": "integer"
         },
         "is_solutions_unlocked": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false,
-          "readOnly": false
+          "description": "If true, solutions discussion tree will be opened after ``solutions_unlocked_attempts`` incorrect submissions. Otherwise, a correct submission is required. Note: Admins and teachers always have solutions forum unlocked"
         },
         "solutions_unlocked_attempts": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 3,
-          "readOnly": false
+          "description": "Number of submissions to automatically open solutions discussion tree. Works only if ``is_solutions_unlocked`` equals ``True``."
         },
         "has_submissions_restrictions": {
-          "description": null,
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false,
-          "readOnly": false
+          "description": "Limits for number of submissions. If true, then students will be allowed to send not more than ``max_submissions_count`` submissions. Note: these limits works only for learners, testers and moderators. Admins and teachers always have unlimited submissions."
         },
         "max_submissions_count": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": true,
-          "defaultValue": 3,
-          "readOnly": false
+          "description": "Number of submissions allowed to send. Works only if ``has_submissions_restrictions`` equals ``True``."
         },
         "variation": {
           "description": null,
@@ -291,68 +88,22 @@
           "readOnly": true
         },
         "create_date": {
-          "description": null,
-          "type": "datetime",
-          "format": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Creation time"
         },
         "update_date": {
-          "description": null,
-          "type": "datetime",
-          "format": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Time of the last update"
         },
         "discussions_count": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Number of comment trees",
+          "type": "integer",
+          "defaultValue": 0
         },
         "discussion_proxy": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "description": "Discussion tree's identifier"
         },
         "discussion_threads": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
-        }
-      }
-    },
-    "WriteBlockViewSerializer": {
-      "id": "WriteBlockViewSerializer",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "text": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "video": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "animation": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
+          "type": "List[str]",
+          "description": "Same as ``discussion_proxy`` in most cases"
         }
       }
     },

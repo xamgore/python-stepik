@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -115,7 +116,7 @@ class VideoSource:
     @property
     def urls(self) -> List:
         """
-        Default value: []
+        Default value: ``[]``
         """
         return self.__data['urls']
 
@@ -125,7 +126,7 @@ class VideoSource:
     @property
     def duration(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['duration']
 

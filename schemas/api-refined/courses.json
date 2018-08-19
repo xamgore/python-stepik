@@ -6,9 +6,7 @@
           "description": null,
           "type": "List[int]",
           "rename": "instructors_ids",
-          "object_type": "List[User]",
-          "required": false,
-          "readOnly": false
+          "object_type": "List[User]"
         },
         "sections": {
           "description": "List of sections",

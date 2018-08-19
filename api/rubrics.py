@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -51,7 +52,7 @@ class WriteRubric:
     @property
     def position(self) -> int:
         """
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -59,7 +60,7 @@ class WriteRubric:
     @position.setter
     def position(self, value: int):
         """
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 
@@ -119,7 +120,7 @@ class Rubric:
     @property
     def position(self) -> int:
         """
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -127,7 +128,7 @@ class Rubric:
     @position.setter
     def position(self, value: int):
         """
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 

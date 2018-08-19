@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -125,7 +126,7 @@ class WriteAlternativeName:
     @property
     def is_preferred(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_preferred']
 
@@ -133,7 +134,7 @@ class WriteAlternativeName:
     @is_preferred.setter
     def is_preferred(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_preferred'] = value
 
@@ -175,7 +176,7 @@ class AlternativeName:
     @property
     def is_preferred(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_preferred']
 
@@ -183,7 +184,7 @@ class AlternativeName:
     @is_preferred.setter
     def is_preferred(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_preferred'] = value
 

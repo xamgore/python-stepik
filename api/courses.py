@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -73,7 +74,7 @@ class WriteCourse:
     @property
     def is_certificate_auto_issued(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_certificate_auto_issued']
 
@@ -81,7 +82,7 @@ class WriteCourse:
     @is_certificate_auto_issued.setter
     def is_certificate_auto_issued(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_certificate_auto_issued'] = value
 
@@ -89,7 +90,7 @@ class WriteCourse:
     @property
     def certificate_regular_threshold(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['certificate_regular_threshold']
 
@@ -97,7 +98,7 @@ class WriteCourse:
     @certificate_regular_threshold.setter
     def certificate_regular_threshold(self, value: int):
         """
-        Default value: 0
+        Default value: ``0``
         """
         self.__data['certificate_regular_threshold'] = value
 
@@ -105,7 +106,7 @@ class WriteCourse:
     @property
     def certificate_distinction_threshold(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['certificate_distinction_threshold']
 
@@ -113,7 +114,7 @@ class WriteCourse:
     @certificate_distinction_threshold.setter
     def certificate_distinction_threshold(self, value: int):
         """
-        Default value: 0
+        Default value: ``0``
         """
         self.__data['certificate_distinction_threshold'] = value
 
@@ -172,7 +173,7 @@ class WriteCourse:
     @property
     def is_adaptive(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_adaptive']
 
@@ -180,7 +181,7 @@ class WriteCourse:
     @is_adaptive.setter
     def is_adaptive(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_adaptive'] = value
 
@@ -188,7 +189,7 @@ class WriteCourse:
     @property
     def is_idea_compatible(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_idea_compatible']
 
@@ -196,7 +197,7 @@ class WriteCourse:
     @is_idea_compatible.setter
     def is_idea_compatible(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_idea_compatible'] = value
 
@@ -234,7 +235,7 @@ class WriteCourse:
     @property
     def is_enabled(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_enabled', True)
 
@@ -242,7 +243,7 @@ class WriteCourse:
     @is_enabled.setter
     def is_enabled(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_enabled'] = value
 
@@ -251,7 +252,7 @@ class WriteCourse:
     @property
     def language(self) -> str:
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         return self.__data.setdefault('language', "en")
 
@@ -259,7 +260,7 @@ class WriteCourse:
     @language.setter
     def language(self, value: str):
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         self.__data['language'] = value
 
@@ -400,24 +401,24 @@ class Course:
         return f'Course(id={self.id!r})'
 
 
-    def instructors(self) -> List[User]:
-        for obj in self.__stepik.fetch_objects('user', self.__data['instructors']):
-            yield User(self.__stepik, obj)
+    @property
+    def instructors(self) -> ResourcesList[User]:
+        return ResourcesList[User](User, self.__stepik, self, 'instructors_ids')
 
 
-    def sections(self) -> List[Section]:
-        for obj in self.__stepik.fetch_objects('section', self.__data['sections']):
-            yield Section(self.__stepik, obj)
+    @property
+    def sections(self) -> ResourcesList[Section]:
+        return ResourcesList[Section](Section, self.__stepik, self, 'sections_ids')
 
 
-    def authors(self) -> List[User]:
-        for obj in self.__stepik.fetch_objects('user', self.__data['authors']):
-            yield User(self.__stepik, obj)
+    @property
+    def authors(self) -> ResourcesList[User]:
+        return ResourcesList[User](User, self.__stepik, self, 'authors_ids')
 
 
-    def tags(self) -> List[Tag]:
-        for obj in self.__stepik.fetch_objects('tag', self.__data['tags']):
-            yield Tag(self.__stepik, obj)
+    @property
+    def tags(self) -> ResourcesList[Tag]:
+        return ResourcesList[Tag](Tag, self.__stepik, self, 'tags_ids')
 
 
     @readonly
@@ -516,7 +517,7 @@ class Course:
     @property
     def is_certificate_auto_issued(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_certificate_auto_issued']
 
@@ -524,7 +525,7 @@ class Course:
     @is_certificate_auto_issued.setter
     def is_certificate_auto_issued(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_certificate_auto_issued'] = value
 
@@ -532,7 +533,7 @@ class Course:
     @property
     def certificate_regular_threshold(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['certificate_regular_threshold']
 
@@ -540,7 +541,7 @@ class Course:
     @certificate_regular_threshold.setter
     def certificate_regular_threshold(self, value: int):
         """
-        Default value: 0
+        Default value: ``0``
         """
         self.__data['certificate_regular_threshold'] = value
 
@@ -548,7 +549,7 @@ class Course:
     @property
     def certificate_distinction_threshold(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['certificate_distinction_threshold']
 
@@ -556,7 +557,7 @@ class Course:
     @certificate_distinction_threshold.setter
     def certificate_distinction_threshold(self, value: int):
         """
-        Default value: 0
+        Default value: ``0``
         """
         self.__data['certificate_distinction_threshold'] = value
 
@@ -702,7 +703,7 @@ class Course:
     @property
     def is_adaptive(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_adaptive']
 
@@ -710,7 +711,7 @@ class Course:
     @is_adaptive.setter
     def is_adaptive(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_adaptive'] = value
 
@@ -718,7 +719,7 @@ class Course:
     @property
     def is_idea_compatible(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_idea_compatible']
 
@@ -726,7 +727,7 @@ class Course:
     @is_idea_compatible.setter
     def is_idea_compatible(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_idea_compatible'] = value
 
@@ -757,7 +758,7 @@ class Course:
     @property
     def has_tutors(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['has_tutors']
 
@@ -766,7 +767,7 @@ class Course:
     @property
     def is_promoted(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_promoted']
 
@@ -774,7 +775,7 @@ class Course:
     @property
     def is_enabled(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_enabled', True)
 
@@ -782,7 +783,7 @@ class Course:
     @is_enabled.setter
     def is_enabled(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_enabled'] = value
 
@@ -791,7 +792,7 @@ class Course:
     @property
     def is_proctored(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_proctored']
 
@@ -826,7 +827,7 @@ class Course:
     @property
     def certificates_count(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['certificates_count']
 
@@ -836,7 +837,7 @@ class Course:
     @property
     def learners_count(self) -> int:
         """
-        Default value: 0
+        Default value: ``0``
         """
         return self.__data['learners_count']
 
@@ -851,7 +852,7 @@ class Course:
     @property
     def is_popular(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_popular']
 
@@ -866,7 +867,7 @@ class Course:
     @property
     def is_unsuitable(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_unsuitable']
 
@@ -875,7 +876,7 @@ class Course:
     @property
     def is_paid(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_paid']
 
@@ -912,7 +913,7 @@ class Course:
     @property
     def readiness(self) -> str:
         """
-        Default value: "0"
+        Default value: ``"0"``
         """
         return self.__data.setdefault('readiness', "0")
 
@@ -927,7 +928,7 @@ class Course:
     @property
     def language(self) -> str:
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         return self.__data.setdefault('language', "en")
 
@@ -935,7 +936,7 @@ class Course:
     @language.setter
     def language(self, value: str):
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         self.__data['language'] = value
 
@@ -944,7 +945,7 @@ class Course:
     @property
     def is_featured(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_featured']
 
@@ -1195,7 +1196,7 @@ class Course:
 
     @property
     def instructors_ids(self) -> List[int]:
-        return self.__data['instructors_ids']
+        return self.__data['instructors']
 
 
     @instructors_ids.setter
@@ -1209,7 +1210,7 @@ class Course:
         """
         List of sections
         """
-        return self.__data['sections_ids']
+        return self.__data['sections']
 
 
     @sections_ids.setter
@@ -1225,7 +1226,7 @@ class Course:
         """
         List of authors, usually from one person: the owner
         """
-        return self.__data['authors_ids']
+        return self.__data['authors']
 
 
     @authors_ids.setter
@@ -1238,7 +1239,7 @@ class Course:
 
     @property
     def tags_ids(self) -> List[int]:
-        return self.__data['tags_ids']
+        return self.__data['tags']
 
 
     @tags_ids.setter

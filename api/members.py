@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -54,7 +55,7 @@ class WriteMember:
     @property
     def is_synced(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_synced']
 
@@ -62,7 +63,7 @@ class WriteMember:
     @is_synced.setter
     def is_synced(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_synced'] = value
 
@@ -111,7 +112,7 @@ class Member:
     @property
     def date_joined(self) -> str:
         """
-        Default value: "2018-08-10T09:48:04.316Z"
+        Default value: ``"2018-08-10T09:48:04.316Z"``
         """
         return self.__data.setdefault('date_joined', "2018-08-10T09:48:04.316Z")
 
@@ -119,7 +120,7 @@ class Member:
     @property
     def is_synced(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_synced']
 
@@ -127,7 +128,7 @@ class Member:
     @is_synced.setter
     def is_synced(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_synced'] = value
 

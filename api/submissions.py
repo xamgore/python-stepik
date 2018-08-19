@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -17,7 +18,7 @@ class WriteSubmission:
     @property
     def reply(self) -> str:
         """
-        Default value: {}
+        Default value: ``{}``
         """
         return self.__data['reply']
 
@@ -25,7 +26,7 @@ class WriteSubmission:
     @reply.setter
     def reply(self, value: str):
         """
-        Default value: {}
+        Default value: ``{}``
         """
         self.__data['reply'] = value
 
@@ -73,7 +74,7 @@ class Submission:
     @property
     def score(self) -> str:
         """
-        Default value: "0"
+        Default value: ``"0"``
         """
         return self.__data.setdefault('score', "0")
 
@@ -102,7 +103,7 @@ class Submission:
     @property
     def reply(self) -> str:
         """
-        Default value: {}
+        Default value: ``{}``
         """
         return self.__data['reply']
 
@@ -110,7 +111,7 @@ class Submission:
     @reply.setter
     def reply(self, value: str):
         """
-        Default value: {}
+        Default value: ``{}``
         """
         self.__data['reply'] = value
 

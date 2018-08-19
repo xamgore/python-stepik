@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -40,7 +41,7 @@ class WriteSection:
     @property
     def position(self) -> int:
         """
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -48,7 +49,7 @@ class WriteSection:
     @position.setter
     def position(self, value: int):
         """
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 
@@ -83,7 +84,7 @@ class WriteSection:
     @property
     def required_percent(self) -> int:
         """
-        Default value: 100
+        Default value: ``100``
         """
         return self.__data.setdefault('required_percent', 100)
 
@@ -91,7 +92,7 @@ class WriteSection:
     @required_percent.setter
     def required_percent(self, value: int):
         """
-        Default value: 100
+        Default value: ``100``
         """
         self.__data['required_percent'] = value
 
@@ -99,7 +100,7 @@ class WriteSection:
     @property
     def is_exam(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_exam']
 
@@ -107,7 +108,7 @@ class WriteSection:
     @is_exam.setter
     def is_exam(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_exam'] = value
 
@@ -116,7 +117,7 @@ class WriteSection:
     @property
     def exam_duration_minutes(self) -> int:
         """
-        Default value: 60
+        Default value: ``60``
         """
         return self.__data.setdefault('exam_duration_minutes', 60)
 
@@ -124,7 +125,7 @@ class WriteSection:
     @exam_duration_minutes.setter
     def exam_duration_minutes(self, value: int):
         """
-        Default value: 60
+        Default value: ``60``
         """
         self.__data['exam_duration_minutes'] = value
 
@@ -243,9 +244,9 @@ class Section:
         return f'Section(id={self.id!r})'
 
 
-    def units(self) -> List[Unit]:
-        for obj in self.__stepik.fetch_objects('unit', self.__data['units']):
-            yield Unit(self.__stepik, obj)
+    @property
+    def units(self) -> ResourcesList[Unit]:
+        return ResourcesList[Unit](Unit, self.__stepik, self, 'units_ids')
 
 
     @readonly
@@ -282,7 +283,7 @@ class Section:
         """
         Position in the syllabus
 
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -292,7 +293,7 @@ class Section:
         """
         Position in the syllabus
 
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 
@@ -331,7 +332,7 @@ class Section:
     @property
     def progress(self) -> str:
         """
-        The progress object identifier, for internal needs.
+        The :class:`Progress` object identifier
         """
         return self.__data['progress']
 
@@ -371,7 +372,7 @@ class Section:
         """
         Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)
 
-        Default value: 100
+        Default value: ``100``
         """
         return self.__data.setdefault('required_percent', 100)
 
@@ -381,7 +382,7 @@ class Section:
         """
         Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)
 
-        Default value: 100
+        Default value: ``100``
         """
         self.__data['required_percent'] = value
 
@@ -400,7 +401,7 @@ class Section:
         """
         Whether the section is exam
 
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_exam']
 
@@ -410,7 +411,7 @@ class Section:
         """
         Whether the section is exam
 
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_exam'] = value
 
@@ -421,7 +422,7 @@ class Section:
         """
         Duration of the exam. Used when ``is_exam`` is true
 
-        Default value: 60
+        Default value: ``60``
         """
         return self.__data.setdefault('exam_duration_minutes', 60)
 
@@ -431,7 +432,7 @@ class Section:
         """
         Duration of the exam. Used when ``is_exam`` is true
 
-        Default value: 60
+        Default value: ``60``
         """
         self.__data['exam_duration_minutes'] = value
 
@@ -461,7 +462,7 @@ class Section:
         """
         Description is display on the "Syllabus" page of the course, under the title
 
-        Default value: ""
+        Default value: ``""``
         """
         return self.__data.setdefault('description', "")
 
@@ -471,7 +472,7 @@ class Section:
         """
         Description is display on the "Syllabus" page of the course, under the title
 
-        Default value: ""
+        Default value: ``""``
         """
         self.__data['description'] = value
 
@@ -736,7 +737,7 @@ class Section:
     @required
     @property
     def units_ids(self) -> List[int]:
-        return self.__data['units_ids']
+        return self.__data['units']
 
 
     @units_ids.setter

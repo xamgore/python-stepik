@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -135,7 +136,7 @@ class Review:
     @property
     def is_verified(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_verified']
 

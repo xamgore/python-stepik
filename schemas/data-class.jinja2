@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 {% for model, struct in models.items() -%}
 {% for class, path in struct['imports'].items() %}
@@ -18,15 +19,15 @@ class {{ model | replace('Serializer', '') }}:
         return f'{{ model | replace('Serializer', '') }}(id={self.id!r})'
 
 
-{% for prop, at in struct['methods'].items() %}
-    def {{ prop }}(self) -> {{ at['object_type'] }}:
+{% for prop, at in struct['resources'].items() %}
+    @property
+    def {{ prop }}(self) -> Resources{{ at['object_type'] }}:
     {% if at['docstring'] %}
         """
         {{ at['docstring'] | indent(width=8) }}
         """
     {% endif %}
-        for obj in self.__stepik.fetch_objects('{{ at['type'] | lower }}', self.__data['{{ prop }}']):
-            yield {{ at['type'] }}(self.__stepik, obj)
+        return Resources{{ at['object_type'] }}({{ at['type'] }}, self.__stepik, self, '{{ at['from'] }}_ids')
 
 
 {% endfor %}
@@ -50,7 +51,7 @@ class {{ model | replace('Serializer', '') }}:
     {% if at['defaultValue'] %}
         return self.__data.setdefault('{{ prop }}', {{ at['defaultValue'] }})
     {% else %}
-        return self.__data['{{ prop }}']
+        return self.__data['{{ at['from'] or prop }}']
     {% endif %}
 
 

@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -44,7 +45,7 @@ class WriteLesson:
     @property
     def is_comments_enabled(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_comments_enabled', True)
 
@@ -52,7 +53,7 @@ class WriteLesson:
     @is_comments_enabled.setter
     def is_comments_enabled(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_comments_enabled'] = value
 
@@ -61,7 +62,7 @@ class WriteLesson:
     @property
     def language(self) -> str:
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         return self.__data.setdefault('language', "en")
 
@@ -69,7 +70,7 @@ class WriteLesson:
     @language.setter
     def language(self, value: str):
         """
-        Default value: "en"
+        Default value: ``"en"``
         """
         self.__data['language'] = value
 
@@ -115,6 +116,8 @@ class WriteLesson:
         self.__data['lti_secret_key'] = value
 
 
+from api.steps import Step
+from api.subscriptions import Subscription
 
 
 class Lesson:
@@ -127,62 +130,76 @@ class Lesson:
         return f'Lesson(id={self.id!r})'
 
 
+    @property
+    def steps(self) -> ResourcesList[Step]:
+        return ResourcesList[Step](Step, self.__stepik, self, 'steps_ids')
+
+
+    @property
+    def subscriptions(self) -> ResourcesList[Subscription]:
+        return ResourcesList[Subscription](Subscription, self.__stepik, self, 'subscriptions_ids')
+
+
     @readonly
     @property
     def id(self) -> int:
         return self.__data['id']
 
 
-    @required
-    @property
-    def steps(self) -> str:
-        return self.__data['steps']
-
-
-    @steps.setter
-    def steps(self, value: str):
-        self.__data['steps'] = value
-
-
     @readonly
     @property
     def actions(self) -> str:
+        """
+        Contains a dict of ``<action : link to the page>``
+
+        Type: dict
+        """
         return self.__data['actions']
 
 
     @readonly
     @property
     def progress(self) -> str:
+        """
+        The :class:`Progress` object identifier
+        """
         return self.__data['progress']
 
 
     @readonly
     @property
-    def subscriptions(self) -> str:
-        return self.__data['subscriptions']
-
-
-    @readonly
-    @property
-    def viewed_by(self) -> str:
+    def viewed_by(self) -> int:
+        """
+        Number of users who checked out the lesson
+        """
         return self.__data['viewed_by']
 
 
     @readonly
     @property
-    def passed_by(self) -> str:
+    def passed_by(self) -> int:
+        """
+        Number of users who completed the lesson
+        """
         return self.__data['passed_by']
 
 
     @readonly
     @property
-    def time_to_complete(self) -> str:
+    def time_to_complete(self) -> int:
+        """
+        Approximate time `in seconds` to complete the lesson.
+
+        May be ``None``.
+        """
         return self.__data['time_to_complete']
 
 
     @property
     def cover_url(self) -> str:
         """
+        Direct link to the cover image of size 180×180. None, if there is no video steps in the lesson
+
         Type: url
         """
         return self.__data['cover_url']
@@ -191,6 +208,8 @@ class Lesson:
     @cover_url.setter
     def cover_url(self, value: str):
         """
+        Direct link to the cover image of size 180×180. None, if there is no video steps in the lesson
+
         Type: url
         """
         self.__data['cover_url'] = value
@@ -199,7 +218,7 @@ class Lesson:
     @property
     def is_comments_enabled(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_comments_enabled', True)
 
@@ -207,14 +226,17 @@ class Lesson:
     @is_comments_enabled.setter
     def is_comments_enabled(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_comments_enabled'] = value
 
 
     @readonly
     @property
-    def owner(self) -> str:
+    def owner(self) -> int:
+        """
+        :class:`User`'s id of the lesson's owner
+        """
         return self.__data['owner']
 
 
@@ -222,7 +244,11 @@ class Lesson:
     @property
     def language(self) -> str:
         """
-        Default value: "en"
+        Language code
+
+        One of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``
+
+        Default value: ``"en"``
         """
         return self.__data.setdefault('language', "en")
 
@@ -230,7 +256,11 @@ class Lesson:
     @language.setter
     def language(self, value: str):
         """
-        Default value: "en"
+        Language code
+
+        One of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``
+
+        Default value: ``"en"``
         """
         self.__data['language'] = value
 
@@ -239,35 +269,51 @@ class Lesson:
     @property
     def is_featured(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
+        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
         return self.__data['is_featured']
 
 
     @property
     def is_public(self) -> bool:
+        """
+        Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
+        """
         return self.__data['is_public']
 
 
     @is_public.setter
     def is_public(self, value: bool):
+        """
+        Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
+        """
         self.__data['is_public'] = value
 
 
     @required
     @property
     def title(self) -> str:
+        """
+        Title of the lesson
+        """
         return self.__data['title']
 
 
     @title.setter
     def title(self, value: str):
+        """
+        Title of the lesson
+        """
         self.__data['title'] = value
 
 
     @readonly
     @property
     def slug(self) -> str:
+        """
+        A string of format "title-id", with hyphens instead of spaces
+        """
         return self.__data['slug']
 
 
@@ -275,6 +321,8 @@ class Lesson:
     @property
     def create_date(self) -> str:
         """
+        Creation time
+
         Type: datetime
         """
         return self.__data['create_date']
@@ -284,6 +332,8 @@ class Lesson:
     @property
     def update_date(self) -> str:
         """
+        Time of the last update
+
         Type: datetime
         """
         return self.__data['update_date']
@@ -291,67 +341,102 @@ class Lesson:
 
     @readonly
     @property
-    def learners_group(self) -> str:
+    def learners_group(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
         return self.__data['learners_group']
 
 
     @readonly
     @property
-    def testers_group(self) -> str:
+    def testers_group(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
         return self.__data['testers_group']
 
 
     @readonly
     @property
-    def moderators_group(self) -> str:
+    def moderators_group(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
         return self.__data['moderators_group']
 
 
     @readonly
     @property
-    def teachers_group(self) -> str:
+    def teachers_group(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
         return self.__data['teachers_group']
 
 
     @readonly
     @property
-    def admins_group(self) -> str:
+    def admins_group(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
         return self.__data['admins_group']
 
 
     @readonly
     @property
-    def discussions_count(self) -> str:
+    def discussions_count(self) -> int:
+        """
+        Number of comment trees
+
+        Default value: ``0``
+        """
         return self.__data['discussions_count']
 
 
     @readonly
     @property
     def discussion_proxy(self) -> str:
+        """
+        Discussion tree's identifier
+        """
         return self.__data['discussion_proxy']
 
 
     @readonly
     @property
-    def discussion_threads(self) -> str:
+    def discussion_threads(self) -> List[str]:
+        """
+        Same as ``discussion_proxy`` in most cases
+        """
         return self.__data['discussion_threads']
 
 
     @readonly
     @property
     def epic_count(self) -> int:
+        """
+        Number of likes
+        """
         return self.__data['epic_count']
 
 
     @readonly
     @property
     def abuse_count(self) -> int:
+        """
+        Number of dislikes
+        """
         return self.__data['abuse_count']
 
 
     @readonly
     @property
     def vote(self) -> str:
+        """
+        The :class:`Vote` object identifier
+        """
         return self.__data['vote']
 
 
@@ -373,5 +458,25 @@ class Lesson:
     @lti_secret_key.setter
     def lti_secret_key(self, value: str):
         self.__data['lti_secret_key'] = value
+
+
+    @required
+    @property
+    def steps_ids(self) -> List[int]:
+        return self.__data['steps']
+
+
+    @steps_ids.setter
+    def steps_ids(self, value: List[int]):
+        self.__data['steps_ids'] = value
+
+
+    @readonly
+    @property
+    def subscriptions_ids(self) -> str:
+        """
+        List[int]
+        """
+        return self.__data['subscriptions']
 
 

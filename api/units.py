@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -51,7 +52,7 @@ class WriteUnit:
     @property
     def position(self) -> int:
         """
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -59,7 +60,7 @@ class WriteUnit:
     @position.setter
     def position(self, value: int):
         """
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 
@@ -157,9 +158,9 @@ class Unit:
         return f'Unit(id={self.id!r})'
 
 
-    def assignments(self) -> List[Assignment]:
-        for obj in self.__stepik.fetch_objects('assignment', self.__data['assignments']):
-            yield Assignment(self.__stepik, obj)
+    @property
+    def assignments(self) -> ResourcesList[Assignment]:
+        return ResourcesList[Assignment](Assignment, self.__stepik, self, 'assignments_ids')
 
 
     @readonly
@@ -208,7 +209,7 @@ class Unit:
         """
         Position in the syllabus
 
-        Default value: 1
+        Default value: ``1``
         """
         return self.__data.setdefault('position', 1)
 
@@ -218,7 +219,7 @@ class Unit:
         """
         Position in the syllabus
 
-        Default value: 1
+        Default value: ``1``
         """
         self.__data['position'] = value
 
@@ -466,7 +467,7 @@ class Unit:
     @required
     @property
     def assignments_ids(self) -> List[int]:
-        return self.__data['assignments_ids']
+        return self.__data['assignments']
 
 
     @assignments_ids.setter

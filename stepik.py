@@ -1,11 +1,12 @@
-# Run with Python 3
-# Saves all step sources into foldered structure
 from typing import List
 
 from api.courses import Course
+from api.groups import Group
 from api.lessons import Lesson
 from api.sections import Section
+from api.step_sources import StepSource
 from api.units import Unit
+from api.users import User
 
 integer = int
 boolean = bool
@@ -14,7 +15,8 @@ string, url, choice = str, str, str
 
 import requests
 
-from config import id, secret
+class StepikError(RuntimeError):
+    pass
 
 
 class Stepik:
@@ -34,6 +36,7 @@ class Stepik:
         self.sections = Sections(self)
         self.units = Units(self)
         self.lessons = Lessons(self)
+        self.step_sources = StepSources(self)
 
     def _update(self, resource_name: str, id: int, data: dict):
         """
@@ -53,6 +56,8 @@ class Stepik:
         """
         api_url = f'https://{self.__server}/api/{resource_name}/{id}'
         response = requests.get(api_url, headers=self.headers).json()
+        if resource_name not in response:
+            raise StepikError(response['detail'])
         return response[f'{resource_name}'][0]
 
 
@@ -113,83 +118,15 @@ class Lessons(object):
         return Lesson(self.stepik, self.stepik._fetch_object('lessons', id))
 
 
-# 1. Get your keys at https://stepik.org/oauth2/applications/
-# (client type = confidential, authorization grant type = client credentials)
+class StepSources(object):
+    def __init__(self, stepik: Stepik):
+        self.stepik = stepik
+
+
+    def get(self, id: int) -> StepSource:
+        return StepSource(self.stepik, self.stepik._fetch_object('step-sources', id))
+
+
+
 if __name__ == '__main__':
-    stepik = Stepik(client_id=id, client_secret=secret)
-    course = stepik.courses.get(course_id=14906)
-    # course = stepik.courses.get(course_id=1612)
-    # course = stepik.courses.get(course_id=6273)
-
-    for sec in course.sections():
-        print(sec.title + ':')
-
-        for unit in sec.units():
-            lesson = stepik.lessons.get(unit.lesson)
-            print('   - ' + lesson.title)
-
-    # unit = stepik.units.get(77169)
-    # unit.grading_policy_source = 'no_deadline'
-    # stepik.units.update(unit)
-
-
-# for section in course.sections():
-#     print(section.title + ':')
-#
-#     for unit in section.units():
-#         print('   - ' + unit.lesson().title)
-#
-#     print()
-
-
-# for sec_id in course.sections:
-#     section = stepik.sections.get(sec_id)
-#     print(section.title + ':')
-#
-#     for unit_id in section.units:
-#         unit = stepik.units.get(unit_id)
-#         lesson = stepik.lessons.get(unit.lesson)
-#         print('   - ' + lesson.title)
-#
-#     print()
-
-exit(0)
-
-# course = fetch_object('course', course_id)
-# sections = fetch_objects('section', course['sections'])
-#
-# for section in sections:
-#
-#     unit_ids = section['units']
-#     units = fetch_objects('unit', unit_ids)
-#
-#     for unit in units:
-#
-#         lesson_id = unit['lesson']
-#         lesson = fetch_object('lesson', lesson_id)
-#
-#         step_ids = lesson['steps']
-#         steps = fetch_objects('step', step_ids)
-#
-#         for step in steps:
-#             step_source = fetch_object('step-source', step['id'])
-#             path = [
-#                 '{} {}'.format(str(course['id']).zfill(2), course['title']),
-#                 '{} {}'.format(str(section['position']).zfill(2), section['title']),
-#                 '{} {}'.format(str(unit['position']).zfill(2), lesson['title']),
-#                 '{}_{}_{}.step'.format(lesson['id'], str(step['position']).zfill(2), step['block']['name'])
-#             ]
-#             try:
-#                 os.makedirs(os.path.join(os.curdir, *path[:-1]))
-#             except:
-#                 pass
-#             filename = os.path.join(os.curdir, *path)
-#             f = open(filename, 'w')
-#             data = {
-#                 'block': step_source['block'],
-#                 'id':    str(step['id']),
-#                 'time':  datetime.datetime.now().isoformat()
-#             }
-#             f.write(json.dumps(data))
-#             f.close()
-#             print(filename)
+    print('ok')

@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -17,7 +18,7 @@ class WriteNotification:
     @property
     def is_unread(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_unread', True)
 
@@ -25,7 +26,7 @@ class WriteNotification:
     @is_unread.setter
     def is_unread(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_unread'] = value
 
@@ -33,7 +34,7 @@ class WriteNotification:
     @property
     def is_muted(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_muted']
 
@@ -41,7 +42,7 @@ class WriteNotification:
     @is_muted.setter
     def is_muted(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_muted'] = value
 
@@ -49,7 +50,7 @@ class WriteNotification:
     @property
     def is_favorite(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_favorite']
 
@@ -57,7 +58,7 @@ class WriteNotification:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_favorite'] = value
 
@@ -83,7 +84,7 @@ class Notification:
     @property
     def is_unread(self) -> bool:
         """
-        Default value: True
+        Default value: ``True``
         """
         return self.__data.setdefault('is_unread', True)
 
@@ -91,7 +92,7 @@ class Notification:
     @is_unread.setter
     def is_unread(self, value: bool):
         """
-        Default value: True
+        Default value: ``True``
         """
         self.__data['is_unread'] = value
 
@@ -99,7 +100,7 @@ class Notification:
     @property
     def is_muted(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_muted']
 
@@ -107,7 +108,7 @@ class Notification:
     @is_muted.setter
     def is_muted(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_muted'] = value
 
@@ -115,7 +116,7 @@ class Notification:
     @property
     def is_favorite(self) -> bool:
         """
-        Default value: False
+        Default value: ``False``
         """
         return self.__data['is_favorite']
 
@@ -123,7 +124,7 @@ class Notification:
     @is_favorite.setter
     def is_favorite(self, value: bool):
         """
-        Default value: False
+        Default value: ``False``
         """
         self.__data['is_favorite'] = value
 

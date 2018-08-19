@@ -1,6 +1,7 @@
 # This file is generated
 from common import required, readonly
 from typing import List
+from resources_list import ResourcesList
 
 
 
@@ -66,7 +67,7 @@ class Follower:
     @property
     def date_joined(self) -> str:
         """
-        Default value: "2018-08-10T09:47:52.623Z"
+        Default value: ``"2018-08-10T09:47:52.623Z"``
         """
         return self.__data.setdefault('date_joined', "2018-08-10T09:47:52.623Z")
 

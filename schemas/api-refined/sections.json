@@ -16,7 +16,7 @@
           "description": "How to change points depending on number of tries:\n\n* ``\"no_discount\"`` — do not change\n* ``\"inverse\"`` — decrease to 1/N\n* ``\"first_one\"`` — zero after first attempt\n* ``\"first_third\"`` — zero after third attempt"
         },
         "progress": {
-          "description": "The progress object identifier, for internal needs."
+          "description": "The :class:`Progress` object identifier"
         },
         "units": {
           "type": "List[int]",
