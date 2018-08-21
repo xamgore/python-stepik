@@ -145,6 +145,7 @@ class WriteUnit:
         self.__data['grading_policy_source'] = value
 
 
+from api.lessons import Lesson
 from api.assignments import Assignment
 
 
@@ -161,6 +162,10 @@ class Unit:
     @property
     def assignments(self) -> ResourcesList[Assignment]:
         return ResourcesList[Assignment](Assignment, self.__stepik, self, 'assignments_ids')
+
+
+    def lesson(self) -> Lesson:
+        return Lesson(self.__stepik, self.__stepik.fetch_object('Lesson', self.lesson_id))
 
 
     @readonly
@@ -184,23 +189,6 @@ class Unit:
         Id of the section
         """
         self.__data['section'] = value
-
-
-    @required
-    @property
-    def lesson(self) -> int:
-        """
-        Id of the lesson associated with the unit
-        """
-        return self.__data['lesson']
-
-
-    @lesson.setter
-    def lesson(self, value: int):
-        """
-        Id of the lesson associated with the unit
-        """
-        self.__data['lesson'] = value
 
 
     @required
@@ -466,12 +454,29 @@ class Unit:
 
     @required
     @property
+    def lesson_id(self) -> int:
+        """
+        Id of the lesson associated with the unit
+        """
+        return self.__data['lesson']
+
+
+    @lesson_id.setter
+    def lesson_id(self, value: int):
+        """
+        Id of the lesson associated with the unit
+        """
+        self.__data['lesson'] = value
+
+
+    @required
+    @property
     def assignments_ids(self) -> List[int]:
         return self.__data['assignments']
 
 
     @assignments_ids.setter
     def assignments_ids(self, value: List[int]):
-        self.__data['assignments_ids'] = value
+        self.__data['assignments'] = value
 
 

@@ -151,6 +151,12 @@ class Step:
     @property
     def status(self) -> str:
         """
+        May take one of the following values:
+
+        * ``"preparing"
+        * ``"ready"``
+        * ``"error"``
+
         Type: choice
         """
         return self.__data['status']
@@ -158,20 +164,18 @@ class Step:
 
     @readonly
     @property
-    def block(self) -> str:
+    def block(self) -> dict:
         """
-        Type: BlockViewSerializer
+        TODO
         """
         return self.__data['block']
 
 
     @readonly
     @property
-    def actions(self) -> str:
+    def actions(self) -> dict:
         """
         Contains a dict of ``<action : link to the page>``
-
-        Type: dict
         """
         return self.__data['actions']
 
@@ -198,18 +202,27 @@ class Step:
     @readonly
     @property
     def instruction(self) -> str:
+        """
+        Something connected with exams and peer review. Maybe take ``None`` value.
+        """
         return self.__data['instruction']
 
 
     @readonly
     @property
     def session(self) -> str:
+        """
+        Something connected with exams and peer review. Maybe take ``None`` value.
+        """
         return self.__data['session']
 
 
     @readonly
     @property
     def instruction_type(self) -> str:
+        """
+        Something connected with exams and peer review. Maybe take ``None`` value.
+        """
         return self.__data['instruction_type']
 
 
@@ -246,7 +259,7 @@ class Step:
     @property
     def worth(self) -> int:
         """
-        Equals 1 or 0
+        Part of an adaptive system. Equals to 1 or 0. TODO
         """
         return self.__data['worth']
 
@@ -336,12 +349,14 @@ class Step:
     @readonly
     @property
     def variation(self) -> str:
+        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
         return self.__data['variation']
 
 
     @readonly
     @property
     def variations_count(self) -> str:
+        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
         return self.__data['variations_count']
 
 

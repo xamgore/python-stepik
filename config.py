@@ -1,3 +1,7 @@
+# Get your keys at https://stepik.org/oauth2/applications/
+# (client type = confidential, authorization grant type = client credentials)
+# id, secret =
+
 # dev
 secret = 'axKW5IsaAUcrG9qlqT7MozqTmiriFLT9LfD7RV4cv0JVF9wLZc4FSdW6egik8GSEXgy4LjgbhGTdWutXSJHY7XWu8wSh2OxFXyV72KYdm8NPcoPlEIjr9ez6iv5T0kFm'
 id = '0Q9SkiEOOnXOL0Wtge8ga0BhGWL0dXeYXJrfZ3PI'

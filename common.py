@@ -1,3 +1,6 @@
+import re
+
+
 def readonly(f):
     return f
 
@@ -10,7 +13,8 @@ from functools import wraps
 
 
 def run_once(f):
-    """Runs a function (successfully) only once.
+    """
+    Runs a function (successfully) only once.
     The running can be reset by setting the `has_run` attribute to False
     """
 
@@ -25,3 +29,17 @@ def run_once(f):
 
     wrapper.has_run = False
     return wrapper
+
+
+first_cap_re = re.compile('(.)([A-Z][a-z]+)')
+all_cap_re = re.compile('([a-z0-9])([A-Z])')
+
+
+def to_camel_case(string):
+    s1 = first_cap_re.sub(r'\1_\2', string)
+    return all_cap_re.sub(r'\1_\2', s1).lower()
+
+
+def to_dash_case(string):
+    s1 = first_cap_re.sub(r'\1-\2', string)
+    return all_cap_re.sub(r'\1-\2', s1).lower()

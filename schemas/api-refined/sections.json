@@ -21,7 +21,7 @@
         "units": {
           "type": "List[int]",
           "rename": "units_ids",
-          "object_type": "List[Unit]"
+          "new_type": "List[Unit]"
         },
         "actions": {
           "description": "Contains a dict of ``<action : link to the page>``\n\nOn the summer 2018 contains only ``test_section`` if user has the `test` permission (is a tester).",

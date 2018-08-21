@@ -16,30 +16,39 @@ def rename_properties(model):
     remove_list = lambda ty: ty[5:-1] if ty.startswith('List[') and ty.endswith(']') else ty
 
     for name, prop in to_rename.items():
+        # need to know, what property is used in rest api
         prop['from'] = name
 
+        # rename "lesson" to "lesson_id"
         attrs[prop['rename']] = prop.copy()
         del attrs[name]
 
-        prop['source'] = name
-        prop['type'] = remove_list(prop['object_type'])
-        model['resources'][name] = prop
+        # extract the inner type, so it could be imported
+        prop['type'] = remove_list(prop['new_type'])
+
+        # make "lesson" either method, or list-property
+        new_prop_name = 'resources' if prop['new_type'].startswith('List[') else 'methods'
+        model[new_prop_name][name] = prop
 
 
 def import_typings(model):
     """Search for types, used in properties & methods, and get correct imports"""
-    imports = structure.imports()
+    import_paths = structure.imports()
 
-    prop_types = {p['type'] for p in model['properties'].values()}
-    meth_types = {p['type'] for p in model['resources'].values()}
+    types = set().union(
+        {p['type'] for p in model['properties'].values()},
+        {p['type'] for p in model['resources'].values()},
+        {p['type'] for p in model['methods'].values()})
 
-    return {k: imports[k] for k in prop_types.union(meth_types).intersection(imports.keys())}
+    return {type: import_paths[type] for type in types.intersection(import_paths.keys())}
 
 
 def refine_type(p):
     """Get a python type by name of type in schema"""
     ty = p['type']
 
+    if ty.startswith('Optional['):
+        return ty
     if ty == 'integer':
         return 'int'
     if ty == 'boolean':
@@ -49,6 +58,8 @@ def refine_type(p):
     if ('description' in p) and (p['description'] == 'Enter a valid JSON object'):
         p['description'] = None
         return 'dict' if (p['defaultValue'] == '{}') else 'List'
+    if ty == 'dict':
+        return ty
     if ty == 'string':
         return 'str'
     if ty.startswith('List['):
@@ -87,11 +98,11 @@ def refine_default_value(p):
 if __name__ == '__main__':
     for schema in structure.schemas():
         for name, model in schema['models'].items():
-            model['resources'] = {}
+            model['resources'], model['methods'] = {}, {}
             rename_properties(model)
 
             for pn, p in model['properties'].items():
-                p['docstring'] = p['description']
+                p['docstring'] = p.get('description', None)
                 p['type'] = refine_type(p)
 
                 if 'defaultValue' in p:

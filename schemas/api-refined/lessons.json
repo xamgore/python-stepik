@@ -7,7 +7,7 @@
         "steps": {
           "type": "List[int]",
           "rename": "steps_ids",
-          "object_type": "List[Step]"
+          "new_type": "List[Step]"
         },
         "actions": {
           "description": "Contains a dict of ``<action : link to the page>``",
@@ -19,7 +19,7 @@
         "subscriptions": {
           "description": "List[int]",
           "rename": "subscriptions_ids",
-          "object_type": "List[Subscription]"
+          "new_type": "List[Subscription]"
         },
         "viewed_by": {
           "description": "Number of users who checked out the lesson",
@@ -40,7 +40,9 @@
         },
         "owner": {
           "description": ":class:`User`'s id of the lesson's owner",
-          "type": "integer"
+          "type": "integer",
+          "rename": "owner_id",
+          "new_type": "User"
         },
         "language": {
           "description": "Language code\n\nOne of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``"
@@ -65,23 +67,33 @@
         },
         "learners_group": {
           "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
-          "type": "integer"
+          "type": "integer",
+          "rename": "learners_group_id",
+          "new_type": "Group"
         },
         "testers_group": {
           "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
-          "type": "integer"
+          "type": "integer",
+          "rename": "testers_group_id",
+          "new_type": "Group"
         },
         "moderators_group": {
           "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
-          "type": "integer"
+          "type": "integer",
+          "rename": "moderators_group_id",
+          "new_type": "Group"
         },
         "teachers_group": {
           "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
-          "type": "integer"
+          "type": "integer",
+          "rename": "teachers_group_id",
+          "new_type": "Group"
         },
         "admins_group": {
           "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
-          "type": "integer"
+          "type": "integer",
+          "rename": "admins_group_id",
+          "new_type": "Group"
         },
         "discussions_count": {
           "description": "Number of comment trees",

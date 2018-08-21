@@ -1,0 +1,36 @@
+{
+  "models": {
+    "Environment": {
+      "properties": {
+        "total_quizzes": {
+          "type": "integer"
+        },
+        "total_active": {
+          "type": "integer"
+        },
+        "total_submissions": {
+          "type": "integer"
+        },
+        "user": {
+          "description": ":class:`User`'s id",
+          "type": "integer",
+          "rename": "user_id",
+          "new_type": "User"
+        },
+        "profile": {
+          "description": ":class:`Profile`'s id",
+          "type": "integer",
+          "rename": "user_id",
+          "new_type": "User"
+        },
+        "config": {
+          "description": "Some trash actively used on the frontend.\n\nSee `server's response <https://stepik.org/api/docs/#!/stepics>`_ to get more information.",
+          "type": "dict"
+        },
+        "server_time": {
+          "type": "decimal"
+        }
+      }
+    }
+  }
+}

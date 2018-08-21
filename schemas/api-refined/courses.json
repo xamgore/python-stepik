@@ -6,29 +6,25 @@
           "description": null,
           "type": "List[int]",
           "rename": "instructors_ids",
-          "object_type": "List[User]"
+          "new_type": "List[User]"
         },
         "sections": {
           "description": "List of sections",
           "type": "List[int]",
           "rename": "sections_ids",
-          "object_type": "List[Section]"
+          "new_type": "List[Section]"
         },
         "authors": {
-          "description": "List of authors, usually from one person: the owner",
+          "description": "List of authors, usually with the only person: course owner",
           "type": "List[int]",
           "rename": "authors_ids",
-          "object_type": "List[User]",
-          "required": false,
-          "readOnly": false
+          "new_type": "List[User]"
         },
         "tags": {
           "description": null,
           "type": "List[int]",
           "rename": "tags_ids",
-          "object_type": "List[Tag]",
-          "required": false,
-          "readOnly": false
+          "new_type": "List[Tag]"
         }
       }
     }

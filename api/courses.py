@@ -386,9 +386,9 @@ class WriteCourse:
         self.__data['lti_secret_key'] = value
 
 
-from api.users import User
 from api.tags import Tag
 from api.sections import Section
+from api.users import User
 
 
 class Course:
@@ -1201,7 +1201,7 @@ class Course:
 
     @instructors_ids.setter
     def instructors_ids(self, value: List[int]):
-        self.__data['instructors_ids'] = value
+        self.__data['instructors'] = value
 
 
     @required
@@ -1218,13 +1218,13 @@ class Course:
         """
         List of sections
         """
-        self.__data['sections_ids'] = value
+        self.__data['sections'] = value
 
 
     @property
     def authors_ids(self) -> List[int]:
         """
-        List of authors, usually from one person: the owner
+        List of authors, usually with the only person: course owner
         """
         return self.__data['authors']
 
@@ -1232,9 +1232,9 @@ class Course:
     @authors_ids.setter
     def authors_ids(self, value: List[int]):
         """
-        List of authors, usually from one person: the owner
+        List of authors, usually with the only person: course owner
         """
-        self.__data['authors_ids'] = value
+        self.__data['authors'] = value
 
 
     @property
@@ -1244,6 +1244,6 @@ class Course:
 
     @tags_ids.setter
     def tags_ids(self, value: List[int]):
-        self.__data['tags_ids'] = value
+        self.__data['tags'] = value
 
 

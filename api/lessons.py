@@ -116,8 +116,10 @@ class WriteLesson:
         self.__data['lti_secret_key'] = value
 
 
-from api.steps import Step
 from api.subscriptions import Subscription
+from api.steps import Step
+from api.users import User
+from api.groups import Group
 
 
 class Lesson:
@@ -140,6 +142,30 @@ class Lesson:
         return ResourcesList[Subscription](Subscription, self.__stepik, self, 'subscriptions_ids')
 
 
+    def owner(self) -> User:
+        return User(self.__stepik, self.__stepik.fetch_object('User', self.owner_id))
+
+
+    def learners_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.learners_group_id))
+
+
+    def testers_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.testers_group_id))
+
+
+    def moderators_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.moderators_group_id))
+
+
+    def teachers_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.teachers_group_id))
+
+
+    def admins_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.admins_group_id))
+
+
     @readonly
     @property
     def id(self) -> int:
@@ -148,11 +174,9 @@ class Lesson:
 
     @readonly
     @property
-    def actions(self) -> str:
+    def actions(self) -> dict:
         """
         Contains a dict of ``<action : link to the page>``
-
-        Type: dict
         """
         return self.__data['actions']
 
@@ -229,15 +253,6 @@ class Lesson:
         Default value: ``True``
         """
         self.__data['is_comments_enabled'] = value
-
-
-    @readonly
-    @property
-    def owner(self) -> int:
-        """
-        :class:`User`'s id of the lesson's owner
-        """
-        return self.__data['owner']
 
 
     @required
@@ -341,51 +356,6 @@ class Lesson:
 
     @readonly
     @property
-    def learners_group(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['learners_group']
-
-
-    @readonly
-    @property
-    def testers_group(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['testers_group']
-
-
-    @readonly
-    @property
-    def moderators_group(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['moderators_group']
-
-
-    @readonly
-    @property
-    def teachers_group(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['teachers_group']
-
-
-    @readonly
-    @property
-    def admins_group(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['admins_group']
-
-
-    @readonly
-    @property
     def discussions_count(self) -> int:
         """
         Number of comment trees
@@ -468,7 +438,7 @@ class Lesson:
 
     @steps_ids.setter
     def steps_ids(self, value: List[int]):
-        self.__data['steps_ids'] = value
+        self.__data['steps'] = value
 
 
     @readonly
@@ -478,5 +448,59 @@ class Lesson:
         List[int]
         """
         return self.__data['subscriptions']
+
+
+    @readonly
+    @property
+    def owner_id(self) -> int:
+        """
+        :class:`User`'s id of the lesson's owner
+        """
+        return self.__data['owner']
+
+
+    @readonly
+    @property
+    def learners_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['learners_group']
+
+
+    @readonly
+    @property
+    def testers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['testers_group']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['moderators_group']
+
+
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['teachers_group']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['admins_group']
 
 

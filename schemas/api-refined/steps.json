@@ -12,23 +12,11 @@
           "description": "Position in the lesson's syllabus"
         },
         "status": {
-          "description": null,
-          "type": "choice",
-          "format": "string",
-          "required": false,
-          "readOnly": true,
-          "enum": [
-            null,
-            10,
-            1000,
-            1010
-          ]
+          "description": "May take one of the following values:\n\n* ``\"preparing\"\n* ``\"ready\"``\n* ``\"error\"``"
         },
         "block": {
-          "description": null,
-          "type": "BlockViewSerializer",
-          "required": false,
-          "readOnly": true
+          "description": "TODO",
+          "type": "dict"
         },
         "actions": {
           "description": "Contains a dict of ``<action : link to the page>``",
@@ -42,10 +30,13 @@
           "type": "List[str]"
         },
         "instruction": {
+          "description": "Something connected with exams and peer review. Maybe take ``None`` value."
         },
         "session": {
+          "description": "Something connected with exams and peer review. Maybe take ``None`` value."
         },
         "instruction_type": {
+          "description": "Something connected with exams and peer review. Maybe take ``None`` value."
         },
         "viewed_by": {
           "description": "Number of users who checked out the step",
@@ -60,7 +51,7 @@
           "type": "decimal"
         },
         "worth": {
-          "description": "Equals 1 or 0",
+          "description": "Part of an adaptive system. Equals to 1 or 0. TODO",
           "type": "integer"
         },
         "is_solutions_unlocked": {
@@ -76,16 +67,10 @@
           "description": "Number of submissions allowed to send. Works only if ``has_submissions_restrictions`` equals ``True``."
         },
         "variation": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "deprecated": true
         },
         "variations_count": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
+          "deprecated": true
         },
         "create_date": {
           "description": "Creation time"

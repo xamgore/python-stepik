@@ -11,12 +11,14 @@
         },
         "lesson": {
           "description": "Id of the lesson associated with the unit",
-          "type": "integer"
+          "type": "integer",
+          "rename": "lesson_id",
+          "new_type": "Lesson"
         },
         "assignments": {
           "type": "List[int]",
           "rename": "assignments_ids",
-          "object_type": "List[Assignment]"
+          "new_type": "List[Assignment]"
         },
         "position": {
           "description": "Position in the syllabus"

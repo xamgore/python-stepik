@@ -339,13 +339,11 @@ class Section:
 
     @readonly
     @property
-    def actions(self) -> str:
+    def actions(self) -> dict:
         """
         Contains a dict of ``<action : link to the page>``
 
         On the summer 2018 contains only ``test_section`` if user has the `test` permission (is a tester).
-
-        Type: dict
         """
         return self.__data['actions']
 
@@ -742,6 +740,6 @@ class Section:
 
     @units_ids.setter
     def units_ids(self, value: List[int]):
-        self.__data['units_ids'] = value
+        self.__data['units'] = value
 
 
