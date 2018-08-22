@@ -116,10 +116,26 @@ class WriteLesson:
         self.__data['lti_secret_key'] = value
 
 
+    @property
+    def lti_private_profile(self) -> bool:
+        """
+        Default value: ``False``
+        """
+        return self.__data['lti_private_profile']
+
+
+    @lti_private_profile.setter
+    def lti_private_profile(self, value: bool):
+        """
+        Default value: ``False``
+        """
+        self.__data['lti_private_profile'] = value
+
+
 from api.subscriptions import Subscription
-from api.steps import Step
 from api.users import User
 from api.groups import Group
+from api.steps import Step
 
 
 class Lesson:
@@ -403,6 +419,12 @@ class Lesson:
 
     @readonly
     @property
+    def vote_delta(self) -> int:
+        return self.__data['vote_delta']
+
+
+    @readonly
+    @property
     def vote(self) -> str:
         """
         The :class:`Vote` object identifier
@@ -428,6 +450,22 @@ class Lesson:
     @lti_secret_key.setter
     def lti_secret_key(self, value: str):
         self.__data['lti_secret_key'] = value
+
+
+    @property
+    def lti_private_profile(self) -> bool:
+        """
+        Default value: ``False``
+        """
+        return self.__data['lti_private_profile']
+
+
+    @lti_private_profile.setter
+    def lti_private_profile(self, value: bool):
+        """
+        Default value: ``False``
+        """
+        self.__data['lti_private_profile'] = value
 
 
     @required

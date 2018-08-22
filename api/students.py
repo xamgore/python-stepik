@@ -78,8 +78,8 @@ class Student:
     @property
     def date_joined(self) -> str:
         """
-        Default value: ``"2018-08-10T09:48:43.661Z"``
+        Default value: ``"2018-08-22T13:18:42.482Z"``
         """
-        return self.__data.setdefault('date_joined', "2018-08-10T09:48:43.661Z")
+        return self.__data.setdefault('date_joined', "2018-08-22T13:18:42.482Z")
 
 

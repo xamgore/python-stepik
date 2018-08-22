@@ -432,6 +432,13 @@
           "type": "string",
           "required": false,
           "readOnly": false
+        },
+        "lti_private_profile": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
         }
       }
     },
@@ -466,9 +473,11 @@
         "discussion_threads",
         "epic_count",
         "abuse_count",
+        "vote_delta",
         "vote",
         "lti_consumer_key",
-        "lti_secret_key"
+        "lti_secret_key",
+        "lti_private_profile"
       ],
       "properties": {
         "id": {
@@ -739,6 +748,13 @@
           "required": false,
           "readOnly": true
         },
+        "vote_delta": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
         "vote": {
           "description": null,
           "type": "string",
@@ -755,6 +771,13 @@
           "description": null,
           "type": "string",
           "required": false,
+          "readOnly": false
+        },
+        "lti_private_profile": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
           "readOnly": false
         }
       }

@@ -145,8 +145,8 @@ class WriteUnit:
         self.__data['grading_policy_source'] = value
 
 
-from api.lessons import Lesson
 from api.assignments import Assignment
+from api.lessons import Lesson
 
 
 class Unit:
@@ -216,7 +216,7 @@ class Unit:
     @property
     def progress(self) -> str:
         """
-        The progress object identifier, for internal needs.
+        The :class:`Progress` object identifier
         """
         return self.__data['progress']
 

@@ -68,9 +68,9 @@ class Certificate:
     @property
     def issue_date(self) -> str:
         """
-        Default value: ``"2018-08-10T09:47:18.845Z"``
+        Default value: ``"2018-08-22T13:17:44.906Z"``
         """
-        return self.__data.setdefault('issue_date', "2018-08-10T09:47:18.845Z")
+        return self.__data.setdefault('issue_date', "2018-08-22T13:17:44.906Z")
 
 
     @readonly

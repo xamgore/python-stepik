@@ -24,7 +24,7 @@
           "description": "Position in the syllabus"
         },
         "progress": {
-          "description": "The progress object identifier, for internal needs."
+          "description": "The :class:`Progress` object identifier"
         },
         "begin_date": {
           "description": "Open date: when the module starts for enrolled users.\n\nInherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value."

@@ -1068,6 +1068,13 @@
           "type": "string",
           "required": false,
           "readOnly": false
+        },
+        "lti_private_profile": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
         }
       }
     },
@@ -1163,7 +1170,8 @@
         "discussion_proxy",
         "discussion_threads",
         "lti_consumer_key",
-        "lti_secret_key"
+        "lti_secret_key",
+        "lti_private_profile"
       ],
       "properties": {
         "id": {
@@ -1193,7 +1201,7 @@
           "readOnly": true
         },
         "intro": {
-          "description": "text, shown on the about page of the course",
+          "description": null,
           "type": "url",
           "format": "string",
           "required": false,
@@ -1863,6 +1871,13 @@
           "description": null,
           "type": "string",
           "required": false,
+          "readOnly": false
+        },
+        "lti_private_profile": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
           "readOnly": false
         }
       }

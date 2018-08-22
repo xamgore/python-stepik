@@ -2,17 +2,173 @@
   "models": {
     "CourseSerializer": {
       "properties": {
+        "id": {
+          "description": "Course's unique identifier"
+        },
+        "summary": {
+          "description": "Short description about the course, may contain HTML tags"
+        },
+        "workload": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "cover": {
+          "description": "Path to the cover image, without the hostname, i.e. ``/media/...1c67c.png``.\n\nMay take ``None`` value."
+        },
+        "intro": {
+          "description": "Link to the introduction video (with html5 player), that may explain what is the course about.",
+          "defaultValue": ""
+        },
+        "course_format": {
+          "description": "",
+          "defaultValue": ""
+        },
+        "target_audience": {
+          "description": null,
+          "type": "string",
+          "defaultValue": ""
+        },
+        "certificate_footer": {
+          "description": "May take ``None`` value.",
+          "type": "file upload",
+          "format": "string"
+        },
+        "certificate_cover_org": {
+          "description": null,
+          "type": "file upload",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "is_certificate_auto_issued": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false,
+          "readOnly": false
+        },
+        "certificate_regular_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
+        "certificate_distinction_threshold": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "defaultValue": 0,
+          "readOnly": false
+        },
         "instructors": {
           "description": null,
-          "type": "List[int]",
-          "rename": "instructors_ids",
-          "new_type": "List[User]"
+          "type": "List[int]"
+        },
+        "certificate": {
+          "description": null,
+          "type": "string"
+        },
+        "requirements": {
+          "description": null,
+          "type": "string"
+        },
+        "description": {
+          "description": "Full description about the course, may contain HTML tags",
+          "type": "string"
         },
         "sections": {
           "description": "List of sections",
           "type": "List[int]",
           "rename": "sections_ids",
           "new_type": "List[Section]"
+        },
+        "total_units": {
+          "description": "Total number of units",
+          "type": "integer"
+        },
+        "enrollment": {
+          "description": "Enrollment id (which usually is equals to course id), if user enrolled. If not, ``None``.",
+          "type": "integer"
+        },
+        "is_favorite": {
+          "description": "Is the course is favourite. See ``favorite_courses`` list.",
+          "type": "boolean"
+        },
+        "actions": {
+          "description": "Contains a dict of ``<action : link to the page>``. If user is not an admin or the course owner, dict is empty.",
+          "type": "dict"
+        },
+        "progress": {
+          "description": "The :class:`Progress` object identifier"
+        },
+        "first_lesson": {
+          "type": "integer"
+        },
+        "first_unit": {
+          "type": "string"
+        },
+        "certificate_link": {
+          "description": null
+        },
+        "certificate_regular_link": {
+          "description": null
+        },
+        "certificate_distinction_link": {
+          "description": null
+        },
+        "schedule_link": {
+          "description": "Path to the ``ics``, without the host name"
+        },
+        "schedule_long_link": {
+          "description": "Path to the ``ics``, without the host name"
+        },
+        "first_deadline": {
+          "description": null
+        },
+        "last_deadline": {
+          "description": null
+        },
+        "subscriptions": {
+          "description": null,
+          "type": "List[str]"
+        },
+        "announcements": {
+          "description": null,
+          "type": "List[str]"
+        },
+        "is_contest": {
+          "description": null,
+          "type": "boolean"
+        },
+        "is_self_paced": {
+          "description": "Completely open course, without deadlines and other things",
+          "type": "boolean"
+        },
+        "is_adaptive": {
+          "description": "Adaptive means that course is based on tasks, which can be marked as easy or hard. Stepik will give better tasks next time.",
+          "type": "boolean"
+        },
+        "is_idea_compatible": {
+          "deprecated": "true",
+          "type": "boolean"
+        },
+        "last_step": {
+          "type": "integer"
+        },
+        "intro_video": {
+          "description": "Dict with following fields:\n\n* thumbnail — full url to image\n* urls — list of ``{quality, url}``\n* duration — in seconds\n* upload_date — isoformat\n* filename",
+          "type": "dict"
+        },
+        "social_providers": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
         },
         "authors": {
           "description": "List of authors, usually with the only person: course owner",
@@ -21,10 +177,186 @@
           "new_type": "List[User]"
         },
         "tags": {
-          "description": null,
           "type": "List[int]",
           "rename": "tags_ids",
           "new_type": "List[Tag]"
+        },
+        "has_tutors": {
+          "type": "boolean"
+        },
+        "is_promoted": {
+          "type": "boolean"
+        },
+        "is_enabled": {
+          "type": "boolean"
+        },
+        "is_proctored": {
+          "type": "boolean"
+        },
+        "proctor_url": {
+          "description": "May take ``None`` value."
+        },
+        "review_summary": {
+          "type": "integer"
+        },
+        "schedule_type": {
+        },
+        "certificates_count": {
+          "description": null
+        },
+        "learners_count": {
+          "description": "Number of learners enrolled"
+        },
+        "time_to_complete": {
+          "description": "Average time to complete the course"
+        },
+        "is_popular": {
+          "description": null,
+          "type": "boolean"
+        },
+        "similar_courses": {
+          "description": null,
+          "type": "List[int]"
+        },
+        "is_unsuitable": {
+          "description": "Does course contain information unsuitable for a wide audience? (how to drink alcohol at work)"
+        },
+        "is_paid": {
+          "description": null,
+          "type": "boolean"
+        },
+        "price": {
+          "description": null,
+          "type": "decimal",
+          "format": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "currency_code": {
+          "description": null
+        },
+        "display_price": {
+          "description": null
+        },
+        "continue_url": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "readiness": {
+          "description": null
+        },
+        "owner": {
+          "description": ":class:`User`'s id of the lesson's owner",
+          "type": "integer",
+          "rename": "owner_id",
+          "new_type": "User"
+        },
+        "language": {
+          "description": "Language code\n\nOne of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``"
+        },
+        "is_featured": {
+          "deprecated": true
+        },
+        "is_public": {
+          "description": "Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID."
+        },
+        "title": {
+          "description": "Title of the course"
+        },
+        "slug": {
+          "description": "A string of format \"title-id\", with hyphens instead of spaces"
+        },
+        "begin_date": {
+          "description": "Open date: when the course starts for enrolled users.\n\nUse `begin_date_source` to update the value."
+        },
+        "end_date": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nUse `end_date_source` to update the value."
+        },
+        "soft_deadline": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nUse `soft_deadline_source` to update the value."
+        },
+        "hard_deadline": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nUse `hard_deadline_source` to update the value."
+        },
+        "grading_policy": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nUse `grading_policy_source` to update the value."
+        },
+        "begin_date_source": {
+          "description": "Open date: when the module starts for enrolled users\n\nUse `begin_date_source` to update the value."
+        },
+        "end_date_source": {
+          "description": "Close date: when the module will be disabled (close date is usually left empty).\n\nUse `end_date_source` to update the value."
+        },
+        "soft_deadline_source": {
+          "description": "Soft deadline: when the cost of every step will be reduced.\n\nUse `soft_deadline_source` to update the value."
+        },
+        "hard_deadline_source": {
+          "description": "Hard deadline: when the cost of every step will be zero.\n\nUse `hard_deadline_source` to update the value."
+        },
+        "grading_policy_source": {
+          "description": "Policy can be one of these:\n\n* ``None`` — default for the course\n* ``\"no_deadlines\"`` — no deadlines\n* ``\"halved\"`` — half points\n* ``\"linear\"`` — linear descending\n\nUse `grading_policy_source` to update the value."
+        },
+        "is_active": {
+          "description": null,
+          "type": "boolean",
+          "required": false,
+          "readOnly": true
+        },
+        "create_date": {
+          "description": "Creation time"
+        },
+        "update_date": {
+          "description": "Time of the last update"
+        },
+        "learners_group": {
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer",
+          "rename": "learners_group_id",
+          "new_type": "Group"
+        },
+        "testers_group": {
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer",
+          "rename": "testers_group_id",
+          "new_type": "Group"
+        },
+        "moderators_group": {
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer",
+          "rename": "moderators_group_id",
+          "new_type": "Group"
+        },
+        "teachers_group": {
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer",
+          "rename": "teachers_group_id",
+          "new_type": "Group"
+        },
+        "admins_group": {
+          "description": ":class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.",
+          "type": "integer",
+          "rename": "admins_group_id",
+          "new_type": "Group"
+        },
+        "discussions_count": {
+          "description": "Number of comment trees",
+          "type": "integer",
+          "defaultValue": 0
+        },
+        "discussion_proxy": {
+          "description": "Discussion tree's identifier"
+        },
+        "discussion_threads": {
+          "type": "List[str]",
+          "description": "Same as ``discussion_proxy`` in most cases"
+        },
+        "lti_consumer_key": {
+          "description": null
+        },
+        "lti_secret_key": {
+          "description": null
         }
       }
     }

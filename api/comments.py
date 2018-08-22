@@ -396,6 +396,12 @@ class Comment:
 
     @readonly
     @property
+    def vote_delta(self) -> int:
+        return self.__data['vote_delta']
+
+
+    @readonly
+    @property
     def vote(self) -> str:
         return self.__data['vote']
 

@@ -103,7 +103,7 @@
           "type": "datetime",
           "format": "string",
           "required": true,
-          "defaultValue": "2018-08-10T09:47:18.845Z",
+          "defaultValue": "2018-08-22T13:17:44.906Z",
           "readOnly": true
         },
         "update_date": {

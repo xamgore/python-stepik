@@ -67,8 +67,7 @@
       "required": [
         "id",
         "user",
-        "course",
-        "create_date"
+        "course"
       ],
       "properties": {
         "id": {
@@ -89,13 +88,6 @@
           "type": "string",
           "required": true,
           "readOnly": false
-        },
-        "create_date": {
-          "description": null,
-          "type": "datetime",
-          "format": "string",
-          "required": false,
-          "readOnly": true
         }
       }
     }

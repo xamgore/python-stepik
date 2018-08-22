@@ -200,6 +200,7 @@
         "edited_at",
         "epic_count",
         "abuse_count",
+        "vote_delta",
         "vote",
         "translations"
       ],
@@ -399,6 +400,13 @@
           "readOnly": true
         },
         "abuse_count": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "vote_delta": {
           "description": null,
           "type": "integer",
           "format": "int32",

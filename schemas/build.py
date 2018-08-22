@@ -96,7 +96,13 @@ def refine_default_value(p):
 
 
 if __name__ == '__main__':
+    resources_without_models = []
+
     for schema in structure.schemas():
+        if len(schema['models'].keys()) == 0:
+            resources_without_models.append(schema['resourcePath'])
+            continue
+
         for name, model in schema['models'].items():
             model['resources'], model['methods'] = {}, {}
             rename_properties(model)
@@ -117,3 +123,5 @@ if __name__ == '__main__':
             with open(f'../{output_module}.py', 'w') as out:
                 template = Template(t.read(), lstrip_blocks=True, trim_blocks=True)
                 out.write(template.render(models=schema['models']))
+
+    print(f'{len(resources_without_models)} resources without models:', *resources_without_models, sep='\n  ')
