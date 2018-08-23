@@ -133,9 +133,9 @@ class WriteLesson:
 
 
 from api.subscriptions import Subscription
+from api.steps import Step
 from api.users import User
 from api.groups import Group
-from api.steps import Step
 
 
 class Lesson:
@@ -159,27 +159,27 @@ class Lesson:
 
 
     def owner(self) -> User:
-        return User(self.__stepik, self.__stepik.fetch_object('User', self.owner_id))
+        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
 
 
     def learners_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.learners_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
 
 
     def testers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.testers_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
 
 
     def moderators_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.moderators_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.moderators_group_id))
 
 
     def teachers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.teachers_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.teachers_group_id))
 
 
     def admins_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.admins_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.admins_group_id))
 
 
     @readonly

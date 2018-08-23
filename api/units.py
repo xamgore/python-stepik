@@ -145,8 +145,8 @@ class WriteUnit:
         self.__data['grading_policy_source'] = value
 
 
-from api.assignments import Assignment
 from api.lessons import Lesson
+from api.assignments import Assignment
 
 
 class Unit:
@@ -165,7 +165,7 @@ class Unit:
 
 
     def lesson(self) -> Lesson:
-        return Lesson(self.__stepik, self.__stepik.fetch_object('Lesson', self.lesson_id))
+        return Lesson(self.__stepik, self.__stepik._fetch_object('Lesson', self.lesson_id))
 
 
     @readonly

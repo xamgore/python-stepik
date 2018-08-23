@@ -17,11 +17,11 @@ class Environment:
 
 
     def user(self) -> User:
-        return User(self.__stepik, self.__stepik.fetch_object('User', self.user_id))
+        return User(self.__stepik, self.__stepik._fetch_object('User', self.user_id))
 
 
     def profile(self) -> User:
-        return User(self.__stepik, self.__stepik.fetch_object('User', self.user_id))
+        return User(self.__stepik, self.__stepik._fetch_object('User', self.user_id))
 
 
     @property

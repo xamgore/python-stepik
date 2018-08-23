@@ -15,7 +15,7 @@ class ResourcesList(Generic[Ty]):
 
     def __iter__(self) -> Iterator[Ty]:
         ids = getattr(self.__holder, self.__field_with_ids)
-        objs = self.__stepik.fetch_objects(self.__resource, ids)
+        objs = self.__stepik._fetch_objects(self.__resource, ids)
         yield from (self.__ty(self.__stepik, o) for o in objs)
 
 

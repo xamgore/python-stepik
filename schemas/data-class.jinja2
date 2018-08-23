@@ -38,7 +38,7 @@ class {{ model | replace('Serializer', '') }}:
         {{ at['docstring'] | indent(width=8) }}
         """
     {% endif %}
-        return {{ at['type'] }}(self.__stepik, self.__stepik.fetch_object('{{ at['type'] }}', self.{{ at['rename'] }}))
+        return {{ at['type'] }}(self.__stepik, self.__stepik._fetch_object('{{ at['type'] }}', self.{{ at['rename'] }}))
 
 
 {% endfor %}

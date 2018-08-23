@@ -35,13 +35,13 @@ start = time()
 sections = course.sections.list()
 
 unit_ids = [id for sec in sections for id in sec.units_ids]
-units = stepik.units.fetch_all(unit_ids)
+units = stepik.units.get_all(unit_ids)
 
 lesson_ids = [u.lesson_id for u in units]
-lessons = stepik.lessons.fetch_all(lesson_ids)
+lessons = stepik.lessons.get_all(lesson_ids)
 
 step_ids = [id for les in lessons for id in les.steps_ids]
-steps = stepik.steps.fetch_all(step_ids)
+steps = stepik.steps.get_all(step_ids)
 
 with open(f'course{course.id}.2.html', 'w', encoding='utf-8') as f:
     for step in steps:

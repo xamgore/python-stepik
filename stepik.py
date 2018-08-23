@@ -1,4 +1,5 @@
-from typing import List, Iterable
+from typing import List, Iterable, Optional
+from urllib.parse import urlencode
 
 from api.courses import Course
 from api.lessons import Lesson
@@ -22,7 +23,7 @@ class StepikError(RuntimeError):
 
 
 class Stepik:
-    def __init__(self, client_id, client_secret, server='stepik.org'):
+    def __init__(self, client_id: str, client_secret: str, server: str = 'stepik.org'):
         data = {'grant_type': 'client_credentials'}
         auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
         resp = requests.post(f'https://{server}/oauth2/token/', data, auth=auth)
@@ -56,7 +57,12 @@ class Stepik:
         return response[f'{resource_name}'][0]
 
 
-    def fetch_object(self, resource_name: str, id: int):
+    def _get(self, url):
+        api_url = f'https://{self.__server}/api/{url}'
+        return requests.get(api_url, headers=self.headers).json()
+
+
+    def _fetch_object(self, resource_name: str, id: int):
         """
         :param resource_name: the name of resource
         :param id: resource's id to grub
@@ -71,7 +77,7 @@ class Stepik:
         return response[f'{resource_name}s'][0]
 
 
-    def fetch_objects(self, resource_name: str, obj_ids: List[int]):
+    def _fetch_objects(self, resource_name: str, obj_ids: List[int]):
         # Fetch objects by 30 items,
         # so we won't bump into HTTP request length limits
         step_size = 30
@@ -86,9 +92,9 @@ class Stepik:
 
     def stepics(self) -> Environment:
         """
-        Return the current context: user's id, system's state.
+        The current context: user's id, system's state.
         """
-        return Environment(self, self.fetch_object('stepic', 1))
+        return Environment(self, self._fetch_object('stepic', 1))
 
 
 class Courses(object):
@@ -97,7 +103,7 @@ class Courses(object):
 
 
     def get(self, course_id: int) -> Course:
-        return Course(self.stepik, self.stepik.fetch_object('course', course_id))
+        return Course(self.stepik, self.stepik._fetch_object('course', course_id))
 
 
     def update(self, course: Course):
@@ -110,7 +116,7 @@ class Sections(object):
 
 
     def get(self, id: int) -> Section:
-        return Section(self.stepik, self.stepik.fetch_object('section', id))
+        return Section(self.stepik, self.stepik._fetch_object('section', id))
 
 
 class Units(object):
@@ -119,11 +125,11 @@ class Units(object):
 
 
     def get(self, id: int) -> Unit:
-        return Unit(self.stepik, self.stepik.fetch_object('unit', id))
+        return Unit(self.stepik, self.stepik._fetch_object('unit', id))
 
 
     def fetch_all(self, ids: List[int], keep_order=True) -> Iterable[Unit]:
-        iterable = self.stepik.fetch_objects('unit', ids)
+        iterable = self.stepik._fetch_objects('unit', ids)
         if keep_order:
             iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
         yield from (Unit(self.stepik, o) for o in iterable)
@@ -135,19 +141,73 @@ class Units(object):
 
 class Lessons(object):
     def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def fetch_all(self, ids: List[int], keep_order=True) -> Iterable[Lesson]:
-        iterable = self.stepik.fetch_objects('lesson', ids)
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
-        yield from (Lesson(self.stepik, o) for o in iterable)
+        self._stepik = stepik
 
 
     def get(self, id: int) -> Lesson:
-        return Lesson(self.stepik, self.stepik.fetch_object('lesson', id))
+        return Lesson(self._stepik, self._stepik._fetch_object('lesson', id))
 
+
+    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Lesson]:
+        objects = self._stepik._fetch_objects('lesson', ids)
+        iterable = (Lesson(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
+
+        yield from iterable
+
+
+    def iterate(self, course: Optional[int] = None, owner: Optional[int] = None,
+                language: Optional[str] = None, is_featured: Optional[bool] = None,
+                by_id: Optional[bool] = None, by_create_date: Optional[bool] = None,
+                by_update_date: Optional[bool] = None, by_vote_delta: Optional[bool] = None,
+                by_vote_epic: Optional[bool] = None, by_vote_abuse: Optional[bool] = None,
+                skip: Optional[int] = 0, limit: Optional[int] = 20) -> Iterable[Lesson]:
+
+        assert skip >= 0, 'skip must be positive'
+        assert limit is None or limit >= 0, 'limit must be positive'
+
+        vars = locals().copy()
+        args, order = [], []
+
+        for k, v in vars.items():
+            is_ordering = k.startswith('by_')
+            is_special = k in ['self', 'skip']
+
+            if not v is None and not is_ordering and not is_special:
+                args.append((k, v))
+
+            if not v is None and is_ordering:
+                sign = '-' if v else ''
+                order.append(sign + k[3:])
+
+
+        params = urlencode(args, doseq=True)
+        ordering = ','.join(order)
+
+        skip = 0 if skip is None else skip
+        page_idx, count = divmod(skip, 20)
+        page_idx += 1  # stepik counts from 1
+
+        while True:
+            page = self._stepik._get(f'lessons?{params}&page={page_idx}&order={ordering}')
+
+            for lesson in page['lessons']:
+                if limit and count >= limit:
+                    break
+
+                yield Lesson(self._stepik, lesson)
+                count += 1
+
+            if not page['meta']['has_next']:
+                break
+
+            page_idx += 1
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
 
 
 class Steps(object):
@@ -156,14 +216,14 @@ class Steps(object):
 
 
     def fetch_all(self, ids: List[int], keep_order=True) -> Iterable[Step]:
-        iterable = self.stepik.fetch_objects('step', ids)
+        iterable = self.stepik._fetch_objects('step', ids)
         if keep_order:
             iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
         yield from (Step(self.stepik, o) for o in iterable)
 
 
     def get(self, id: int) -> Step:
-        return Step(self.stepik, self.stepik.fetch_object('step', id))
+        return Step(self.stepik, self.stepik._fetch_object('step', id))
 
 
 class StepSources(object):
@@ -172,7 +232,7 @@ class StepSources(object):
 
 
     def get(self, id: int) -> StepSource:
-        return StepSource(self.stepik, self.stepik.fetch_object('step-source', id))
+        return StepSource(self.stepik, self.stepik._fetch_object('step-source', id))
 
 
 class Users(object):
@@ -181,8 +241,8 @@ class Users(object):
 
 
     def get(self, id: int) -> User:
-        return User(self.stepik, self.stepik.fetch_object('user', id))
+        return User(self.stepik, self.stepik._fetch_object('user', id))
 
 
 if __name__ == '__main__':
-    print('ok')
+    pass

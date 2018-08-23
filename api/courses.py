@@ -402,10 +402,10 @@ class WriteCourse:
         self.__data['lti_private_profile'] = value
 
 
+from api.tags import Tag
 from api.sections import Section
 from api.users import User
 from api.groups import Group
-from api.tags import Tag
 
 
 class Course:
@@ -434,27 +434,27 @@ class Course:
 
 
     def owner(self) -> User:
-        return User(self.__stepik, self.__stepik.fetch_object('User', self.owner_id))
+        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
 
 
     def learners_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.learners_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
 
 
     def testers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.testers_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
 
 
     def moderators_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.moderators_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.moderators_group_id))
 
 
     def teachers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.teachers_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.teachers_group_id))
 
 
     def admins_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik.fetch_object('Group', self.admins_group_id))
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.admins_group_id))
 
 
     @readonly
@@ -1083,9 +1083,10 @@ class Course:
     @property
     def is_featured(self) -> bool:
         """
+        Course will be shown in the catalogue, the field is set by admins.
+
         Default value: ``False``
         """
-        import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
         return self.__data['is_featured']
 
 
