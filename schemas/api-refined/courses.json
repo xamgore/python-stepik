@@ -199,8 +199,7 @@
         "review_summary": {
           "type": "integer"
         },
-        "schedule_type": {
-        },
+        "schedule_type": {},
         "certificates_count": {
           "description": null
         },
@@ -257,7 +256,7 @@
           "description": "Language code\n\nOne of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``"
         },
         "is_featured": {
-          "deprecated": true
+          "description": "Course will be shown in the catalogue, the field is set by admins."
         },
         "is_public": {
           "description": "Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID."
@@ -360,5 +359,12 @@
         }
       }
     }
-  }
+  },
+  "ordering": [
+    "create_date",
+    "id",
+    "update_date",
+    "popularity",
+    "activity"
+  ]
 }

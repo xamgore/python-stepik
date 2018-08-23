@@ -2,8 +2,7 @@
   "models": {
     "StepSerializer": {
       "properties": {
-        "id": {
-        },
+        "id": {},
         "lesson": {
           "description": ":class:`Lesson`'s id ",
           "type": "integer"
@@ -142,5 +141,10 @@
         }
       }
     }
-  }
+  },
+  "ordering": [
+    "create_date",
+    "id",
+    "update_date"
+  ]
 }

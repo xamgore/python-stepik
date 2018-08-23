@@ -1,0 +1,8 @@
+{
+  "ordering": [
+    "id",
+    "last_time",
+    "time",
+    "vote_delta"
+  ]
+}

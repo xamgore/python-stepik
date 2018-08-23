@@ -1,0 +1,9 @@
+{
+  "ordering": [
+    "id",
+    "knowledge",
+    "knowledge_rank",
+    "reputation",
+    "reputation_rank"
+  ]
+}

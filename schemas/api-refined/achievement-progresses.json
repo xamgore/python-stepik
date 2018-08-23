@@ -1,0 +1,9 @@
+{
+  "ordering": [
+    "create_date",
+    "id",
+    "obtain_date",
+    "score",
+    "update_date"
+  ]
+}
