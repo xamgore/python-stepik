@@ -39,6 +39,6 @@ for section in course.sections:
                 'id':    str(step.id),
                 'time':  datetime.datetime.now().isoformat()
             }
-            f.write(json.dumps(data))
+            f.write(json.dumps(data, indent=2, ensure_ascii=False))
             f.close()
             print(filename)
