@@ -116,7 +116,7 @@
           "type": "datetime",
           "format": "string",
           "required": true,
-          "defaultValue": "2018-08-10T09:48:04.316Z",
+          "defaultValue": "2018-08-26T00:35:27.146Z",
           "readOnly": true
         },
         "is_synced": {

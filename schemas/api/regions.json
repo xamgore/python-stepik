@@ -48,62 +48,6 @@
     }
   ],
   "models": {
-    "WriteRegionSerializer": {
-      "id": "WriteRegionSerializer",
-      "required": [
-        "name_std",
-        "alt_names"
-      ],
-      "properties": {
-        "name_std": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "alt_names": {
-          "description": null,
-          "type": "array",
-          "required": true,
-          "readOnly": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "RegionSerializer": {
-      "id": "RegionSerializer",
-      "required": [
-        "id",
-        "name_std",
-        "alt_names"
-      ],
-      "properties": {
-        "id": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
-        },
-        "name_std": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "alt_names": {
-          "description": null,
-          "type": "array",
-          "required": true,
-          "readOnly": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "WriteAlternativeNameSerializer": {
       "id": "WriteAlternativeNameSerializer",
       "required": [
@@ -158,6 +102,62 @@
           "required": false,
           "defaultValue": false,
           "readOnly": false
+        }
+      }
+    },
+    "WriteRegionSerializer": {
+      "id": "WriteRegionSerializer",
+      "required": [
+        "name_std",
+        "alt_names"
+      ],
+      "properties": {
+        "name_std": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionSerializer": {
+      "id": "RegionSerializer",
+      "required": [
+        "id",
+        "name_std",
+        "alt_names"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "name_std": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

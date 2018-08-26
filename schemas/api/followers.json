@@ -95,7 +95,7 @@
           "type": "datetime",
           "format": "string",
           "required": true,
-          "defaultValue": "2018-08-10T09:47:52.623Z",
+          "defaultValue": "2018-08-26T00:35:20.667Z",
           "readOnly": true
         }
       }

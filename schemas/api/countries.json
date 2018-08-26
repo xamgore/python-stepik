@@ -48,62 +48,6 @@
     }
   ],
   "models": {
-    "WriteCountrySerializer": {
-      "id": "WriteCountrySerializer",
-      "required": [
-        "name",
-        "alt_names"
-      ],
-      "properties": {
-        "name": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "alt_names": {
-          "description": null,
-          "type": "array",
-          "required": true,
-          "readOnly": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "CountrySerializer": {
-      "id": "CountrySerializer",
-      "required": [
-        "id",
-        "name",
-        "alt_names"
-      ],
-      "properties": {
-        "id": {
-          "description": null,
-          "type": "integer",
-          "format": "int32",
-          "required": false,
-          "readOnly": true
-        },
-        "name": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "alt_names": {
-          "description": null,
-          "type": "array",
-          "required": true,
-          "readOnly": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "WriteAlternativeNameSerializer": {
       "id": "WriteAlternativeNameSerializer",
       "required": [
@@ -158,6 +102,62 @@
           "required": false,
           "defaultValue": false,
           "readOnly": false
+        }
+      }
+    },
+    "WriteCountrySerializer": {
+      "id": "WriteCountrySerializer",
+      "required": [
+        "name",
+        "alt_names"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CountrySerializer": {
+      "id": "CountrySerializer",
+      "required": [
+        "id",
+        "name",
+        "alt_names"
+      ],
+      "properties": {
+        "id": {
+          "description": null,
+          "type": "integer",
+          "format": "int32",
+          "required": false,
+          "readOnly": true
+        },
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "alt_names": {
+          "description": null,
+          "type": "array",
+          "required": true,
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

@@ -78,7 +78,7 @@
           "type": "datetime",
           "format": "string",
           "required": true,
-          "defaultValue": "2018-08-10T09:47:31.030Z",
+          "defaultValue": "2018-08-26T00:35:10.871Z",
           "readOnly": false
         },
         "score": {
@@ -212,7 +212,7 @@
           "type": "datetime",
           "format": "string",
           "required": true,
-          "defaultValue": "2018-08-10T09:47:31.030Z",
+          "defaultValue": "2018-08-26T00:35:10.871Z",
           "readOnly": false
         },
         "score": {

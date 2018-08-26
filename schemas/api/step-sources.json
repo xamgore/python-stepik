@@ -69,6 +69,151 @@
     }
   ],
   "models": {
+    "WriteBlockEditSerializer": {
+      "id": "WriteBlockEditSerializer",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "animation": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "source": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "subtitles": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "feedback_correct": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "feedback_wrong": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
+    "BlockEditSerializer": {
+      "id": "BlockEditSerializer",
+      "required": [
+        "name",
+        "text",
+        "video",
+        "animation",
+        "options",
+        "subtitle_files",
+        "source",
+        "subtitles",
+        "tests_archive",
+        "feedback_correct",
+        "feedback_wrong"
+      ],
+      "properties": {
+        "name": {
+          "description": null,
+          "type": "string",
+          "required": true,
+          "readOnly": false
+        },
+        "text": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "video": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "animation": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "options": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": true
+        },
+        "subtitle_files": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "source": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "subtitles": {
+          "description": "Enter a valid JSON object",
+          "type": "string",
+          "required": false,
+          "defaultValue": {},
+          "readOnly": false
+        },
+        "tests_archive": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": true
+        },
+        "feedback_correct": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        },
+        "feedback_wrong": {
+          "description": null,
+          "type": "string",
+          "required": false,
+          "readOnly": false
+        }
+      }
+    },
     "WriteStepSourceSerializer": {
       "id": "WriteStepSourceSerializer",
       "required": [
@@ -372,151 +517,6 @@
           "format": "int32",
           "required": true,
           "defaultValue": 0,
-          "readOnly": false
-        }
-      }
-    },
-    "WriteBlockEditSerializer": {
-      "id": "WriteBlockEditSerializer",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "text": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "video": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "animation": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "source": {
-          "description": "Enter a valid JSON object",
-          "type": "string",
-          "required": false,
-          "defaultValue": {},
-          "readOnly": false
-        },
-        "subtitles": {
-          "description": "Enter a valid JSON object",
-          "type": "string",
-          "required": false,
-          "defaultValue": {},
-          "readOnly": false
-        },
-        "feedback_correct": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "feedback_wrong": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        }
-      }
-    },
-    "BlockEditSerializer": {
-      "id": "BlockEditSerializer",
-      "required": [
-        "name",
-        "text",
-        "video",
-        "animation",
-        "options",
-        "subtitle_files",
-        "source",
-        "subtitles",
-        "tests_archive",
-        "feedback_correct",
-        "feedback_wrong"
-      ],
-      "properties": {
-        "name": {
-          "description": null,
-          "type": "string",
-          "required": true,
-          "readOnly": false
-        },
-        "text": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "video": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "animation": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "options": {
-          "description": "Enter a valid JSON object",
-          "type": "string",
-          "required": false,
-          "defaultValue": {},
-          "readOnly": true
-        },
-        "subtitle_files": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
-        },
-        "source": {
-          "description": "Enter a valid JSON object",
-          "type": "string",
-          "required": false,
-          "defaultValue": {},
-          "readOnly": false
-        },
-        "subtitles": {
-          "description": "Enter a valid JSON object",
-          "type": "string",
-          "required": false,
-          "defaultValue": {},
-          "readOnly": false
-        },
-        "tests_archive": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": true
-        },
-        "feedback_correct": {
-          "description": null,
-          "type": "string",
-          "required": false,
-          "readOnly": false
-        },
-        "feedback_wrong": {
-          "description": null,
-          "type": "string",
-          "required": false,
           "readOnly": false
         }
       }
