@@ -6,7 +6,7 @@ from time import sleep
 
 from progress.bar import IncrementalBar
 from requests import get
-from structure import schemas
+from schemas.structure import schemas
 
 
 def get_props_names(schema):

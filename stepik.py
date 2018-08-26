@@ -140,7 +140,7 @@ class Units(object):
 
 
 class Lessons(object):
-    def __init__(self, stepik: Stepik):
+    def __init__(self, stepik):
         self._stepik = stepik
 
 
@@ -246,3 +246,17 @@ class Users(object):
 
 if __name__ == '__main__':
     pass
+    # from config import id, secret
+    # stepik = Stepik(id, secret)
+    #
+    # course = stepik.courses.get(course_id=1)
+    # sections = course.sections.list()
+    #
+    # unit_ids = [id for sec in sections for id in sec.units_ids]
+    # units = stepik.units.fetch_all(unit_ids)
+    #
+    # lesson_ids = [u.lesson_id for u in units]
+    # lessons = stepik.lessons.fetch_all(lesson_ids)
+    #
+    # step_ids = [id for les in lessons for id in les.steps_ids]
+    # steps = stepik.steps.fetch_all(step_ids)

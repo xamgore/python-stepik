@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
             model['imports'] = import_typings(model)
 
-        with open('data-class.jinja2') as t:
+        with open('python-templates/data-class.jinja2') as t:
             output_module = schema["resourcePath"].replace('-', '_')
 
             with open(f'../{output_module}.py', 'w') as out:

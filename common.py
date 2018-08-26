@@ -35,7 +35,7 @@ first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 
-def to_camel_case(string):
+def to_snake_case(string):
     s1 = first_cap_re.sub(r'\1_\2', string)
     return all_cap_re.sub(r'\1_\2', s1).lower()
 
@@ -43,3 +43,7 @@ def to_camel_case(string):
 def to_dash_case(string):
     s1 = first_cap_re.sub(r'\1-\2', string)
     return all_cap_re.sub(r'\1-\2', s1).lower()
+
+
+def to_camel_case(dash_str: str) -> str:
+    return ''.join(map(str.title, dash_str.split('-')))

@@ -1,6 +1,7 @@
 {
   "models": {
     "Environment": {
+      "id": "Environment",
       "properties": {
         "total_quizzes": {
           "type": "integer"
