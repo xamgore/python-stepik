@@ -1,0 +1,533 @@
+{
+  "/api/announcements": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/attempts": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/groups": [],
+  "/api/user-code-runs": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/platform-news": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/search-reactions": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/sections": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/step-issues": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/instructions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/goal-metrics": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/user-courses": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/email-templates": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/scripts": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/queries": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-images": [],
+  "/api/devices": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/rubrics": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/storage-records": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/todo-items": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/reminders": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-purchases": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/score-files": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/review-sessions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/tags": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/countries": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/invites": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/certificates": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/stripe-subscriptions": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/followers": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/specializations": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-grades": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-ranks": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/recommendation-reactions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/profiles": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-period-statistics": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/short-urls": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/notification-statuses": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-payments": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/achievement-progresses": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/lesson-images": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/stepics": [],
+  "/api/social-providers": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/members": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/recommendations": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-reminders": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/events": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/classes": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/social-accounts": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/cities": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/email-addresses": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-subscriptions": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-reviews": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/views": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/licenses": [],
+  "/api/metrics": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/stripe-coupons": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/subscriptions": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/social-profiles": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/adaptivity-parameters-changes": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/last-steps": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/rubric-scores": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/long-task-templates": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/enrollments": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-progress-changes": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/profile-images": [],
+  "/api/students": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/videos": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/assistants": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-review-summaries": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/exam-sessions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/discussion-threads": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/long-tasks": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/service-requests": [
+    "POST",
+    "OPTIONS"
+  ],
+  "/api/search-results": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/stripe-plans": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/progresses": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/ws": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/class-plans": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/reviews": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/notifications": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/proctor-sessions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/lessons": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/invitations": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/attachments": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/achievements": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/steps": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/assignments": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/status-services": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/story-templates": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/units": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/submissions": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/regions": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/step-snapshots": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/discussion-proxies": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/comments": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/favorite-courses": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-by-language-statistics": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/user-activities": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/votes": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/courses": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-lists": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/users": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/course-total-statistics": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "/api/step-sources": [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+  ]
+}
