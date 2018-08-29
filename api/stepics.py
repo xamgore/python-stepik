@@ -1,57 +1,69 @@
 # This file is generated
-from common import required, readonly
 from typing import List
-from resources_list import ResourcesList
 
+from errors import StepikError
+from common import required, readonly
+from resources_list import ResourcesList
 from api.users import User
 
 
 class Stepics:
+    _resources_name = 'stepics'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'Stepics(id={self.id!r})'
+        return f'Stepics(id={self.user!r})'
 
 
-    def user(self) -> User:
-        return User(self.__stepik, self.__stepik._fetch_object('User', self.user_id))
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Stepics are missing')
 
 
     def profile(self) -> User:
-        return User(self.__stepik, self.__stepik._fetch_object('User', self.user_id))
+        return User(self._stepik, self._stepik._fetch_object(User, self.user_id))
+
+
+    def user(self) -> User:
+        return User(self._stepik, self._stepik._fetch_object(User, self.user_id))
 
 
     @property
     def total_quizzes(self) -> int:
-        return self.__data['total_quizzes']
+        return self._data['total_quizzes']
 
 
     @total_quizzes.setter
     def total_quizzes(self, value: int):
-        self.__data['total_quizzes'] = value
+        self._data['total_quizzes'] = value
 
 
     @property
     def total_active(self) -> int:
-        return self.__data['total_active']
+        return self._data['total_active']
 
 
     @total_active.setter
     def total_active(self, value: int):
-        self.__data['total_active'] = value
+        self._data['total_active'] = value
 
 
     @property
     def total_submissions(self) -> int:
-        return self.__data['total_submissions']
+        return self._data['total_submissions']
 
 
     @total_submissions.setter
     def total_submissions(self, value: int):
-        self.__data['total_submissions'] = value
+        self._data['total_submissions'] = value
 
 
     @property
@@ -63,7 +75,7 @@ class Stepics:
 
         Type: dict
         """
-        return self.__data['config']
+        return self._data['config']
 
 
     @config.setter
@@ -75,32 +87,32 @@ class Stepics:
 
         Type: dict
         """
-        self.__data['config'] = value
+        self._data['config'] = value
 
 
     @property
     def server_time(self) -> float:
-        return self.__data['server_time']
+        return self._data['server_time']
 
 
     @server_time.setter
     def server_time(self, value: float):
-        self.__data['server_time'] = value
+        self._data['server_time'] = value
 
 
     @property
     def user_id(self) -> int:
         """
-        :class:`Profile`'s id
+        :class:`User`'s id
         """
-        return self.__data['profile']
+        return self._data['user']
 
 
     @user_id.setter
     def user_id(self, value: int):
         """
-        :class:`Profile`'s id
+        :class:`User`'s id
         """
-        self.__data['profile'] = value
+        self._data['user'] = value
 
 

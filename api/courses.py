@@ -1,61 +1,76 @@
 # This file is generated
-from common import required, readonly
 from typing import List
-from resources_list import ResourcesList
 
+from errors import StepikError
+from common import required, readonly
+from resources_list import ResourcesList
+from api.sections import Section
 from api.groups import Group
 from api.tags import Tag
-from api.sections import Section
 from api.users import User
 
 
 class Course:
+    _resources_name = 'courses'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Course(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Course are missing')
+
+
     @property
     def authors(self) -> ResourcesList[User]:
-        return ResourcesList[User](User, self.__stepik, self, 'authors_ids')
+        return ResourcesList[User]\
+            (User, self._stepik, holder=self, field_with_ids='authors_ids')
 
 
     @property
     def tags(self) -> ResourcesList[Tag]:
-        return ResourcesList[Tag](Tag, self.__stepik, self, 'tags_ids')
+        return ResourcesList[Tag]\
+            (Tag, self._stepik, holder=self, field_with_ids='tags_ids')
 
 
     @property
     def sections(self) -> ResourcesList[Section]:
-        return ResourcesList[Section](Section, self.__stepik, self, 'sections_ids')
-
-
-    def moderators_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.moderators_group_id))
-
-
-    def teachers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.teachers_group_id))
-
-
-    def admins_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.admins_group_id))
+        return ResourcesList[Section]\
+            (Section, self._stepik, holder=self, field_with_ids='sections_ids')
 
 
     def owner(self) -> User:
-        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
+        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
 
 
     def learners_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.learners_group_id))
 
 
     def testers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.testers_group_id))
+
+
+    def moderators_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.moderators_group_id))
+
+
+    def teachers_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.teachers_group_id))
+
+
+    def admins_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
 
 
     @readonly
@@ -64,7 +79,7 @@ class Course:
         """
         Course's unique identifier
         """
-        return self.__data['id']
+        return self._data['id']
 
 
     @property
@@ -72,7 +87,7 @@ class Course:
         """
         Short description about the course, may contain HTML tags
         """
-        return self.__data['summary']
+        return self._data['summary']
 
 
     @summary.setter
@@ -80,17 +95,17 @@ class Course:
         """
         Short description about the course, may contain HTML tags
         """
-        self.__data['summary'] = value
+        self._data['summary'] = value
 
 
     @property
     def workload(self) -> str:
-        return self.__data['workload']
+        return self._data['workload']
 
 
     @workload.setter
     def workload(self, value: str):
-        self.__data['workload'] = value
+        self._data['workload'] = value
 
 
     @readonly
@@ -105,7 +120,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('cover', "None")
+        return self._data.setdefault('cover', "None")
 
 
     @property
@@ -117,7 +132,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('intro', "")
+        return self._data.setdefault('intro', "")
 
 
     @intro.setter
@@ -129,7 +144,7 @@ class Course:
 
         Type: str
         """
-        self.__data['intro'] = value
+        self._data['intro'] = value
 
 
     @property
@@ -137,7 +152,7 @@ class Course:
         """
         Default value: ````
         """
-        return self.__data['course_format']
+        return self._data['course_format']
 
 
     @course_format.setter
@@ -145,7 +160,7 @@ class Course:
         """
         Default value: ````
         """
-        self.__data['course_format'] = value
+        self._data['course_format'] = value
 
 
     @property
@@ -153,7 +168,7 @@ class Course:
         """
         Default value: ````
         """
-        return self.__data['target_audience']
+        return self._data['target_audience']
 
 
     @target_audience.setter
@@ -161,7 +176,7 @@ class Course:
         """
         Default value: ````
         """
-        self.__data['target_audience'] = value
+        self._data['target_audience'] = value
 
 
     @readonly
@@ -174,7 +189,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('certificate_footer', "None")
+        return self._data.setdefault('certificate_footer', "None")
 
 
     @readonly
@@ -185,7 +200,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('certificate_cover_org', "None")
+        return self._data.setdefault('certificate_cover_org', "None")
 
 
     @property
@@ -193,7 +208,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['is_certificate_auto_issued']
+        return self._data['is_certificate_auto_issued']
 
 
     @is_certificate_auto_issued.setter
@@ -201,7 +216,7 @@ class Course:
         """
         Default value: ``False``
         """
-        self.__data['is_certificate_auto_issued'] = value
+        self._data['is_certificate_auto_issued'] = value
 
 
     @property
@@ -209,7 +224,7 @@ class Course:
         """
         Default value: ``0``
         """
-        return self.__data['certificate_regular_threshold']
+        return self._data['certificate_regular_threshold']
 
 
     @certificate_regular_threshold.setter
@@ -217,7 +232,7 @@ class Course:
         """
         Default value: ``0``
         """
-        self.__data['certificate_regular_threshold'] = value
+        self._data['certificate_regular_threshold'] = value
 
 
     @property
@@ -225,7 +240,7 @@ class Course:
         """
         Default value: ``0``
         """
-        return self.__data['certificate_distinction_threshold']
+        return self._data['certificate_distinction_threshold']
 
 
     @certificate_distinction_threshold.setter
@@ -233,7 +248,7 @@ class Course:
         """
         Default value: ``0``
         """
-        self.__data['certificate_distinction_threshold'] = value
+        self._data['certificate_distinction_threshold'] = value
 
 
     @property
@@ -241,7 +256,7 @@ class Course:
         """
         Type: List[int]
         """
-        return self.__data['instructors']
+        return self._data['instructors']
 
 
     @instructors.setter
@@ -249,27 +264,27 @@ class Course:
         """
         Type: List[int]
         """
-        self.__data['instructors'] = value
+        self._data['instructors'] = value
 
 
     @property
     def certificate(self) -> str:
-        return self.__data['certificate']
+        return self._data['certificate']
 
 
     @certificate.setter
     def certificate(self, value: str):
-        self.__data['certificate'] = value
+        self._data['certificate'] = value
 
 
     @property
     def requirements(self) -> str:
-        return self.__data['requirements']
+        return self._data['requirements']
 
 
     @requirements.setter
     def requirements(self, value: str):
-        self.__data['requirements'] = value
+        self._data['requirements'] = value
 
 
     @property
@@ -277,7 +292,7 @@ class Course:
         """
         Full description about the course, may contain HTML tags
         """
-        return self.__data['description']
+        return self._data['description']
 
 
     @description.setter
@@ -285,7 +300,7 @@ class Course:
         """
         Full description about the course, may contain HTML tags
         """
-        self.__data['description'] = value
+        self._data['description'] = value
 
 
     @readonly
@@ -294,7 +309,7 @@ class Course:
         """
         Total number of units
         """
-        return self.__data['total_units']
+        return self._data['total_units']
 
 
     @readonly
@@ -303,7 +318,7 @@ class Course:
         """
         Enrollment id (which usually is equals to course id), if user enrolled. If not, ``None``.
         """
-        return self.__data['enrollment']
+        return self._data['enrollment']
 
 
     @readonly
@@ -312,7 +327,7 @@ class Course:
         """
         Is the course is favourite. See ``favorite_courses`` list.
         """
-        return self.__data['is_favorite']
+        return self._data['is_favorite']
 
 
     @readonly
@@ -323,7 +338,7 @@ class Course:
 
         Type: dict
         """
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @readonly
@@ -332,37 +347,37 @@ class Course:
         """
         The :class:`Progress` object identifier
         """
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
     @property
     def first_lesson(self) -> int:
-        return self.__data['first_lesson']
+        return self._data['first_lesson']
 
 
     @readonly
     @property
     def first_unit(self) -> str:
-        return self.__data['first_unit']
+        return self._data['first_unit']
 
 
     @readonly
     @property
     def certificate_link(self) -> str:
-        return self.__data['certificate_link']
+        return self._data['certificate_link']
 
 
     @readonly
     @property
     def certificate_regular_link(self) -> str:
-        return self.__data['certificate_regular_link']
+        return self._data['certificate_regular_link']
 
 
     @readonly
     @property
     def certificate_distinction_link(self) -> str:
-        return self.__data['certificate_distinction_link']
+        return self._data['certificate_distinction_link']
 
 
     @readonly
@@ -371,7 +386,7 @@ class Course:
         """
         Path to the ``ics``, without the host name
         """
-        return self.__data['schedule_link']
+        return self._data['schedule_link']
 
 
     @readonly
@@ -380,19 +395,19 @@ class Course:
         """
         Path to the ``ics``, without the host name
         """
-        return self.__data['schedule_long_link']
+        return self._data['schedule_long_link']
 
 
     @readonly
     @property
     def first_deadline(self) -> str:
-        return self.__data['first_deadline']
+        return self._data['first_deadline']
 
 
     @readonly
     @property
     def last_deadline(self) -> str:
-        return self.__data['last_deadline']
+        return self._data['last_deadline']
 
 
     @readonly
@@ -401,7 +416,7 @@ class Course:
         """
         Type: List[str]
         """
-        return self.__data['subscriptions']
+        return self._data['subscriptions']
 
 
     @readonly
@@ -410,13 +425,13 @@ class Course:
         """
         Type: List[str]
         """
-        return self.__data['announcements']
+        return self._data['announcements']
 
 
     @readonly
     @property
     def is_contest(self) -> bool:
-        return self.__data['is_contest']
+        return self._data['is_contest']
 
 
     @readonly
@@ -425,7 +440,7 @@ class Course:
         """
         Completely open course, without deadlines and other things
         """
-        return self.__data['is_self_paced']
+        return self._data['is_self_paced']
 
 
     @property
@@ -435,7 +450,7 @@ class Course:
 
         Default value: ``False``
         """
-        return self.__data['is_adaptive']
+        return self._data['is_adaptive']
 
 
     @is_adaptive.setter
@@ -445,7 +460,7 @@ class Course:
 
         Default value: ``False``
         """
-        self.__data['is_adaptive'] = value
+        self._data['is_adaptive'] = value
 
 
     @property
@@ -454,7 +469,7 @@ class Course:
         Default value: ``False``
         """
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
-        return self.__data['is_idea_compatible']
+        return self._data['is_idea_compatible']
 
 
     @is_idea_compatible.setter
@@ -463,13 +478,13 @@ class Course:
         Default value: ``False``
         """
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
-        self.__data['is_idea_compatible'] = value
+        self._data['is_idea_compatible'] = value
 
 
     @readonly
     @property
     def last_step(self) -> int:
-        return self.__data['last_step']
+        return self._data['last_step']
 
 
     @property
@@ -485,7 +500,7 @@ class Course:
 
         Type: dict
         """
-        return self.__data['intro_video']
+        return self._data['intro_video']
 
 
     @intro_video.setter
@@ -501,13 +516,13 @@ class Course:
 
         Type: dict
         """
-        self.__data['intro_video'] = value
+        self._data['intro_video'] = value
 
 
     @readonly
     @property
     def social_providers(self) -> str:
-        return self.__data['social_providers']
+        return self._data['social_providers']
 
 
     @readonly
@@ -516,7 +531,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['has_tutors']
+        return self._data['has_tutors']
 
 
     @readonly
@@ -525,7 +540,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['is_promoted']
+        return self._data['is_promoted']
 
 
     @property
@@ -533,7 +548,7 @@ class Course:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('is_enabled', True)
+        return self._data.setdefault('is_enabled', True)
 
 
     @is_enabled.setter
@@ -541,7 +556,7 @@ class Course:
         """
         Default value: ``True``
         """
-        self.__data['is_enabled'] = value
+        self._data['is_enabled'] = value
 
 
     @readonly
@@ -550,7 +565,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['is_proctored']
+        return self._data['is_proctored']
 
 
     @readonly
@@ -563,14 +578,14 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('proctor_url', "None")
+        return self._data.setdefault('proctor_url', "None")
 
 
     @required
     @readonly
     @property
     def review_summary(self) -> int:
-        return self.__data['review_summary']
+        return self._data['review_summary']
 
 
     @readonly
@@ -581,7 +596,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('schedule_type', "None")
+        return self._data.setdefault('schedule_type', "None")
 
 
     @required
@@ -591,7 +606,7 @@ class Course:
         """
         Default value: ``0``
         """
-        return self.__data['certificates_count']
+        return self._data['certificates_count']
 
 
     @required
@@ -603,7 +618,7 @@ class Course:
 
         Default value: ``0``
         """
-        return self.__data['learners_count']
+        return self._data['learners_count']
 
 
     @readonly
@@ -612,7 +627,7 @@ class Course:
         """
         Average time to complete the course
         """
-        return self.__data['time_to_complete']
+        return self._data['time_to_complete']
 
 
     @readonly
@@ -621,7 +636,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['is_popular']
+        return self._data['is_popular']
 
 
     @readonly
@@ -630,7 +645,7 @@ class Course:
         """
         Type: List[int]
         """
-        return self.__data['similar_courses']
+        return self._data['similar_courses']
 
 
     @readonly
@@ -641,7 +656,7 @@ class Course:
 
         Default value: ``False``
         """
-        return self.__data['is_unsuitable']
+        return self._data['is_unsuitable']
 
 
     @readonly
@@ -650,7 +665,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['is_paid']
+        return self._data['is_paid']
 
 
     @readonly
@@ -659,7 +674,7 @@ class Course:
         """
         Default value: ``"None"``
         """
-        return self.__data.setdefault('price', "None")
+        return self._data.setdefault('price', "None")
 
 
     @readonly
@@ -670,19 +685,19 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('currency_code', "None")
+        return self._data.setdefault('currency_code', "None")
 
 
     @readonly
     @property
     def display_price(self) -> str:
-        return self.__data['display_price']
+        return self._data['display_price']
 
 
     @readonly
     @property
     def continue_url(self) -> str:
-        return self.__data['continue_url']
+        return self._data['continue_url']
 
 
     @required
@@ -694,7 +709,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('readiness', "0")
+        return self._data.setdefault('readiness', "0")
 
 
     @required
@@ -709,7 +724,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('language', "en")
+        return self._data.setdefault('language', "en")
 
 
     @language.setter
@@ -723,7 +738,7 @@ class Course:
 
         Type: str
         """
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @readonly
@@ -734,7 +749,7 @@ class Course:
 
         Default value: ``False``
         """
-        return self.__data['is_featured']
+        return self._data['is_featured']
 
 
     @property
@@ -742,7 +757,7 @@ class Course:
         """
         Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
         """
-        return self.__data['is_public']
+        return self._data['is_public']
 
 
     @is_public.setter
@@ -750,7 +765,7 @@ class Course:
         """
         Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
         """
-        self.__data['is_public'] = value
+        self._data['is_public'] = value
 
 
     @required
@@ -759,7 +774,7 @@ class Course:
         """
         Title of the course
         """
-        return self.__data['title']
+        return self._data['title']
 
 
     @title.setter
@@ -767,7 +782,7 @@ class Course:
         """
         Title of the course
         """
-        self.__data['title'] = value
+        self._data['title'] = value
 
 
     @readonly
@@ -776,7 +791,7 @@ class Course:
         """
         A string of format "title-id", with hyphens instead of spaces
         """
-        return self.__data['slug']
+        return self._data['slug']
 
 
     @readonly
@@ -791,7 +806,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date', "None")
+        return self._data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -806,7 +821,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('end_date', "None")
+        return self._data.setdefault('end_date', "None")
 
 
     @readonly
@@ -821,7 +836,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline', "None")
+        return self._data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -836,7 +851,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline', "None")
+        return self._data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -856,7 +871,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy', "None")
+        return self._data.setdefault('grading_policy', "None")
 
 
     @property
@@ -870,7 +885,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date_source', "None")
+        return self._data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -884,7 +899,7 @@ class Course:
 
         Type: str
         """
-        self.__data['begin_date_source'] = value
+        self._data['begin_date_source'] = value
 
 
     @property
@@ -898,7 +913,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('end_date_source', "None")
+        return self._data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -912,7 +927,7 @@ class Course:
 
         Type: str
         """
-        self.__data['end_date_source'] = value
+        self._data['end_date_source'] = value
 
 
     @property
@@ -926,7 +941,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline_source', "None")
+        return self._data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -940,7 +955,7 @@ class Course:
 
         Type: str
         """
-        self.__data['soft_deadline_source'] = value
+        self._data['soft_deadline_source'] = value
 
 
     @property
@@ -954,7 +969,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline_source', "None")
+        return self._data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -968,7 +983,7 @@ class Course:
 
         Type: str
         """
-        self.__data['hard_deadline_source'] = value
+        self._data['hard_deadline_source'] = value
 
 
     @property
@@ -987,7 +1002,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy_source', "None")
+        return self._data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -1006,13 +1021,13 @@ class Course:
 
         Type: str
         """
-        self.__data['grading_policy_source'] = value
+        self._data['grading_policy_source'] = value
 
 
     @readonly
     @property
     def is_active(self) -> bool:
-        return self.__data['is_active']
+        return self._data['is_active']
 
 
     @readonly
@@ -1025,7 +1040,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -1038,7 +1053,7 @@ class Course:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @readonly
@@ -1049,7 +1064,7 @@ class Course:
 
         Default value: ``0``
         """
-        return self.__data['discussions_count']
+        return self._data['discussions_count']
 
 
     @readonly
@@ -1058,7 +1073,7 @@ class Course:
         """
         Discussion tree's identifier
         """
-        return self.__data['discussion_proxy']
+        return self._data['discussion_proxy']
 
 
     @readonly
@@ -1069,27 +1084,27 @@ class Course:
 
         Type: List[str]
         """
-        return self.__data['discussion_threads']
+        return self._data['discussion_threads']
 
 
     @property
     def lti_consumer_key(self) -> str:
-        return self.__data['lti_consumer_key']
+        return self._data['lti_consumer_key']
 
 
     @lti_consumer_key.setter
     def lti_consumer_key(self, value: str):
-        self.__data['lti_consumer_key'] = value
+        self._data['lti_consumer_key'] = value
 
 
     @property
     def lti_secret_key(self) -> str:
-        return self.__data['lti_secret_key']
+        return self._data['lti_secret_key']
 
 
     @lti_secret_key.setter
     def lti_secret_key(self, value: str):
-        self.__data['lti_secret_key'] = value
+        self._data['lti_secret_key'] = value
 
 
     @property
@@ -1097,7 +1112,7 @@ class Course:
         """
         Default value: ``False``
         """
-        return self.__data['lti_private_profile']
+        return self._data['lti_private_profile']
 
 
     @lti_private_profile.setter
@@ -1105,34 +1120,7 @@ class Course:
         """
         Default value: ``False``
         """
-        self.__data['lti_private_profile'] = value
-
-
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['moderators_group']
-
-
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['teachers_group']
-
-
-    @readonly
-    @property
-    def admins_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['admins_group']
+        self._data['lti_private_profile'] = value
 
 
     @property
@@ -1142,7 +1130,7 @@ class Course:
 
         Type: List[int]
         """
-        return self.__data['authors']
+        return self._data['authors']
 
 
     @authors_ids.setter
@@ -1152,7 +1140,7 @@ class Course:
 
         Type: List[int]
         """
-        self.__data['authors'] = value
+        self._data['authors'] = value
 
 
     @property
@@ -1160,7 +1148,7 @@ class Course:
         """
         Type: List[int]
         """
-        return self.__data['tags']
+        return self._data['tags']
 
 
     @tags_ids.setter
@@ -1168,7 +1156,7 @@ class Course:
         """
         Type: List[int]
         """
-        self.__data['tags'] = value
+        self._data['tags'] = value
 
 
     @required
@@ -1179,7 +1167,7 @@ class Course:
 
         Type: List[int]
         """
-        return self.__data['sections']
+        return self._data['sections']
 
 
     @sections_ids.setter
@@ -1189,7 +1177,7 @@ class Course:
 
         Type: List[int]
         """
-        self.__data['sections'] = value
+        self._data['sections'] = value
 
 
     @readonly
@@ -1198,7 +1186,7 @@ class Course:
         """
         :class:`User`'s id of the lesson's owner
         """
-        return self.__data['owner']
+        return self._data['owner']
 
 
     @readonly
@@ -1207,7 +1195,7 @@ class Course:
         """
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
-        return self.__data['learners_group']
+        return self._data['learners_group']
 
 
     @readonly
@@ -1216,6 +1204,33 @@ class Course:
         """
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
-        return self.__data['testers_group']
+        return self._data['testers_group']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['moderators_group']
+
+
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['teachers_group']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['admins_group']
 
 

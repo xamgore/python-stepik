@@ -1,59 +1,71 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class BlockEdit:
+    _resources_name = 'step-sources'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'BlockEdit(id={self.id!r})'
+        return f'BlockEdit(id={self.name!r})'
+
+
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model BlockEdit are missing')
 
 
     @required
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @name.setter
     def name(self, value: str):
-        self.__data['name'] = value
+        self._data['name'] = value
 
 
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
     @property
     def video(self) -> str:
-        return self.__data['video']
+        return self._data['video']
 
 
     @video.setter
     def video(self, value: str):
-        self.__data['video'] = value
+        self._data['video'] = value
 
 
     @property
     def animation(self) -> str:
-        return self.__data['animation']
+        return self._data['animation']
 
 
     @animation.setter
     def animation(self, value: str):
-        self.__data['animation'] = value
+        self._data['animation'] = value
 
 
     @readonly
@@ -64,13 +76,13 @@ class BlockEdit:
 
         Default value: ``{}``
         """
-        return self.__data['options']
+        return self._data['options']
 
 
     @readonly
     @property
     def subtitle_files(self) -> str:
-        return self.__data['subtitle_files']
+        return self._data['subtitle_files']
 
 
     @property
@@ -80,7 +92,7 @@ class BlockEdit:
 
         Default value: ``{}``
         """
-        return self.__data['source']
+        return self._data['source']
 
 
     @source.setter
@@ -90,7 +102,7 @@ class BlockEdit:
 
         Default value: ``{}``
         """
-        self.__data['source'] = value
+        self._data['source'] = value
 
 
     @property
@@ -100,7 +112,7 @@ class BlockEdit:
 
         Default value: ``{}``
         """
-        return self.__data['subtitles']
+        return self._data['subtitles']
 
 
     @subtitles.setter
@@ -110,58 +122,69 @@ class BlockEdit:
 
         Default value: ``{}``
         """
-        self.__data['subtitles'] = value
+        self._data['subtitles'] = value
 
 
     @readonly
     @property
     def tests_archive(self) -> str:
-        return self.__data['tests_archive']
+        return self._data['tests_archive']
 
 
     @property
     def feedback_correct(self) -> str:
-        return self.__data['feedback_correct']
+        return self._data['feedback_correct']
 
 
     @feedback_correct.setter
     def feedback_correct(self, value: str):
-        self.__data['feedback_correct'] = value
+        self._data['feedback_correct'] = value
 
 
     @property
     def feedback_wrong(self) -> str:
-        return self.__data['feedback_wrong']
+        return self._data['feedback_wrong']
 
 
     @feedback_wrong.setter
     def feedback_wrong(self, value: str):
-        self.__data['feedback_wrong'] = value
+        self._data['feedback_wrong'] = value
 
 
 
 
 class StepSource:
+    _resources_name = 'step-sources'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'StepSource(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model StepSource are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def lesson(self) -> str:
-        return self.__data['lesson']
+        return self._data['lesson']
 
 
     @required
@@ -170,7 +193,7 @@ class StepSource:
         """
         Default value: ``1``
         """
-        return self.__data.setdefault('position', 1)
+        return self._data.setdefault('position', 1)
 
 
     @position.setter
@@ -178,7 +201,7 @@ class StepSource:
         """
         Default value: ``1``
         """
-        self.__data['position'] = value
+        self._data['position'] = value
 
 
     @readonly
@@ -189,7 +212,7 @@ class StepSource:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @required
@@ -198,7 +221,7 @@ class StepSource:
         """
         Type: str
         """
-        return self.__data['block']
+        return self._data['block']
 
 
     @block.setter
@@ -206,68 +229,68 @@ class StepSource:
         """
         Type: str
         """
-        self.__data['block'] = value
+        self._data['block'] = value
 
 
     @readonly
     @property
     def actions(self) -> str:
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @readonly
     @property
     def progress(self) -> str:
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
     @property
     def subscriptions(self) -> str:
-        return self.__data['subscriptions']
+        return self._data['subscriptions']
 
 
     @required
     @readonly
     @property
     def instruction(self) -> str:
-        return self.__data['instruction']
+        return self._data['instruction']
 
 
     @readonly
     @property
     def session(self) -> str:
-        return self.__data['session']
+        return self._data['session']
 
 
     @readonly
     @property
     def instruction_type(self) -> str:
-        return self.__data['instruction_type']
+        return self._data['instruction_type']
 
 
     @readonly
     @property
     def viewed_by(self) -> str:
-        return self.__data['viewed_by']
+        return self._data['viewed_by']
 
 
     @readonly
     @property
     def passed_by(self) -> str:
-        return self.__data['passed_by']
+        return self._data['passed_by']
 
 
     @readonly
     @property
     def correct_ratio(self) -> str:
-        return self.__data['correct_ratio']
+        return self._data['correct_ratio']
 
 
     @readonly
     @property
     def worth(self) -> str:
-        return self.__data['worth']
+        return self._data['worth']
 
 
     @property
@@ -275,7 +298,7 @@ class StepSource:
         """
         Default value: ``False``
         """
-        return self.__data['is_solutions_unlocked']
+        return self._data['is_solutions_unlocked']
 
 
     @is_solutions_unlocked.setter
@@ -283,7 +306,7 @@ class StepSource:
         """
         Default value: ``False``
         """
-        self.__data['is_solutions_unlocked'] = value
+        self._data['is_solutions_unlocked'] = value
 
 
     @required
@@ -292,7 +315,7 @@ class StepSource:
         """
         Default value: ``3``
         """
-        return self.__data.setdefault('solutions_unlocked_attempts', 3)
+        return self._data.setdefault('solutions_unlocked_attempts', 3)
 
 
     @solutions_unlocked_attempts.setter
@@ -300,7 +323,7 @@ class StepSource:
         """
         Default value: ``3``
         """
-        self.__data['solutions_unlocked_attempts'] = value
+        self._data['solutions_unlocked_attempts'] = value
 
 
     @property
@@ -308,7 +331,7 @@ class StepSource:
         """
         Default value: ``False``
         """
-        return self.__data['has_submissions_restrictions']
+        return self._data['has_submissions_restrictions']
 
 
     @has_submissions_restrictions.setter
@@ -316,7 +339,7 @@ class StepSource:
         """
         Default value: ``False``
         """
-        self.__data['has_submissions_restrictions'] = value
+        self._data['has_submissions_restrictions'] = value
 
 
     @required
@@ -325,7 +348,7 @@ class StepSource:
         """
         Default value: ``3``
         """
-        return self.__data.setdefault('max_submissions_count', 3)
+        return self._data.setdefault('max_submissions_count', 3)
 
 
     @max_submissions_count.setter
@@ -333,19 +356,19 @@ class StepSource:
         """
         Default value: ``3``
         """
-        self.__data['max_submissions_count'] = value
+        self._data['max_submissions_count'] = value
 
 
     @readonly
     @property
     def variation(self) -> str:
-        return self.__data['variation']
+        return self._data['variation']
 
 
     @readonly
     @property
     def variations_count(self) -> str:
-        return self.__data['variations_count']
+        return self._data['variations_count']
 
 
     @readonly
@@ -356,7 +379,7 @@ class StepSource:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -367,31 +390,31 @@ class StepSource:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @readonly
     @property
     def discussions_count(self) -> str:
-        return self.__data['discussions_count']
+        return self._data['discussions_count']
 
 
     @readonly
     @property
     def discussion_proxy(self) -> str:
-        return self.__data['discussion_proxy']
+        return self._data['discussion_proxy']
 
 
     @readonly
     @property
     def discussion_threads(self) -> str:
-        return self.__data['discussion_threads']
+        return self._data['discussion_threads']
 
 
     @readonly
     @property
     def reason_of_failure(self) -> str:
-        return self.__data['reason_of_failure']
+        return self._data['reason_of_failure']
 
 
     @readonly
@@ -402,7 +425,7 @@ class StepSource:
 
         Default value: ``{'text': '', 'code': '', 'params': {}}``
         """
-        return self.__data.setdefault('error', {'text': '', 'code': '', 'params': {}})
+        return self._data.setdefault('error', {'text': '', 'code': '', 'params': {}})
 
 
     @required
@@ -414,7 +437,7 @@ class StepSource:
 
         Default value: ``[]``
         """
-        return self.__data['warnings']
+        return self._data['warnings']
 
 
     @required
@@ -423,7 +446,7 @@ class StepSource:
         """
         Default value: ``0``
         """
-        return self.__data['cost']
+        return self._data['cost']
 
 
     @cost.setter
@@ -431,6 +454,6 @@ class StepSource:
         """
         Default value: ``0``
         """
-        self.__data['cost'] = value
+        self._data['cost'] = value
 
 

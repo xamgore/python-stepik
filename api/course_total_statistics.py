@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseTotalStatistics:
+    _resources_name = 'course-total-statistics'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseTotalStatistics(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseTotalStatistics are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
@@ -38,7 +50,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['learners_count']
+        return self._data['learners_count']
 
 
     @learners_count.setter
@@ -46,7 +58,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['learners_count'] = value
+        self._data['learners_count'] = value
 
 
     @required
@@ -55,7 +67,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['moderators_count']
+        return self._data['moderators_count']
 
 
     @moderators_count.setter
@@ -63,7 +75,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['moderators_count'] = value
+        self._data['moderators_count'] = value
 
 
     @required
@@ -72,7 +84,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['testers_count']
+        return self._data['testers_count']
 
 
     @testers_count.setter
@@ -80,7 +92,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['testers_count'] = value
+        self._data['testers_count'] = value
 
 
     @required
@@ -89,7 +101,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['enrollments_count']
+        return self._data['enrollments_count']
 
 
     @enrollments_count.setter
@@ -97,7 +109,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['enrollments_count'] = value
+        self._data['enrollments_count'] = value
 
 
     @required
@@ -106,7 +118,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['dropouts_count']
+        return self._data['dropouts_count']
 
 
     @dropouts_count.setter
@@ -114,7 +126,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['dropouts_count'] = value
+        self._data['dropouts_count'] = value
 
 
     @required
@@ -123,7 +135,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['certificates_count']
+        return self._data['certificates_count']
 
 
     @certificates_count.setter
@@ -131,7 +143,7 @@ class CourseTotalStatistics:
         """
         Default value: ``0``
         """
-        self.__data['certificates_count'] = value
+        self._data['certificates_count'] = value
 
 
     @readonly
@@ -142,6 +154,6 @@ class CourseTotalStatistics:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

@@ -1,81 +1,93 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Class:
+    _resources_name = 'classes'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Class(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Class are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
     @readonly
     @property
     def owner(self) -> str:
-        return self.__data['owner']
+        return self._data['owner']
 
 
     @property
     def title(self) -> str:
-        return self.__data['title']
+        return self._data['title']
 
 
     @title.setter
     def title(self, value: str):
-        self.__data['title'] = value
+        self._data['title'] = value
 
 
     @property
     def description(self) -> str:
-        return self.__data['description']
+        return self._data['description']
 
 
     @description.setter
     def description(self, value: str):
-        self.__data['description'] = value
+        self._data['description'] = value
 
 
     @required
     @readonly
     @property
     def invitation_key(self) -> str:
-        return self.__data['invitation_key']
+        return self._data['invitation_key']
 
 
     @readonly
     @property
     def is_access_restricted(self) -> str:
-        return self.__data['is_access_restricted']
+        return self._data['is_access_restricted']
 
 
     @readonly
     @property
     def actions(self) -> str:
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @readonly
@@ -86,7 +98,7 @@ class Class:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -97,6 +109,6 @@ class Class:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

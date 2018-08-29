@@ -1,48 +1,60 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CoursePayment:
+    _resources_name = 'course-payments'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CoursePayment(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CoursePayment are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @readonly
     @property
     def redirect_url(self) -> str:
-        return self.__data['redirect_url']
+        return self._data['redirect_url']
 
 
     @property
@@ -50,7 +62,7 @@ class CoursePayment:
         """
         Default value: ``"None"``
         """
-        return self.__data.setdefault('amount', "None")
+        return self._data.setdefault('amount', "None")
 
 
     @amount.setter
@@ -58,7 +70,7 @@ class CoursePayment:
         """
         Default value: ``"None"``
         """
-        self.__data['amount'] = value
+        self._data['amount'] = value
 
 
     @readonly
@@ -69,7 +81,7 @@ class CoursePayment:
 
         Type: str
         """
-        return self.__data.setdefault('currency_code', "None")
+        return self._data.setdefault('currency_code', "None")
 
 
     @readonly
@@ -80,7 +92,7 @@ class CoursePayment:
 
         Type: str
         """
-        return self.__data.setdefault('payment_date', "None")
+        return self._data.setdefault('payment_date', "None")
 
 
     @readonly
@@ -91,7 +103,7 @@ class CoursePayment:
 
         Type: str
         """
-        return self.__data.setdefault('cancel_date', "None")
+        return self._data.setdefault('cancel_date', "None")
 
 
     @readonly
@@ -102,18 +114,18 @@ class CoursePayment:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @readonly
     @property
     def comment(self) -> str:
-        return self.__data['comment']
+        return self._data['comment']
 
 
     @readonly
     @property
     def is_paid(self) -> bool:
-        return self.__data['is_paid']
+        return self._data['is_paid']
 
 

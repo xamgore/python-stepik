@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Notification:
+    _resources_name = 'notifications'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Notification(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Notification are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @property
@@ -26,7 +38,7 @@ class Notification:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('is_unread', True)
+        return self._data.setdefault('is_unread', True)
 
 
     @is_unread.setter
@@ -34,7 +46,7 @@ class Notification:
         """
         Default value: ``True``
         """
-        self.__data['is_unread'] = value
+        self._data['is_unread'] = value
 
 
     @property
@@ -42,7 +54,7 @@ class Notification:
         """
         Default value: ``False``
         """
-        return self.__data['is_muted']
+        return self._data['is_muted']
 
 
     @is_muted.setter
@@ -50,7 +62,7 @@ class Notification:
         """
         Default value: ``False``
         """
-        self.__data['is_muted'] = value
+        self._data['is_muted'] = value
 
 
     @property
@@ -58,7 +70,7 @@ class Notification:
         """
         Default value: ``False``
         """
-        return self.__data['is_favorite']
+        return self._data['is_favorite']
 
 
     @is_favorite.setter
@@ -66,7 +78,7 @@ class Notification:
         """
         Default value: ``False``
         """
-        self.__data['is_favorite'] = value
+        self._data['is_favorite'] = value
 
 
     @readonly
@@ -77,13 +89,13 @@ class Notification:
 
         Type: str
         """
-        return self.__data.setdefault('time', "None")
+        return self._data.setdefault('time', "None")
 
 
     @readonly
     @property
     def type(self) -> str:
-        return self.__data['type']
+        return self._data['type']
 
 
     @readonly
@@ -94,7 +106,7 @@ class Notification:
 
         Type: str
         """
-        return self.__data.setdefault('action', "None")
+        return self._data.setdefault('action', "None")
 
 
     @readonly
@@ -105,7 +117,7 @@ class Notification:
 
         Type: str
         """
-        return self.__data.setdefault('level', "None")
+        return self._data.setdefault('level', "None")
 
 
     @readonly
@@ -116,12 +128,12 @@ class Notification:
 
         Type: str
         """
-        return self.__data.setdefault('priority', "None")
+        return self._data.setdefault('priority', "None")
 
 
     @readonly
     @property
     def html_text(self) -> str:
-        return self.__data['html_text']
+        return self._data['html_text']
 
 

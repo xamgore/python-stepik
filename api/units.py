@@ -1,35 +1,48 @@
 # This file is generated
-from common import required, readonly
 from typing import List
-from resources_list import ResourcesList
 
-from api.lessons import Lesson
+from errors import StepikError
+from common import required, readonly
+from resources_list import ResourcesList
 from api.assignments import Assignment
+from api.lessons import Lesson
 
 
 class Unit:
+    _resources_name = 'units'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Unit(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Unit are missing')
+
+
     @property
     def assignments(self) -> ResourcesList[Assignment]:
-        return ResourcesList[Assignment](Assignment, self.__stepik, self, 'assignments_ids')
+        return ResourcesList[Assignment]\
+            (Assignment, self._stepik, holder=self, field_with_ids='assignments_ids')
 
 
     def lesson(self) -> Lesson:
-        return Lesson(self.__stepik, self.__stepik._fetch_object('Lesson', self.lesson_id))
+        return Lesson(self._stepik, self._stepik._fetch_object(Lesson, self.lesson_id))
 
 
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
@@ -38,7 +51,7 @@ class Unit:
         """
         Id of the section
         """
-        return self.__data['section']
+        return self._data['section']
 
 
     @section.setter
@@ -46,7 +59,7 @@ class Unit:
         """
         Id of the section
         """
-        self.__data['section'] = value
+        self._data['section'] = value
 
 
     @required
@@ -57,7 +70,7 @@ class Unit:
 
         Default value: ``1``
         """
-        return self.__data.setdefault('position', 1)
+        return self._data.setdefault('position', 1)
 
 
     @position.setter
@@ -67,7 +80,7 @@ class Unit:
 
         Default value: ``1``
         """
-        self.__data['position'] = value
+        self._data['position'] = value
 
 
     @readonly
@@ -76,7 +89,7 @@ class Unit:
         """
         The :class:`Progress` object identifier
         """
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
@@ -91,7 +104,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date', "None")
+        return self._data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -106,7 +119,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('end_date', "None")
+        return self._data.setdefault('end_date', "None")
 
 
     @readonly
@@ -121,7 +134,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline', "None")
+        return self._data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -136,7 +149,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline', "None")
+        return self._data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -156,7 +169,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy', "None")
+        return self._data.setdefault('grading_policy', "None")
 
 
     @property
@@ -170,7 +183,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date_source', "None")
+        return self._data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -184,7 +197,7 @@ class Unit:
 
         Type: str
         """
-        self.__data['begin_date_source'] = value
+        self._data['begin_date_source'] = value
 
 
     @property
@@ -198,7 +211,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('end_date_source', "None")
+        return self._data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -212,7 +225,7 @@ class Unit:
 
         Type: str
         """
-        self.__data['end_date_source'] = value
+        self._data['end_date_source'] = value
 
 
     @property
@@ -226,7 +239,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline_source', "None")
+        return self._data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -240,7 +253,7 @@ class Unit:
 
         Type: str
         """
-        self.__data['soft_deadline_source'] = value
+        self._data['soft_deadline_source'] = value
 
 
     @property
@@ -254,7 +267,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline_source', "None")
+        return self._data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -268,7 +281,7 @@ class Unit:
 
         Type: str
         """
-        self.__data['hard_deadline_source'] = value
+        self._data['hard_deadline_source'] = value
 
 
     @property
@@ -287,7 +300,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy_source', "None")
+        return self._data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -306,7 +319,7 @@ class Unit:
 
         Type: str
         """
-        self.__data['grading_policy_source'] = value
+        self._data['grading_policy_source'] = value
 
 
     @readonly
@@ -315,7 +328,7 @@ class Unit:
         """
         True, if the section is open, i.e. the server's current date is between `begin_date` and `end_date`
         """
-        return self.__data['is_active']
+        return self._data['is_active']
 
 
     @readonly
@@ -328,7 +341,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -341,7 +354,7 @@ class Unit:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @required
@@ -350,7 +363,7 @@ class Unit:
         """
         Type: List[int]
         """
-        return self.__data['assignments']
+        return self._data['assignments']
 
 
     @assignments_ids.setter
@@ -358,7 +371,7 @@ class Unit:
         """
         Type: List[int]
         """
-        self.__data['assignments'] = value
+        self._data['assignments'] = value
 
 
     @required
@@ -367,7 +380,7 @@ class Unit:
         """
         Id of the lesson associated with the unit
         """
-        return self.__data['lesson']
+        return self._data['lesson']
 
 
     @lesson_id.setter
@@ -375,6 +388,6 @@ class Unit:
         """
         Id of the lesson associated with the unit
         """
-        self.__data['lesson'] = value
+        self._data['lesson'] = value
 
 

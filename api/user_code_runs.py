@@ -1,68 +1,80 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class UserCodeRun:
+    _resources_name = 'user-code-runs'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'UserCodeRun(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model UserCodeRun are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @required
     @property
     def step(self) -> str:
-        return self.__data['step']
+        return self._data['step']
 
 
     @step.setter
     def step(self, value: str):
-        self.__data['step'] = value
+        self._data['step'] = value
 
 
     @required
     @property
     def language(self) -> str:
-        return self.__data['language']
+        return self._data['language']
 
 
     @language.setter
     def language(self, value: str):
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @required
     @property
     def code(self) -> str:
-        return self.__data['code']
+        return self._data['code']
 
 
     @code.setter
     def code(self, value: str):
-        self.__data['code'] = value
+        self._data['code'] = value
 
 
     @readonly
@@ -73,32 +85,32 @@ class UserCodeRun:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @required
     @property
     def stdin(self) -> str:
-        return self.__data['stdin']
+        return self._data['stdin']
 
 
     @stdin.setter
     def stdin(self, value: str):
-        self.__data['stdin'] = value
+        self._data['stdin'] = value
 
 
     @required
     @readonly
     @property
     def stdout(self) -> str:
-        return self.__data['stdout']
+        return self._data['stdout']
 
 
     @required
     @readonly
     @property
     def stderr(self) -> str:
-        return self.__data['stderr']
+        return self._data['stderr']
 
 
     @readonly
@@ -107,7 +119,7 @@ class UserCodeRun:
         """
         Default value: ``False``
         """
-        return self.__data['time_limit_exceeded']
+        return self._data['time_limit_exceeded']
 
 
     @readonly
@@ -116,7 +128,7 @@ class UserCodeRun:
         """
         Default value: ``False``
         """
-        return self.__data['memory_limit_exceeded']
+        return self._data['memory_limit_exceeded']
 
 
     @readonly
@@ -127,7 +139,7 @@ class UserCodeRun:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -138,6 +150,6 @@ class UserCodeRun:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

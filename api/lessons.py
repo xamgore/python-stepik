@@ -1,62 +1,76 @@
 # This file is generated
-from common import required, readonly
 from typing import List
-from resources_list import ResourcesList
 
+from errors import StepikError
+from common import required, readonly
+from resources_list import ResourcesList
+from api.steps import Step
 from api.groups import Group
 from api.users import User
 from api.subscriptions import Subscription
-from api.steps import Step
 
 
 class Lesson:
+    _resources_name = 'lessons'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Lesson(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Lesson are missing')
+
+
     @property
     def steps(self) -> ResourcesList[Step]:
-        return ResourcesList[Step](Step, self.__stepik, self, 'steps_ids')
+        return ResourcesList[Step]\
+            (Step, self._stepik, holder=self, field_with_ids='steps_ids')
 
 
     @property
     def subscriptions(self) -> ResourcesList[Subscription]:
-        return ResourcesList[Subscription](Subscription, self.__stepik, self, 'subscriptions_ids')
-
-
-    def moderators_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.moderators_group_id))
-
-
-    def testers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
-
-
-    def owner(self) -> User:
-        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
-
-
-    def teachers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.teachers_group_id))
-
-
-    def admins_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.admins_group_id))
+        return ResourcesList[Subscription]\
+            (Subscription, self._stepik, holder=self, field_with_ids='subscriptions_ids')
 
 
     def learners_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.learners_group_id))
+
+
+    def teachers_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.teachers_group_id))
+
+
+    def owner(self) -> User:
+        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
+
+
+    def moderators_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.moderators_group_id))
+
+
+    def admins_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
+
+
+    def testers_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.testers_group_id))
 
 
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @readonly
@@ -67,7 +81,7 @@ class Lesson:
 
         Type: dict
         """
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @readonly
@@ -76,7 +90,7 @@ class Lesson:
         """
         The :class:`Progress` object identifier
         """
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
@@ -85,7 +99,7 @@ class Lesson:
         """
         Number of users who checked out the lesson
         """
-        return self.__data['viewed_by']
+        return self._data['viewed_by']
 
 
     @readonly
@@ -94,7 +108,7 @@ class Lesson:
         """
         Number of users who completed the lesson
         """
-        return self.__data['passed_by']
+        return self._data['passed_by']
 
 
     @readonly
@@ -105,7 +119,7 @@ class Lesson:
 
         May be ``None``.
         """
-        return self.__data['time_to_complete']
+        return self._data['time_to_complete']
 
 
     @property
@@ -117,7 +131,7 @@ class Lesson:
 
         Type: str
         """
-        return self.__data.setdefault('cover_url', "None")
+        return self._data.setdefault('cover_url', "None")
 
 
     @cover_url.setter
@@ -129,7 +143,7 @@ class Lesson:
 
         Type: str
         """
-        self.__data['cover_url'] = value
+        self._data['cover_url'] = value
 
 
     @property
@@ -137,7 +151,7 @@ class Lesson:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('is_comments_enabled', True)
+        return self._data.setdefault('is_comments_enabled', True)
 
 
     @is_comments_enabled.setter
@@ -145,7 +159,7 @@ class Lesson:
         """
         Default value: ``True``
         """
-        self.__data['is_comments_enabled'] = value
+        self._data['is_comments_enabled'] = value
 
 
     @required
@@ -160,7 +174,7 @@ class Lesson:
 
         Type: str
         """
-        return self.__data.setdefault('language', "en")
+        return self._data.setdefault('language', "en")
 
 
     @language.setter
@@ -174,7 +188,7 @@ class Lesson:
 
         Type: str
         """
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @readonly
@@ -184,7 +198,7 @@ class Lesson:
         Default value: ``False``
         """
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
-        return self.__data['is_featured']
+        return self._data['is_featured']
 
 
     @property
@@ -192,7 +206,7 @@ class Lesson:
         """
         Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
         """
-        return self.__data['is_public']
+        return self._data['is_public']
 
 
     @is_public.setter
@@ -200,7 +214,7 @@ class Lesson:
         """
         Any user can access and learn `public` lesson. If lesson is private, then learners need to use invitation link or be added by user ID.
         """
-        self.__data['is_public'] = value
+        self._data['is_public'] = value
 
 
     @required
@@ -209,7 +223,7 @@ class Lesson:
         """
         Title of the lesson
         """
-        return self.__data['title']
+        return self._data['title']
 
 
     @title.setter
@@ -217,7 +231,7 @@ class Lesson:
         """
         Title of the lesson
         """
-        self.__data['title'] = value
+        self._data['title'] = value
 
 
     @readonly
@@ -226,7 +240,7 @@ class Lesson:
         """
         A string of format "title-id", with hyphens instead of spaces
         """
-        return self.__data['slug']
+        return self._data['slug']
 
 
     @readonly
@@ -239,7 +253,7 @@ class Lesson:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -252,7 +266,7 @@ class Lesson:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @readonly
@@ -263,7 +277,7 @@ class Lesson:
 
         Default value: ``0``
         """
-        return self.__data['discussions_count']
+        return self._data['discussions_count']
 
 
     @readonly
@@ -272,7 +286,7 @@ class Lesson:
         """
         Discussion tree's identifier
         """
-        return self.__data['discussion_proxy']
+        return self._data['discussion_proxy']
 
 
     @readonly
@@ -283,7 +297,7 @@ class Lesson:
 
         Type: List[str]
         """
-        return self.__data['discussion_threads']
+        return self._data['discussion_threads']
 
 
     @readonly
@@ -292,7 +306,7 @@ class Lesson:
         """
         Number of likes
         """
-        return self.__data['epic_count']
+        return self._data['epic_count']
 
 
     @readonly
@@ -301,13 +315,13 @@ class Lesson:
         """
         Number of dislikes
         """
-        return self.__data['abuse_count']
+        return self._data['abuse_count']
 
 
     @readonly
     @property
     def vote_delta(self) -> int:
-        return self.__data['vote_delta']
+        return self._data['vote_delta']
 
 
     @readonly
@@ -316,27 +330,27 @@ class Lesson:
         """
         The :class:`Vote` object identifier
         """
-        return self.__data['vote']
+        return self._data['vote']
 
 
     @property
     def lti_consumer_key(self) -> str:
-        return self.__data['lti_consumer_key']
+        return self._data['lti_consumer_key']
 
 
     @lti_consumer_key.setter
     def lti_consumer_key(self, value: str):
-        self.__data['lti_consumer_key'] = value
+        self._data['lti_consumer_key'] = value
 
 
     @property
     def lti_secret_key(self) -> str:
-        return self.__data['lti_secret_key']
+        return self._data['lti_secret_key']
 
 
     @lti_secret_key.setter
     def lti_secret_key(self, value: str):
-        self.__data['lti_secret_key'] = value
+        self._data['lti_secret_key'] = value
 
 
     @property
@@ -344,7 +358,7 @@ class Lesson:
         """
         Default value: ``False``
         """
-        return self.__data['lti_private_profile']
+        return self._data['lti_private_profile']
 
 
     @lti_private_profile.setter
@@ -352,25 +366,7 @@ class Lesson:
         """
         Default value: ``False``
         """
-        self.__data['lti_private_profile'] = value
-
-
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['moderators_group']
-
-
-    @readonly
-    @property
-    def testers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['testers_group']
+        self._data['lti_private_profile'] = value
 
 
     @required
@@ -379,7 +375,7 @@ class Lesson:
         """
         Type: List[int]
         """
-        return self.__data['steps']
+        return self._data['steps']
 
 
     @steps_ids.setter
@@ -387,43 +383,7 @@ class Lesson:
         """
         Type: List[int]
         """
-        self.__data['steps'] = value
-
-
-    @readonly
-    @property
-    def owner_id(self) -> int:
-        """
-        :class:`User`'s id of the lesson's owner
-        """
-        return self.__data['owner']
-
-
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['teachers_group']
-
-
-    @readonly
-    @property
-    def admins_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['admins_group']
-
-
-    @readonly
-    @property
-    def subscriptions_ids(self) -> str:
-        """
-        List[int]
-        """
-        return self.__data['subscriptions']
+        self._data['steps'] = value
 
 
     @readonly
@@ -432,6 +392,60 @@ class Lesson:
         """
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
-        return self.__data['learners_group']
+        return self._data['learners_group']
+
+
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['teachers_group']
+
+
+    @readonly
+    @property
+    def owner_id(self) -> int:
+        """
+        :class:`User`'s id of the lesson's owner
+        """
+        return self._data['owner']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['moderators_group']
+
+
+    @readonly
+    @property
+    def subscriptions_ids(self) -> str:
+        """
+        List[int]
+        """
+        return self._data['subscriptions']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['admins_group']
+
+
+    @readonly
+    @property
+    def testers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['testers_group']
 
 

@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class PlatformNews:
+    _resources_name = 'platform-news'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'PlatformNews(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model PlatformNews are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
@@ -29,7 +41,7 @@ class PlatformNews:
 
         Type: str
         """
-        return self.__data.setdefault('language', "en")
+        return self._data.setdefault('language', "en")
 
 
     @language.setter
@@ -39,7 +51,7 @@ class PlatformNews:
 
         Type: str
         """
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @readonly
@@ -50,17 +62,17 @@ class PlatformNews:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @required
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 

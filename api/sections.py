@@ -1,24 +1,37 @@
 # This file is generated
-from common import required, readonly
 from typing import List
-from resources_list import ResourcesList
 
+from errors import StepikError
+from common import required, readonly
+from resources_list import ResourcesList
 from api.units import Unit
 
 
 class Section:
+    _resources_name = 'sections'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Section(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Section are missing')
+
+
     @property
     def units(self) -> ResourcesList[Unit]:
-        return ResourcesList[Unit](Unit, self.__stepik, self, 'units_ids')
+        return ResourcesList[Unit]\
+            (Unit, self._stepik, holder=self, field_with_ids='units_ids')
 
 
     @readonly
@@ -29,7 +42,7 @@ class Section:
 
         The object of type ``Section`` can be accessed through ``stepik.sections.get(id)`` function.
         """
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
@@ -38,7 +51,7 @@ class Section:
         """
         Id of the course
         """
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
@@ -46,7 +59,7 @@ class Section:
         """
         Id of the course
         """
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
@@ -57,7 +70,7 @@ class Section:
 
         Default value: ``1``
         """
-        return self.__data.setdefault('position', 1)
+        return self._data.setdefault('position', 1)
 
 
     @position.setter
@@ -67,7 +80,7 @@ class Section:
 
         Default value: ``1``
         """
-        self.__data['position'] = value
+        self._data['position'] = value
 
 
     @property
@@ -84,7 +97,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('discounting_policy', "None")
+        return self._data.setdefault('discounting_policy', "None")
 
 
     @discounting_policy.setter
@@ -101,7 +114,7 @@ class Section:
 
         Type: str
         """
-        self.__data['discounting_policy'] = value
+        self._data['discounting_policy'] = value
 
 
     @readonly
@@ -110,7 +123,7 @@ class Section:
         """
         The :class:`Progress` object identifier
         """
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
@@ -123,7 +136,7 @@ class Section:
 
         Type: dict
         """
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @property
@@ -131,7 +144,7 @@ class Section:
         """
         Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)
         """
-        return self.__data['required_section']
+        return self._data['required_section']
 
 
     @required_section.setter
@@ -139,7 +152,7 @@ class Section:
         """
         Section will be closed until a user won't complete the `required_section` (`required_percent` from the total score)
         """
-        self.__data['required_section'] = value
+        self._data['required_section'] = value
 
 
     @required
@@ -150,7 +163,7 @@ class Section:
 
         Default value: ``100``
         """
-        return self.__data.setdefault('required_percent', 100)
+        return self._data.setdefault('required_percent', 100)
 
 
     @required_percent.setter
@@ -160,7 +173,7 @@ class Section:
 
         Default value: ``100``
         """
-        self.__data['required_percent'] = value
+        self._data['required_percent'] = value
 
 
     @readonly
@@ -169,7 +182,7 @@ class Section:
         """
         Whether the section is open for a user. True if the score in the `required_section` is more than `required_percent` from the total score.
         """
-        return self.__data['is_requirement_satisfied']
+        return self._data['is_requirement_satisfied']
 
 
     @property
@@ -179,7 +192,7 @@ class Section:
 
         Default value: ``False``
         """
-        return self.__data['is_exam']
+        return self._data['is_exam']
 
 
     @is_exam.setter
@@ -189,7 +202,7 @@ class Section:
 
         Default value: ``False``
         """
-        self.__data['is_exam'] = value
+        self._data['is_exam'] = value
 
 
     @required
@@ -200,7 +213,7 @@ class Section:
 
         Default value: ``60``
         """
-        return self.__data.setdefault('exam_duration_minutes', 60)
+        return self._data.setdefault('exam_duration_minutes', 60)
 
 
     @exam_duration_minutes.setter
@@ -210,7 +223,7 @@ class Section:
 
         Default value: ``60``
         """
-        self.__data['exam_duration_minutes'] = value
+        self._data['exam_duration_minutes'] = value
 
 
     @readonly
@@ -219,7 +232,7 @@ class Section:
         """
         Unique identifier of the :class:`ExamSession`
         """
-        return self.__data['exam_session']
+        return self._data['exam_session']
 
 
     @readonly
@@ -230,7 +243,7 @@ class Section:
 
         It is used to control the user that he does not cheat during the exam.
         """
-        return self.__data['proctor_session']
+        return self._data['proctor_session']
 
 
     @property
@@ -240,7 +253,7 @@ class Section:
 
         Default value: ``""``
         """
-        return self.__data.setdefault('description', "")
+        return self._data.setdefault('description', "")
 
 
     @description.setter
@@ -250,7 +263,7 @@ class Section:
 
         Default value: ``""``
         """
-        self.__data['description'] = value
+        self._data['description'] = value
 
 
     @required
@@ -259,7 +272,7 @@ class Section:
         """
         Title is displayed on the "Syllabus" page of the course
         """
-        return self.__data['title']
+        return self._data['title']
 
 
     @title.setter
@@ -267,7 +280,7 @@ class Section:
         """
         Title is displayed on the "Syllabus" page of the course
         """
-        self.__data['title'] = value
+        self._data['title'] = value
 
 
     @readonly
@@ -276,7 +289,7 @@ class Section:
         """
         A string of format "title-id", with hyphens instead of spaces
         """
-        return self.__data['slug']
+        return self._data['slug']
 
 
     @readonly
@@ -291,7 +304,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date', "None")
+        return self._data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -306,7 +319,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('end_date', "None")
+        return self._data.setdefault('end_date', "None")
 
 
     @readonly
@@ -321,7 +334,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline', "None")
+        return self._data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -336,7 +349,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline', "None")
+        return self._data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -356,7 +369,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy', "None")
+        return self._data.setdefault('grading_policy', "None")
 
 
     @property
@@ -370,7 +383,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('begin_date_source', "None")
+        return self._data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -384,7 +397,7 @@ class Section:
 
         Type: str
         """
-        self.__data['begin_date_source'] = value
+        self._data['begin_date_source'] = value
 
 
     @property
@@ -398,7 +411,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('end_date_source', "None")
+        return self._data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -412,7 +425,7 @@ class Section:
 
         Type: str
         """
-        self.__data['end_date_source'] = value
+        self._data['end_date_source'] = value
 
 
     @property
@@ -426,7 +439,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('soft_deadline_source', "None")
+        return self._data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -440,7 +453,7 @@ class Section:
 
         Type: str
         """
-        self.__data['soft_deadline_source'] = value
+        self._data['soft_deadline_source'] = value
 
 
     @property
@@ -454,7 +467,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('hard_deadline_source', "None")
+        return self._data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -468,7 +481,7 @@ class Section:
 
         Type: str
         """
-        self.__data['hard_deadline_source'] = value
+        self._data['hard_deadline_source'] = value
 
 
     @property
@@ -487,7 +500,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('grading_policy_source', "None")
+        return self._data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -506,7 +519,7 @@ class Section:
 
         Type: str
         """
-        self.__data['grading_policy_source'] = value
+        self._data['grading_policy_source'] = value
 
 
     @readonly
@@ -515,7 +528,7 @@ class Section:
         """
         True, if the section is open, i.e. the server's current date is between `begin_date` and `end_date`
         """
-        return self.__data['is_active']
+        return self._data['is_active']
 
 
     @readonly
@@ -528,7 +541,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -541,7 +554,7 @@ class Section:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @required
@@ -550,7 +563,7 @@ class Section:
         """
         Type: List[int]
         """
-        return self.__data['units']
+        return self._data['units']
 
 
     @units_ids.setter
@@ -558,6 +571,6 @@ class Section:
         """
         Type: List[int]
         """
-        self.__data['units'] = value
+        self._data['units'] = value
 
 

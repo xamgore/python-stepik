@@ -1,38 +1,50 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseSubscription:
+    _resources_name = 'course-subscriptions'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseSubscription(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseSubscription are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @required
     @readonly
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @property
@@ -40,7 +52,7 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('to_reminders', True)
+        return self._data.setdefault('to_reminders', True)
 
 
     @to_reminders.setter
@@ -48,7 +60,7 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        self.__data['to_reminders'] = value
+        self._data['to_reminders'] = value
 
 
     @property
@@ -56,7 +68,7 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('to_announcements', True)
+        return self._data.setdefault('to_announcements', True)
 
 
     @to_announcements.setter
@@ -64,7 +76,7 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        self.__data['to_announcements'] = value
+        self._data['to_announcements'] = value
 
 
     @property
@@ -72,7 +84,7 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('to_comments', True)
+        return self._data.setdefault('to_comments', True)
 
 
     @to_comments.setter
@@ -80,6 +92,6 @@ class CourseSubscription:
         """
         Default value: ``True``
         """
-        self.__data['to_comments'] = value
+        self._data['to_comments'] = value
 
 

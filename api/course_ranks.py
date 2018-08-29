@@ -1,46 +1,58 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseRank:
+    _resources_name = 'course-ranks'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseRank(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseRank are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @required
@@ -51,7 +63,7 @@ class CourseRank:
 
         Type: str
         """
-        return self.__data.setdefault('score', "0")
+        return self._data.setdefault('score', "0")
 
 
     @score.setter
@@ -61,42 +73,42 @@ class CourseRank:
 
         Type: str
         """
-        self.__data['score'] = value
+        self._data['score'] = value
 
 
     @property
     def rank(self) -> int:
-        return self.__data['rank']
+        return self._data['rank']
 
 
     @rank.setter
     def rank(self, value: int):
-        self.__data['rank'] = value
+        self._data['rank'] = value
 
 
     @property
     def rank_max(self) -> int:
-        return self.__data['rank_max']
+        return self._data['rank_max']
 
 
     @rank_max.setter
     def rank_max(self, value: int):
-        self.__data['rank_max'] = value
+        self._data['rank_max'] = value
 
 
     @readonly
     @property
     def position(self) -> str:
-        return self.__data['position']
+        return self._data['position']
 
 
     @property
     def users_count(self) -> int:
-        return self.__data['users_count']
+        return self._data['users_count']
 
 
     @users_count.setter
     def users_count(self, value: int):
-        self.__data['users_count'] = value
+        self._data['users_count'] = value
 
 

@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Submission:
+    _resources_name = 'submissions'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Submission(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Submission are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @readonly
@@ -29,7 +41,7 @@ class Submission:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @required
@@ -41,19 +53,19 @@ class Submission:
 
         Type: str
         """
-        return self.__data.setdefault('score', "0")
+        return self._data.setdefault('score', "0")
 
 
     @readonly
     @property
     def hint(self) -> str:
-        return self.__data['hint']
+        return self._data['hint']
 
 
     @readonly
     @property
     def feedback(self) -> str:
-        return self.__data['feedback']
+        return self._data['feedback']
 
 
     @readonly
@@ -64,7 +76,7 @@ class Submission:
 
         Type: str
         """
-        return self.__data.setdefault('time', "None")
+        return self._data.setdefault('time', "None")
 
 
     @property
@@ -72,7 +84,7 @@ class Submission:
         """
         Default value: ``{}``
         """
-        return self.__data['reply']
+        return self._data['reply']
 
 
     @reply.setter
@@ -80,36 +92,36 @@ class Submission:
         """
         Default value: ``{}``
         """
-        self.__data['reply'] = value
+        self._data['reply'] = value
 
 
     @readonly
     @property
     def reply_url(self) -> str:
-        return self.__data['reply_url']
+        return self._data['reply_url']
 
 
     @required
     @property
     def attempt(self) -> str:
-        return self.__data['attempt']
+        return self._data['attempt']
 
 
     @attempt.setter
     def attempt(self, value: str):
-        self.__data['attempt'] = value
+        self._data['attempt'] = value
 
 
     @required
     @readonly
     @property
     def session(self) -> str:
-        return self.__data['session']
+        return self._data['session']
 
 
     @readonly
     @property
     def eta(self) -> int:
-        return self.__data['eta']
+        return self._data['eta']
 
 

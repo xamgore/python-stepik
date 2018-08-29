@@ -1,52 +1,64 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class ScoreFile:
+    _resources_name = 'score-files'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'ScoreFile(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model ScoreFile are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def session(self) -> str:
-        return self.__data['session']
+        return self._data['session']
 
 
     @session.setter
     def session(self, value: str):
-        self.__data['session'] = value
+        self._data['session'] = value
 
 
     @required
     @property
     def file(self) -> str:
-        return self.__data['file']
+        return self._data['file']
 
 
     @file.setter
     def file(self, value: str):
-        self.__data['file'] = value
+        self._data['file'] = value
 
 
     @readonly
     @property
     def error(self) -> str:
-        return self.__data['error']
+        return self._data['error']
 
 
     @readonly
@@ -57,7 +69,7 @@ class ScoreFile:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -68,6 +80,6 @@ class ScoreFile:
 
         Type: str
         """
-        return self.__data.setdefault('process_date', "None")
+        return self._data.setdefault('process_date', "None")
 
 

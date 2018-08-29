@@ -1,63 +1,75 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class AchievementProgress:
+    _resources_name = 'achievement-progresses'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'AchievementProgress(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model AchievementProgress are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @required
     @property
     def achievement(self) -> str:
-        return self.__data['achievement']
+        return self._data['achievement']
 
 
     @achievement.setter
     def achievement(self, value: str):
-        self.__data['achievement'] = value
+        self._data['achievement'] = value
 
 
     @required
     @property
     def score(self) -> int:
-        return self.__data['score']
+        return self._data['score']
 
 
     @score.setter
     def score(self, value: int):
-        self.__data['score'] = value
+        self._data['score'] = value
 
 
     @readonly
     @property
     def kind(self) -> str:
-        return self.__data['kind']
+        return self._data['kind']
 
 
     @readonly
@@ -68,7 +80,7 @@ class AchievementProgress:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -79,7 +91,7 @@ class AchievementProgress:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @property
@@ -89,7 +101,7 @@ class AchievementProgress:
 
         Type: str
         """
-        return self.__data.setdefault('obtain_date', "None")
+        return self._data.setdefault('obtain_date', "None")
 
 
     @obtain_date.setter
@@ -99,6 +111,6 @@ class AchievementProgress:
 
         Type: str
         """
-        self.__data['obtain_date'] = value
+        self._data['obtain_date'] = value
 
 

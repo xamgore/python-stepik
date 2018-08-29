@@ -1,29 +1,41 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class GoalMetric:
+    _resources_name = 'goal-metrics'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'GoalMetric(id={self.id!r})'
+        return f'GoalMetric(id={self.goal_name!r})'
+
+
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model GoalMetric are missing')
 
 
     @required
     @property
     def goal_name(self) -> str:
-        return self.__data['goal_name']
+        return self._data['goal_name']
 
 
     @goal_name.setter
     def goal_name(self, value: str):
-        self.__data['goal_name'] = value
+        self._data['goal_name'] = value
 
 
     @required
@@ -34,7 +46,7 @@ class GoalMetric:
 
         Type: str
         """
-        return self.__data.setdefault('value', "0")
+        return self._data.setdefault('value', "0")
 
 
     @value.setter
@@ -44,6 +56,6 @@ class GoalMetric:
 
         Type: str
         """
-        self.__data['value'] = value
+        self._data['value'] = value
 
 

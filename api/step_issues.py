@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class StepIssue:
+    _resources_name = 'step-issues'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'StepIssue(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model StepIssue are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def step(self) -> str:
-        return self.__data['step']
+        return self._data['step']
 
 
     @step.setter
     def step(self, value: str):
-        self.__data['step'] = value
+        self._data['step'] = value
 
 
     @required
@@ -40,7 +52,7 @@ class StepIssue:
 
         Type: str
         """
-        return self.__data.setdefault('epoch_time', "2018-08-26T00:35:43.217Z")
+        return self._data.setdefault('epoch_time', "2018-08-26T00:35:43.217Z")
 
 
     @epoch_time.setter
@@ -50,7 +62,7 @@ class StepIssue:
 
         Type: str
         """
-        self.__data['epoch_time'] = value
+        self._data['epoch_time'] = value
 
 
     @property
@@ -58,7 +70,7 @@ class StepIssue:
         """
         Default value: ``False``
         """
-        return self.__data['has_quiz_error']
+        return self._data['has_quiz_error']
 
 
     @has_quiz_error.setter
@@ -66,7 +78,7 @@ class StepIssue:
         """
         Default value: ``False``
         """
-        self.__data['has_quiz_error'] = value
+        self._data['has_quiz_error'] = value
 
 
     @property
@@ -74,7 +86,7 @@ class StepIssue:
         """
         Default value: ``False``
         """
-        return self.__data['has_quiz_warning']
+        return self._data['has_quiz_warning']
 
 
     @has_quiz_warning.setter
@@ -82,7 +94,7 @@ class StepIssue:
         """
         Default value: ``False``
         """
-        self.__data['has_quiz_warning'] = value
+        self._data['has_quiz_warning'] = value
 
 
     @required
@@ -91,7 +103,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['unique_views']
+        return self._data['unique_views']
 
 
     @unique_views.setter
@@ -99,7 +111,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['unique_views'] = value
+        self._data['unique_views'] = value
 
 
     @required
@@ -108,7 +120,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_views']
+        return self._data['total_views']
 
 
     @total_views.setter
@@ -116,7 +128,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_views'] = value
+        self._data['total_views'] = value
 
 
     @required
@@ -125,7 +137,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['unique_successes']
+        return self._data['unique_successes']
 
 
     @unique_successes.setter
@@ -133,7 +145,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['unique_successes'] = value
+        self._data['unique_successes'] = value
 
 
     @required
@@ -142,7 +154,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['unique_failures']
+        return self._data['unique_failures']
 
 
     @unique_failures.setter
@@ -150,7 +162,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['unique_failures'] = value
+        self._data['unique_failures'] = value
 
 
     @required
@@ -159,7 +171,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['unique_attempts']
+        return self._data['unique_attempts']
 
 
     @unique_attempts.setter
@@ -167,7 +179,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['unique_attempts'] = value
+        self._data['unique_attempts'] = value
 
 
     @required
@@ -178,7 +190,7 @@ class StepIssue:
 
         Type: str
         """
-        return self.__data.setdefault('unique_correct_ratio', "0")
+        return self._data.setdefault('unique_correct_ratio', "0")
 
 
     @unique_correct_ratio.setter
@@ -188,7 +200,7 @@ class StepIssue:
 
         Type: str
         """
-        self.__data['unique_correct_ratio'] = value
+        self._data['unique_correct_ratio'] = value
 
 
     @required
@@ -197,7 +209,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_successes']
+        return self._data['total_successes']
 
 
     @total_successes.setter
@@ -205,7 +217,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_successes'] = value
+        self._data['total_successes'] = value
 
 
     @required
@@ -214,7 +226,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_failures']
+        return self._data['total_failures']
 
 
     @total_failures.setter
@@ -222,7 +234,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_failures'] = value
+        self._data['total_failures'] = value
 
 
     @required
@@ -231,7 +243,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_attempts']
+        return self._data['total_attempts']
 
 
     @total_attempts.setter
@@ -239,7 +251,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_attempts'] = value
+        self._data['total_attempts'] = value
 
 
     @required
@@ -250,7 +262,7 @@ class StepIssue:
 
         Type: str
         """
-        return self.__data.setdefault('total_correct_ratio', "0")
+        return self._data.setdefault('total_correct_ratio', "0")
 
 
     @total_correct_ratio.setter
@@ -260,7 +272,7 @@ class StepIssue:
 
         Type: str
         """
-        self.__data['total_correct_ratio'] = value
+        self._data['total_correct_ratio'] = value
 
 
     @required
@@ -269,7 +281,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_comments']
+        return self._data['total_comments']
 
 
     @total_comments.setter
@@ -277,7 +289,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_comments'] = value
+        self._data['total_comments'] = value
 
 
     @required
@@ -286,7 +298,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['pending_comments']
+        return self._data['pending_comments']
 
 
     @pending_comments.setter
@@ -294,7 +306,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['pending_comments'] = value
+        self._data['pending_comments'] = value
 
 
     @required
@@ -303,7 +315,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['deleted_comments']
+        return self._data['deleted_comments']
 
 
     @deleted_comments.setter
@@ -311,7 +323,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['deleted_comments'] = value
+        self._data['deleted_comments'] = value
 
 
     @required
@@ -320,7 +332,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['epic_comment_votes']
+        return self._data['epic_comment_votes']
 
 
     @epic_comment_votes.setter
@@ -328,7 +340,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['epic_comment_votes'] = value
+        self._data['epic_comment_votes'] = value
 
 
     @required
@@ -337,7 +349,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['abuse_comment_votes']
+        return self._data['abuse_comment_votes']
 
 
     @abuse_comment_votes.setter
@@ -345,7 +357,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['abuse_comment_votes'] = value
+        self._data['abuse_comment_votes'] = value
 
 
     @required
@@ -354,7 +366,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['total_reviews']
+        return self._data['total_reviews']
 
 
     @total_reviews.setter
@@ -362,7 +374,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['total_reviews'] = value
+        self._data['total_reviews'] = value
 
 
     @required
@@ -371,7 +383,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['reviews_outliers']
+        return self._data['reviews_outliers']
 
 
     @reviews_outliers.setter
@@ -379,7 +391,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['reviews_outliers'] = value
+        self._data['reviews_outliers'] = value
 
 
     @required
@@ -388,7 +400,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        return self.__data['plagiarized_submissions']
+        return self._data['plagiarized_submissions']
 
 
     @plagiarized_submissions.setter
@@ -396,7 +408,7 @@ class StepIssue:
         """
         Default value: ``0``
         """
-        self.__data['plagiarized_submissions'] = value
+        self._data['plagiarized_submissions'] = value
 
 
     @required
@@ -407,7 +419,7 @@ class StepIssue:
 
         Type: str
         """
-        return self.__data.setdefault('magic', "0")
+        return self._data.setdefault('magic', "0")
 
 
     @magic.setter
@@ -417,7 +429,7 @@ class StepIssue:
 
         Type: str
         """
-        self.__data['magic'] = value
+        self._data['magic'] = value
 
 
     @required
@@ -428,7 +440,7 @@ class StepIssue:
 
         Type: str
         """
-        return self.__data.setdefault('discrimination', "0")
+        return self._data.setdefault('discrimination', "0")
 
 
     @discrimination.setter
@@ -438,6 +450,6 @@ class StepIssue:
 
         Type: str
         """
-        self.__data['discrimination'] = value
+        self._data['discrimination'] = value
 
 

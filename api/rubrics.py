@@ -1,57 +1,69 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Rubric:
+    _resources_name = 'rubrics'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Rubric(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Rubric are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def instruction(self) -> str:
-        return self.__data['instruction']
+        return self._data['instruction']
 
 
     @instruction.setter
     def instruction(self, value: str):
-        self.__data['instruction'] = value
+        self._data['instruction'] = value
 
 
     @required
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
     @required
     @property
     def cost(self) -> int:
-        return self.__data['cost']
+        return self._data['cost']
 
 
     @cost.setter
     def cost(self, value: int):
-        self.__data['cost'] = value
+        self._data['cost'] = value
 
 
     @required
@@ -60,7 +72,7 @@ class Rubric:
         """
         Default value: ``1``
         """
-        return self.__data.setdefault('position', 1)
+        return self._data.setdefault('position', 1)
 
 
     @position.setter
@@ -68,6 +80,6 @@ class Rubric:
         """
         Default value: ``1``
         """
-        self.__data['position'] = value
+        self._data['position'] = value
 
 

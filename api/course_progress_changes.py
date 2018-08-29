@@ -1,46 +1,58 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseProgressChange:
+    _resources_name = 'course-progress-changes'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseProgressChange(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseProgressChange are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
@@ -51,7 +63,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        return self.__data.setdefault('time', "2018-08-26T00:35:10.871Z")
+        return self._data.setdefault('time', "2018-08-26T00:35:10.871Z")
 
 
     @time.setter
@@ -61,7 +73,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        self.__data['time'] = value
+        self._data['time'] = value
 
 
     @required
@@ -72,7 +84,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        return self.__data.setdefault('score', "None")
+        return self._data.setdefault('score', "None")
 
 
     @score.setter
@@ -82,40 +94,40 @@ class CourseProgressChange:
 
         Type: str
         """
-        self.__data['score'] = value
+        self._data['score'] = value
 
 
     @required
     @property
     def cost(self) -> int:
-        return self.__data['cost']
+        return self._data['cost']
 
 
     @cost.setter
     def cost(self, value: int):
-        self.__data['cost'] = value
+        self._data['cost'] = value
 
 
     @required
     @property
     def n_steps(self) -> int:
-        return self.__data['n_steps']
+        return self._data['n_steps']
 
 
     @n_steps.setter
     def n_steps(self, value: int):
-        self.__data['n_steps'] = value
+        self._data['n_steps'] = value
 
 
     @required
     @property
     def n_steps_passed(self) -> int:
-        return self.__data['n_steps_passed']
+        return self._data['n_steps_passed']
 
 
     @n_steps_passed.setter
     def n_steps_passed(self, value: int):
-        self.__data['n_steps_passed'] = value
+        self._data['n_steps_passed'] = value
 
 
     @required
@@ -126,7 +138,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        return self.__data.setdefault('best_score', "None")
+        return self._data.setdefault('best_score', "None")
 
 
     @best_score.setter
@@ -136,47 +148,47 @@ class CourseProgressChange:
 
         Type: str
         """
-        self.__data['best_score'] = value
+        self._data['best_score'] = value
 
 
     @property
     def rank(self) -> int:
-        return self.__data['rank']
+        return self._data['rank']
 
 
     @rank.setter
     def rank(self, value: int):
-        self.__data['rank'] = value
+        self._data['rank'] = value
 
 
     @property
     def rank_max(self) -> int:
-        return self.__data['rank_max']
+        return self._data['rank_max']
 
 
     @rank_max.setter
     def rank_max(self, value: int):
-        self.__data['rank_max'] = value
+        self._data['rank_max'] = value
 
 
     @property
     def rank_position(self) -> int:
-        return self.__data['rank_position']
+        return self._data['rank_position']
 
 
     @rank_position.setter
     def rank_position(self, value: int):
-        self.__data['rank_position'] = value
+        self._data['rank_position'] = value
 
 
     @property
     def users_count(self) -> int:
-        return self.__data['users_count']
+        return self._data['users_count']
 
 
     @users_count.setter
     def users_count(self, value: int):
-        self.__data['users_count'] = value
+        self._data['users_count'] = value
 
 
     @property
@@ -184,7 +196,7 @@ class CourseProgressChange:
         """
         Default value: ``False``
         """
-        return self.__data['is_teacher']
+        return self._data['is_teacher']
 
 
     @is_teacher.setter
@@ -192,7 +204,7 @@ class CourseProgressChange:
         """
         Default value: ``False``
         """
-        self.__data['is_teacher'] = value
+        self._data['is_teacher'] = value
 
 
     @property
@@ -202,7 +214,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        return self.__data.setdefault('date_joined', "None")
+        return self._data.setdefault('date_joined', "None")
 
 
     @date_joined.setter
@@ -212,7 +224,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        self.__data['date_joined'] = value
+        self._data['date_joined'] = value
 
 
     @property
@@ -222,7 +234,7 @@ class CourseProgressChange:
 
         Type: str
         """
-        return self.__data.setdefault('last_viewed', "None")
+        return self._data.setdefault('last_viewed', "None")
 
 
     @last_viewed.setter
@@ -232,6 +244,6 @@ class CourseProgressChange:
 
         Type: str
         """
-        self.__data['last_viewed'] = value
+        self._data['last_viewed'] = value
 
 

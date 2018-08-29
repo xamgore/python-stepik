@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CoursePeriodStatistics:
+    _resources_name = 'course-period-statistics'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CoursePeriodStatistics(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CoursePeriodStatistics are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @property
@@ -39,7 +51,7 @@ class CoursePeriodStatistics:
 
         Type: str
         """
-        return self.__data.setdefault('from_date', "None")
+        return self._data.setdefault('from_date', "None")
 
 
     @from_date.setter
@@ -49,7 +61,7 @@ class CoursePeriodStatistics:
 
         Type: str
         """
-        self.__data['from_date'] = value
+        self._data['from_date'] = value
 
 
     @property
@@ -59,7 +71,7 @@ class CoursePeriodStatistics:
 
         Type: str
         """
-        return self.__data.setdefault('to_date', "None")
+        return self._data.setdefault('to_date', "None")
 
 
     @to_date.setter
@@ -69,7 +81,7 @@ class CoursePeriodStatistics:
 
         Type: str
         """
-        self.__data['to_date'] = value
+        self._data['to_date'] = value
 
 
     @required
@@ -78,7 +90,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['active_learners_count']
+        return self._data['active_learners_count']
 
 
     @active_learners_count.setter
@@ -86,7 +98,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['active_learners_count'] = value
+        self._data['active_learners_count'] = value
 
 
     @required
@@ -95,7 +107,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['active_learners_delta']
+        return self._data['active_learners_delta']
 
 
     @active_learners_delta.setter
@@ -103,7 +115,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['active_learners_delta'] = value
+        self._data['active_learners_delta'] = value
 
 
     @required
@@ -112,7 +124,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['submissions_count']
+        return self._data['submissions_count']
 
 
     @submissions_count.setter
@@ -120,7 +132,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['submissions_count'] = value
+        self._data['submissions_count'] = value
 
 
     @required
@@ -129,7 +141,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['submissions_delta']
+        return self._data['submissions_delta']
 
 
     @submissions_delta.setter
@@ -137,7 +149,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['submissions_delta'] = value
+        self._data['submissions_delta'] = value
 
 
     @required
@@ -146,7 +158,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['certificates_count']
+        return self._data['certificates_count']
 
 
     @certificates_count.setter
@@ -154,7 +166,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['certificates_count'] = value
+        self._data['certificates_count'] = value
 
 
     @required
@@ -163,7 +175,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['certificates_delta']
+        return self._data['certificates_delta']
 
 
     @certificates_delta.setter
@@ -171,7 +183,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['certificates_delta'] = value
+        self._data['certificates_delta'] = value
 
 
     @required
@@ -180,7 +192,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['comments_count']
+        return self._data['comments_count']
 
 
     @comments_count.setter
@@ -188,7 +200,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['comments_count'] = value
+        self._data['comments_count'] = value
 
 
     @required
@@ -197,7 +209,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['comments_delta']
+        return self._data['comments_delta']
 
 
     @comments_delta.setter
@@ -205,7 +217,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['comments_delta'] = value
+        self._data['comments_delta'] = value
 
 
     @required
@@ -214,7 +226,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['enrollments_count']
+        return self._data['enrollments_count']
 
 
     @enrollments_count.setter
@@ -222,7 +234,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['enrollments_count'] = value
+        self._data['enrollments_count'] = value
 
 
     @required
@@ -231,7 +243,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['enrollments_delta']
+        return self._data['enrollments_delta']
 
 
     @enrollments_delta.setter
@@ -239,7 +251,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['enrollments_delta'] = value
+        self._data['enrollments_delta'] = value
 
 
     @required
@@ -248,7 +260,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['dropouts_count']
+        return self._data['dropouts_count']
 
 
     @dropouts_count.setter
@@ -256,7 +268,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['dropouts_count'] = value
+        self._data['dropouts_count'] = value
 
 
     @required
@@ -265,7 +277,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        return self.__data['dropouts_delta']
+        return self._data['dropouts_delta']
 
 
     @dropouts_delta.setter
@@ -273,7 +285,7 @@ class CoursePeriodStatistics:
         """
         Default value: ``0``
         """
-        self.__data['dropouts_delta'] = value
+        self._data['dropouts_delta'] = value
 
 
     @readonly
@@ -284,6 +296,6 @@ class CoursePeriodStatistics:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

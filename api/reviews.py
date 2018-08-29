@@ -1,72 +1,84 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Review:
+    _resources_name = 'reviews'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Review(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Review are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def session(self) -> str:
-        return self.__data['session']
+        return self._data['session']
 
 
     @session.setter
     def session(self, value: str):
-        self.__data['session'] = value
+        self._data['session'] = value
 
 
     @property
     def target_session(self) -> str:
-        return self.__data['target_session']
+        return self._data['target_session']
 
 
     @target_session.setter
     def target_session(self, value: str):
-        self.__data['target_session'] = value
+        self._data['target_session'] = value
 
 
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
     @required
     @property
     def rubric_scores(self) -> str:
-        return self.__data['rubric_scores']
+        return self._data['rubric_scores']
 
 
     @rubric_scores.setter
     def rubric_scores(self, value: str):
-        self.__data['rubric_scores'] = value
+        self._data['rubric_scores'] = value
 
 
     @readonly
     @property
     def submission(self) -> int:
-        return self.__data['submission']
+        return self._data['submission']
 
 
     @readonly
@@ -77,7 +89,7 @@ class Review:
 
         Type: str
         """
-        return self.__data.setdefault('when_finished', "None")
+        return self._data.setdefault('when_finished', "None")
 
 
     @readonly
@@ -86,6 +98,6 @@ class Review:
         """
         Default value: ``False``
         """
-        return self.__data['is_verified']
+        return self._data['is_verified']
 
 

@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Event:
+    _resources_name = 'events'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Event(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Event are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
@@ -29,7 +41,7 @@ class Event:
 
         Type: str
         """
-        return self.__data.setdefault('time', "2018-08-26T00:35:18.956Z")
+        return self._data.setdefault('time', "2018-08-26T00:35:18.956Z")
 
 
     @time.setter
@@ -39,13 +51,13 @@ class Event:
 
         Type: str
         """
-        self.__data['time'] = value
+        self._data['time'] = value
 
 
     @readonly
     @property
     def type(self) -> str:
-        return self.__data['type']
+        return self._data['type']
 
 
     @readonly
@@ -56,12 +68,12 @@ class Event:
 
         Type: str
         """
-        return self.__data.setdefault('action', "None")
+        return self._data.setdefault('action', "None")
 
 
     @readonly
     @property
     def html_text(self) -> str:
-        return self.__data['html_text']
+        return self._data['html_text']
 
 

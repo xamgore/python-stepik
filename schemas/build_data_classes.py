@@ -12,15 +12,17 @@ def rename_properties(model: Model):
     remove_list = lambda ty: ty[5:-1] if ty.startswith('List[') and ty.endswith(']') else ty
 
     for prop in to_rename:
-        # need to know, what property's name is used in rest api
-        prop.from_name = prop.name
+        # which property's name to use in rest api
+        prop.api_name = prop.name
 
-        # rename "lesson" to "lesson_id"
-        model.properties[prop.rename] = copy(prop)
-        del model.properties[prop.name]
+        # rename raw property (lessons -> lessons_ids)
+        raw_prop = copy(prop)
+        raw_prop.name = raw_prop.rename
+        del model.properties[prop.api_name]
+        model.properties[raw_prop.name] = raw_prop
 
         # extract the inner type, so it could be imported
-        # also used in the template, like ResourcesList[type]
+        # used in template, i.e. ResourcesList[prop.type]
         prop.type = remove_list(prop.new_type)
 
         # make "lesson" either method, or list-property
@@ -44,6 +46,7 @@ def get_imports_to_types(schema: Schema):
     models_to_import = {prop.type for box in boxes for prop in box.values()} \
         .intersection(models().keys())
 
+    # TODO topological sort :(
     return {m: f'api.{models()[m].schema.py_module_name}' for m in models_to_import}
 
 
@@ -63,18 +66,12 @@ def improve_doc_string(p: Property):
 
 
 if __name__ == '__main__':
-    resources_without_models = []
-
     for schema in load_schemas():
-        if len(schema.models) == 0:
-            resources_without_models.append(schema.resourcePath)
-            continue
-
         for model in schema.models.values():
             model.resources, model.methods = {}, {}
             rename_properties(model)
 
-            for pn, p in model.properties.items():
+            for p in model.properties.values():
                 improve_doc_string(p)
 
         with open('python-templates/data-class.jinja2') as t:
@@ -85,4 +82,3 @@ if __name__ == '__main__':
                     imports=get_imports_to_types(schema))
                 )
 
-    print(f'{len(resources_without_models)} resources without models:', *resources_without_models, sep='\n  ')

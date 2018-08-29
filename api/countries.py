@@ -1,40 +1,52 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class AlternativeName:
+    _resources_name = 'countries'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'AlternativeName(id={self.id!r})'
+        return f'AlternativeName(id={self.name!r})'
+
+
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model AlternativeName are missing')
 
 
     @required
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @name.setter
     def name(self, value: str):
-        self.__data['name'] = value
+        self._data['name'] = value
 
 
     @required
     @property
     def language(self) -> str:
-        return self.__data['language']
+        return self._data['language']
 
 
     @language.setter
     def language(self, value: str):
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @property
@@ -42,7 +54,7 @@ class AlternativeName:
         """
         Default value: ``False``
         """
-        return self.__data['is_preferred']
+        return self._data['is_preferred']
 
 
     @is_preferred.setter
@@ -50,36 +62,47 @@ class AlternativeName:
         """
         Default value: ``False``
         """
-        self.__data['is_preferred'] = value
+        self._data['is_preferred'] = value
 
 
 
 
 class Country:
+    _resources_name = 'countries'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Country(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Country are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @name.setter
     def name(self, value: str):
-        self.__data['name'] = value
+        self._data['name'] = value
 
 
     @required
@@ -88,7 +111,7 @@ class Country:
         """
         Type: str
         """
-        return self.__data['alt_names']
+        return self._data['alt_names']
 
 
     @alt_names.setter
@@ -96,6 +119,6 @@ class Country:
         """
         Type: str
         """
-        self.__data['alt_names'] = value
+        self._data['alt_names'] = value
 
 

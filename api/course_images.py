@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseImage:
+    _resources_name = 'course-images'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseImage(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseImage are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @property
@@ -28,7 +40,7 @@ class CourseImage:
 
         Type: str
         """
-        return self.__data.setdefault('certificate_footer', "None")
+        return self._data.setdefault('certificate_footer', "None")
 
 
     @certificate_footer.setter
@@ -38,7 +50,7 @@ class CourseImage:
 
         Type: str
         """
-        self.__data['certificate_footer'] = value
+        self._data['certificate_footer'] = value
 
 
     @property
@@ -48,7 +60,7 @@ class CourseImage:
 
         Type: str
         """
-        return self.__data.setdefault('certificate_cover_org', "None")
+        return self._data.setdefault('certificate_cover_org', "None")
 
 
     @certificate_cover_org.setter
@@ -58,7 +70,7 @@ class CourseImage:
 
         Type: str
         """
-        self.__data['certificate_cover_org'] = value
+        self._data['certificate_cover_org'] = value
 
 
     @property
@@ -68,7 +80,7 @@ class CourseImage:
 
         Type: str
         """
-        return self.__data.setdefault('cover', "None")
+        return self._data.setdefault('cover', "None")
 
 
     @cover.setter
@@ -78,6 +90,6 @@ class CourseImage:
 
         Type: str
         """
-        self.__data['cover'] = value
+        self._data['cover'] = value
 
 

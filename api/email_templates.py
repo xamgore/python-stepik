@@ -1,31 +1,43 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class EmailTemplate:
+    _resources_name = 'email-templates'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'EmailTemplate(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model EmailTemplate are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @required
@@ -36,7 +48,7 @@ class EmailTemplate:
 
         Type: str
         """
-        return self.__data.setdefault('mail_type', "announcement")
+        return self._data.setdefault('mail_type', "announcement")
 
 
     @mail_type.setter
@@ -46,17 +58,17 @@ class EmailTemplate:
 
         Type: str
         """
-        self.__data['mail_type'] = value
+        self._data['mail_type'] = value
 
 
     @required
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @name.setter
     def name(self, value: str):
-        self.__data['name'] = value
+        self._data['name'] = value
 
 

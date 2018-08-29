@@ -1,48 +1,60 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Assignment:
+    _resources_name = 'assignments'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Assignment(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Assignment are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def unit(self) -> str:
-        return self.__data['unit']
+        return self._data['unit']
 
 
     @required
     @property
     def step(self) -> str:
-        return self.__data['step']
+        return self._data['step']
 
 
     @step.setter
     def step(self, value: str):
-        self.__data['step'] = value
+        self._data['step'] = value
 
 
     @readonly
     @property
     def progress(self) -> str:
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
@@ -53,7 +65,7 @@ class Assignment:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -64,6 +76,6 @@ class Assignment:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

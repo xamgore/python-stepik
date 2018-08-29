@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class TodoItem:
+    _resources_name = 'todo-items'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'TodoItem(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model TodoItem are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @required
@@ -40,7 +52,7 @@ class TodoItem:
 
         Type: str
         """
-        return self.__data.setdefault('kind', "None")
+        return self._data.setdefault('kind', "None")
 
 
     @kind.setter
@@ -50,7 +62,7 @@ class TodoItem:
 
         Type: str
         """
-        self.__data['kind'] = value
+        self._data['kind'] = value
 
 
     @property
@@ -58,7 +70,7 @@ class TodoItem:
         """
         Default value: ``False``
         """
-        return self.__data['is_complete']
+        return self._data['is_complete']
 
 
     @is_complete.setter
@@ -66,7 +78,7 @@ class TodoItem:
         """
         Default value: ``False``
         """
-        self.__data['is_complete'] = value
+        self._data['is_complete'] = value
 
 
     @property
@@ -76,7 +88,7 @@ class TodoItem:
 
         Default value: ``{}``
         """
-        return self.__data['context']
+        return self._data['context']
 
 
     @context.setter
@@ -86,7 +98,7 @@ class TodoItem:
 
         Default value: ``{}``
         """
-        self.__data['context'] = value
+        self._data['context'] = value
 
 
     @readonly
@@ -97,7 +109,7 @@ class TodoItem:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -108,6 +120,6 @@ class TodoItem:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 

@@ -1,53 +1,65 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Device:
+    _resources_name = 'devices'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Device(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Device are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def registration_id(self) -> str:
-        return self.__data['registration_id']
+        return self._data['registration_id']
 
 
     @registration_id.setter
     def registration_id(self, value: str):
-        self.__data['registration_id'] = value
+        self._data['registration_id'] = value
 
 
     @required
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @required
     @property
     def description(self) -> str:
-        return self.__data['description']
+        return self._data['description']
 
 
     @description.setter
     def description(self, value: str):
-        self.__data['description'] = value
+        self._data['description'] = value
 
 
     @required
@@ -58,7 +70,7 @@ class Device:
 
         Type: str
         """
-        return self.__data.setdefault('client_type', "ios")
+        return self._data.setdefault('client_type', "ios")
 
 
     @client_type.setter
@@ -68,7 +80,7 @@ class Device:
 
         Type: str
         """
-        self.__data['client_type'] = value
+        self._data['client_type'] = value
 
 
     @property
@@ -76,7 +88,7 @@ class Device:
         """
         Default value: ``False``
         """
-        return self.__data['is_badges_enabled']
+        return self._data['is_badges_enabled']
 
 
     @is_badges_enabled.setter
@@ -84,6 +96,6 @@ class Device:
         """
         Default value: ``False``
         """
-        self.__data['is_badges_enabled'] = value
+        self._data['is_badges_enabled'] = value
 
 

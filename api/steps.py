@@ -1,24 +1,36 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Step:
+    _resources_name = 'steps'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Step(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Step are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
@@ -28,7 +40,7 @@ class Step:
         """
         :class:`Lesson`'s id 
         """
-        return self.__data['lesson']
+        return self._data['lesson']
 
 
     @required
@@ -39,7 +51,7 @@ class Step:
 
         Default value: ``1``
         """
-        return self.__data.setdefault('position', 1)
+        return self._data.setdefault('position', 1)
 
 
     @position.setter
@@ -49,7 +61,7 @@ class Step:
 
         Default value: ``1``
         """
-        self.__data['position'] = value
+        self._data['position'] = value
 
 
     @readonly
@@ -66,7 +78,7 @@ class Step:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @readonly
@@ -77,7 +89,7 @@ class Step:
 
         Type: dict
         """
-        return self.__data['block']
+        return self._data['block']
 
 
     @readonly
@@ -88,7 +100,7 @@ class Step:
 
         Type: dict
         """
-        return self.__data['actions']
+        return self._data['actions']
 
 
     @readonly
@@ -97,7 +109,7 @@ class Step:
         """
         The :class:`Progress` object identifier
         """
-        return self.__data['progress']
+        return self._data['progress']
 
 
     @readonly
@@ -108,7 +120,7 @@ class Step:
 
         Type: List[str]
         """
-        return self.__data['subscriptions']
+        return self._data['subscriptions']
 
 
     @required
@@ -118,7 +130,7 @@ class Step:
         """
         Something connected with exams and peer review. Maybe take ``None`` value.
         """
-        return self.__data['instruction']
+        return self._data['instruction']
 
 
     @readonly
@@ -127,7 +139,7 @@ class Step:
         """
         Something connected with exams and peer review. Maybe take ``None`` value.
         """
-        return self.__data['session']
+        return self._data['session']
 
 
     @readonly
@@ -136,7 +148,7 @@ class Step:
         """
         Something connected with exams and peer review. Maybe take ``None`` value.
         """
-        return self.__data['instruction_type']
+        return self._data['instruction_type']
 
 
     @readonly
@@ -145,7 +157,7 @@ class Step:
         """
         Number of users who checked out the step
         """
-        return self.__data['viewed_by']
+        return self._data['viewed_by']
 
 
     @readonly
@@ -154,7 +166,7 @@ class Step:
         """
         Number of users who completed the lesson
         """
-        return self.__data['passed_by']
+        return self._data['passed_by']
 
 
     @readonly
@@ -165,7 +177,7 @@ class Step:
 
         May take ``None`` value.
         """
-        return self.__data['correct_ratio']
+        return self._data['correct_ratio']
 
 
     @readonly
@@ -174,7 +186,7 @@ class Step:
         """
         Part of an adaptive system. Equals to 1 or 0. TODO
         """
-        return self.__data['worth']
+        return self._data['worth']
 
 
     @property
@@ -184,7 +196,7 @@ class Step:
 
         Default value: ``False``
         """
-        return self.__data['is_solutions_unlocked']
+        return self._data['is_solutions_unlocked']
 
 
     @is_solutions_unlocked.setter
@@ -194,7 +206,7 @@ class Step:
 
         Default value: ``False``
         """
-        self.__data['is_solutions_unlocked'] = value
+        self._data['is_solutions_unlocked'] = value
 
 
     @required
@@ -205,7 +217,7 @@ class Step:
 
         Default value: ``3``
         """
-        return self.__data.setdefault('solutions_unlocked_attempts', 3)
+        return self._data.setdefault('solutions_unlocked_attempts', 3)
 
 
     @solutions_unlocked_attempts.setter
@@ -215,7 +227,7 @@ class Step:
 
         Default value: ``3``
         """
-        self.__data['solutions_unlocked_attempts'] = value
+        self._data['solutions_unlocked_attempts'] = value
 
 
     @property
@@ -225,7 +237,7 @@ class Step:
 
         Default value: ``False``
         """
-        return self.__data['has_submissions_restrictions']
+        return self._data['has_submissions_restrictions']
 
 
     @has_submissions_restrictions.setter
@@ -235,7 +247,7 @@ class Step:
 
         Default value: ``False``
         """
-        self.__data['has_submissions_restrictions'] = value
+        self._data['has_submissions_restrictions'] = value
 
 
     @required
@@ -246,7 +258,7 @@ class Step:
 
         Default value: ``3``
         """
-        return self.__data.setdefault('max_submissions_count', 3)
+        return self._data.setdefault('max_submissions_count', 3)
 
 
     @max_submissions_count.setter
@@ -256,21 +268,21 @@ class Step:
 
         Default value: ``3``
         """
-        self.__data['max_submissions_count'] = value
+        self._data['max_submissions_count'] = value
 
 
     @readonly
     @property
     def variation(self) -> str:
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
-        return self.__data['variation']
+        return self._data['variation']
 
 
     @readonly
     @property
     def variations_count(self) -> str:
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
-        return self.__data['variations_count']
+        return self._data['variations_count']
 
 
     @readonly
@@ -283,7 +295,7 @@ class Step:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -296,7 +308,7 @@ class Step:
 
         Type: str
         """
-        return self.__data.setdefault('update_date', "None")
+        return self._data.setdefault('update_date', "None")
 
 
     @readonly
@@ -307,7 +319,7 @@ class Step:
 
         Default value: ``0``
         """
-        return self.__data['discussions_count']
+        return self._data['discussions_count']
 
 
     @readonly
@@ -316,7 +328,7 @@ class Step:
         """
         Discussion tree's identifier
         """
-        return self.__data['discussion_proxy']
+        return self._data['discussion_proxy']
 
 
     @readonly
@@ -327,60 +339,71 @@ class Step:
 
         Type: List[str]
         """
-        return self.__data['discussion_threads']
+        return self._data['discussion_threads']
 
 
 
 
 class BlockView:
+    _resources_name = 'steps'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'BlockView(id={self.id!r})'
+        return f'BlockView(id={self.name!r})'
+
+
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model BlockView are missing')
 
 
     @required
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @name.setter
     def name(self, value: str):
-        self.__data['name'] = value
+        self._data['name'] = value
 
 
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
     @property
     def video(self) -> str:
-        return self.__data['video']
+        return self._data['video']
 
 
     @video.setter
     def video(self, value: str):
-        self.__data['video'] = value
+        self._data['video'] = value
 
 
     @property
     def animation(self) -> str:
-        return self.__data['animation']
+        return self._data['animation']
 
 
     @animation.setter
     def animation(self, value: str):
-        self.__data['animation'] = value
+        self._data['animation'] = value
 
 
     @readonly
@@ -391,12 +414,12 @@ class BlockView:
 
         Default value: ``{}``
         """
-        return self.__data['options']
+        return self._data['options']
 
 
     @readonly
     @property
     def subtitle_files(self) -> str:
-        return self.__data['subtitle_files']
+        return self._data['subtitle_files']
 
 

@@ -1,83 +1,97 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
-
-{% for model, struct in models.items() -%}
-{% for class, py_module_name in imports.items() %}
-from {{ py_module_name }} import {{ class }}
+{% for model_name, py_module_name in imports.items() if model_name not in models %}
+from {{ py_module_name }} import {{ model_name }}
 {% endfor %}
+{% for model in models.values() %}
 
 
-class {{ model | replace('Serializer', '') }}:
+class {{ model.id }}:
+    _resources_name = '{{ model.schema.resources_name }}'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        {# self._required = {{ model.required }} #}
+        self._check_fields(data)
 
 
     def __repr__(self):
-        return f'{{ model | replace('Serializer', '') }}(id={self.id!r})'
+        return f'{{ model.id }}(id={self.{{ model.required[0] }}!r})'
 
 
-{% for prop, at in struct['resources'].items() %}
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model {{ model.id }} are missing')
+
+
+{% for pr in model.resources.values() %}
     @property
-    def {{ prop }}(self) -> Resources{{ at['new_type'] }}:
-    {% if at.docstring %}
+    def {{ pr.name }}(self) -> ResourcesList[{{ pr.type }}]:
+    {% if pr.docstring %}
         """
-        {{ at.docstring | indent(width=8) }}
+        {{ pr.docstring | indent(width=8) }}
         """
     {% endif %}
-        return Resources{{ at['new_type'] }}({{ at['type'] }}, self.__stepik, self, '{{ at.from_name }}_ids')
+        return ResourcesList[{{ pr.type }}]\
+            ({{ pr.type }}, self._stepik, holder=self, field_with_ids='{{ pr.rename }}')
 
 
 {% endfor %}
-{% for prop, at in struct['methods'].items() %}
-    def {{ prop }}(self) -> {{ at['new_type'] }}:
-    {% if at.docstring %}
+{% for pr in model.methods.values() %}
+    def {{ pr.name }}(self) -> {{ pr.type }}:
+    {% if pr.docstring %}
         """
-        {{ at.docstring | indent(width=8) }}
+        {{ pr.docstring | indent(width=8) }}
         """
     {% endif %}
-        return {{ at['type'] }}(self.__stepik, self.__stepik._fetch_object('{{ at['type'] }}', self.{{ at['rename'] }}))
+        return {{ pr.type }}{#
+            #}(self._stepik, self._stepik._fetch_object({{ pr.type }}, self.{{ pr.rename }}))
 
 
 {% endfor %}
-{% for prop, at in struct.properties.items() %}
-{% if at.required %}
+{% for pr in model.properties.values() %}
+{% if pr.required %}
     @required
-{% endif %}
-{% if at.readOnly %}
+{% endif %}{% if pr.readOnly %}
     @readonly
 {% endif %}
     @property
-    def {{ prop }}(self) -> {{ at.python_type }}:
-    {% if at.docstring %}
+    def {{ pr.name }}(self) -> {{ pr.python_type }}:
+    {% if pr.docstring %}
         """
-        {{ at.docstring | indent(width=8) }}
+        {{ pr.docstring | indent(width=8) }}
         """
     {% endif %}
-    {% if at.deprecated %}
+    {% if pr.deprecated %}
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
-    {% if at.defaultValue %}
-        return self.__data.setdefault('{{ prop }}', {{ at.defaultValue }})
+    {% if pr.defaultValue %}
+        return self._data.setdefault('{{ pr.name }}', {{ pr.defaultValue }})
     {% else %}
-        return self.__data['{{ at.from_name or prop }}']
+        return self._data['{{ pr.api_name or pr.name }}']
     {% endif %}
 
 
-{% if not at.readOnly %}
-    @{{ prop }}.setter
-    def {{ prop }}(self, value: {{ at.python_type }}):
-    {% if at.docstring %}
+{% if not pr.readOnly %}
+    @{{ pr.name }}.setter
+    def {{ pr.name }}(self, value: {{ pr.python_type }}):
+    {% if pr.docstring %}
         """
-        {{ at.docstring | indent(width=8) }}
+        {{ pr.docstring | indent(width=8) }}
         """
     {% endif %}
-    {% if at.deprecated %}
+    {% if pr.deprecated %}
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
-        self.__data['{{ at.from_name or prop }}'] = value
+        self._data['{{ pr.api_name or pr.name }}'] = value
 
 
 {% endif %}

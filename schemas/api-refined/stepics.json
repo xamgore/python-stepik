@@ -2,6 +2,9 @@
   "models": {
     "StepicsSerializer": {
       "id": "StepicsSerializer",
+      "required": [
+        "user"
+      ],
       "properties": {
         "total_quizzes": {
           "type": "integer"

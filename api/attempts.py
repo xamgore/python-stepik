@@ -1,36 +1,48 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Attempt:
+    _resources_name = 'attempts'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Attempt(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Attempt are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @readonly
     @property
     def dataset(self) -> str:
-        return self.__data['dataset']
+        return self._data['dataset']
 
 
     @readonly
     @property
     def dataset_url(self) -> str:
-        return self.__data['dataset_url']
+        return self._data['dataset_url']
 
 
     @readonly
@@ -41,7 +53,7 @@ class Attempt:
 
         Type: str
         """
-        return self.__data.setdefault('time', "None")
+        return self._data.setdefault('time', "None")
 
 
     @readonly
@@ -52,29 +64,29 @@ class Attempt:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @readonly
     @property
     def time_left(self) -> int:
-        return self.__data['time_left']
+        return self._data['time_left']
 
 
     @required
     @property
     def step(self) -> str:
-        return self.__data['step']
+        return self._data['step']
 
 
     @step.setter
     def step(self, value: str):
-        self.__data['step'] = value
+        self._data['step'] = value
 
 
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 

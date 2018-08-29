@@ -1,66 +1,78 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Announcement:
+    _resources_name = 'announcements'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Announcement(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Announcement are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @required
     @property
     def subject(self) -> str:
-        return self.__data['subject']
+        return self._data['subject']
 
 
     @subject.setter
     def subject(self, value: str):
-        self.__data['subject'] = value
+        self._data['subject'] = value
 
 
     @required
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
     @readonly
@@ -71,7 +83,7 @@ class Announcement:
 
         Type: str
         """
-        return self.__data.setdefault('create_date', "None")
+        return self._data.setdefault('create_date', "None")
 
 
     @readonly
@@ -82,7 +94,7 @@ class Announcement:
 
         Type: str
         """
-        return self.__data.setdefault('next_date', "None")
+        return self._data.setdefault('next_date', "None")
 
 
     @readonly
@@ -93,7 +105,7 @@ class Announcement:
 
         Type: str
         """
-        return self.__data.setdefault('sent_date', "None")
+        return self._data.setdefault('sent_date', "None")
 
 
     @readonly
@@ -104,7 +116,7 @@ class Announcement:
 
         Type: str
         """
-        return self.__data.setdefault('status', "None")
+        return self._data.setdefault('status', "None")
 
 
     @property
@@ -112,7 +124,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        return self.__data['is_restricted_by_score']
+        return self._data['is_restricted_by_score']
 
 
     @is_restricted_by_score.setter
@@ -120,7 +132,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        self.__data['is_restricted_by_score'] = value
+        self._data['is_restricted_by_score'] = value
 
 
     @required
@@ -129,7 +141,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['score_percent_min']
+        return self._data['score_percent_min']
 
 
     @score_percent_min.setter
@@ -137,7 +149,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        self.__data['score_percent_min'] = value
+        self._data['score_percent_min'] = value
 
 
     @required
@@ -146,7 +158,7 @@ class Announcement:
         """
         Default value: ``100``
         """
-        return self.__data.setdefault('score_percent_max', 100)
+        return self._data.setdefault('score_percent_max', 100)
 
 
     @score_percent_max.setter
@@ -154,17 +166,17 @@ class Announcement:
         """
         Default value: ``100``
         """
-        self.__data['score_percent_max'] = value
+        self._data['score_percent_max'] = value
 
 
     @property
     def email_template(self) -> str:
-        return self.__data['email_template']
+        return self._data['email_template']
 
 
     @email_template.setter
     def email_template(self, value: str):
-        self.__data['email_template'] = value
+        self._data['email_template'] = value
 
 
     @property
@@ -172,7 +184,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        return self.__data['is_scheduled']
+        return self._data['is_scheduled']
 
 
     @is_scheduled.setter
@@ -180,7 +192,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        self.__data['is_scheduled'] = value
+        self._data['is_scheduled'] = value
 
 
     @property
@@ -190,7 +202,7 @@ class Announcement:
 
         Type: str
         """
-        return self.__data.setdefault('start_date', "None")
+        return self._data.setdefault('start_date', "None")
 
 
     @start_date.setter
@@ -200,7 +212,7 @@ class Announcement:
 
         Type: str
         """
-        self.__data['start_date'] = value
+        self._data['start_date'] = value
 
 
     @required
@@ -209,7 +221,7 @@ class Announcement:
         """
         Default value: ``7``
         """
-        return self.__data.setdefault('mail_period_days', 7)
+        return self._data.setdefault('mail_period_days', 7)
 
 
     @mail_period_days.setter
@@ -217,7 +229,7 @@ class Announcement:
         """
         Default value: ``7``
         """
-        self.__data['mail_period_days'] = value
+        self._data['mail_period_days'] = value
 
 
     @required
@@ -226,7 +238,7 @@ class Announcement:
         """
         Default value: ``1``
         """
-        return self.__data.setdefault('mail_quantity', 1)
+        return self._data.setdefault('mail_quantity', 1)
 
 
     @mail_quantity.setter
@@ -234,7 +246,7 @@ class Announcement:
         """
         Default value: ``1``
         """
-        self.__data['mail_quantity'] = value
+        self._data['mail_quantity'] = value
 
 
     @property
@@ -242,7 +254,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        return self.__data['is_infinite']
+        return self._data['is_infinite']
 
 
     @is_infinite.setter
@@ -250,7 +262,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        self.__data['is_infinite'] = value
+        self._data['is_infinite'] = value
 
 
     @property
@@ -258,7 +270,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        return self.__data['on_enroll']
+        return self._data['on_enroll']
 
 
     @on_enroll.setter
@@ -266,7 +278,7 @@ class Announcement:
         """
         Default value: ``False``
         """
-        self.__data['on_enroll'] = value
+        self._data['on_enroll'] = value
 
 
     @required
@@ -276,7 +288,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['publish_count']
+        return self._data['publish_count']
 
 
     @required
@@ -286,7 +298,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['queue_count']
+        return self._data['queue_count']
 
 
     @required
@@ -296,7 +308,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['sent_count']
+        return self._data['sent_count']
 
 
     @required
@@ -306,7 +318,7 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['open_count']
+        return self._data['open_count']
 
 
     @required
@@ -316,24 +328,24 @@ class Announcement:
         """
         Default value: ``0``
         """
-        return self.__data['click_count']
+        return self._data['click_count']
 
 
     @readonly
     @property
     def estimated_start_date(self) -> str:
-        return self.__data['estimated_start_date']
+        return self._data['estimated_start_date']
 
 
     @readonly
     @property
     def estimated_finish_date(self) -> str:
-        return self.__data['estimated_finish_date']
+        return self._data['estimated_finish_date']
 
 
     @readonly
     @property
     def notice_dates(self) -> str:
-        return self.__data['notice_dates']
+        return self._data['notice_dates']
 
 

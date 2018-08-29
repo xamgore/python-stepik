@@ -1,56 +1,68 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Attachment:
+    _resources_name = 'attachments'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Attachment(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Attachment are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @readonly
     @property
     def name(self) -> str:
-        return self.__data['name']
+        return self._data['name']
 
 
     @readonly
     @property
     def size(self) -> str:
-        return self.__data['size']
+        return self._data['size']
 
 
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @course.setter
     def course(self, value: str):
-        self.__data['course'] = value
+        self._data['course'] = value
 
 
     @property
     def lesson(self) -> str:
-        return self.__data['lesson']
+        return self._data['lesson']
 
 
     @lesson.setter
     def lesson(self, value: str):
-        self.__data['lesson'] = value
+        self._data['lesson'] = value
 
 
     @required
@@ -61,7 +73,7 @@ class Attachment:
 
         Type: str
         """
-        return self.__data.setdefault('file', "None")
+        return self._data.setdefault('file', "None")
 
 
     @file.setter
@@ -71,12 +83,12 @@ class Attachment:
 
         Type: str
         """
-        self.__data['file'] = value
+        self._data['file'] = value
 
 
     @readonly
     @property
     def has_clones(self) -> str:
-        return self.__data['has_clones']
+        return self._data['has_clones']
 
 

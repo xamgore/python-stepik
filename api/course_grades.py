@@ -1,44 +1,56 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class CourseGrade:
+    _resources_name = 'course-grades'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'CourseGrade(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model CourseGrade are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @readonly
     @property
     def course(self) -> str:
-        return self.__data['course']
+        return self._data['course']
 
 
     @required
     @readonly
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @readonly
     @property
     def results(self) -> str:
-        return self.__data['results']
+        return self._data['results']
 
 
     @required
@@ -50,31 +62,31 @@ class CourseGrade:
 
         Type: str
         """
-        return self.__data.setdefault('score', "0")
+        return self._data.setdefault('score', "0")
 
 
     @readonly
     @property
     def rank(self) -> int:
-        return self.__data['rank']
+        return self._data['rank']
 
 
     @readonly
     @property
     def rank_max(self) -> int:
-        return self.__data['rank_max']
+        return self._data['rank_max']
 
 
     @readonly
     @property
     def rank_position(self) -> int:
-        return self.__data['rank_position']
+        return self._data['rank_position']
 
 
     @readonly
     @property
     def users_count(self) -> int:
-        return self.__data['users_count']
+        return self._data['users_count']
 
 
     @readonly
@@ -83,7 +95,7 @@ class CourseGrade:
         """
         Default value: ``False``
         """
-        return self.__data['is_teacher']
+        return self._data['is_teacher']
 
 
     @readonly
@@ -94,7 +106,7 @@ class CourseGrade:
 
         Type: str
         """
-        return self.__data.setdefault('date_joined', "None")
+        return self._data.setdefault('date_joined', "None")
 
 
     @readonly
@@ -105,36 +117,36 @@ class CourseGrade:
 
         Type: str
         """
-        return self.__data.setdefault('last_viewed', "None")
+        return self._data.setdefault('last_viewed', "None")
 
 
     @readonly
     @property
     def certificate_issue_date(self) -> str:
-        return self.__data['certificate_issue_date']
+        return self._data['certificate_issue_date']
 
 
     @readonly
     @property
     def certificate_issue_regular_date(self) -> str:
-        return self.__data['certificate_issue_regular_date']
+        return self._data['certificate_issue_regular_date']
 
 
     @readonly
     @property
     def certificate_issue_distinction_date(self) -> str:
-        return self.__data['certificate_issue_distinction_date']
+        return self._data['certificate_issue_distinction_date']
 
 
     @readonly
     @property
     def certificate_update_date(self) -> str:
-        return self.__data['certificate_update_date']
+        return self._data['certificate_update_date']
 
 
     @readonly
     @property
     def certificate_url(self) -> str:
-        return self.__data['certificate_url']
+        return self._data['certificate_url']
 
 

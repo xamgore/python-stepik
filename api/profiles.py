@@ -1,52 +1,64 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Profile:
+    _resources_name = 'profiles'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Profile(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Profile are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def first_name(self) -> str:
-        return self.__data['first_name']
+        return self._data['first_name']
 
 
     @first_name.setter
     def first_name(self, value: str):
-        self.__data['first_name'] = value
+        self._data['first_name'] = value
 
 
     @required
     @property
     def last_name(self) -> str:
-        return self.__data['last_name']
+        return self._data['last_name']
 
 
     @last_name.setter
     def last_name(self, value: str):
-        self.__data['last_name'] = value
+        self._data['last_name'] = value
 
 
     @readonly
     @property
     def full_name(self) -> str:
-        return self.__data['full_name']
+        return self._data['full_name']
 
 
     @property
@@ -54,7 +66,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        return self.__data['is_private']
+        return self._data['is_private']
 
 
     @is_private.setter
@@ -62,13 +74,13 @@ class Profile:
         """
         Default value: ``False``
         """
-        self.__data['is_private'] = value
+        self._data['is_private'] = value
 
 
     @readonly
     @property
     def avatar(self) -> str:
-        return self.__data['avatar']
+        return self._data['avatar']
 
 
     @required
@@ -79,7 +91,7 @@ class Profile:
 
         Type: str
         """
-        return self.__data.setdefault('language', "en")
+        return self._data.setdefault('language', "en")
 
 
     @language.setter
@@ -89,37 +101,37 @@ class Profile:
 
         Type: str
         """
-        self.__data['language'] = value
+        self._data['language'] = value
 
 
     @property
     def city(self) -> str:
-        return self.__data['city']
+        return self._data['city']
 
 
     @city.setter
     def city(self, value: str):
-        self.__data['city'] = value
+        self._data['city'] = value
 
 
     @property
     def short_bio(self) -> str:
-        return self.__data['short_bio']
+        return self._data['short_bio']
 
 
     @short_bio.setter
     def short_bio(self, value: str):
-        self.__data['short_bio'] = value
+        self._data['short_bio'] = value
 
 
     @property
     def details(self) -> str:
-        return self.__data['details']
+        return self._data['details']
 
 
     @details.setter
     def details(self, value: str):
-        self.__data['details'] = value
+        self._data['details'] = value
 
 
     @property
@@ -127,7 +139,7 @@ class Profile:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('subscribed_for_mail', True)
+        return self._data.setdefault('subscribed_for_mail', True)
 
 
     @subscribed_for_mail.setter
@@ -135,7 +147,7 @@ class Profile:
         """
         Default value: ``True``
         """
-        self.__data['subscribed_for_mail'] = value
+        self._data['subscribed_for_mail'] = value
 
 
     @property
@@ -145,7 +157,7 @@ class Profile:
 
         Type: str
         """
-        return self.__data.setdefault('notification_email_delay', "None")
+        return self._data.setdefault('notification_email_delay', "None")
 
 
     @notification_email_delay.setter
@@ -155,13 +167,13 @@ class Profile:
 
         Type: str
         """
-        self.__data['notification_email_delay'] = value
+        self._data['notification_email_delay'] = value
 
 
     @readonly
     @property
     def notification_status(self) -> str:
-        return self.__data['notification_status']
+        return self._data['notification_status']
 
 
     @readonly
@@ -172,7 +184,7 @@ class Profile:
 
         Default value: ``False``
         """
-        return self.__data['is_staff']
+        return self._data['is_staff']
 
 
     @readonly
@@ -181,25 +193,25 @@ class Profile:
         """
         Default value: ``False``
         """
-        return self.__data['is_guest']
+        return self._data['is_guest']
 
 
     @readonly
     @property
     def can_add_lesson(self) -> str:
-        return self.__data['can_add_lesson']
+        return self._data['can_add_lesson']
 
 
     @readonly
     @property
     def can_add_course(self) -> str:
-        return self.__data['can_add_course']
+        return self._data['can_add_course']
 
 
     @readonly
     @property
     def can_add_group(self) -> str:
-        return self.__data['can_add_group']
+        return self._data['can_add_group']
 
 
     @property
@@ -207,7 +219,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        return self.__data['subscribed_for_marketing']
+        return self._data['subscribed_for_marketing']
 
 
     @subscribed_for_marketing.setter
@@ -215,7 +227,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        self.__data['subscribed_for_marketing'] = value
+        self._data['subscribed_for_marketing'] = value
 
 
     @property
@@ -223,7 +235,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        return self.__data['subscribed_for_partners']
+        return self._data['subscribed_for_partners']
 
 
     @subscribed_for_partners.setter
@@ -231,7 +243,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        self.__data['subscribed_for_partners'] = value
+        self._data['subscribed_for_partners'] = value
 
 
     @property
@@ -239,7 +251,7 @@ class Profile:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('subscribed_for_news_en', True)
+        return self._data.setdefault('subscribed_for_news_en', True)
 
 
     @subscribed_for_news_en.setter
@@ -247,7 +259,7 @@ class Profile:
         """
         Default value: ``True``
         """
-        self.__data['subscribed_for_news_en'] = value
+        self._data['subscribed_for_news_en'] = value
 
 
     @property
@@ -255,7 +267,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        return self.__data['subscribed_for_news_ru']
+        return self._data['subscribed_for_news_ru']
 
 
     @subscribed_for_news_ru.setter
@@ -263,7 +275,7 @@ class Profile:
         """
         Default value: ``False``
         """
-        self.__data['subscribed_for_news_ru'] = value
+        self._data['subscribed_for_news_ru'] = value
 
 
     @required
@@ -272,7 +284,7 @@ class Profile:
         """
         Default value: ``0``
         """
-        return self.__data['bit_field']
+        return self._data['bit_field']
 
 
     @bit_field.setter
@@ -280,7 +292,7 @@ class Profile:
         """
         Default value: ``0``
         """
-        self.__data['bit_field'] = value
+        self._data['bit_field'] = value
 
 
     @required
@@ -290,74 +302,74 @@ class Profile:
         """
         Default value: ``0``
         """
-        return self.__data['level']
+        return self._data['level']
 
 
     @readonly
     @property
     def level_title(self) -> str:
-        return self.__data['level_title']
+        return self._data['level_title']
 
 
     @readonly
     @property
     def level_abilities(self) -> str:
-        return self.__data['level_abilities']
+        return self._data['level_abilities']
 
 
     @readonly
     @property
     def has_password(self) -> str:
-        return self.__data['has_password']
+        return self._data['has_password']
 
 
     @readonly
     @property
     def social_accounts(self) -> str:
-        return self.__data['social_accounts']
+        return self._data['social_accounts']
 
 
     @readonly
     @property
     def email_addresses(self) -> str:
-        return self.__data['email_addresses']
+        return self._data['email_addresses']
 
 
     @readonly
     @property
     def is_email_verified(self) -> str:
-        return self.__data['is_email_verified']
+        return self._data['is_email_verified']
 
 
     @readonly
     @property
     def invite_url(self) -> str:
-        return self.__data['invite_url']
+        return self._data['invite_url']
 
 
     @readonly
     @property
     def telegram_bot_url(self) -> str:
-        return self.__data['telegram_bot_url']
+        return self._data['telegram_bot_url']
 
 
     @required
     @readonly
     @property
     def subscription_plan(self) -> str:
-        return self.__data['subscription_plan']
+        return self._data['subscription_plan']
 
 
     @readonly
     @property
     def experiment_choices(self) -> str:
-        return self.__data['experiment_choices']
+        return self._data['experiment_choices']
 
 
     @readonly
     @property
     def allowed_private_courses_count(self) -> str:
-        return self.__data['allowed_private_courses_count']
+        return self._data['allowed_private_courses_count']
 
 
     @property
@@ -365,7 +377,7 @@ class Profile:
         """
         Default value: ``True``
         """
-        return self.__data.setdefault('is_web_push_enabled', True)
+        return self._data.setdefault('is_web_push_enabled', True)
 
 
     @is_web_push_enabled.setter
@@ -373,6 +385,6 @@ class Profile:
         """
         Default value: ``True``
         """
-        self.__data['is_web_push_enabled'] = value
+        self._data['is_web_push_enabled'] = value
 
 

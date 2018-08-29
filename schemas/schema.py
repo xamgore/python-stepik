@@ -62,12 +62,15 @@ class Property:
         self.format = prop.get('format', None)
         self.enum: List[Any] = prop.get('enum', None)
         self.rename = prop.get('rename', None)
+        """New name (lesson_id)"""
         self.new_type = prop.get('new_type', None)
         self.items: Dict[str, str] = prop.get('items', None)
         self.deprecated: bool = prop.get('deprecated', None)
         """Contains {"type": "string"}, when self.type equals to \"array\""""
 
         check_other_fields(self, prop)
+        self.type = self.type[:-len('Serializer')] \
+            if self.type.endswith('Serializer') else self.type
 
 
     @property

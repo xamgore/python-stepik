@@ -1,46 +1,58 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class ServiceRequest:
+    _resources_name = 'service-requests'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'ServiceRequest(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model ServiceRequest are missing')
+
+
     @readonly
     @property
     def id(self) -> str:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def target(self) -> str:
-        return self.__data['target']
+        return self._data['target']
 
 
     @target.setter
     def target(self, value: str):
-        self.__data['target'] = value
+        self._data['target'] = value
 
 
     @required
     @property
     def method(self) -> str:
-        return self.__data['method']
+        return self._data['method']
 
 
     @method.setter
     def method(self, value: str):
-        self.__data['method'] = value
+        self._data['method'] = value
 
 
     @property
@@ -48,7 +60,7 @@ class ServiceRequest:
         """
         Default value: ``[]``
         """
-        return self.__data['args']
+        return self._data['args']
 
 
     @args.setter
@@ -56,7 +68,7 @@ class ServiceRequest:
         """
         Default value: ``[]``
         """
-        self.__data['args'] = value
+        self._data['args'] = value
 
 
     @property
@@ -64,7 +76,7 @@ class ServiceRequest:
         """
         Default value: ``{}``
         """
-        return self.__data['kwargs']
+        return self._data['kwargs']
 
 
     @kwargs.setter
@@ -72,18 +84,18 @@ class ServiceRequest:
         """
         Default value: ``{}``
         """
-        self.__data['kwargs'] = value
+        self._data['kwargs'] = value
 
 
     @readonly
     @property
     def status(self) -> str:
-        return self.__data['status']
+        return self._data['status']
 
 
     @readonly
     @property
     def result(self) -> str:
-        return self.__data['result']
+        return self._data['result']
 
 

@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class StoryTemplate:
+    _resources_name = 'story-templates'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'StoryTemplate(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model StoryTemplate are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def title(self) -> str:
-        return self.__data['title']
+        return self._data['title']
 
 
     @title.setter
     def title(self, value: str):
-        self.__data['title'] = value
+        self._data['title'] = value
 
 
     @required
@@ -40,7 +52,7 @@ class StoryTemplate:
 
         Default value: ``[]``
         """
-        return self.__data['parts']
+        return self._data['parts']
 
 
     @parts.setter
@@ -50,7 +62,7 @@ class StoryTemplate:
 
         Default value: ``[]``
         """
-        self.__data['parts'] = value
+        self._data['parts'] = value
 
 
     @required
@@ -61,7 +73,7 @@ class StoryTemplate:
 
         Type: str
         """
-        return self.__data.setdefault('cover', "None")
+        return self._data.setdefault('cover', "None")
 
 
     @cover.setter
@@ -71,7 +83,7 @@ class StoryTemplate:
 
         Type: str
         """
-        self.__data['cover'] = value
+        self._data['cover'] = value
 
 
     @property
@@ -79,7 +91,7 @@ class StoryTemplate:
         """
         Default value: ``False``
         """
-        return self.__data['is_published']
+        return self._data['is_published']
 
 
     @is_published.setter
@@ -87,6 +99,6 @@ class StoryTemplate:
         """
         Default value: ``False``
         """
-        self.__data['is_published'] = value
+        self._data['is_published'] = value
 
 

@@ -1,16 +1,17 @@
-import json
 from json import JSONDecodeError
-from typing import List, Iterable, Optional
+from typing import List, Iterable, Optional, TypeVar
 from urllib.parse import urlencode
 
 from api.courses import Course
 from api.lessons import Lesson
 from api.sections import Section
 from api.step_sources import StepSource
-from api.stepics import Environment
+from api.stepics import Stepics
 from api.steps import Step
 from api.units import Unit
 from api.users import User
+from api.videos import Video
+from errors import StepikError
 
 integer = int
 boolean = bool
@@ -18,10 +19,6 @@ decimal = float
 string, url, choice = str, str, str
 
 import requests
-
-
-class StepikError(RuntimeError):
-    pass
 
 
 class Stepik:
@@ -44,11 +41,6 @@ class Stepik:
         self.step_sources = StepSources(self)
         self.users = Users(self)
         self.steps = Steps(self)
-
-
-    def _check_fields(self, obj, model):
-        if not model._contains_all_required_fields_in(obj):
-            raise StepikError(f'Mailformed object: {json.dumps(obj)}')
 
 
     def _update(self, resource_name: str, id: int, data: dict):
@@ -84,22 +76,22 @@ class Stepik:
             return {'error': f'{res.status_code} {res.reason}'}
 
 
-    def _fetch_object(self, resource_name: str, id: int):
+    def _fetch_object(self, model: TypeVar, id: int):
         """
-        :param resource_name: the name of resource
+        :param model: the name of resource
         :param id: resource's id to grub
         """
-        from common import to_dash_case
-        response = self._get(f'{to_dash_case(resource_name)}s/{id}')
+        resource_name = model._resources_name
+        response = self._get(f'{resource_name}/{id}')
 
-        if f'{resource_name}s' not in response:
+        if resource_name not in response:
             raise StepikError(response['detail'])
 
-        return response[f'{resource_name}s'][0]
+        return response[resource_name][0]
 
 
-    def _fetch_objects(self, resource_name: str, obj_ids: List[int]):
-        from common import to_dash_case
+    def _fetch_objects(self, model: TypeVar, obj_ids: List[int]):
+        resource_name = model._resources_name
 
         # Fetch objects by 30 items,
         # so we won't bump into HTTP request length limits
@@ -108,8 +100,11 @@ class Stepik:
             ids_slice = obj_ids[i:i + step_size]
             ids = '&'.join(f'ids[]={id}' for id in ids_slice)
 
-            response = self._get(f'{to_dash_case(resource_name)}s/{ids}')
-            yield from response[f'{resource_name}s']
+            response = self._get(f'{resource_name}/?{ids}')
+            if resource_name not in response:
+                raise StepikError(response['detail'])
+
+            yield from response[resource_name]
 
 
     def _upload(self, resource_name, files, data):
@@ -133,16 +128,14 @@ class Stepik:
         else:
             raise AttributeError('file_path or file_url must be filled')
 
-        from api.videos import VideoSource
-        self._check_fields(res, VideoSource)
-        return VideoSource(self, res)
+        return Video(self, res)
 
 
-    def stepics(self) -> Environment:
+    def stepics(self) -> Stepics:
         """
         The current context: user's id, system's state.
         """
-        return Environment(self, self._fetch_object('stepic', 1))
+        return Stepics(self, self._fetch_object(Stepics, 1))
 
 
 class Courses(object):
@@ -151,7 +144,7 @@ class Courses(object):
 
 
     def get(self, course_id: int) -> Course:
-        return Course(self.stepik, self.stepik._fetch_object('course', course_id))
+        return Course(self.stepik, self.stepik._fetch_object(Course, course_id))
 
 
     def update(self, course: Course):
@@ -164,7 +157,7 @@ class Sections(object):
 
 
     def get(self, id: int) -> Section:
-        return Section(self.stepik, self.stepik._fetch_object('section', id))
+        return Section(self.stepik, self.stepik._fetch_object(Section, id))
 
 
 class Units(object):
@@ -173,18 +166,18 @@ class Units(object):
 
 
     def get(self, id: int) -> Unit:
-        return Unit(self.stepik, self.stepik._fetch_object('unit', id))
+        return Unit(self.stepik, self.stepik._fetch_object(Unit, id))
 
 
-    def fetch_all(self, ids: List[int], keep_order=True) -> Iterable[Unit]:
-        iterable = self.stepik._fetch_objects('unit', ids)
+    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Unit]:
+        iterable = self.stepik._fetch_objects(Unit, ids)
         if keep_order:
             iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
         yield from (Unit(self.stepik, o) for o in iterable)
 
 
     def update(self, unit: Unit):
-        self.stepik._update('units', unit.id, unit._Unit__data)
+        self.stepik._update('units', unit.id, unit._data)
 
 
 class Lessons(object):
@@ -193,15 +186,15 @@ class Lessons(object):
 
 
     def get(self, id: int) -> Lesson:
-        return Lesson(self._stepik, self._stepik._fetch_object('lesson', id))
+        return Lesson(self._stepik, self._stepik._fetch_object(Lesson, id))
 
 
     def get_all(self, ids: List[int], keep_order=True) -> Iterable[Lesson]:
-        objects = self._stepik._fetch_objects('lesson', ids)
+        objects = self._stepik._fetch_objects(Lesson, ids)
         iterable = (Lesson(self._stepik, o) for o in objects)
 
         if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))
 
         yield from iterable
 
@@ -262,15 +255,15 @@ class Steps(object):
         self.stepik = stepik
 
 
-    def fetch_all(self, ids: List[int], keep_order=True) -> Iterable[Step]:
-        iterable = self.stepik._fetch_objects('step', ids)
+    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Step]:
+        iterable = self.stepik._fetch_objects(Step, ids)
         if keep_order:
             iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
         yield from (Step(self.stepik, o) for o in iterable)
 
 
     def get(self, id: int) -> Step:
-        return Step(self.stepik, self.stepik._fetch_object('step', id))
+        return Step(self.stepik, self.stepik._fetch_object(Step, id))
 
 
 class StepSources(object):
@@ -279,7 +272,7 @@ class StepSources(object):
 
 
     def get(self, id: int) -> StepSource:
-        return StepSource(self.stepik, self.stepik._fetch_object('step-source', id))
+        return StepSource(self.stepik, self.stepik._fetch_object(StepSource, id))
 
 
 class Users(object):
@@ -288,7 +281,7 @@ class Users(object):
 
 
     def get(self, id: int) -> User:
-        return User(self.stepik, self.stepik._fetch_object('user', id))
+        return User(self.stepik, self.stepik._fetch_object(User, id))
 
 
 if __name__ == '__main__':
@@ -297,10 +290,10 @@ if __name__ == '__main__':
     # sections = course.sections.list()
     #
     # unit_ids = [id for sec in sections for id in sec.units_ids]
-    # units = stepik.units.fetch_all(unit_ids)
+    # units = stepik.units.get_all(unit_ids)
     #
     # lesson_ids = [u.lesson_id for u in units]
-    # lessons = stepik.lessons.fetch_all(lesson_ids)
+    # lessons = stepik.lessons.get_all(lesson_ids)
     #
     # step_ids = [id for les in lessons for id in les.steps_ids]
-    # steps = stepik.steps.fetch_all(step_ids)
+    # steps = stepik.steps.get_all(step_ids)

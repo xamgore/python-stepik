@@ -1,54 +1,66 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class AdaptivityParametersChange:
+    _resources_name = 'adaptivity-parameters-changes'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'AdaptivityParametersChange(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model AdaptivityParametersChange are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @property
     def user(self) -> str:
-        return self.__data['user']
+        return self._data['user']
 
 
     @user.setter
     def user(self, value: str):
-        self.__data['user'] = value
+        self._data['user'] = value
 
 
     @property
     def lesson(self) -> str:
-        return self.__data['lesson']
+        return self._data['lesson']
 
 
     @lesson.setter
     def lesson(self, value: str):
-        self.__data['lesson'] = value
+        self._data['lesson'] = value
 
 
     @property
     def tag(self) -> str:
-        return self.__data['tag']
+        return self._data['tag']
 
 
     @tag.setter
     def tag(self, value: str):
-        self.__data['tag'] = value
+        self._data['tag'] = value
 
 
     @required
@@ -59,7 +71,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('time', "2018-08-26T00:35:00.566Z")
+        return self._data.setdefault('time', "2018-08-26T00:35:00.566Z")
 
 
     @time.setter
@@ -69,37 +81,37 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['time'] = value
+        self._data['time'] = value
 
 
     @readonly
     @property
     def reason(self) -> str:
-        return self.__data['reason']
+        return self._data['reason']
 
 
     @readonly
     @property
     def predicted_score(self) -> str:
-        return self.__data['predicted_score']
+        return self._data['predicted_score']
 
 
     @readonly
     @property
     def real_score(self) -> str:
-        return self.__data['real_score']
+        return self._data['real_score']
 
 
     @readonly
     @property
     def solving_time(self) -> str:
-        return self.__data['solving_time']
+        return self._data['solving_time']
 
 
     @readonly
     @property
     def attempt_num(self) -> str:
-        return self.__data['attempt_num']
+        return self._data['attempt_num']
 
 
     @property
@@ -109,7 +121,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('old_user_skill', "None")
+        return self._data.setdefault('old_user_skill', "None")
 
 
     @old_user_skill.setter
@@ -119,7 +131,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['old_user_skill'] = value
+        self._data['old_user_skill'] = value
 
 
     @property
@@ -129,7 +141,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('old_user_confidence', "None")
+        return self._data.setdefault('old_user_confidence', "None")
 
 
     @old_user_confidence.setter
@@ -139,7 +151,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['old_user_confidence'] = value
+        self._data['old_user_confidence'] = value
 
 
     @property
@@ -149,7 +161,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('old_lesson_difficulty', "None")
+        return self._data.setdefault('old_lesson_difficulty', "None")
 
 
     @old_lesson_difficulty.setter
@@ -159,7 +171,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['old_lesson_difficulty'] = value
+        self._data['old_lesson_difficulty'] = value
 
 
     @property
@@ -169,7 +181,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('old_lesson_confidence', "None")
+        return self._data.setdefault('old_lesson_confidence', "None")
 
 
     @old_lesson_confidence.setter
@@ -179,7 +191,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['old_lesson_confidence'] = value
+        self._data['old_lesson_confidence'] = value
 
 
     @property
@@ -189,7 +201,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('new_user_skill', "None")
+        return self._data.setdefault('new_user_skill', "None")
 
 
     @new_user_skill.setter
@@ -199,7 +211,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['new_user_skill'] = value
+        self._data['new_user_skill'] = value
 
 
     @property
@@ -209,7 +221,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('new_user_confidence', "None")
+        return self._data.setdefault('new_user_confidence', "None")
 
 
     @new_user_confidence.setter
@@ -219,7 +231,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['new_user_confidence'] = value
+        self._data['new_user_confidence'] = value
 
 
     @property
@@ -229,7 +241,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('new_lesson_difficulty', "None")
+        return self._data.setdefault('new_lesson_difficulty', "None")
 
 
     @new_lesson_difficulty.setter
@@ -239,7 +251,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['new_lesson_difficulty'] = value
+        self._data['new_lesson_difficulty'] = value
 
 
     @property
@@ -249,7 +261,7 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        return self.__data.setdefault('new_lesson_confidence', "None")
+        return self._data.setdefault('new_lesson_confidence', "None")
 
 
     @new_lesson_confidence.setter
@@ -259,6 +271,6 @@ class AdaptivityParametersChange:
 
         Type: str
         """
-        self.__data['new_lesson_confidence'] = value
+        self._data['new_lesson_confidence'] = value
 
 

@@ -1,30 +1,42 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class User:
+    _resources_name = 'users'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'User(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model User are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @readonly
     @property
     def profile(self) -> str:
-        return self.__data['profile']
+        return self._data['profile']
 
 
     @property
@@ -32,7 +44,7 @@ class User:
         """
         Default value: ``False``
         """
-        return self.__data['is_private']
+        return self._data['is_private']
 
 
     @is_private.setter
@@ -40,7 +52,7 @@ class User:
         """
         Default value: ``False``
         """
-        self.__data['is_private'] = value
+        self._data['is_private'] = value
 
 
     @readonly
@@ -51,7 +63,7 @@ class User:
 
         Default value: ``True``
         """
-        return self.__data.setdefault('is_active', True)
+        return self._data.setdefault('is_active', True)
 
 
     @readonly
@@ -60,7 +72,7 @@ class User:
         """
         Default value: ``False``
         """
-        return self.__data['is_guest']
+        return self._data['is_guest']
 
 
     @readonly
@@ -69,65 +81,65 @@ class User:
         """
         Default value: ``False``
         """
-        return self.__data['is_organization']
+        return self._data['is_organization']
 
 
     @property
     def short_bio(self) -> str:
-        return self.__data['short_bio']
+        return self._data['short_bio']
 
 
     @short_bio.setter
     def short_bio(self, value: str):
-        self.__data['short_bio'] = value
+        self._data['short_bio'] = value
 
 
     @property
     def details(self) -> str:
-        return self.__data['details']
+        return self._data['details']
 
 
     @details.setter
     def details(self, value: str):
-        self.__data['details'] = value
+        self._data['details'] = value
 
 
     @property
     def first_name(self) -> str:
-        return self.__data['first_name']
+        return self._data['first_name']
 
 
     @first_name.setter
     def first_name(self, value: str):
-        self.__data['first_name'] = value
+        self._data['first_name'] = value
 
 
     @property
     def last_name(self) -> str:
-        return self.__data['last_name']
+        return self._data['last_name']
 
 
     @last_name.setter
     def last_name(self, value: str):
-        self.__data['last_name'] = value
+        self._data['last_name'] = value
 
 
     @readonly
     @property
     def full_name(self) -> str:
-        return self.__data['full_name']
+        return self._data['full_name']
 
 
     @readonly
     @property
     def alias(self) -> str:
-        return self.__data['alias']
+        return self._data['alias']
 
 
     @readonly
     @property
     def avatar(self) -> str:
-        return self.__data['avatar']
+        return self._data['avatar']
 
 
     @readonly
@@ -138,13 +150,13 @@ class User:
 
         Type: str
         """
-        return self.__data.setdefault('cover', "None")
+        return self._data.setdefault('cover', "None")
 
 
     @readonly
     @property
     def city(self) -> str:
-        return self.__data['city']
+        return self._data['city']
 
 
     @required
@@ -154,13 +166,13 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['level']
+        return self._data['level']
 
 
     @readonly
     @property
     def level_title(self) -> str:
-        return self.__data['level_title']
+        return self._data['level_title']
 
 
     @required
@@ -170,13 +182,13 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['knowledge']
+        return self._data['knowledge']
 
 
     @readonly
     @property
     def knowledge_rank(self) -> int:
-        return self.__data['knowledge_rank']
+        return self._data['knowledge_rank']
 
 
     @required
@@ -186,25 +198,25 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['reputation']
+        return self._data['reputation']
 
 
     @readonly
     @property
     def reputation_rank(self) -> int:
-        return self.__data['reputation_rank']
+        return self._data['reputation_rank']
 
 
     @readonly
     @property
     def join_date(self) -> str:
-        return self.__data['join_date']
+        return self._data['join_date']
 
 
     @readonly
     @property
     def social_profiles(self) -> str:
-        return self.__data['social_profiles']
+        return self._data['social_profiles']
 
 
     @required
@@ -214,7 +226,7 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['solved_steps_count']
+        return self._data['solved_steps_count']
 
 
     @required
@@ -224,7 +236,7 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['created_courses_count']
+        return self._data['created_courses_count']
 
 
     @required
@@ -234,7 +246,7 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['created_lessons_count']
+        return self._data['created_lessons_count']
 
 
     @required
@@ -244,7 +256,7 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['issued_certificates_count']
+        return self._data['issued_certificates_count']
 
 
     @required
@@ -254,6 +266,6 @@ class User:
         """
         Default value: ``0``
         """
-        return self.__data['followers_count']
+        return self._data['followers_count']
 
 

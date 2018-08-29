@@ -1,35 +1,47 @@
 # This file is generated
-from common import required, readonly
 from typing import List
+
+from errors import StepikError
+from common import required, readonly
 from resources_list import ResourcesList
 
 
-
 class Instruction:
+    _resources_name = 'instructions'
+
+
     def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+        self._data = data
+        self._check_fields(data)
 
 
     def __repr__(self):
         return f'Instruction(id={self.id!r})'
 
 
+    def _check_fields(self, obj):
+        # Ensure, all required fields are in the data-object
+        if not all(f in obj.keys() for f in self._data):
+            raise StepikError('Some fields required by the model Instruction are missing')
+
+
     @readonly
     @property
     def id(self) -> int:
-        return self.__data['id']
+        return self._data['id']
 
 
     @required
     @property
     def step(self) -> str:
-        return self.__data['step']
+        return self._data['step']
 
 
     @step.setter
     def step(self, value: str):
-        self.__data['step'] = value
+        self._data['step'] = value
 
 
     @required
@@ -38,7 +50,7 @@ class Instruction:
         """
         Default value: ``3``
         """
-        return self.__data.setdefault('min_reviews', 3)
+        return self._data.setdefault('min_reviews', 3)
 
 
     @min_reviews.setter
@@ -46,7 +58,7 @@ class Instruction:
         """
         Default value: ``3``
         """
-        self.__data['min_reviews'] = value
+        self._data['min_reviews'] = value
 
 
     @property
@@ -56,7 +68,7 @@ class Instruction:
 
         Type: str
         """
-        return self.__data.setdefault('strategy_type', "None")
+        return self._data.setdefault('strategy_type', "None")
 
 
     @strategy_type.setter
@@ -66,33 +78,33 @@ class Instruction:
 
         Type: str
         """
-        self.__data['strategy_type'] = value
+        self._data['strategy_type'] = value
 
 
     @required
     @property
     def rubrics(self) -> str:
-        return self.__data['rubrics']
+        return self._data['rubrics']
 
 
     @rubrics.setter
     def rubrics(self, value: str):
-        self.__data['rubrics'] = value
+        self._data['rubrics'] = value
 
 
     @readonly
     @property
     def is_frozen(self) -> bool:
-        return self.__data['is_frozen']
+        return self._data['is_frozen']
 
 
     @property
     def text(self) -> str:
-        return self.__data['text']
+        return self._data['text']
 
 
     @text.setter
     def text(self, value: str):
-        self.__data['text'] = value
+        self._data['text'] = value
 
 
