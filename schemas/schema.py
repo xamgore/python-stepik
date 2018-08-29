@@ -1,6 +1,7 @@
 from typing import Dict, List, Any
 
-debug = False
+__debug = False
+
 
 def check_other_fields(self, data, ignore: List[str] = None):
     known_fields = (ignore or []) + list(self.__dict__.keys())
@@ -69,6 +70,34 @@ class Property:
         check_other_fields(self, prop)
 
 
+    @property
+    def python_type(self):
+        """Return the python type"""
+        ty = self.type or self.dataType
+
+        if ty == 'dict' or ty.startswith('List[') or ty.startswith('Optional['):
+            return ty
+        if ty == 'string':
+            return 'str'
+        if ty == 'integer':
+            return 'int'
+        if ty == 'boolean':
+            return 'bool'
+        if ty == 'decimal':
+            return 'float'
+        if ty == 'enum':
+            return 'str'
+        if self.description == 'Enter a valid JSON object':
+            self.description = None
+            return 'dict' if (self.defaultValue == '{}') else 'List'
+        if ty == '':
+            return 'bool' if self.name.startswith('is_') else 'Any'
+        # TODO: take from model
+        return 'str' # TODO something with that
+        # raise AttributeError(
+        #     f'There is an unknown type "{ty}", add it to {self.__class__.__name__}.python_type property please')
+
+
 class Operation:
     def __init__(self, data):
         self.type: str = data['type']
@@ -104,8 +133,7 @@ class Route:
         if self.get and self.get.method != 'GET':
             raise AttributeError('Swagger generates only GET methods, need intervention')
 
-        global debug
-        if self.get and self.get.type == 'object' and debug:
+        if self.get and self.get.type == 'object' and globals()['__debug']:
             print(f'Route {self.url} has type "object", that\'s strange')
             # models_with_names_like_url = \
             #     [m for m in self.schema.models.values() if m.id[:-2] in self.route]
@@ -141,8 +169,9 @@ class Route:
 
 
 class Model:
-    def __init__(self, struct):
-        self.id: str = struct['id'][: -len('Serializer')]
+    def __init__(self, struct, schema):
+        id = struct['id'][: -len('Serializer')]
+        self.id = id[: -len('Source')] if id.endswith('VideoSource') else id
         self.required: List[str] = struct.get('required', [])
         """
         Contains names of properties. For usual models this field is useless,
@@ -152,15 +181,16 @@ class Model:
         self.properties: Dict[str, Property] = \
             {k: Property(k, p) for k, p in struct['properties'].items()}
         check_other_fields(self, struct)
+        self.schema = schema
 
 
 class Schema:
-    def __init__(self, schema):
+    def __init__(self, schema, base_methods=None, pk_methods=None):
         self.resourcePath: str = schema['resourcePath']
         self.ordering: List[str] = schema.get('ordering', [])
 
         models: Dict[str, Model] = \
-            {m.id: m for m in map(Model, schema['models'].values())}
+            {m.id: m for m in map(lambda x: Model(x, self), schema['models'].values())}
         self.write_models: Dict[str, Model] = \
             {m.id: m for m in models.values() if m.id.startswith('Write')}
         self.models: Dict[str, Model] = \
@@ -170,7 +200,10 @@ class Schema:
             {r.url: r for r in map(lambda x: Route(x, self), schema['apis']) if '{pk}/' not in r.url}
         check_other_fields(self, schema, ignore=['apiVersion', 'swaggerVersion', 'basePath', 'apis'])
 
+        self.base_methods = base_methods
         self.base_route = self.routes.get(self.resourcePath, None)
+
+        self.pk_methods = pk_methods
         self.pk_route = self.routes.get(self.resourcePath + '/{pk}', None)
 
 
@@ -182,15 +215,9 @@ class Schema:
 
 
     @property
-    def there_is_no_models(self) -> bool:
-        return len(self.models) == 0
-
-
-    @property
-    def supports(self) -> Dict[str, bool]:
-        return {
-            "list": self.base_route and (self.base_route.get is not None),
-        }
+    def py_module_name(self) -> str:
+        """Full module name, where schema will be saved, i.e., ``api.step_sources``"""
+        return self.resources_name.replace('/', '.').replace('-', '_')
 
 
 ##############
@@ -205,65 +232,17 @@ class Schema:
 
 
 def load_schemas() -> List[Schema]:
-    from schemas.structure import schemas
-    return list(map(Schema, schemas()))
+    from schemas.structure import schemas, base_methods, pk_methods
 
-
-def print_routes():
-    global schemas
-    for s in schemas:
-
-        # "ok schema", there is base & pk routes with only model
-        if s.base_route and s.pk_route and s.base_route.get and s.pk_route.get and s.base_route.get.type == s.pk_route.get.type and s.pk_route.get.type in s.models:
-            print('everything')
-
-        # have just pk route with only model
-        if not s.base_route and s.pk_route and s.pk_route.get and s.pk_route.get.type in s.models:
-            print('get-id / put-post-id')
-
-        # have just base route with only model
-        if s.base_route and not s.pk_route and s.base_route.get and s.base_route.get.type in s.models:
-            print('get-list / post-list')
-
-        # old routes, we don't know, what to do with them
-        if s.base_route and not s.base_route.get and s.there_is_no_models:
-            print('nothing')
-
-        # these have only PUT method by {pk}
-        if not s.base_route and s.pk_route and not s.pk_route.get and len(s.models) == 1:
-            print('put-post-id')
-
-        # these have only POST method by base
-        if not s.pk_route and s.base_route and not s.base_route.get and len(s.models) == 1:
-            print('post-list')
-
-        # if s.base_route and not s.base_route.get:
-
-        print(s.resourcePath)
-        print(f'  Routes: {len(s.routes)}')
-
-        if s.base_route:
-            print(f'  base: {s.base_route}')
-            if s.base_route.get:
-                print(f'    + op: {s.base_route.get.type}')
-            else:
-                print(f'    - op: NONE')
-
-        if s.pk_route:
-            print(f'  pk: {s.pk_route}')
-            if s.pk_route.get:
-                print(f'    + op: {s.pk_route.get.type}')
-            else:
-                print(f'    - op: NONE')
-
-        if s.models:
-            print(' ', *[m for m in s.models], sep=' ')
-        print()
+    result = []
+    for sch in schemas():
+        res = sch['resourcePath']
+        result.append(Schema(sch, base_methods.get(res, None), pk_methods.get(res, None)))
+    return result
 
 
 if __name__ == '__main__':
-    debug = True
-# print_routes()
+    __debug = True
 
 # from common import to_dash_case
 # for s in schemas:
@@ -295,5 +274,3 @@ if __name__ == '__main__':
 #         print('   ', [
 #             (p.name, p.type) for m in s.models.values()
 #             for p in m.properties.values() if pr.name == p.name])
-
-

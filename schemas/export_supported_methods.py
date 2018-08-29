@@ -25,8 +25,8 @@ if __name__ == '__main__':
     dir = 'api-refined/metadata'
     pathlib.Path(dir).mkdir(parents=True, exist_ok=True)
 
-    with open(f'{dir}/base.methods.json', 'w') as f:
+    with open(f'{dir}/methods.base.json', 'w') as f:
         json.dump(routes, f, indent=2)
 
-    with open(f'{dir}/pk.methods.json', 'w') as f:
+    with open(f'{dir}/methods.pk.json', 'w') as f:
         json.dump(routes_pk, f, indent=2)

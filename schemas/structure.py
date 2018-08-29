@@ -1,7 +1,9 @@
 import json
 import pathlib
+from typing import Dict, List
 
 from jsonmerge import merge
+
 from common import run_once
 
 
@@ -33,17 +35,15 @@ def get_types(model):
     return {p['type'] for p in model['properties'].values()}
 
 
-@run_once
-def imports():
-    """Return dict of (model -> resource path)"""
-    book = {}
 
-    for schema in schemas():
-        for model in schema['models'].keys():
-            book[model.replace('Serializer', '')] = schema['resourcePath'].lstrip('/').replace('/', '.')
 
-    return book
+base_methods: Dict[str, List[str]] = {}
+with open('api-refined/metadata/methods.base.json') as f:
+    base_methods = json.load(f)
 
+pk_methods: Dict[str, List[str]] = {}
+with open('api-refined/metadata/methods.pk.json') as f:
+    pk_methods = json.load(f)
 
 if __name__ == '__main__':
     print(*types())
