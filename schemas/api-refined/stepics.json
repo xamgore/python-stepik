@@ -1,7 +1,7 @@
 {
   "models": {
-    "Environment": {
-      "id": "Environment",
+    "StepicsSerializer": {
+      "id": "StepicsSerializer",
       "properties": {
         "total_quizzes": {
           "type": "integer"
