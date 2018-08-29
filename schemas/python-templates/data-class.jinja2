@@ -4,8 +4,8 @@ from typing import List
 from resources_list import ResourcesList
 
 {% for model, struct in models.items() -%}
-{% for class, path in struct['imports'].items() %}
-from {{ path }} import {{ class }}
+{% for class, py_module_name in imports.items() %}
+from {{ py_module_name }} import {{ class }}
 {% endfor %}
 
 
@@ -22,62 +22,62 @@ class {{ model | replace('Serializer', '') }}:
 {% for prop, at in struct['resources'].items() %}
     @property
     def {{ prop }}(self) -> Resources{{ at['new_type'] }}:
-    {% if at['docstring'] %}
+    {% if at.docstring %}
         """
-        {{ at['docstring'] | indent(width=8) }}
+        {{ at.docstring | indent(width=8) }}
         """
     {% endif %}
-        return Resources{{ at['new_type'] }}({{ at['type'] }}, self.__stepik, self, '{{ at['from'] }}_ids')
+        return Resources{{ at['new_type'] }}({{ at['type'] }}, self.__stepik, self, '{{ at.from_name }}_ids')
 
 
 {% endfor %}
 {% for prop, at in struct['methods'].items() %}
     def {{ prop }}(self) -> {{ at['new_type'] }}:
-    {% if at['docstring'] %}
+    {% if at.docstring %}
         """
-        {{ at['docstring'] | indent(width=8) }}
+        {{ at.docstring | indent(width=8) }}
         """
     {% endif %}
         return {{ at['type'] }}(self.__stepik, self.__stepik._fetch_object('{{ at['type'] }}', self.{{ at['rename'] }}))
 
 
 {% endfor %}
-{% for prop, at in struct['properties'].items() %}
-{% if at['required'] %}
+{% for prop, at in struct.properties.items() %}
+{% if at.required %}
     @required
 {% endif %}
-{% if at['readOnly'] %}
+{% if at.readOnly %}
     @readonly
 {% endif %}
     @property
-    def {{ prop }}(self) -> {{ at['type'] }}:
-    {% if at['docstring'] %}
+    def {{ prop }}(self) -> {{ at.python_type }}:
+    {% if at.docstring %}
         """
-        {{ at['docstring'] | indent(width=8) }}
+        {{ at.docstring | indent(width=8) }}
         """
     {% endif %}
-    {% if at['deprecated'] %}
+    {% if at.deprecated %}
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
-    {% if at['defaultValue'] %}
-        return self.__data.setdefault('{{ prop }}', {{ at['defaultValue'] }})
+    {% if at.defaultValue %}
+        return self.__data.setdefault('{{ prop }}', {{ at.defaultValue }})
     {% else %}
-        return self.__data['{{ at['from'] or prop }}']
+        return self.__data['{{ at.from_name or prop }}']
     {% endif %}
 
 
-{% if not at['readOnly'] %}
+{% if not at.readOnly %}
     @{{ prop }}.setter
-    def {{ prop }}(self, value: {{ at['type'] }}):
-    {% if at['docstring'] %}
+    def {{ prop }}(self, value: {{ at.python_type }}):
+    {% if at.docstring %}
         """
-        {{ at['docstring'] | indent(width=8) }}
+        {{ at.docstring | indent(width=8) }}
         """
     {% endif %}
-    {% if at['deprecated'] %}
+    {% if at.deprecated %}
         import warnings; warnings.warn('This function is deprecated', DeprecationWarning)
     {% endif %}
-        self.__data['{{ at['from'] or prop }}'] = value
+        self.__data['{{ at.from_name or prop }}'] = value
 
 
 {% endif %}
