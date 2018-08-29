@@ -1,3 +1,5 @@
+import json
+from json import JSONDecodeError
 from typing import List, Iterable, Optional
 from urllib.parse import urlencode
 
@@ -32,7 +34,7 @@ class Stepik:
         if not token:
             raise ConnectionRefusedError('Unable to authorize with provided credentials')
 
-        self.__server = server
+        self._server = server
         self.headers = {'Authorization': 'Bearer ' + token}
 
         self.courses = Courses(self)
@@ -44,13 +46,18 @@ class Stepik:
         self.steps = Steps(self)
 
 
+    def _check_fields(self, obj, model):
+        if not model._contains_all_required_fields_in(obj):
+            raise StepikError(f'Mailformed object: {json.dumps(obj)}')
+
+
     def _update(self, resource_name: str, id: int, data: dict):
         """
         :param resource_name: the name of resource
         :param id: resource's id to grub
         :param data: dict object
         """
-        api_url = f'https://{self.__server}/api/{resource_name}/{id}'
+        api_url = f'https://{self._server}/api/{resource_name}/{id}'
         response = requests.put(api_url, headers=self.headers, json={resource_name: data}).json()
         if resource_name not in response:
             raise StepikError(response['detail'])
@@ -58,8 +65,23 @@ class Stepik:
 
 
     def _get(self, url):
-        api_url = f'https://{self.__server}/api/{url}'
-        return requests.get(api_url, headers=self.headers).json()
+        api_url = f'https://{self._server}/api/{url}'
+        res = requests.get(api_url, headers=self.headers)
+
+        try:
+            return res.json()
+        except JSONDecodeError as e:
+            return {'error': f'{res.status_code} {res.reason}'}
+
+
+    def _post(self, url, data=None):
+        api_url = f'https://{self._server}/api/{url}'
+        res = requests.post(api_url, headers=self.headers, json=data or {})
+
+        try:
+            return res.json()
+        except JSONDecodeError as e:
+            return {'error': f'{res.status_code} {res.reason}'}
 
 
     def _fetch_object(self, resource_name: str, id: int):
@@ -68,26 +90,52 @@ class Stepik:
         :param id: resource's id to grub
         """
         from common import to_dash_case
-        resource_name = to_dash_case(resource_name)
+        response = self._get(f'{to_dash_case(resource_name)}s/{id}')
 
-        api_url = f'https://{self.__server}/api/{resource_name}s/{id}'
-        response = requests.get(api_url, headers=self.headers).json()
         if f'{resource_name}s' not in response:
             raise StepikError(response['detail'])
+
         return response[f'{resource_name}s'][0]
 
 
     def _fetch_objects(self, resource_name: str, obj_ids: List[int]):
+        from common import to_dash_case
+
         # Fetch objects by 30 items,
         # so we won't bump into HTTP request length limits
         step_size = 30
         for i in range(0, len(obj_ids), step_size):
             ids_slice = obj_ids[i:i + step_size]
-            api_url = 'https://{}/api/{}s?{}' \
-                .format(self.__server, resource_name,
-                        '&'.join(f'ids[]={id}' for id in ids_slice))
-            response = requests.get(api_url, headers=self.headers).json()
+            ids = '&'.join(f'ids[]={id}' for id in ids_slice)
+
+            response = self._get(f'{to_dash_case(resource_name)}s/{ids}')
             yield from response[f'{resource_name}s']
+
+
+    def _upload(self, resource_name, files, data):
+        return requests.post(f'https://{self._server}/api/{resource_name}',
+                             headers=self.headers, files=files, data=data)
+
+
+    def upload_video(self, file_path: str = None, file_url: str = None,
+                     lesson_id: int = None, course_id: int = None):
+        if lesson_id is None and course_id is None:
+            raise AttributeError('lesson_id or course_id must be filled')
+
+        data = {'lesson': lesson_id} if course_id is None else {'course': course_id}
+
+        if file_path is not None:
+            with open(file_path, 'rb') as f:
+                res = self._upload('videos', {'source': f}, data).json()
+        elif file_url is not None:
+            data['source_url'] = file_url
+            res = self._post('videos', {'video': data}).json()
+        else:
+            raise AttributeError('file_path or file_url must be filled')
+
+        from api.videos import VideoSource
+        self._check_fields(res, VideoSource)
+        return VideoSource(self, res)
 
 
     def stepics(self) -> Environment:
@@ -182,7 +230,6 @@ class Lessons(object):
                 sign = '-' if v else ''
                 order.append(sign + k[3:])
 
-
         params = urlencode(args, doseq=True)
         ordering = ','.join(order)
 
@@ -246,10 +293,7 @@ class Users(object):
 
 if __name__ == '__main__':
     pass
-    # from config import id, secret
-    # stepik = Stepik(id, secret)
-    #
-    # course = stepik.courses.get(course_id=1)
+
     # sections = course.sections.list()
     #
     # unit_ids = [id for sec in sections for id in sec.units_ids]
