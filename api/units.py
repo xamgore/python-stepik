@@ -3,148 +3,6 @@ from common import required, readonly
 from typing import List
 from resources_list import ResourcesList
 
-
-
-class WriteUnit:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteUnit(id={self.id!r})'
-
-
-    @required
-    @property
-    def section(self) -> str:
-        return self.__data['section']
-
-
-    @section.setter
-    def section(self, value: str):
-        self.__data['section'] = value
-
-
-    @required
-    @property
-    def lesson(self) -> str:
-        return self.__data['lesson']
-
-
-    @lesson.setter
-    def lesson(self, value: str):
-        self.__data['lesson'] = value
-
-
-    @required
-    @property
-    def assignments(self) -> str:
-        return self.__data['assignments']
-
-
-    @assignments.setter
-    def assignments(self, value: str):
-        self.__data['assignments'] = value
-
-
-    @required
-    @property
-    def position(self) -> int:
-        """
-        Default value: ``1``
-        """
-        return self.__data.setdefault('position', 1)
-
-
-    @position.setter
-    def position(self, value: int):
-        """
-        Default value: ``1``
-        """
-        self.__data['position'] = value
-
-
-    @property
-    def begin_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['begin_date_source']
-
-
-    @begin_date_source.setter
-    def begin_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['begin_date_source'] = value
-
-
-    @property
-    def end_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['end_date_source']
-
-
-    @end_date_source.setter
-    def end_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['end_date_source'] = value
-
-
-    @property
-    def soft_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['soft_deadline_source']
-
-
-    @soft_deadline_source.setter
-    def soft_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['soft_deadline_source'] = value
-
-
-    @property
-    def hard_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['hard_deadline_source']
-
-
-    @hard_deadline_source.setter
-    def hard_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['hard_deadline_source'] = value
-
-
-    @property
-    def grading_policy_source(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['grading_policy_source']
-
-
-    @grading_policy_source.setter
-    def grading_policy_source(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['grading_policy_source'] = value
-
-
 from api.lessons import Lesson
 from api.assignments import Assignment
 
@@ -229,9 +87,11 @@ class Unit:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date']
+        return self.__data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -242,9 +102,11 @@ class Unit:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date']
+        return self.__data.setdefault('end_date', "None")
 
 
     @readonly
@@ -255,9 +117,11 @@ class Unit:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline']
+        return self.__data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -268,9 +132,11 @@ class Unit:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline']
+        return self.__data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -286,9 +152,11 @@ class Unit:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy']
+        return self.__data.setdefault('grading_policy', "None")
 
 
     @property
@@ -298,9 +166,11 @@ class Unit:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date_source']
+        return self.__data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -310,7 +180,9 @@ class Unit:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['begin_date_source'] = value
 
@@ -322,9 +194,11 @@ class Unit:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date_source']
+        return self.__data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -334,7 +208,9 @@ class Unit:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['end_date_source'] = value
 
@@ -346,9 +222,11 @@ class Unit:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline_source']
+        return self.__data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -358,7 +236,9 @@ class Unit:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['soft_deadline_source'] = value
 
@@ -370,9 +250,11 @@ class Unit:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline_source']
+        return self.__data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -382,7 +264,9 @@ class Unit:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['hard_deadline_source'] = value
 
@@ -399,9 +283,11 @@ class Unit:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy_source']
+        return self.__data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -416,7 +302,9 @@ class Unit:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['grading_policy_source'] = value
 
@@ -436,9 +324,11 @@ class Unit:
         """
         Creation time
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['create_date']
+        return self.__data.setdefault('create_date', "None")
 
 
     @readonly
@@ -447,9 +337,28 @@ class Unit:
         """
         Time of the last update
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['update_date']
+        return self.__data.setdefault('update_date', "None")
+
+
+    @required
+    @property
+    def assignments_ids(self) -> List[int]:
+        """
+        Type: List[int]
+        """
+        return self.__data['assignments']
+
+
+    @assignments_ids.setter
+    def assignments_ids(self, value: List[int]):
+        """
+        Type: List[int]
+        """
+        self.__data['assignments'] = value
 
 
     @required
@@ -467,16 +376,5 @@ class Unit:
         Id of the lesson associated with the unit
         """
         self.__data['lesson'] = value
-
-
-    @required
-    @property
-    def assignments_ids(self) -> List[int]:
-        return self.__data['assignments']
-
-
-    @assignments_ids.setter
-    def assignments_ids(self, value: List[int]):
-        self.__data['assignments'] = value
 
 

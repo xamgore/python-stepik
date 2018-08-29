@@ -5,218 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteAnnouncement:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteAnnouncement(id={self.id!r})'
-
-
-    @property
-    def course(self) -> str:
-        return self.__data['course']
-
-
-    @course.setter
-    def course(self, value: str):
-        self.__data['course'] = value
-
-
-    @property
-    def user(self) -> str:
-        return self.__data['user']
-
-
-    @user.setter
-    def user(self, value: str):
-        self.__data['user'] = value
-
-
-    @required
-    @property
-    def subject(self) -> str:
-        return self.__data['subject']
-
-
-    @subject.setter
-    def subject(self, value: str):
-        self.__data['subject'] = value
-
-
-    @required
-    @property
-    def text(self) -> str:
-        return self.__data['text']
-
-
-    @text.setter
-    def text(self, value: str):
-        self.__data['text'] = value
-
-
-    @property
-    def is_restricted_by_score(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_restricted_by_score']
-
-
-    @is_restricted_by_score.setter
-    def is_restricted_by_score(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_restricted_by_score'] = value
-
-
-    @required
-    @property
-    def score_percent_min(self) -> int:
-        """
-        Default value: ``0``
-        """
-        return self.__data['score_percent_min']
-
-
-    @score_percent_min.setter
-    def score_percent_min(self, value: int):
-        """
-        Default value: ``0``
-        """
-        self.__data['score_percent_min'] = value
-
-
-    @required
-    @property
-    def score_percent_max(self) -> int:
-        """
-        Default value: ``100``
-        """
-        return self.__data.setdefault('score_percent_max', 100)
-
-
-    @score_percent_max.setter
-    def score_percent_max(self, value: int):
-        """
-        Default value: ``100``
-        """
-        self.__data['score_percent_max'] = value
-
-
-    @property
-    def email_template(self) -> str:
-        return self.__data['email_template']
-
-
-    @email_template.setter
-    def email_template(self, value: str):
-        self.__data['email_template'] = value
-
-
-    @property
-    def is_scheduled(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_scheduled']
-
-
-    @is_scheduled.setter
-    def is_scheduled(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_scheduled'] = value
-
-
-    @property
-    def start_date(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['start_date']
-
-
-    @start_date.setter
-    def start_date(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['start_date'] = value
-
-
-    @required
-    @property
-    def mail_period_days(self) -> int:
-        """
-        Default value: ``7``
-        """
-        return self.__data.setdefault('mail_period_days', 7)
-
-
-    @mail_period_days.setter
-    def mail_period_days(self, value: int):
-        """
-        Default value: ``7``
-        """
-        self.__data['mail_period_days'] = value
-
-
-    @required
-    @property
-    def mail_quantity(self) -> int:
-        """
-        Default value: ``1``
-        """
-        return self.__data.setdefault('mail_quantity', 1)
-
-
-    @mail_quantity.setter
-    def mail_quantity(self, value: int):
-        """
-        Default value: ``1``
-        """
-        self.__data['mail_quantity'] = value
-
-
-    @property
-    def is_infinite(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_infinite']
-
-
-    @is_infinite.setter
-    def is_infinite(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_infinite'] = value
-
-
-    @property
-    def on_enroll(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['on_enroll']
-
-
-    @on_enroll.setter
-    def on_enroll(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['on_enroll'] = value
-
-
-
-
 class Announcement:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -279,36 +67,44 @@ class Announcement:
     @property
     def create_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['create_date']
+        return self.__data.setdefault('create_date', "None")
 
 
     @readonly
     @property
     def next_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['next_date']
+        return self.__data.setdefault('next_date', "None")
 
 
     @readonly
     @property
     def sent_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['sent_date']
+        return self.__data.setdefault('sent_date', "None")
 
 
     @readonly
     @property
     def status(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['status']
+        return self.__data.setdefault('status', "None")
 
 
     @property
@@ -390,15 +186,19 @@ class Announcement:
     @property
     def start_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['start_date']
+        return self.__data.setdefault('start_date', "None")
 
 
     @start_date.setter
     def start_date(self, value: str):
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['start_date'] = value
 

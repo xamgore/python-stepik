@@ -5,123 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteComment:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteComment(id={self.id!r})'
-
-
-    @property
-    def parent(self) -> str:
-        return self.__data['parent']
-
-
-    @parent.setter
-    def parent(self, value: str):
-        self.__data['parent'] = value
-
-
-    @property
-    def text(self) -> str:
-        return self.__data['text']
-
-
-    @text.setter
-    def text(self, value: str):
-        self.__data['text'] = value
-
-
-    @required
-    @property
-    def target(self) -> str:
-        return self.__data['target']
-
-
-    @target.setter
-    def target(self, value: str):
-        self.__data['target'] = value
-
-
-    @property
-    def is_pinned(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_pinned']
-
-
-    @is_pinned.setter
-    def is_pinned(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_pinned'] = value
-
-
-    @property
-    def is_reported(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_reported']
-
-
-    @is_reported.setter
-    def is_reported(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_reported'] = value
-
-
-    @property
-    def attachments(self) -> List:
-        """
-        Default value: ``[]``
-        """
-        return self.__data['attachments']
-
-
-    @attachments.setter
-    def attachments(self, value: List):
-        """
-        Default value: ``[]``
-        """
-        self.__data['attachments'] = value
-
-
-    @property
-    def thread(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['thread']
-
-
-    @thread.setter
-    def thread(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['thread'] = value
-
-
-    @property
-    def submission(self) -> str:
-        return self.__data['submission']
-
-
-    @submission.setter
-    def submission(self, value: str):
-        self.__data['submission'] = value
-
-
-
-
 class Comment:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -164,18 +47,22 @@ class Comment:
     @property
     def time(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['time']
+        return self.__data.setdefault('time', "None")
 
 
     @readonly
     @property
     def last_time(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['last_time']
+        return self.__data.setdefault('last_time', "None")
 
 
     @property
@@ -217,9 +104,11 @@ class Comment:
     @property
     def deleted_at(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['deleted_at']
+        return self.__data.setdefault('deleted_at', "None")
 
 
     @readonly
@@ -295,9 +184,11 @@ class Comment:
     @property
     def pinned_at(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['pinned_at']
+        return self.__data.setdefault('pinned_at', "None")
 
 
     @readonly
@@ -326,16 +217,20 @@ class Comment:
 
 
     @property
-    def attachments(self) -> List:
+    def attachments(self) -> str:
         """
+        Enter a valid JSON object
+
         Default value: ``[]``
         """
         return self.__data['attachments']
 
 
     @attachments.setter
-    def attachments(self, value: List):
+    def attachments(self, value: str):
         """
+        Enter a valid JSON object
+
         Default value: ``[]``
         """
         self.__data['attachments'] = value
@@ -344,15 +239,19 @@ class Comment:
     @property
     def thread(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['thread']
+        return self.__data.setdefault('thread', "None")
 
 
     @thread.setter
     def thread(self, value: str):
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['thread'] = value
 
@@ -377,9 +276,11 @@ class Comment:
     @property
     def edited_at(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['edited_at']
+        return self.__data.setdefault('edited_at', "None")
 
 
     @readonly

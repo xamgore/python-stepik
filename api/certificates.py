@@ -5,34 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteCertificate:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteCertificate(id={self.id!r})'
-
-
-    @property
-    def is_public(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('is_public', True)
-
-
-    @is_public.setter
-    def is_public(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['is_public'] = value
-
-
-
-
 class Certificate:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -68,18 +40,22 @@ class Certificate:
     @property
     def issue_date(self) -> str:
         """
-        Default value: ``"2018-08-22T13:17:44.906Z"``
+        Default value: ``"2018-08-26T00:35:04.162Z"``
+
+        Type: str
         """
-        return self.__data.setdefault('issue_date', "2018-08-22T13:17:44.906Z")
+        return self.__data.setdefault('issue_date', "2018-08-26T00:35:04.162Z")
 
 
     @readonly
     @property
     def update_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['update_date']
+        return self.__data.setdefault('update_date', "None")
 
 
     @readonly

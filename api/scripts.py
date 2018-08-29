@@ -5,29 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteScript:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteScript(id={self.id!r})'
-
-
-    @required
-    @property
-    def code(self) -> str:
-        return self.__data['code']
-
-
-    @code.setter
-    def code(self, value: str):
-        self.__data['code'] = value
-
-
-
-
 class Script:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -73,8 +50,10 @@ class Script:
     @property
     def status(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['status']
+        return self.__data.setdefault('status', "None")
 
 

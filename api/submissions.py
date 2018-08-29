@@ -5,45 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteSubmission:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteSubmission(id={self.id!r})'
-
-
-    @property
-    def reply(self) -> str:
-        """
-        Default value: ``{}``
-        """
-        return self.__data['reply']
-
-
-    @reply.setter
-    def reply(self, value: str):
-        """
-        Default value: ``{}``
-        """
-        self.__data['reply'] = value
-
-
-    @required
-    @property
-    def attempt(self) -> str:
-        return self.__data['attempt']
-
-
-    @attempt.setter
-    def attempt(self, value: str):
-        self.__data['attempt'] = value
-
-
-
-
 class Submission:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -64,9 +25,11 @@ class Submission:
     @property
     def status(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['status']
+        return self.__data.setdefault('status', "None")
 
 
     @required
@@ -75,6 +38,8 @@ class Submission:
     def score(self) -> str:
         """
         Default value: ``"0"``
+
+        Type: str
         """
         return self.__data.setdefault('score', "0")
 
@@ -95,9 +60,11 @@ class Submission:
     @property
     def time(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['time']
+        return self.__data.setdefault('time', "None")
 
 
     @property

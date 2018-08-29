@@ -5,55 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteAttachment:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteAttachment(id={self.id!r})'
-
-
-    @property
-    def course(self) -> str:
-        return self.__data['course']
-
-
-    @course.setter
-    def course(self, value: str):
-        self.__data['course'] = value
-
-
-    @property
-    def lesson(self) -> str:
-        return self.__data['lesson']
-
-
-    @lesson.setter
-    def lesson(self, value: str):
-        self.__data['lesson'] = value
-
-
-    @required
-    @property
-    def file(self) -> str:
-        """
-        Type: file upload
-        """
-        return self.__data['file']
-
-
-    @file.setter
-    def file(self, value: str):
-        """
-        Type: file upload
-        """
-        self.__data['file'] = value
-
-
-
-
 class Attachment:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -106,15 +57,19 @@ class Attachment:
     @property
     def file(self) -> str:
         """
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['file']
+        return self.__data.setdefault('file', "None")
 
 
     @file.setter
     def file(self, value: str):
         """
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['file'] = value
 

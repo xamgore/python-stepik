@@ -5,29 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteAttempt:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteAttempt(id={self.id!r})'
-
-
-    @required
-    @property
-    def step(self) -> str:
-        return self.__data['step']
-
-
-    @step.setter
-    def step(self, value: str):
-        self.__data['step'] = value
-
-
-
-
 class Attempt:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -60,18 +37,22 @@ class Attempt:
     @property
     def time(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['time']
+        return self.__data.setdefault('time', "None")
 
 
     @readonly
     @property
     def status(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['status']
+        return self.__data.setdefault('status', "None")
 
 
     @readonly

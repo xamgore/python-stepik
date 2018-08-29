@@ -5,101 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteUser:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteUser(id={self.id!r})'
-
-
-    @property
-    def is_private(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_private']
-
-
-    @is_private.setter
-    def is_private(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_private'] = value
-
-
-    @property
-    def short_bio(self) -> str:
-        return self.__data['short_bio']
-
-
-    @short_bio.setter
-    def short_bio(self, value: str):
-        self.__data['short_bio'] = value
-
-
-    @property
-    def details(self) -> str:
-        return self.__data['details']
-
-
-    @details.setter
-    def details(self, value: str):
-        self.__data['details'] = value
-
-
-    @property
-    def first_name(self) -> str:
-        return self.__data['first_name']
-
-
-    @first_name.setter
-    def first_name(self, value: str):
-        self.__data['first_name'] = value
-
-
-    @property
-    def last_name(self) -> str:
-        return self.__data['last_name']
-
-
-    @last_name.setter
-    def last_name(self, value: str):
-        self.__data['last_name'] = value
-
-
-    @required
-    @property
-    def email(self) -> str:
-        """
-        Type: email
-        """
-        return self.__data['email']
-
-
-    @email.setter
-    def email(self, value: str):
-        """
-        Type: email
-        """
-        self.__data['email'] = value
-
-
-    @property
-    def password(self) -> str:
-        return self.__data['password']
-
-
-    @password.setter
-    def password(self, value: str):
-        self.__data['password'] = value
-
-
-
-
 class User:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -229,9 +134,11 @@ class User:
     @property
     def cover(self) -> str:
         """
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['cover']
+        return self.__data.setdefault('cover', "None")
 
 
     @readonly

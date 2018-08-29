@@ -5,232 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteProfile:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteProfile(id={self.id!r})'
-
-
-    @required
-    @property
-    def first_name(self) -> str:
-        return self.__data['first_name']
-
-
-    @first_name.setter
-    def first_name(self, value: str):
-        self.__data['first_name'] = value
-
-
-    @required
-    @property
-    def last_name(self) -> str:
-        return self.__data['last_name']
-
-
-    @last_name.setter
-    def last_name(self, value: str):
-        self.__data['last_name'] = value
-
-
-    @property
-    def is_private(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_private']
-
-
-    @is_private.setter
-    def is_private(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_private'] = value
-
-
-    @required
-    @property
-    def language(self) -> str:
-        """
-        Default value: ``"en"``
-        """
-        return self.__data.setdefault('language', "en")
-
-
-    @language.setter
-    def language(self, value: str):
-        """
-        Default value: ``"en"``
-        """
-        self.__data['language'] = value
-
-
-    @property
-    def city(self) -> str:
-        return self.__data['city']
-
-
-    @city.setter
-    def city(self, value: str):
-        self.__data['city'] = value
-
-
-    @property
-    def short_bio(self) -> str:
-        return self.__data['short_bio']
-
-
-    @short_bio.setter
-    def short_bio(self, value: str):
-        self.__data['short_bio'] = value
-
-
-    @property
-    def details(self) -> str:
-        return self.__data['details']
-
-
-    @details.setter
-    def details(self, value: str):
-        self.__data['details'] = value
-
-
-    @property
-    def subscribed_for_mail(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('subscribed_for_mail', True)
-
-
-    @subscribed_for_mail.setter
-    def subscribed_for_mail(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['subscribed_for_mail'] = value
-
-
-    @property
-    def notification_email_delay(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['notification_email_delay']
-
-
-    @notification_email_delay.setter
-    def notification_email_delay(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['notification_email_delay'] = value
-
-
-    @property
-    def subscribed_for_marketing(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['subscribed_for_marketing']
-
-
-    @subscribed_for_marketing.setter
-    def subscribed_for_marketing(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['subscribed_for_marketing'] = value
-
-
-    @property
-    def subscribed_for_partners(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['subscribed_for_partners']
-
-
-    @subscribed_for_partners.setter
-    def subscribed_for_partners(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['subscribed_for_partners'] = value
-
-
-    @property
-    def subscribed_for_news_en(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('subscribed_for_news_en', True)
-
-
-    @subscribed_for_news_en.setter
-    def subscribed_for_news_en(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['subscribed_for_news_en'] = value
-
-
-    @property
-    def subscribed_for_news_ru(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['subscribed_for_news_ru']
-
-
-    @subscribed_for_news_ru.setter
-    def subscribed_for_news_ru(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['subscribed_for_news_ru'] = value
-
-
-    @required
-    @property
-    def bit_field(self) -> int:
-        """
-        Default value: ``0``
-        """
-        return self.__data['bit_field']
-
-
-    @bit_field.setter
-    def bit_field(self, value: int):
-        """
-        Default value: ``0``
-        """
-        self.__data['bit_field'] = value
-
-
-    @property
-    def is_web_push_enabled(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('is_web_push_enabled', True)
-
-
-    @is_web_push_enabled.setter
-    def is_web_push_enabled(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['is_web_push_enabled'] = value
-
-
-
-
 class Profile:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -302,6 +76,8 @@ class Profile:
     def language(self) -> str:
         """
         Default value: ``"en"``
+
+        Type: str
         """
         return self.__data.setdefault('language', "en")
 
@@ -310,6 +86,8 @@ class Profile:
     def language(self, value: str):
         """
         Default value: ``"en"``
+
+        Type: str
         """
         self.__data['language'] = value
 
@@ -363,15 +141,19 @@ class Profile:
     @property
     def notification_email_delay(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['notification_email_delay']
+        return self.__data.setdefault('notification_email_delay', "None")
 
 
     @notification_email_delay.setter
     def notification_email_delay(self, value: str):
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['notification_email_delay'] = value
 

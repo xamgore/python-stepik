@@ -5,49 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteClass:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteClass(id={self.id!r})'
-
-
-    @required
-    @property
-    def course(self) -> str:
-        return self.__data['course']
-
-
-    @course.setter
-    def course(self, value: str):
-        self.__data['course'] = value
-
-
-    @property
-    def title(self) -> str:
-        return self.__data['title']
-
-
-    @title.setter
-    def title(self, value: str):
-        self.__data['title'] = value
-
-
-    @property
-    def description(self) -> str:
-        return self.__data['description']
-
-
-    @description.setter
-    def description(self, value: str):
-        self.__data['description'] = value
-
-
-
-
 class Class:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -125,17 +82,21 @@ class Class:
     @property
     def create_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['create_date']
+        return self.__data.setdefault('create_date', "None")
 
 
     @readonly
     @property
     def update_date(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['update_date']
+        return self.__data.setdefault('update_date', "None")
 
 

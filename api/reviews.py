@@ -5,60 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteReview:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteReview(id={self.id!r})'
-
-
-    @required
-    @property
-    def session(self) -> str:
-        return self.__data['session']
-
-
-    @session.setter
-    def session(self, value: str):
-        self.__data['session'] = value
-
-
-    @property
-    def target_session(self) -> str:
-        return self.__data['target_session']
-
-
-    @target_session.setter
-    def target_session(self, value: str):
-        self.__data['target_session'] = value
-
-
-    @property
-    def text(self) -> str:
-        return self.__data['text']
-
-
-    @text.setter
-    def text(self, value: str):
-        self.__data['text'] = value
-
-
-    @required
-    @property
-    def rubric_scores(self) -> str:
-        return self.__data['rubric_scores']
-
-
-    @rubric_scores.setter
-    def rubric_scores(self, value: str):
-        self.__data['rubric_scores'] = value
-
-
-
-
 class Review:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -127,9 +73,11 @@ class Review:
     @property
     def when_finished(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['when_finished']
+        return self.__data.setdefault('when_finished', "None")
 
 
     @readonly

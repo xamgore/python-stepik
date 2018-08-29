@@ -3,234 +3,6 @@ from common import required, readonly
 from typing import List
 from resources_list import ResourcesList
 
-
-
-class WriteSection:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteSection(id={self.id!r})'
-
-
-    @required
-    @property
-    def course(self) -> str:
-        return self.__data['course']
-
-
-    @course.setter
-    def course(self, value: str):
-        self.__data['course'] = value
-
-
-    @required
-    @property
-    def units(self) -> str:
-        return self.__data['units']
-
-
-    @units.setter
-    def units(self, value: str):
-        self.__data['units'] = value
-
-
-    @required
-    @property
-    def position(self) -> int:
-        """
-        Default value: ``1``
-        """
-        return self.__data.setdefault('position', 1)
-
-
-    @position.setter
-    def position(self, value: int):
-        """
-        Default value: ``1``
-        """
-        self.__data['position'] = value
-
-
-    @property
-    def discounting_policy(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['discounting_policy']
-
-
-    @discounting_policy.setter
-    def discounting_policy(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['discounting_policy'] = value
-
-
-    @property
-    def required_section(self) -> str:
-        return self.__data['required_section']
-
-
-    @required_section.setter
-    def required_section(self, value: str):
-        self.__data['required_section'] = value
-
-
-    @required
-    @property
-    def required_percent(self) -> int:
-        """
-        Default value: ``100``
-        """
-        return self.__data.setdefault('required_percent', 100)
-
-
-    @required_percent.setter
-    def required_percent(self, value: int):
-        """
-        Default value: ``100``
-        """
-        self.__data['required_percent'] = value
-
-
-    @property
-    def is_exam(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_exam']
-
-
-    @is_exam.setter
-    def is_exam(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_exam'] = value
-
-
-    @required
-    @property
-    def exam_duration_minutes(self) -> int:
-        """
-        Default value: ``60``
-        """
-        return self.__data.setdefault('exam_duration_minutes', 60)
-
-
-    @exam_duration_minutes.setter
-    def exam_duration_minutes(self, value: int):
-        """
-        Default value: ``60``
-        """
-        self.__data['exam_duration_minutes'] = value
-
-
-    @property
-    def description(self) -> str:
-        return self.__data['description']
-
-
-    @description.setter
-    def description(self, value: str):
-        self.__data['description'] = value
-
-
-    @required
-    @property
-    def title(self) -> str:
-        return self.__data['title']
-
-
-    @title.setter
-    def title(self, value: str):
-        self.__data['title'] = value
-
-
-    @property
-    def begin_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['begin_date_source']
-
-
-    @begin_date_source.setter
-    def begin_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['begin_date_source'] = value
-
-
-    @property
-    def end_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['end_date_source']
-
-
-    @end_date_source.setter
-    def end_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['end_date_source'] = value
-
-
-    @property
-    def soft_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['soft_deadline_source']
-
-
-    @soft_deadline_source.setter
-    def soft_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['soft_deadline_source'] = value
-
-
-    @property
-    def hard_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['hard_deadline_source']
-
-
-    @hard_deadline_source.setter
-    def hard_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['hard_deadline_source'] = value
-
-
-    @property
-    def grading_policy_source(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['grading_policy_source']
-
-
-    @grading_policy_source.setter
-    def grading_policy_source(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['grading_policy_source'] = value
-
-
 from api.units import Unit
 
 
@@ -308,9 +80,11 @@ class Section:
         * ``"first_one"`` — zero after first attempt
         * ``"first_third"`` — zero after third attempt
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['discounting_policy']
+        return self.__data.setdefault('discounting_policy', "None")
 
 
     @discounting_policy.setter
@@ -323,7 +97,9 @@ class Section:
         * ``"first_one"`` — zero after first attempt
         * ``"first_third"`` — zero after third attempt
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['discounting_policy'] = value
 
@@ -344,6 +120,8 @@ class Section:
         Contains a dict of ``<action : link to the page>``
 
         On the summer 2018 contains only ``test_section`` if user has the `test` permission (is a tester).
+
+        Type: dict
         """
         return self.__data['actions']
 
@@ -509,9 +287,11 @@ class Section:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date']
+        return self.__data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -522,9 +302,11 @@ class Section:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date']
+        return self.__data.setdefault('end_date', "None")
 
 
     @readonly
@@ -535,9 +317,11 @@ class Section:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline']
+        return self.__data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -548,9 +332,11 @@ class Section:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline']
+        return self.__data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -566,9 +352,11 @@ class Section:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy']
+        return self.__data.setdefault('grading_policy', "None")
 
 
     @property
@@ -578,9 +366,11 @@ class Section:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date_source']
+        return self.__data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -590,7 +380,9 @@ class Section:
 
         Inherited property, so `begin_date_source` can be undefined, while `begin_date` can be gotten by hierarchy. Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['begin_date_source'] = value
 
@@ -602,9 +394,11 @@ class Section:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date_source']
+        return self.__data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -614,7 +408,9 @@ class Section:
 
         Inherited property, so `end_date_source` can be undefined, while `end_date` can be gotten by hierarchy. Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['end_date_source'] = value
 
@@ -626,9 +422,11 @@ class Section:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline_source']
+        return self.__data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -638,7 +436,9 @@ class Section:
 
         Inherited property, so `soft_deadline_source` can be undefined, while `soft_deadline` can be gotten by hierarchy. Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['soft_deadline_source'] = value
 
@@ -650,9 +450,11 @@ class Section:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline_source']
+        return self.__data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -662,7 +464,9 @@ class Section:
 
         Inherited property, so `hard_deadline_source` can be undefined, while `hard_deadline` can be gotten by hierarchy. Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['hard_deadline_source'] = value
 
@@ -679,9 +483,11 @@ class Section:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy_source']
+        return self.__data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -696,7 +502,9 @@ class Section:
 
         Inherited property, so `grading_policy_source` can be undefined, while `grading_policy` can be gotten by hierarchy. Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['grading_policy_source'] = value
 
@@ -716,9 +524,11 @@ class Section:
         """
         Creation time
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['create_date']
+        return self.__data.setdefault('create_date', "None")
 
 
     @readonly
@@ -727,19 +537,27 @@ class Section:
         """
         Time of the last update
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['update_date']
+        return self.__data.setdefault('update_date', "None")
 
 
     @required
     @property
     def units_ids(self) -> List[int]:
+        """
+        Type: List[int]
+        """
         return self.__data['units']
 
 
     @units_ids.setter
     def units_ids(self, value: List[int]):
+        """
+        Type: List[int]
+        """
         self.__data['units'] = value
 
 

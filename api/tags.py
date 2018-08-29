@@ -5,29 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteTag:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteTag(id={self.id!r})'
-
-
-    @required
-    @property
-    def title(self) -> str:
-        return self.__data['title']
-
-
-    @title.setter
-    def title(self, value: str):
-        self.__data['title'] = value
-
-
-
-
 class Tag:
     def __init__(self, stepik, data):
         self.__stepik = stepik

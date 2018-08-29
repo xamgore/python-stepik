@@ -3,409 +3,10 @@ from common import required, readonly
 from typing import List
 from resources_list import ResourcesList
 
-
-
-class WriteCourse:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteCourse(id={self.id!r})'
-
-
-    @property
-    def summary(self) -> str:
-        return self.__data['summary']
-
-
-    @summary.setter
-    def summary(self, value: str):
-        self.__data['summary'] = value
-
-
-    @property
-    def workload(self) -> str:
-        return self.__data['workload']
-
-
-    @workload.setter
-    def workload(self, value: str):
-        self.__data['workload'] = value
-
-
-    @property
-    def intro(self) -> str:
-        """
-        Type: url
-        """
-        return self.__data['intro']
-
-
-    @intro.setter
-    def intro(self, value: str):
-        """
-        Type: url
-        """
-        self.__data['intro'] = value
-
-
-    @property
-    def course_format(self) -> str:
-        return self.__data['course_format']
-
-
-    @course_format.setter
-    def course_format(self, value: str):
-        self.__data['course_format'] = value
-
-
-    @property
-    def target_audience(self) -> str:
-        return self.__data['target_audience']
-
-
-    @target_audience.setter
-    def target_audience(self, value: str):
-        self.__data['target_audience'] = value
-
-
-    @property
-    def is_certificate_auto_issued(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_certificate_auto_issued']
-
-
-    @is_certificate_auto_issued.setter
-    def is_certificate_auto_issued(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_certificate_auto_issued'] = value
-
-
-    @property
-    def certificate_regular_threshold(self) -> int:
-        """
-        Default value: ``0``
-        """
-        return self.__data['certificate_regular_threshold']
-
-
-    @certificate_regular_threshold.setter
-    def certificate_regular_threshold(self, value: int):
-        """
-        Default value: ``0``
-        """
-        self.__data['certificate_regular_threshold'] = value
-
-
-    @property
-    def certificate_distinction_threshold(self) -> int:
-        """
-        Default value: ``0``
-        """
-        return self.__data['certificate_distinction_threshold']
-
-
-    @certificate_distinction_threshold.setter
-    def certificate_distinction_threshold(self, value: int):
-        """
-        Default value: ``0``
-        """
-        self.__data['certificate_distinction_threshold'] = value
-
-
-    @property
-    def instructors(self) -> str:
-        return self.__data['instructors']
-
-
-    @instructors.setter
-    def instructors(self, value: str):
-        self.__data['instructors'] = value
-
-
-    @property
-    def certificate(self) -> str:
-        return self.__data['certificate']
-
-
-    @certificate.setter
-    def certificate(self, value: str):
-        self.__data['certificate'] = value
-
-
-    @property
-    def requirements(self) -> str:
-        return self.__data['requirements']
-
-
-    @requirements.setter
-    def requirements(self, value: str):
-        self.__data['requirements'] = value
-
-
-    @property
-    def description(self) -> str:
-        return self.__data['description']
-
-
-    @description.setter
-    def description(self, value: str):
-        self.__data['description'] = value
-
-
-    @required
-    @property
-    def sections(self) -> str:
-        return self.__data['sections']
-
-
-    @sections.setter
-    def sections(self, value: str):
-        self.__data['sections'] = value
-
-
-    @property
-    def is_adaptive(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_adaptive']
-
-
-    @is_adaptive.setter
-    def is_adaptive(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_adaptive'] = value
-
-
-    @property
-    def is_idea_compatible(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_idea_compatible']
-
-
-    @is_idea_compatible.setter
-    def is_idea_compatible(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_idea_compatible'] = value
-
-
-    @property
-    def intro_video(self) -> str:
-        return self.__data['intro_video']
-
-
-    @intro_video.setter
-    def intro_video(self, value: str):
-        self.__data['intro_video'] = value
-
-
-    @property
-    def authors(self) -> str:
-        return self.__data['authors']
-
-
-    @authors.setter
-    def authors(self, value: str):
-        self.__data['authors'] = value
-
-
-    @property
-    def tags(self) -> str:
-        return self.__data['tags']
-
-
-    @tags.setter
-    def tags(self, value: str):
-        self.__data['tags'] = value
-
-
-    @property
-    def is_enabled(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('is_enabled', True)
-
-
-    @is_enabled.setter
-    def is_enabled(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['is_enabled'] = value
-
-
-    @required
-    @property
-    def language(self) -> str:
-        """
-        Default value: ``"en"``
-        """
-        return self.__data.setdefault('language', "en")
-
-
-    @language.setter
-    def language(self, value: str):
-        """
-        Default value: ``"en"``
-        """
-        self.__data['language'] = value
-
-
-    @property
-    def is_public(self) -> bool:
-        return self.__data['is_public']
-
-
-    @is_public.setter
-    def is_public(self, value: bool):
-        self.__data['is_public'] = value
-
-
-    @required
-    @property
-    def title(self) -> str:
-        return self.__data['title']
-
-
-    @title.setter
-    def title(self, value: str):
-        self.__data['title'] = value
-
-
-    @property
-    def begin_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['begin_date_source']
-
-
-    @begin_date_source.setter
-    def begin_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['begin_date_source'] = value
-
-
-    @property
-    def end_date_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['end_date_source']
-
-
-    @end_date_source.setter
-    def end_date_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['end_date_source'] = value
-
-
-    @property
-    def soft_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['soft_deadline_source']
-
-
-    @soft_deadline_source.setter
-    def soft_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['soft_deadline_source'] = value
-
-
-    @property
-    def hard_deadline_source(self) -> str:
-        """
-        Type: datetime
-        """
-        return self.__data['hard_deadline_source']
-
-
-    @hard_deadline_source.setter
-    def hard_deadline_source(self, value: str):
-        """
-        Type: datetime
-        """
-        self.__data['hard_deadline_source'] = value
-
-
-    @property
-    def grading_policy_source(self) -> str:
-        """
-        Type: choice
-        """
-        return self.__data['grading_policy_source']
-
-
-    @grading_policy_source.setter
-    def grading_policy_source(self, value: str):
-        """
-        Type: choice
-        """
-        self.__data['grading_policy_source'] = value
-
-
-    @property
-    def lti_consumer_key(self) -> str:
-        return self.__data['lti_consumer_key']
-
-
-    @lti_consumer_key.setter
-    def lti_consumer_key(self, value: str):
-        self.__data['lti_consumer_key'] = value
-
-
-    @property
-    def lti_secret_key(self) -> str:
-        return self.__data['lti_secret_key']
-
-
-    @lti_secret_key.setter
-    def lti_secret_key(self, value: str):
-        self.__data['lti_secret_key'] = value
-
-
-    @property
-    def lti_private_profile(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['lti_private_profile']
-
-
-    @lti_private_profile.setter
-    def lti_private_profile(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['lti_private_profile'] = value
-
-
+from api.groups import Group
 from api.tags import Tag
 from api.sections import Section
 from api.users import User
-from api.groups import Group
 
 
 class Course:
@@ -419,11 +20,6 @@ class Course:
 
 
     @property
-    def sections(self) -> ResourcesList[Section]:
-        return ResourcesList[Section](Section, self.__stepik, self, 'sections_ids')
-
-
-    @property
     def authors(self) -> ResourcesList[User]:
         return ResourcesList[User](User, self.__stepik, self, 'authors_ids')
 
@@ -433,16 +29,9 @@ class Course:
         return ResourcesList[Tag](Tag, self.__stepik, self, 'tags_ids')
 
 
-    def owner(self) -> User:
-        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
-
-
-    def learners_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
-
-
-    def testers_group(self) -> Group:
-        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
+    @property
+    def sections(self) -> ResourcesList[Section]:
+        return ResourcesList[Section](Section, self.__stepik, self, 'sections_ids')
 
 
     def moderators_group(self) -> Group:
@@ -455,6 +44,18 @@ class Course:
 
     def admins_group(self) -> Group:
         return Group(self.__stepik, self.__stepik._fetch_object('Group', self.admins_group_id))
+
+
+    def owner(self) -> User:
+        return User(self.__stepik, self.__stepik._fetch_object('User', self.owner_id))
+
+
+    def learners_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.learners_group_id))
+
+
+    def testers_group(self) -> Group:
+        return Group(self.__stepik, self.__stepik._fetch_object('Group', self.testers_group_id))
 
 
     @readonly
@@ -500,9 +101,11 @@ class Course:
 
         May take ``None`` value.
 
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['cover']
+        return self.__data.setdefault('cover', "None")
 
 
     @property
@@ -511,6 +114,8 @@ class Course:
         Link to the introduction video (with html5 player), that may explain what is the course about.
 
         Default value: ``""``
+
+        Type: str
         """
         return self.__data.setdefault('intro', "")
 
@@ -521,6 +126,8 @@ class Course:
         Link to the introduction video (with html5 player), that may explain what is the course about.
 
         Default value: ``""``
+
+        Type: str
         """
         self.__data['intro'] = value
 
@@ -563,18 +170,22 @@ class Course:
         """
         May take ``None`` value.
 
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['certificate_footer']
+        return self.__data.setdefault('certificate_footer', "None")
 
 
     @readonly
     @property
     def certificate_cover_org(self) -> str:
         """
-        Type: file upload
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['certificate_cover_org']
+        return self.__data.setdefault('certificate_cover_org', "None")
 
 
     @property
@@ -627,11 +238,17 @@ class Course:
 
     @property
     def instructors(self) -> List[int]:
+        """
+        Type: List[int]
+        """
         return self.__data['instructors']
 
 
     @instructors.setter
     def instructors(self, value: List[int]):
+        """
+        Type: List[int]
+        """
         self.__data['instructors'] = value
 
 
@@ -703,6 +320,8 @@ class Course:
     def actions(self) -> dict:
         """
         Contains a dict of ``<action : link to the page>``. If user is not an admin or the course owner, dict is empty.
+
+        Type: dict
         """
         return self.__data['actions']
 
@@ -779,12 +398,18 @@ class Course:
     @readonly
     @property
     def subscriptions(self) -> List[str]:
+        """
+        Type: List[str]
+        """
         return self.__data['subscriptions']
 
 
     @readonly
     @property
     def announcements(self) -> List[str]:
+        """
+        Type: List[str]
+        """
         return self.__data['announcements']
 
 
@@ -857,6 +482,8 @@ class Course:
         * duration — in seconds
         * upload_date — isoformat
         * filename
+
+        Type: dict
         """
         return self.__data['intro_video']
 
@@ -871,6 +498,8 @@ class Course:
         * duration — in seconds
         * upload_date — isoformat
         * filename
+
+        Type: dict
         """
         self.__data['intro_video'] = value
 
@@ -930,9 +559,11 @@ class Course:
         """
         May take ``None`` value.
 
-        Type: url
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['proctor_url']
+        return self.__data.setdefault('proctor_url', "None")
 
 
     @required
@@ -946,9 +577,11 @@ class Course:
     @property
     def schedule_type(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['schedule_type']
+        return self.__data.setdefault('schedule_type', "None")
 
 
     @required
@@ -994,6 +627,9 @@ class Course:
     @readonly
     @property
     def similar_courses(self) -> List[int]:
+        """
+        Type: List[int]
+        """
         return self.__data['similar_courses']
 
 
@@ -1020,16 +656,21 @@ class Course:
     @readonly
     @property
     def price(self) -> float:
-        return self.__data['price']
+        """
+        Default value: ``"None"``
+        """
+        return self.__data.setdefault('price', "None")
 
 
     @readonly
     @property
     def currency_code(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['currency_code']
+        return self.__data.setdefault('currency_code', "None")
 
 
     @readonly
@@ -1050,6 +691,8 @@ class Course:
     def readiness(self) -> str:
         """
         Default value: ``"0"``
+
+        Type: str
         """
         return self.__data.setdefault('readiness', "0")
 
@@ -1063,6 +706,8 @@ class Course:
         One of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``
 
         Default value: ``"en"``
+
+        Type: str
         """
         return self.__data.setdefault('language', "en")
 
@@ -1075,6 +720,8 @@ class Course:
         One of these: ``af`` / ``ar`` / ``ast`` / ``az`` / ``bg`` / ``be`` / ``bn`` / ``br`` / ``bs`` / ``ca`` / ``cs`` / ``cy`` / ``da`` / ``de`` / ``dsb`` / ``el`` / ``en`` / ``en-au`` / ``en-gb`` / ``eo`` / ``es`` / ``es-ar`` / ``es-co`` / ``es-mx`` / ``es-ni`` / ``es-ve`` / ``et`` / ``eu`` / ``fa`` / ``fi`` / ``fr`` / ``fy`` / ``ga`` / ``gd`` / ``gl`` / ``he`` / ``hi`` / ``hr`` / ``hsb`` / ``hu`` / ``ia`` / ``id`` / ``io`` / ``is`` / ``it`` / ``ja`` / ``ka`` / ``kk`` / ``km`` / ``kn`` / ``ko`` / ``lb`` / ``lt`` / ``lv`` / ``mk`` / ``ml`` / ``mn`` / ``mr`` / ``my`` / ``nb`` / ``ne`` / ``nl`` / ``nn`` / ``os`` / ``pa`` / ``pl`` / ``pt`` / ``pt-br`` / ``ro`` / ``ru`` / ``sk`` / ``sl`` / ``sq`` / ``sr`` / ``sr-latn`` / ``sv`` / ``sw`` / ``ta`` / ``te`` / ``th`` / ``tr`` / ``tt`` / ``udm`` / ``uk`` / ``ur`` / ``vi`` / ``zh-hans`` / ``zh-hant``
 
         Default value: ``"en"``
+
+        Type: str
         """
         self.__data['language'] = value
 
@@ -1140,9 +787,11 @@ class Course:
 
         Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date']
+        return self.__data.setdefault('begin_date', "None")
 
 
     @readonly
@@ -1153,9 +802,11 @@ class Course:
 
         Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date']
+        return self.__data.setdefault('end_date', "None")
 
 
     @readonly
@@ -1166,9 +817,11 @@ class Course:
 
         Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline']
+        return self.__data.setdefault('soft_deadline', "None")
 
 
     @readonly
@@ -1179,9 +832,11 @@ class Course:
 
         Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline']
+        return self.__data.setdefault('hard_deadline', "None")
 
 
     @readonly
@@ -1197,9 +852,11 @@ class Course:
 
         Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy']
+        return self.__data.setdefault('grading_policy', "None")
 
 
     @property
@@ -1209,9 +866,11 @@ class Course:
 
         Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['begin_date_source']
+        return self.__data.setdefault('begin_date_source', "None")
 
 
     @begin_date_source.setter
@@ -1221,7 +880,9 @@ class Course:
 
         Use `begin_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['begin_date_source'] = value
 
@@ -1233,9 +894,11 @@ class Course:
 
         Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['end_date_source']
+        return self.__data.setdefault('end_date_source', "None")
 
 
     @end_date_source.setter
@@ -1245,7 +908,9 @@ class Course:
 
         Use `end_date_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['end_date_source'] = value
 
@@ -1257,9 +922,11 @@ class Course:
 
         Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['soft_deadline_source']
+        return self.__data.setdefault('soft_deadline_source', "None")
 
 
     @soft_deadline_source.setter
@@ -1269,7 +936,9 @@ class Course:
 
         Use `soft_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['soft_deadline_source'] = value
 
@@ -1281,9 +950,11 @@ class Course:
 
         Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['hard_deadline_source']
+        return self.__data.setdefault('hard_deadline_source', "None")
 
 
     @hard_deadline_source.setter
@@ -1293,7 +964,9 @@ class Course:
 
         Use `hard_deadline_source` to update the value.
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['hard_deadline_source'] = value
 
@@ -1310,9 +983,11 @@ class Course:
 
         Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['grading_policy_source']
+        return self.__data.setdefault('grading_policy_source', "None")
 
 
     @grading_policy_source.setter
@@ -1327,7 +1002,9 @@ class Course:
 
         Use `grading_policy_source` to update the value.
 
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
         self.__data['grading_policy_source'] = value
 
@@ -1344,9 +1021,11 @@ class Course:
         """
         Creation time
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['create_date']
+        return self.__data.setdefault('create_date', "None")
 
 
     @readonly
@@ -1355,9 +1034,11 @@ class Course:
         """
         Time of the last update
 
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['update_date']
+        return self.__data.setdefault('update_date', "None")
 
 
     @readonly
@@ -1385,6 +1066,8 @@ class Course:
     def discussion_threads(self) -> List[str]:
         """
         Same as ``discussion_proxy`` in most cases
+
+        Type: List[str]
         """
         return self.__data['discussion_threads']
 
@@ -1425,27 +1108,39 @@ class Course:
         self.__data['lti_private_profile'] = value
 
 
-    @required
+    @readonly
     @property
-    def sections_ids(self) -> List[int]:
+    def moderators_group_id(self) -> int:
         """
-        List of sections
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
-        return self.__data['sections']
+        return self.__data['moderators_group']
 
 
-    @sections_ids.setter
-    def sections_ids(self, value: List[int]):
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
         """
-        List of sections
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
-        self.__data['sections'] = value
+        return self.__data['teachers_group']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self.__data['admins_group']
 
 
     @property
     def authors_ids(self) -> List[int]:
         """
         List of authors, usually with the only person: course owner
+
+        Type: List[int]
         """
         return self.__data['authors']
 
@@ -1454,18 +1149,47 @@ class Course:
     def authors_ids(self, value: List[int]):
         """
         List of authors, usually with the only person: course owner
+
+        Type: List[int]
         """
         self.__data['authors'] = value
 
 
     @property
     def tags_ids(self) -> List[int]:
+        """
+        Type: List[int]
+        """
         return self.__data['tags']
 
 
     @tags_ids.setter
     def tags_ids(self, value: List[int]):
+        """
+        Type: List[int]
+        """
         self.__data['tags'] = value
+
+
+    @required
+    @property
+    def sections_ids(self) -> List[int]:
+        """
+        List of sections
+
+        Type: List[int]
+        """
+        return self.__data['sections']
+
+
+    @sections_ids.setter
+    def sections_ids(self, value: List[int]):
+        """
+        List of sections
+
+        Type: List[int]
+        """
+        self.__data['sections'] = value
 
 
     @readonly
@@ -1493,32 +1217,5 @@ class Course:
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
         return self.__data['testers_group']
-
-
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['moderators_group']
-
-
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['teachers_group']
-
-
-    @readonly
-    @property
-    def admins_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self.__data['admins_group']
 
 

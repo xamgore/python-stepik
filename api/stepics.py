@@ -6,14 +6,14 @@ from resources_list import ResourcesList
 from api.users import User
 
 
-class Environment:
+class Stepics:
     def __init__(self, stepik, data):
         self.__stepik = stepik
         self.__data = data
 
 
     def __repr__(self):
-        return f'Environment(id={self.id!r})'
+        return f'Stepics(id={self.id!r})'
 
 
     def user(self) -> User:
@@ -60,6 +60,8 @@ class Environment:
         Some trash actively used on the frontend.
 
         See `server's response <https://stepik.org/api/docs/#!/stepics>`_ to get more information.
+
+        Type: dict
         """
         return self.__data['config']
 
@@ -70,6 +72,8 @@ class Environment:
         Some trash actively used on the frontend.
 
         See `server's response <https://stepik.org/api/docs/#!/stepics>`_ to get more information.
+
+        Type: dict
         """
         self.__data['config'] = value
 

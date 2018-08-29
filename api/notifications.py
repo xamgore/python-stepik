@@ -5,66 +5,6 @@ from resources_list import ResourcesList
 
 
 
-class WriteNotification:
-    def __init__(self, stepik, data):
-        self.__stepik = stepik
-        self.__data = data
-
-
-    def __repr__(self):
-        return f'WriteNotification(id={self.id!r})'
-
-
-    @property
-    def is_unread(self) -> bool:
-        """
-        Default value: ``True``
-        """
-        return self.__data.setdefault('is_unread', True)
-
-
-    @is_unread.setter
-    def is_unread(self, value: bool):
-        """
-        Default value: ``True``
-        """
-        self.__data['is_unread'] = value
-
-
-    @property
-    def is_muted(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_muted']
-
-
-    @is_muted.setter
-    def is_muted(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_muted'] = value
-
-
-    @property
-    def is_favorite(self) -> bool:
-        """
-        Default value: ``False``
-        """
-        return self.__data['is_favorite']
-
-
-    @is_favorite.setter
-    def is_favorite(self, value: bool):
-        """
-        Default value: ``False``
-        """
-        self.__data['is_favorite'] = value
-
-
-
-
 class Notification:
     def __init__(self, stepik, data):
         self.__stepik = stepik
@@ -133,9 +73,11 @@ class Notification:
     @property
     def time(self) -> str:
         """
-        Type: datetime
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['time']
+        return self.__data.setdefault('time', "None")
 
 
     @readonly
@@ -148,27 +90,33 @@ class Notification:
     @property
     def action(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['action']
+        return self.__data.setdefault('action', "None")
 
 
     @readonly
     @property
     def level(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['level']
+        return self.__data.setdefault('level', "None")
 
 
     @readonly
     @property
     def priority(self) -> str:
         """
-        Type: choice
+        Default value: ``"None"``
+
+        Type: str
         """
-        return self.__data['priority']
+        return self.__data.setdefault('priority', "None")
 
 
     @readonly
