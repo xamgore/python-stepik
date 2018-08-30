@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -129,3 +129,40 @@ class CoursePayment:
         return self._data['is_paid']
 
 
+
+
+class ListOfCoursePayments:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> CoursePayment:
+        return CoursePayment(self._stepik, self._stepik._fetch_object(CoursePayment, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[CoursePayment]:
+        objects = self._stepik._fetch_objects(CoursePayment, ids)
+        iterable = (CoursePayment(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, course: str, amount: float = None) -> CoursePayment:
+        vars = locals().copy()
+        data = {'course-payment': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'course-payments'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return CoursePayment(self._stepik, response[resources_name][0])

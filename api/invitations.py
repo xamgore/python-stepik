@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -76,3 +76,44 @@ class Invitation:
         self._data['limit'] = value
 
 
+
+
+class ListOfInvitations:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Invitation:
+        return Invitation(self._stepik, self._stepik._fetch_object(Invitation, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Invitation]:
+        objects = self._stepik._fetch_objects(Invitation, ids)
+        iterable = (Invitation(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, group: str, description: str = None, limit: int = None) -> Invitation:
+        vars = locals().copy()
+        data = {'invitation': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'invitations'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Invitation(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('invitations', id)

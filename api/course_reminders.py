@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -84,3 +84,44 @@ class CourseReminder:
         return self._data['payload']
 
 
+
+
+class ListOfCourseReminders:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> CourseReminder:
+        return CourseReminder(self._stepik, self._stepik._fetch_object(CourseReminder, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[CourseReminder]:
+        objects = self._stepik._fetch_objects(CourseReminder, ids)
+        iterable = (CourseReminder(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, course: str, is_active: bool = None) -> CourseReminder:
+        vars = locals().copy()
+        data = {'course-reminder': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'course-reminders'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return CourseReminder(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('course-reminders', id)

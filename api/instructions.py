@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -108,3 +108,44 @@ class Instruction:
         self._data['text'] = value
 
 
+
+
+class ListOfInstructions:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Instruction:
+        return Instruction(self._stepik, self._stepik._fetch_object(Instruction, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Instruction]:
+        objects = self._stepik._fetch_objects(Instruction, ids)
+        iterable = (Instruction(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, step: str, min_reviews: int = None, strategy_type: str = None, rubrics: str = None, text: str = None) -> Instruction:
+        vars = locals().copy()
+        data = {'instruction': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'instructions'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Instruction(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('instructions', id)

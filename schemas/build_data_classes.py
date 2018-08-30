@@ -65,20 +65,24 @@ def improve_doc_string(p: Property):
         p.docstring = f"{p.docstring}\n\nType: {p.python_type}".lstrip('\n')
 
 
-if __name__ == '__main__':
+def main():
+    template: Template = None
+    with open('python-templates/data-class.jinja2') as t:
+        template = template or Template(t.read(), lstrip_blocks=True, trim_blocks=True)
+
     for schema in load_schemas():
         for model in schema.models.values():
             model.resources, model.methods = {}, {}
             rename_properties(model)
 
-            for p in model.properties.values():
-                improve_doc_string(p)
+            for prop in model.properties.values():
+                improve_doc_string(prop)
 
-        with open('python-templates/data-class.jinja2') as t:
-            with open(f'../api/{schema.py_module_name}.py', 'w') as out:
-                template = Template(t.read(), lstrip_blocks=True, trim_blocks=True)
-                out.write(template.render(
-                    models=schema.models,
-                    imports=get_imports_to_types(schema))
-                )
+        output = template.render(models=schema.models, imports=get_imports_to_types(schema))
 
+        with open(f'../api/{schema.py_module_name}.py', 'w') as out:
+            out.write(output)
+
+
+if __name__ == '__main__':
+    main()

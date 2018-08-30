@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -83,3 +83,44 @@ class Rubric:
         self._data['position'] = value
 
 
+
+
+class ListOfRubrics:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Rubric:
+        return Rubric(self._stepik, self._stepik._fetch_object(Rubric, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Rubric]:
+        objects = self._stepik._fetch_objects(Rubric, ids)
+        iterable = (Rubric(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, instruction: str, text: str, cost: int, position: int = None) -> Rubric:
+        vars = locals().copy()
+        data = {'rubric': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'rubrics'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Rubric(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('rubrics', id)

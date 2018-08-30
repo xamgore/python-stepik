@@ -1,11 +1,11 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
 from resources_list import ResourcesList
-from api.assignments import Assignment
 from api.lessons import Lesson
+from api.assignments import Assignment
 
 
 class Unit:
@@ -391,3 +391,44 @@ class Unit:
         self._data['lesson'] = value
 
 
+
+
+class ListOfUnits:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Unit:
+        return Unit(self._stepik, self._stepik._fetch_object(Unit, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Unit]:
+        objects = self._stepik._fetch_objects(Unit, ids)
+        iterable = (Unit(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, section: int, lesson: int, assignments: List[int] = None, position: int = None, begin_date_source: str = None, end_date_source: str = None, soft_deadline_source: str = None, hard_deadline_source: str = None, grading_policy_source: str = None) -> Unit:
+        vars = locals().copy()
+        data = {'unit': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'units'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Unit(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('units', id)

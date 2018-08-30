@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -54,3 +54,27 @@ class Subscription:
         self._data['is_active'] = value
 
 
+
+
+class ListOfSubscriptions:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: str) -> Subscription:
+        return Subscription(self._stepik, self._stepik._fetch_object(Subscription, id))
+
+
+    def get_all(self, ids: List[str], keep_order=False) -> Iterable[Subscription]:
+        objects = self._stepik._fetch_objects(Subscription, ids)
+        iterable = (Subscription(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)

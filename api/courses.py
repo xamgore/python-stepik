@@ -1,12 +1,12 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
 from resources_list import ResourcesList
-from api.sections import Section
-from api.groups import Group
 from api.tags import Tag
+from api.groups import Group
+from api.sections import Section
 from api.users import User
 
 
@@ -49,10 +49,6 @@ class Course:
             (Section, self._stepik, holder=self, field_with_ids='sections_ids')
 
 
-    def owner(self) -> User:
-        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
-
-
     def learners_group(self) -> Group:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.learners_group_id))
 
@@ -71,6 +67,10 @@ class Course:
 
     def admins_group(self) -> Group:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
+
+
+    def owner(self) -> User:
+        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
 
 
     @readonly
@@ -1123,6 +1123,51 @@ class Course:
         self._data['lti_private_profile'] = value
 
 
+    @readonly
+    @property
+    def learners_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['learners_group']
+
+
+    @readonly
+    @property
+    def testers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['testers_group']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['moderators_group']
+
+
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['teachers_group']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['admins_group']
+
+
     @property
     def authors_ids(self) -> List[int]:
         """
@@ -1189,48 +1234,40 @@ class Course:
         return self._data['owner']
 
 
-    @readonly
-    @property
-    def learners_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['learners_group']
 
 
-    @readonly
-    @property
-    def testers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['testers_group']
+class ListOfCourses:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
 
 
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['moderators_group']
+    def get(self, id: int) -> Course:
+        return Course(self._stepik, self._stepik._fetch_object(Course, id))
 
 
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['teachers_group']
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Course]:
+        objects = self._stepik._fetch_objects(Course, ids)
+        iterable = (Course(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
 
 
-    @readonly
-    @property
-    def admins_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['admins_group']
+    def __iter__(self):
+        yield from self.iterate(limit=None)
 
 
+    def create(self, title: str, summary: str = None, workload: str = None, intro: str = None, course_format: str = None, target_audience: str = None, is_certificate_auto_issued: bool = None, certificate_regular_threshold: int = None, certificate_distinction_threshold: int = None, instructors: List[int] = None, certificate: str = None, requirements: str = None, description: str = None, sections: List[int] = None, is_adaptive: bool = None, is_idea_compatible: bool = None, intro_video: dict = None, authors: List[int] = None, tags: List[int] = None, is_enabled: bool = None, language: str = None, is_public: bool = None, begin_date_source: str = None, end_date_source: str = None, soft_deadline_source: str = None, hard_deadline_source: str = None, grading_policy_source: str = None, lti_consumer_key: str = None, lti_secret_key: str = None, lti_private_profile: bool = None) -> Course:
+        vars = locals().copy()
+        data = {'course': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'courses'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Course(self._stepik, response[resources_name][0])

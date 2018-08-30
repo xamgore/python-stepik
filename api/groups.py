@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -39,3 +39,13 @@ class Group:
         return self._data['users']
 
 
+
+
+class ListOfGroups:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, id))

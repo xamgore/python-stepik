@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -146,3 +146,21 @@ class Session:
         return self._data['actions']
 
 
+
+
+class ListOfReviewSessions:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: Any) -> dict:
+        return self._stepik._fetch_object({'_resources_name': 'review-sessions'}, id)
+
+
+    def get_all(self, ids: List[Any], keep_order=False) -> Iterable[dict]:
+        return self._stepik._fetch_objects(dict, ids)
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)

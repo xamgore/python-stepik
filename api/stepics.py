@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -28,11 +28,11 @@ class Stepics:
             raise StepikError('Some fields required by the model Stepics are missing')
 
 
-    def profile(self) -> User:
+    def user(self) -> User:
         return User(self._stepik, self._stepik._fetch_object(User, self.user_id))
 
 
-    def user(self) -> User:
+    def profile(self) -> User:
         return User(self._stepik, self._stepik._fetch_object(User, self.user_id))
 
 
@@ -103,16 +103,26 @@ class Stepics:
     @property
     def user_id(self) -> int:
         """
-        :class:`User`'s id
+        :class:`Profile`'s id
         """
-        return self._data['user']
+        return self._data['profile']
 
 
     @user_id.setter
     def user_id(self, value: int):
         """
-        :class:`User`'s id
+        :class:`Profile`'s id
         """
-        self._data['user'] = value
+        self._data['profile'] = value
 
 
+
+
+class ListOfStepics:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, user: int) -> Stepics:
+        return Stepics(self._stepik, self._stepik._fetch_object(Stepics, user))

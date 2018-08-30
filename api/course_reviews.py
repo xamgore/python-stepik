@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -100,3 +100,44 @@ class CourseReview:
         return self._data['translations']
 
 
+
+
+class ListOfCourseReviews:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> CourseReview:
+        return CourseReview(self._stepik, self._stepik._fetch_object(CourseReview, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[CourseReview]:
+        objects = self._stepik._fetch_objects(CourseReview, ids)
+        iterable = (CourseReview(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, course: str, score: int, text: str = None) -> CourseReview:
+        vars = locals().copy()
+        data = {'course-review': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'course-reviews'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return CourseReview(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('course-reviews', id)

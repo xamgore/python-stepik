@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -112,3 +112,44 @@ class Class:
         return self._data.setdefault('update_date', "None")
 
 
+
+
+class ListOfClasses:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Class:
+        return Class(self._stepik, self._stepik._fetch_object(Class, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Class]:
+        objects = self._stepik._fetch_objects(Class, ids)
+        iterable = (Class(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, course: str, title: str = None, description: str = None) -> Class:
+        vars = locals().copy()
+        data = {'class': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'classes'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Class(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('classes', id)

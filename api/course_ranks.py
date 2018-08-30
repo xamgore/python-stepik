@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -112,3 +112,27 @@ class CourseRank:
         self._data['users_count'] = value
 
 
+
+
+class ListOfCourseRanks:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> CourseRank:
+        return CourseRank(self._stepik, self._stepik._fetch_object(CourseRank, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[CourseRank]:
+        objects = self._stepik._fetch_objects(CourseRank, ids)
+        iterable = (CourseRank(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)

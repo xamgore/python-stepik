@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -38,3 +38,23 @@ class Query:
         self._data['text'] = value
 
 
+
+
+class ListOfQueries:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get_all(self, texts: List[str], keep_order=False) -> Iterable[Query]:
+        objects = self._stepik._fetch_objects(Query, texts)
+        iterable = (Query(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'text')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)

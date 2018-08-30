@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -53,3 +53,9 @@ class ProfileImage:
         self._data['avatar'] = value
 
 
+
+
+class ListOfProfileImages:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik

@@ -20,15 +20,15 @@ stepik = Stepik(client_id=id, client_secret=secret)
 course = stepik.courses.get(1)
 
 # Straightforward way, make request on each object separately:
-with open(f'course{course.id}.html', 'w', encoding='utf-8') as f:
-    start = time()
-
-    for section in course.sections:
-        for unit in section.units:
-            for step in unit.lesson().steps:
-                f.write(step_to_html(step))
-
-    print(time() - start)  # 30 seconds
+# with open(f'course{course.id}.html', 'w', encoding='utf-8') as f:
+#     start = time()
+#
+#     for section in course.sections:
+#         for unit in section.units:
+#             for step in unit.lesson().steps:
+#                 f.write(step_to_html(step))
+#
+#     print(time() - start)  # 30 seconds
 
 # The fastest way, make request with the whole bunch of ids
 start = time()

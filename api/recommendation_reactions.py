@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -91,3 +91,36 @@ class RecommendationReaction:
         self._data['time'] = value
 
 
+
+
+class ListOfRecommendationReactions:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get_all(self, users: List[str], keep_order=False) -> Iterable[RecommendationReaction]:
+        objects = self._stepik._fetch_objects(RecommendationReaction, users)
+        iterable = (RecommendationReaction(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'user')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, user: str, lesson: str, reaction: str, time: str = None) -> RecommendationReaction:
+        vars = locals().copy()
+        data = {'recommendation-reaction': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'recommendation-reactions'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return RecommendationReaction(self._stepik, response[resources_name][0])

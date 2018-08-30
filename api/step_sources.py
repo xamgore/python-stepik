@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -457,3 +457,44 @@ class StepSource:
         self._data['cost'] = value
 
 
+
+
+class ListOfStepSources:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> StepSource:
+        return StepSource(self._stepik, self._stepik._fetch_object(StepSource, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[StepSource]:
+        objects = self._stepik._fetch_objects(StepSource, ids)
+        iterable = (StepSource(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, lesson: str, block: str, position: int = None, is_solutions_unlocked: bool = None, solutions_unlocked_attempts: int = None, has_submissions_restrictions: bool = None, max_submissions_count: int = None, cost: int = None) -> StepSource:
+        vars = locals().copy()
+        data = {'step-source': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'step-sources'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return StepSource(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('step-sources', id)

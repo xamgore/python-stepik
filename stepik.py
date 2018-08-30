@@ -1,15 +1,15 @@
 from json import JSONDecodeError
-from typing import List, Iterable, Optional, TypeVar
+from typing import List, Iterable, TypeVar, Optional
 from urllib.parse import urlencode
 
-from api.courses import Course
-from api.lessons import Lesson
-from api.sections import Section
-from api.step_sources import StepSource
+from api.courses import Course, ListOfCourses
+from api.lessons import Lesson, ListOfLessons
+from api.sections import Section, ListOfSections
+from api.step_sources import StepSource, ListOfStepSources
 from api.stepics import Stepics
-from api.steps import Step
-from api.units import Unit
-from api.users import User
+from api.steps import Step, ListOfSteps
+from api.units import Unit, ListOfUnits
+from api.users import User, ListOfUsers
 from api.videos import Video
 from errors import StepikError
 
@@ -34,13 +34,13 @@ class Stepik:
         self._server = server
         self.headers = {'Authorization': 'Bearer ' + token}
 
-        self.courses = Courses(self)
-        self.sections = Sections(self)
-        self.units = Units(self)
-        self.lessons = Lessons(self)
-        self.step_sources = StepSources(self)
-        self.users = Users(self)
-        self.steps = Steps(self)
+        self.courses = ListOfCourses(self)
+        self.sections = ListOfSections(self)
+        self.units = ListOfUnits(self)
+        self.lessons = ListOfLessons(self)
+        self.step_sources = ListOfStepSources(self)
+        self.users = ListOfUsers(self)
+        self.steps = ListOfSteps(self)
 
 
     def _update(self, resource_name: str, id: int, data: dict):
@@ -63,7 +63,7 @@ class Stepik:
         try:
             return res.json()
         except JSONDecodeError as e:
-            return {'error': f'{res.status_code} {res.reason}'}
+            return {'detail': f'{res.status_code} {res.reason}'}
 
 
     def _post(self, url, data=None):
@@ -73,7 +73,17 @@ class Stepik:
         try:
             return res.json()
         except JSONDecodeError as e:
-            return {'error': f'{res.status_code} {res.reason}'}
+            return {'detail': f'{res.status_code} {res.reason}'}
+
+
+    def _delete(self, url, id):
+        api_url = f'https://{self._server}/api/{url}/{id}'
+        res = requests.delete(api_url, headers=self.headers)
+
+        try:
+            return res.json()
+        except JSONDecodeError as e:
+            return {'detail': f'{res.status_code} {res.reason}'}
 
 
     def _fetch_object(self, model: TypeVar, id: int):
@@ -138,51 +148,13 @@ class Stepik:
         return Stepics(self, self._fetch_object(Stepics, 1))
 
 
-class Courses(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get(self, course_id: int) -> Course:
-        return Course(self.stepik, self.stepik._fetch_object(Course, course_id))
-
-
-    def update(self, course: Course):
-        pass
-
-
-class Sections(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get(self, id: int) -> Section:
-        return Section(self.stepik, self.stepik._fetch_object(Section, id))
-
-
-class Units(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get(self, id: int) -> Unit:
-        return Unit(self.stepik, self.stepik._fetch_object(Unit, id))
-
-
-    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Unit]:
-        iterable = self.stepik._fetch_objects(Unit, ids)
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
-        yield from (Unit(self.stepik, o) for o in iterable)
-
-
-    def update(self, unit: Unit):
-        self.stepik._update('units', unit.id, unit._data)
-
-
 class Lessons(object):
     def __init__(self, stepik):
         self._stepik = stepik
+
+
+    def update(self, lesson: Lesson):
+        self._stepik._update('lessons', lesson.id, lesson._data)
 
 
     def get(self, id: int) -> Lesson:
@@ -199,12 +171,12 @@ class Lessons(object):
         yield from iterable
 
 
-    def iterate(self, course: Optional[int] = None, owner: Optional[int] = None,
-                language: Optional[str] = None, is_featured: Optional[bool] = None,
-                by_id: Optional[bool] = None, by_create_date: Optional[bool] = None,
-                by_update_date: Optional[bool] = None, by_vote_delta: Optional[bool] = None,
-                by_vote_epic: Optional[bool] = None, by_vote_abuse: Optional[bool] = None,
-                skip: Optional[int] = 0, limit: Optional[int] = 20) -> Iterable[Lesson]:
+    def iterate(self, course: int = None, owner: int = None,
+                language: str = None, is_featured: bool = None,
+                by_id: bool = None, by_create_date: bool = None,
+                by_update_date: bool = None, by_vote_delta: bool = None,
+                by_vote_epic: bool = None, by_vote_abuse: bool = None,
+                skip: int = 0, limit: Optional[int] = 20) -> Iterable[Lesson]:
 
         assert skip >= 0, 'skip must be positive'
         assert limit is None or limit >= 0, 'limit must be positive'
@@ -250,42 +222,19 @@ class Lessons(object):
         yield from self.iterate(limit=None)
 
 
-class Steps(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Step]:
-        iterable = self.stepik._fetch_objects(Step, ids)
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(o['id']))
-        yield from (Step(self.stepik, o) for o in iterable)
-
-
-    def get(self, id: int) -> Step:
-        return Step(self.stepik, self.stepik._fetch_object(Step, id))
-
-
-class StepSources(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get(self, id: int) -> StepSource:
-        return StepSource(self.stepik, self.stepik._fetch_object(StepSource, id))
-
-
-class Users(object):
-    def __init__(self, stepik: Stepik):
-        self.stepik = stepik
-
-
-    def get(self, id: int) -> User:
-        return User(self.stepik, self.stepik._fetch_object(User, id))
-
 
 if __name__ == '__main__':
     pass
+
+    from config import id, secret
+    stepik = Stepik(id, secret)
+
+    lesson = stepik.lessons.create(title='This is my test lesson', is_public=False)
+    print(lesson.title, lesson.id)
+
+    stepik.lessons.delete(lesson.id)
+
+
 
     # sections = course.sections.list()
     #

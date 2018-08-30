@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -349,3 +349,44 @@ class Announcement:
         return self._data['notice_dates']
 
 
+
+
+class ListOfAnnouncements:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Announcement:
+        return Announcement(self._stepik, self._stepik._fetch_object(Announcement, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Announcement]:
+        objects = self._stepik._fetch_objects(Announcement, ids)
+        iterable = (Announcement(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, subject: str, text: str, course: str = None, user: str = None, is_restricted_by_score: bool = None, score_percent_min: int = None, score_percent_max: int = None, email_template: str = None, is_scheduled: bool = None, start_date: str = None, mail_period_days: int = None, mail_quantity: int = None, is_infinite: bool = None, on_enroll: bool = None) -> Announcement:
+        vars = locals().copy()
+        data = {'announcement': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'announcements'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Announcement(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('announcements', id)

@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -574,3 +574,44 @@ class Section:
         self._data['units'] = value
 
 
+
+
+class ListOfSections:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Section:
+        return Section(self._stepik, self._stepik._fetch_object(Section, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Section]:
+        objects = self._stepik._fetch_objects(Section, ids)
+        iterable = (Section(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, course: int, title: str, units: List[int] = None, position: int = None, discounting_policy: str = None, required_section: int = None, required_percent: int = None, is_exam: bool = None, exam_duration_minutes: int = None, description: str = None, begin_date_source: str = None, end_date_source: str = None, soft_deadline_source: str = None, hard_deadline_source: str = None, grading_policy_source: str = None) -> Section:
+        vars = locals().copy()
+        data = {'section': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'sections'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return Section(self._stepik, response[resources_name][0])
+
+
+    def delete(self, id: int) -> dict:
+        return self._stepik._delete('sections', id)

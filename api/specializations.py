@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -75,3 +75,27 @@ class Specialization:
         self._data['courses'] = value
 
 
+
+
+class ListOfSpecializations:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> Specialization:
+        return Specialization(self._stepik, self._stepik._fetch_object(Specialization, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Specialization]:
+        objects = self._stepik._fetch_objects(Specialization, ids)
+        iterable = (Specialization(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)

@@ -96,7 +96,7 @@ class Property:
         if ty == '':
             return 'bool' if self.name.startswith('is_') else 'Any'
         # TODO: take from model
-        return 'str' # TODO something with that
+        return 'str'  # TODO something with that
         # raise AttributeError(
         #     f'There is an unknown type "{ty}", add it to {self.__class__.__name__}.python_type property please')
 
@@ -221,6 +221,16 @@ class Schema:
     def py_module_name(self) -> str:
         """Full module name, where schema will be saved, i.e., ``api.step_sources``"""
         return self.resources_name.replace('/', '.').replace('-', '_')
+
+
+    @property
+    def possible_module(self) -> str:
+        from common import to_dash_case
+        ty = (self.base_route and self.base_route.get and self.base_route.get.type) or \
+             (self.pk_route and self.pk_route.get and self.pk_route.get.type) or \
+             ([m.id for m in self.models.values()
+              if self.resources_name.startswith(to_dash_case(m.id)[:-2])] + ['object'])[0]
+        return to_dash_case(ty)
 
 
 ##############

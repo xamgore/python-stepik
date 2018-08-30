@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List
+from typing import List, Iterable, Any
 
 from errors import StepikError
 from common import required, readonly
@@ -153,3 +153,40 @@ class UserCodeRun:
         return self._data.setdefault('update_date', "None")
 
 
+
+
+class ListOfUserCodeRuns:
+    def __init__(self, stepik):
+        from stepik import Stepik
+        self._stepik: Stepik = stepik
+
+
+    def get(self, id: int) -> UserCodeRun:
+        return UserCodeRun(self._stepik, self._stepik._fetch_object(UserCodeRun, id))
+
+
+    def get_all(self, ids: List[int], keep_order=False) -> Iterable[UserCodeRun]:
+        objects = self._stepik._fetch_objects(UserCodeRun, ids)
+        iterable = (UserCodeRun(self._stepik, o) for o in objects)
+
+        if keep_order:
+            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+
+        return iterable
+
+
+    def __iter__(self):
+        yield from self.iterate(limit=None)
+
+
+    def create(self, user: str, step: str, language: str, code: str, stdin: str) -> UserCodeRun:
+        vars = locals().copy()
+        data = {'user-code-run': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+
+        resources_name = 'user-code-runs'
+        response = self._stepik._post(resources_name, data)
+
+        if resources_name not in response:
+            raise StepikError(response)
+
+        return UserCodeRun(self._stepik, response[resources_name][0])
