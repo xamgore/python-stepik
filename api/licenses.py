@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -66,5 +66,7 @@ class ListOfLicenses:
         self._stepik: Stepik = stepik
 
 
-    def get(self, id: Any) -> dict:
-        return self._stepik._fetch_object({'_resources_name': 'licenses'}, id)
+    def get(self, id: int) -> UserLicense:
+        obj = self._stepik._fetch_object(UserLicense, id)
+        return UserLicense(self._stepik, obj)
+

@@ -2,11 +2,12 @@
 
 # Get username using auth token. Simple version.
 
-from config import id, secret
 from stepik import Stepik
 
-stepik = Stepik(client_id=id, client_secret=secret)
+if __name__ == '__main__':
+    from config import id, secret
 
-user = stepik.stepics().user()
+    stepik = Stepik(client_id=id, client_secret=secret)
 
-print(user.first_name, user.last_name)
+    user = stepik.stepics().user()
+    print(user.first_name, user.last_name)

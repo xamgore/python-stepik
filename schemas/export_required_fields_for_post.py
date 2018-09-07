@@ -70,7 +70,7 @@ if __name__ == '__main__':
             else:
                 print('Error: ', schema.resourcePath, fields, end='\n\n')
 
-    dir = 'api-refined/metadata'
+    dir = 'schemas/api-refined/metadata'
     pathlib.Path(dir).mkdir(parents=True, exist_ok=True)
 
     with open(f'{dir}/required_fields.post.base.json', 'w') as f:

@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -78,17 +78,21 @@ class ListOfScripts:
 
 
     def get(self, id: int) -> Script:
-        return Script(self._stepik, self._stepik._fetch_object(Script, id))
+        obj = self._stepik._fetch_object(Script, id)
+        return Script(self._stepik, obj)
 
 
-    def create(self, code: str) -> Script:
+    def create(self,
+               code: str,
+               **kwargs) -> Script:
         vars = locals().copy()
-        data = {'script': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'script':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'scripts'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('scripts', data)
+        if 'scripts' not in response:
             raise StepikError(response)
 
-        return Script(self._stepik, response[resources_name][0])
+        return Script(self._stepik, response['scripts'][0])
+

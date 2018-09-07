@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -7,6 +7,10 @@ from resources_list import ResourcesList
 
 
 class Submission:
+    """
+    Submission resource.
+    """
+
     _resources_name = 'submissions'
 
 
@@ -134,31 +138,106 @@ class ListOfSubmissions:
 
 
     def get(self, id: int) -> Submission:
-        return Submission(self._stepik, self._stepik._fetch_object(Submission, id))
+        obj = self._stepik._fetch_object(Submission, id)
+        return Submission(self._stepik, obj)
 
 
-    def get_all(self, ids: List[int], keep_order=False) -> Iterable[Submission]:
+    def get_all(self, ids: Iterable[int], keep_order=False) -> Iterable[Submission]:
+        """
+        Grab a bunch of ids, usually 20 objects per request.
+        """
+        if keep_order:
+            ids = list(ids)
+
         objects = self._stepik._fetch_objects(Submission, ids)
         iterable = (Submission(self._stepik, o) for o in objects)
 
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))  # or []?
+        return iterable if not keep_order \
+            else sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))
 
-        return iterable
+
+    def iterate(self,
+                status: str = None,
+                user_name: str = None,
+                step: str = None,
+                user: str = None,
+                attempt: str = None,
+                search: str = None,
+                order: str = None,
+                review_status: str = None,
+                by_desc: bool = None,
+                skip: int = 0, limit: Optional[int] = 20) -> Iterable[Submission]:
+        """
+        There are base fields, like ``language``, that can be used to filter out
+        objects. Also there are ordering fields, that starts with ``by_`` prefix.
+        They are not used in queries if their value is ``None``. If ``True``
+        objects are sorted in straight order, if ``False`` in reversed.
+        The sorting is done on the server side, there is no guarantees will it be
+        in ascending or descending order.
+
+        ``skip`` parameter means how much objects to skip from the beginning.
+
+        ``limit`` means how much objects to take. It can be set to ``None``,
+        all objects will be fetched (not recommended, actually).
+        """
+
+        assert skip >= 0, 'skip must be positive'
+        assert limit is None or limit >= 0, 'limit must be positive'
+
+        vars = locals().copy()
+        args, order = [], []
+
+        for k, v in vars.items():
+            is_ordering = k.startswith('by_')
+            is_special = k in ['self', 'skip']
+
+            if not v is None and not is_ordering and not is_special:
+                args.append((k, v))
+
+            if not v is None and is_ordering:
+                sign = '-' if v else ''
+                order.append(sign + k[3:])
+
+        from urllib.parse import urlencode
+        params = urlencode(args, doseq=True)
+        ordering = ','.join(order)
+
+        skip = 0 if skip is None else skip
+        page_idx, count = divmod(skip, 20)
+        page_idx += 1  # stepik counts from 1
+
+        while True:
+            page = self._stepik._get(f'submissions?{params}&page={page_idx}&order={ordering}')
+
+            for obj in page['submissions']:
+                if limit and count >= limit:
+                    break
+
+                yield Submission(self._stepik, obj)
+                count += 1
+
+            if not page['meta']['has_next']:
+                break
+
+            page_idx += 1
 
 
     def __iter__(self):
         yield from self.iterate(limit=None)
 
 
-    def create(self, attempt: str, reply: str = None) -> Submission:
+    def create(self,
+               attempt: str,
+               reply: str = None,
+               **kwargs) -> Submission:
         vars = locals().copy()
-        data = {'submission': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'submission':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'submissions'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('submissions', data)
+        if 'submissions' not in response:
             raise StepikError(response)
 
-        return Submission(self._stepik, response[resources_name][0])
+        return Submission(self._stepik, response['submissions'][0])
+

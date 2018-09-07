@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -116,13 +116,3 @@ class Stepics:
         self._data['profile'] = value
 
 
-
-
-class ListOfStepics:
-    def __init__(self, stepik):
-        from stepik import Stepik
-        self._stepik: Stepik = stepik
-
-
-    def get(self, user: int) -> Stepics:
-        return Stepics(self._stepik, self._stepik._fetch_object(Stepics, user))

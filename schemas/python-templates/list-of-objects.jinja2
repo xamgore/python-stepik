@@ -7,32 +7,21 @@ class ListOf{{ name }}:
 {% if GET_PK %}
 
 
-    def get(self, {{ pk }}: {{ pk_type }}) -> {{ model_id }}:
-{% if model_id == 'dict' %}
+    def get(self, {{ pk }}: {{ pk_type }}) -> {{ model.id }}:
         return self._stepik._fetch_object({'_resources_name': '{{ resources_name }}'}, {{ pk }})
-{% else %}
-        return {{ model_id }}(self._stepik, self._stepik._fetch_object({{ model_id }}, {{ pk }}))
-{% endif %}
+
 {% endif %}
 {% if GET_BASE %}
 
 
-    def get_all(self, {{ pk }}s: List[{{ pk_type }}], keep_order=False) -> Iterable[{{ model_id }}]:
-{% if model_id == 'dict' %}
-        return self._stepik._fetch_objects({{ model_id }}, {{ pk }}s)
-{% else %}
-        objects = self._stepik._fetch_objects({{ model_id }}, {{ pk }}s)
-        iterable = ({{ model_id }}(self._stepik, o) for o in objects)
-
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, '{{ pk }}')))  # or []?
-
-        return iterable
-{% endif %}
+    def get_all(self, {{ pk }}s: List[{{ pk_type }}], keep_order=False) -> Iterable[{{ model.id }}]:
+        return self._stepik._fetch_objects({{ model.id }}, {{ pk }}s)
 
 
     def __iter__(self):
         yield from self.iterate(limit=None)
+
+
 {% endif %}
 {% if POST_BASE %}
 
@@ -41,7 +30,7 @@ class ListOf{{ name }}:
         #}{% for p in POST_BASE_PARAMS %}, {{ p.name }}: {{ p.python_type }}{#
         #}{% endfor %}{#
         #}{% for p in POST_BASE_OTHER_PARAMS %}, {{ p.name }}: {{ p.python_type }} = None{#
-        #}{% endfor %}) -> {{ model_id }}:
+        #}{% endfor %}) -> {{ model.id }}:
         vars = locals().copy()
         data = {'{{ resource_name }}': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
 
@@ -51,11 +40,7 @@ class ListOf{{ name }}:
         if resources_name not in response:
             raise StepikError(response)
 
-{% if model_id == 'dict' %}
         return response[resources_name][0]
-{% else %}
-        return {{ model_id }}(self._stepik, response[resources_name][0])
-{% endif %}
 {% endif %}
 {% if DELETE_PK %}
 
@@ -63,6 +48,22 @@ class ListOf{{ name }}:
     def delete(self, {{ pk }}: {{ pk_type }}) -> dict:
         return self._stepik._delete('{{ resources_name }}', {{ pk }})
 {% endif %}
+{#{% if PUT_PK %}#}
+{##}
+{##}
+{#    def update(self, {{ resource_name_as_variable }}: {{ model.id }}):#}
+{#        resources_name = '{{ resources_name }}'#}
+{#        response = self._stepik._put('%s/%s' % (resources_name, {{ resource_name_as_variable }}.{{ pk }}), {{ resource_name_as_variable }}._data)#}
+{##}
+{#        if resources_name not in response:#}
+{#                raise StepikError(response)#}
+{##}
+{#{% if model_id == 'dict' %}#}
+{#        return response[resources_name][0]#}
+{#{% else %}#}
+{#        return {{ model.id }}(self._stepik, response[resources_name][0])#}
+{#{% endif %}#}
+{#{% endif %}#}
 {# TODO: PUT #}
 {# TODO: create course!1 #}
 {# TODO: presentation #}

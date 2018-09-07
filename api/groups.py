@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -48,4 +48,6 @@ class ListOfGroups:
 
 
     def get(self, id: int) -> Group:
-        return Group(self._stepik, self._stepik._fetch_object(Group, id))
+        obj = self._stepik._fetch_object(Group, id)
+        return Group(self._stepik, obj)
+

@@ -14,6 +14,6 @@ resources = [r['path'] for r in get(url).json()['apis']]
 
 # save each schema to a separate file with formatting
 for path in IncrementalBar('Downloading', max=20).iter(resources):
-    with open(f'.{path}.json', 'w') as f:
+    with open(f'/schemas{path}.json', 'w') as f:
         description = get(url + path).json()
         json.dump(description, f, indent=2)

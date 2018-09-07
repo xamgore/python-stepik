@@ -67,7 +67,7 @@ def improve_doc_string(p: Property):
 
 def main():
     template: Template = None
-    with open('python-templates/data-class.jinja2') as t:
+    with open('schemas/python-templates/data-class.jinja2') as t:
         template = template or Template(t.read(), lstrip_blocks=True, trim_blocks=True)
 
     for schema in load_schemas():
@@ -80,7 +80,7 @@ def main():
 
         output = template.render(models=schema.models, imports=get_imports_to_types(schema))
 
-        with open(f'../api/{schema.py_module_name}.py', 'w') as out:
+        with open(f'api/{schema.py_module_name}.py', 'w') as out:
             out.write(output)
 
 

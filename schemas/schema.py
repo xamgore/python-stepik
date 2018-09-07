@@ -187,6 +187,15 @@ class Model:
         self.schema = schema
 
 
+    @property
+    def primary_key(self) -> str:
+        """
+        Returns a name of field that is supposed to be a primary
+        (it can be used in GET /api/resource/{pk}, and ordering)
+        """
+        return (self.required or ['id'])[0]
+
+
 class Schema:
     def __init__(self, schema, base_methods=None, pk_methods=None):
         self.resourcePath: str = schema['resourcePath']
@@ -194,6 +203,7 @@ class Schema:
 
         models: Dict[str, Model] = \
             {m.id: m for m in map(lambda x: Model(x, self), schema['models'].values())}
+        """All models that are used by this schema (the main one and inner models)"""
         self.write_models: Dict[str, Model] = \
             {m.id: m for m in models.values() if m.id.startswith('Write')}
         self.models: Dict[str, Model] = \
@@ -209,9 +219,13 @@ class Schema:
         self.pk_methods = pk_methods
         self.pk_route = self.routes.get(self.resourcePath + '/{pk}', None)
 
+        corresponding_model = self.possible_model_name
+        self.model = self.models.get(corresponding_model, None)
+
 
     @property
     def resources_name(self) -> str:
+        """Dashed resource name in plural form"""
         need_cut = self.resourcePath.startswith('/api/')
         start_idx = len('/api/') if need_cut else 0
         return self.resourcePath[start_idx:]
@@ -224,13 +238,15 @@ class Schema:
 
 
     @property
-    def possible_module(self) -> str:
+    def possible_model_name(self) -> str:
         from common import to_dash_case
         ty = (self.base_route and self.base_route.get and self.base_route.get.type) or \
              (self.pk_route and self.pk_route.get and self.pk_route.get.type) or \
              ([m.id for m in self.models.values()
               if self.resources_name.startswith(to_dash_case(m.id)[:-2])] + ['object'])[0]
-        return to_dash_case(ty)
+        return ty
+
+
 
 
 ##############
@@ -256,6 +272,23 @@ def load_schemas() -> List[Schema]:
 
 if __name__ == '__main__':
     __debug = True
+    from structure import pk_methods, base_methods
+
+    for schema in load_schemas():
+        if 'PUT' in pk_methods[schema.resourcePath]:
+            print(schema.resourcePath, end=' ')
+            print('PUT', end=' ')
+
+            if 'POST' in base_methods[schema.resourcePath]:
+                print('POST', end=' ')
+
+            if 'GET' in base_methods[schema.resourcePath]:
+                print('GET', end=' ')
+
+            if 'GET' in pk_methods[schema.resourcePath]:
+                print('GETPK', end=' ')
+
+            print('\n')
 
 # from common import to_dash_case
 # for s in schemas:

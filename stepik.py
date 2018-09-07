@@ -12,6 +12,7 @@ from api.units import Unit, ListOfUnits
 from api.users import User, ListOfUsers
 from api.videos import Video
 from errors import StepikError
+from profiles import ListOfProfiles
 
 integer = int
 boolean = bool
@@ -41,6 +42,7 @@ class Stepik:
         self.step_sources = ListOfStepSources(self)
         self.users = ListOfUsers(self)
         self.steps = ListOfSteps(self)
+        self.profiles = ListOfProfiles(self)
 
 
     def _update(self, resource_name: str, id: int, data: dict):
@@ -76,6 +78,16 @@ class Stepik:
             return {'detail': f'{res.status_code} {res.reason}'}
 
 
+    def _put(self, url, data=None):
+        api_url = f'https://{self._server}/api/{url}'
+        res = requests.put(api_url, headers=self.headers, json=data or {})
+
+        try:
+            return res.json()
+        except JSONDecodeError as e:
+            return {'detail': f'{res.status_code} {res.reason}'}
+
+
     def _delete(self, url, id):
         api_url = f'https://{self._server}/api/{url}/{id}'
         res = requests.delete(api_url, headers=self.headers)
@@ -100,17 +112,34 @@ class Stepik:
         return response[resource_name][0]
 
 
-    def _fetch_objects(self, model: TypeVar, obj_ids: List[int]):
+    @staticmethod
+    def __take(n: int, iterable: Iterable):
+        # take(2, [1,4,6,4,1]) --> 1 4
+        assert n > 0
+
+        i = 0
+        for x in iterable:
+            yield x
+            i += 1
+            if i >= n:
+                break
+
+
+    def _fetch_objects(self, model: TypeVar, obj_ids: Iterable[int]):
         resource_name = model._resources_name
+        iterator = iter(obj_ids)
 
-        # Fetch objects by 30 items,
+        # Fetch objects by 20 items,
         # so we won't bump into HTTP request length limits
-        step_size = 30
-        for i in range(0, len(obj_ids), step_size):
-            ids_slice = obj_ids[i:i + step_size]
-            ids = '&'.join(f'ids[]={id}' for id in ids_slice)
+        step_size = 20
+        while True:
+            ids_slice = list(self.__take(step_size, iterator))
+            if not ids_slice:
+                break
 
+            ids = '&'.join(f'ids[]={id}' for id in ids_slice)
             response = self._get(f'{resource_name}/?{ids}')
+
             if resource_name not in response:
                 raise StepikError(response['detail'])
 
@@ -230,6 +259,10 @@ if __name__ == '__main__':
     stepik = Stepik(id, secret)
 
     lesson = stepik.lessons.create(title='This is my test lesson', is_public=False)
+    print(lesson.title, lesson.id)
+
+    lesson.title = 'Ok, second test'
+    lesson = stepik.lessons.update(lesson)
     print(lesson.title, lesson.id)
 
     stepik.lessons.delete(lesson.id)

@@ -1,3 +1,5 @@
+import os
+
 from stepik import Stepik
 
 
@@ -6,11 +8,11 @@ def generate_html(top_lessons):
 
     for lesson in top_lessons:
         rows += """<tr>
-            <td><a href="https://stepik.org/lesson/{id}">{title}</a></td>
-            <td>{viewed_by}</td>
-            <td>{passed_by}</td>
-            <td>{vote_delta}</td>
-        </tr>""".format(**lesson)
+            <td><a href="https://stepik.org/lesson/{0.id}">{0.title}</a></td>
+            <td>{0.viewed_by}</td>
+            <td>{0.passed_by}</td>
+            <td>{0.vote_delta}</td>
+        </tr>""".format(lesson)
 
     template = f"""
         <!DOCTYPE html>
@@ -41,12 +43,11 @@ if __name__ == "__main__":
     stepik = Stepik(id, secret, server='stepik.org')
 
     # We want to sort by votes, to take the most popular lessons
-    top_lessons = list(stepik.lessons.iterate(by_vote_delta=True, limit=20))
+    top_lessons = stepik.lessons.iterate(by_vote_delta=True, limit=20)
 
     # Sort by number of views
     lessons = sorted(top_lessons, key=lambda l: l.viewed_by, reverse=True)
 
     # Generate html and write it to file
-    with open("top_lessons.html", "w+") as f:
+    with open(f'{os.path.dirname(__file__)}/out/top_lessons.html', 'w+') as f:
         f.write(generate_html(lessons))
-

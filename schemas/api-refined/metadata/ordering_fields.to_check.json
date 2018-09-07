@@ -1,0 +1,17 @@
+{
+  "/api/courses": [
+    "id",
+    "create_date",
+    "update_date",
+    "popularity",
+    "activity"
+  ],
+  "/api/lessons": [
+    "id",
+    "create_date",
+    "update_date",
+    "vote_epic",
+    "vote_abuse",
+    "vote_delta"
+  ]
+}

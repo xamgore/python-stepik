@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -46,14 +46,17 @@ class ListOfSearchReactions:
         self._stepik: Stepik = stepik
 
 
-    def create(self, result: str) -> SearchReaction:
+    def create(self,
+               result: str,
+               **kwargs) -> SearchReaction:
         vars = locals().copy()
-        data = {'search-reaction': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'search-reaction':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'search-reactions'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('search-reactions', data)
+        if 'search-reactions' not in response:
             raise StepikError(response)
 
-        return SearchReaction(self._stepik, response[resources_name][0])
+        return SearchReaction(self._stepik, response['search-reactions'][0])
+

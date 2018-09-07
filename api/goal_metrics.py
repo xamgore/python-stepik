@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -67,14 +67,18 @@ class ListOfGoalMetrics:
         self._stepik: Stepik = stepik
 
 
-    def create(self, goal_name: str, value: str = None) -> GoalMetric:
+    def create(self,
+               goal_name: str,
+               value: str = None,
+               **kwargs) -> GoalMetric:
         vars = locals().copy()
-        data = {'goal-metric': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'goal-metric':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'goal-metrics'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('goal-metrics', data)
+        if 'goal-metrics' not in response:
             raise StepikError(response)
 
-        return GoalMetric(self._stepik, response[resources_name][0])
+        return GoalMetric(self._stepik, response['goal-metrics'][0])
+

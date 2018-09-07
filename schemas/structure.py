@@ -8,11 +8,11 @@ from common import run_once
 
 
 def schemas():
-    for path in pathlib.Path('api').iterdir():
+    for path in pathlib.Path('schemas/api').iterdir():
         with open(str(path)) as source:
             schema = json.load(source)
 
-            refined_path = f'api-refined/{path.name}'
+            refined_path = f'schemas/api-refined/{path.name}'
             if pathlib.Path(refined_path).exists():
                 with open(refined_path) as refined:
                     yield merge(schema, json.load(refined))
@@ -34,15 +34,15 @@ def types():
 def get_types(model):
     return {p['type'] for p in model['properties'].values()}
 
-
+#
 
 
 base_methods: Dict[str, List[str]] = {}
-with open('api-refined/metadata/methods.base.json') as f:
+with open('schemas/api-refined/metadata/methods.base.json') as f:
     base_methods = json.load(f)
 
 pk_methods: Dict[str, List[str]] = {}
-with open('api-refined/metadata/methods.pk.json') as f:
+with open('schemas/api-refined/metadata/methods.pk.json') as f:
     pk_methods = json.load(f)
 
 if __name__ == '__main__':

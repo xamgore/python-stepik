@@ -22,7 +22,7 @@ if __name__ == '__main__':
     routes = {schema.resourcePath: get(schema.resources_name) for schema in schemas}
     routes_pk = {schema.resourcePath: get(f'{schema.resources_name}/0') for schema in schemas}
 
-    dir = 'api-refined/metadata'
+    dir = 'schemas/api-refined/metadata'
     pathlib.Path(dir).mkdir(parents=True, exist_ok=True)
 
     with open(f'{dir}/methods.base.json', 'w') as f:

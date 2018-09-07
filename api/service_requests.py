@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -108,17 +108,24 @@ class ListOfServiceRequests:
 
 
     def get(self, id: str) -> ServiceRequest:
-        return ServiceRequest(self._stepik, self._stepik._fetch_object(ServiceRequest, id))
+        obj = self._stepik._fetch_object(ServiceRequest, id)
+        return ServiceRequest(self._stepik, obj)
 
 
-    def create(self, target: str, method: str, args: str = None, kwargs: str = None) -> ServiceRequest:
+    def create(self,
+               target: str,
+               method: str,
+               args: str = None,
+               kwargs: str = None,
+               **kwargs) -> ServiceRequest:
         vars = locals().copy()
-        data = {'service-request': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'service-request':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'service-requests'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('service-requests', data)
+        if 'service-requests' not in response:
             raise StepikError(response)
 
-        return ServiceRequest(self._stepik, response[resources_name][0])
+        return ServiceRequest(self._stepik, response['service-requests'][0])
+

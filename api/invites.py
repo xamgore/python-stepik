@@ -1,5 +1,5 @@
 # This file is generated
-from typing import List, Iterable, Any
+from typing import List, Iterable, Any, Optional
 
 from errors import StepikError
 from common import required, readonly
@@ -52,14 +52,17 @@ class ListOfInvites:
         self._stepik: Stepik = stepik
 
 
-    def create(self, invite_key: str) -> Invite:
+    def create(self,
+               invite_key: str,
+               **kwargs) -> Invite:
         vars = locals().copy()
-        data = {'invite': {k: v for k, v in vars.items() if k != 'self' and v is not None}}
+        data = {'invite':
+                    {k: v for k, v in {**vars, **kwargs}.items()
+                     if k != 'self' and v is not None}}
 
-        resources_name = 'invites'
-        response = self._stepik._post(resources_name, data)
-
-        if resources_name not in response:
+        response = self._stepik._post('invites', data)
+        if 'invites' not in response:
             raise StepikError(response)
 
-        return Invite(self._stepik, response[resources_name][0])
+        return Invite(self._stepik, response['invites'][0])
+
