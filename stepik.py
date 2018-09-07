@@ -52,7 +52,7 @@ class Stepik:
         :param data: dict object
         """
         api_url = f'https://{self._server}/api/{resource_name}/{id}'
-        response = requests.put(api_url, headers=self.headers, json={resource_name: data}).json()
+        response = requests.put(api_url, headers=self.headers, json=data).json()
         if resource_name not in response:
             raise StepikError(response['detail'])
         return response[f'{resource_name}'][0]
@@ -175,81 +175,6 @@ class Stepik:
         The current context: user's id, system's state.
         """
         return Stepics(self, self._fetch_object(Stepics, 1))
-
-
-class Lessons(object):
-    def __init__(self, stepik):
-        self._stepik = stepik
-
-
-    def update(self, lesson: Lesson):
-        self._stepik._update('lessons', lesson.id, lesson._data)
-
-
-    def get(self, id: int) -> Lesson:
-        return Lesson(self._stepik, self._stepik._fetch_object(Lesson, id))
-
-
-    def get_all(self, ids: List[int], keep_order=True) -> Iterable[Lesson]:
-        objects = self._stepik._fetch_objects(Lesson, ids)
-        iterable = (Lesson(self._stepik, o) for o in objects)
-
-        if keep_order:
-            iterable = sorted(iterable, key=lambda o: ids.index(getattr(o, 'id')))
-
-        yield from iterable
-
-
-    def iterate(self, course: int = None, owner: int = None,
-                language: str = None, is_featured: bool = None,
-                by_id: bool = None, by_create_date: bool = None,
-                by_update_date: bool = None, by_vote_delta: bool = None,
-                by_vote_epic: bool = None, by_vote_abuse: bool = None,
-                skip: int = 0, limit: Optional[int] = 20) -> Iterable[Lesson]:
-
-        assert skip >= 0, 'skip must be positive'
-        assert limit is None or limit >= 0, 'limit must be positive'
-
-        vars = locals().copy()
-        args, order = [], []
-
-        for k, v in vars.items():
-            is_ordering = k.startswith('by_')
-            is_special = k in ['self', 'skip']
-
-            if not v is None and not is_ordering and not is_special:
-                args.append((k, v))
-
-            if not v is None and is_ordering:
-                sign = '-' if v else ''
-                order.append(sign + k[3:])
-
-        params = urlencode(args, doseq=True)
-        ordering = ','.join(order)
-
-        skip = 0 if skip is None else skip
-        page_idx, count = divmod(skip, 20)
-        page_idx += 1  # stepik counts from 1
-
-        while True:
-            page = self._stepik._get(f'lessons?{params}&page={page_idx}&order={ordering}')
-
-            for lesson in page['lessons']:
-                if limit and count >= limit:
-                    break
-
-                yield Lesson(self._stepik, lesson)
-                count += 1
-
-            if not page['meta']['has_next']:
-                break
-
-            page_idx += 1
-
-
-    def __iter__(self):
-        yield from self.iterate(limit=None)
-
 
 
 if __name__ == '__main__':

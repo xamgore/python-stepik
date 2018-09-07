@@ -211,3 +211,17 @@ class ListOfReviews:
 
         return Review(self._stepik, response['reviews'][0])
 
+
+    def update(self, obj: Review) -> Review:
+        required = ['session', 'target_session', 'text', 'rubric_scores']
+        vars = obj._data
+        data = {'review':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'reviews/{ obj.id }', data)
+        if 'reviews' not in response:
+            raise StepikError(response)
+
+        return Review(self._stepik, response['reviews'][0])
+

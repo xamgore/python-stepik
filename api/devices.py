@@ -209,3 +209,17 @@ class ListOfDevices:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('devices', id)
 
+
+    def update(self, obj: Device) -> Device:
+        required = ['registration_id', 'description', 'client_type', 'is_badges_enabled']
+        vars = obj._data
+        data = {'device':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'devices/{ obj.id }', data)
+        if 'devices' not in response:
+            raise StepikError(response)
+
+        return Device(self._stepik, response['devices'][0])
+

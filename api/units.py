@@ -4,8 +4,8 @@ from typing import List, Iterable, Any, Optional
 from errors import StepikError
 from common import required, readonly
 from resources_list import ResourcesList
-from api.lessons import Lesson
 from api.assignments import Assignment
+from api.lessons import Lesson
 
 
 class Unit:
@@ -512,4 +512,18 @@ class ListOfUnits:
     def delete(self, id: int) -> dict:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('units', id)
+
+
+    def update(self, obj: Unit) -> Unit:
+        required = ['section', 'lesson', 'assignments', 'position', 'begin_date_source', 'end_date_source', 'soft_deadline_source', 'hard_deadline_source', 'grading_policy_source']
+        vars = obj._data
+        data = {'unit':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'units/{ obj.id }', data)
+        if 'units' not in response:
+            raise StepikError(response)
+
+        return Unit(self._stepik, response['units'][0])
 

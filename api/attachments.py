@@ -203,3 +203,17 @@ class ListOfAttachments:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('attachments', id)
 
+
+    def update(self, obj: Attachment) -> Attachment:
+        required = ['file', 'course', 'lesson']
+        vars = obj._data
+        data = {'attachment':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'attachments/{ obj.id }', data)
+        if 'attachments' not in response:
+            raise StepikError(response)
+
+        return Attachment(self._stepik, response['attachments'][0])
+

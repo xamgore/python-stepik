@@ -8,6 +8,7 @@ from schemas.structure import base_methods, pk_methods
 
 
 def gen_with_model(schema: Schema) -> str:
+    global post_required_fields
     base_route, pk_route = {}, {}
     resource_path = schema.resourcePath
 
@@ -31,7 +32,6 @@ def gen_with_model(schema: Schema) -> str:
         }
 
     if 'POST' in base_methods[resource_path]:
-        global post_required_fields
         fields = post_required_fields.get(resource_path, None)
 
         if fields is not None:
@@ -52,8 +52,19 @@ def gen_with_model(schema: Schema) -> str:
             'model_class_name': schema.model.id,
         }
 
-    if 'PUT' in pk_methods[resource_path]:
-        pk_route['PUT'] = {}  # todo remove required fields and test
+    if 'PUT' in pk_methods[resource_path] and 'POST' in base_methods[resource_path]:
+        fields = post_required_fields.get(resource_path, None)
+
+        if fields is not None:
+            pk_route['PUT'] = {
+                'pk':               schema.model.primary_key,
+                'var':              'obj',
+                'required':         fields + [p.name for p in schema.model.properties.values()
+                                     if not (p.readOnly or p.name in fields)],
+                'model_class_name': schema.model.id,
+                'resource':         to_dash_case(schema.model.id),
+                'resources_plural': schema.resources_name,
+            }
 
     if 'POST' in pk_methods[resource_path]:
         pk_route['POST'] = {}

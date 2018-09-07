@@ -206,3 +206,17 @@ class ListOfStorageRecords:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('storage-records', id)
 
+
+    def update(self, obj: StorageRecord) -> StorageRecord:
+        required = ['kind', 'data']
+        vars = obj._data
+        data = {'storage-record':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'storage-records/{ obj.id }', data)
+        if 'storage-records' not in response:
+            raise StepikError(response)
+
+        return StorageRecord(self._stepik, response['storage-records'][0])
+

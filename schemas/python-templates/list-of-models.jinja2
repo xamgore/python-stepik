@@ -124,18 +124,26 @@ class ListOf{{ name }}:
         return self._stepik._delete('{{ r.url }}', {{ r.var }})
 
 {% endif %}
-{#{% if PUT_PK %}#}
-{##}
-{##}
-{#    def update(self, {{ resource_name_as_variable }}: {{ model.id }}):#}
-{#        resources_name = '{{ resources_name }}'#}
-{#        response = self._stepik._put('%s/%s' % (resources_name, {{ resource_name_as_variable }}.{{ pk }}), {{ resource_name_as_variable }}._data)#}
-{##}
-{#        if resources_name not in response:#}
-{#                raise StepikError(response)#}
-{##}
-{#        return {{ model.id }}(self._stepik, response[resources_name][0])#}
-{#{% endif %}#}
-{# TODO: PUT #}
-{# TODO: create course!1 #}
-{# TODO: presentation #}
+{% if 'PUT' in pk_route %}{% set r = pk_route['PUT'] %}
+
+    def update(self, {{ r.var }}: {{ r.model_class_name }}) -> {{ r.model_class_name }}:
+{#               {% for p in r.required %}#}
+{#               {{ p.name }}: {{ p.python_type or 'str' }},#}
+{#               {% endfor %}#}
+{#               {% for p in r.other    %}#}
+{#               {{ p.name }}: {{ p.python_type or 'str' }} = None,#}
+{#               {% endfor %}#}
+{#               **kwargs) -> {{ r.model_class_name }}:#}
+        required = {{ r.required }}
+        vars = {{ r.var }}._data
+        data = {'{{ r.resource }}':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'{{ r.resources_plural }}/{ {{ r.var }}.{{ r.pk }} }', data)
+        if '{{ r.resources_plural }}' not in response:
+            raise StepikError(response)
+
+        return {{ r.model_class_name }}(self._stepik, response['{{ r.resources_plural }}'][0])
+
+{% endif %}

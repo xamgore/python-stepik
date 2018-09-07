@@ -700,3 +700,17 @@ class ListOfSections:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('sections', id)
 
+
+    def update(self, obj: Section) -> Section:
+        required = ['course', 'title', 'units', 'position', 'discounting_policy', 'required_section', 'required_percent', 'is_exam', 'exam_duration_minutes', 'description', 'begin_date_source', 'end_date_source', 'soft_deadline_source', 'hard_deadline_source', 'grading_policy_source']
+        vars = obj._data
+        data = {'section':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'sections/{ obj.id }', data)
+        if 'sections' not in response:
+            raise StepikError(response)
+
+        return Section(self._stepik, response['sections'][0])
+

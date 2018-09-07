@@ -198,3 +198,17 @@ class ListOfRubrics:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('rubrics', id)
 
+
+    def update(self, obj: Rubric) -> Rubric:
+        required = ['instruction', 'text', 'cost', 'position']
+        vars = obj._data
+        data = {'rubric':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'rubrics/{ obj.id }', data)
+        if 'rubrics' not in response:
+            raise StepikError(response)
+
+        return Rubric(self._stepik, response['rubrics'][0])
+

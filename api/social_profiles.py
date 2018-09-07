@@ -187,3 +187,17 @@ class ListOfSocialProfiles:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('social-profiles', id)
 
+
+    def update(self, obj: SocialProfile) -> SocialProfile:
+        required = ['provider', 'name']
+        vars = obj._data
+        data = {'social-profile':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'social-profiles/{ obj.id }', data)
+        if 'social-profiles' not in response:
+            raise StepikError(response)
+
+        return SocialProfile(self._stepik, response['social-profiles'][0])
+

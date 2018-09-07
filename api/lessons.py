@@ -4,10 +4,10 @@ from typing import List, Iterable, Any, Optional
 from errors import StepikError
 from common import required, readonly
 from resources_list import ResourcesList
-from api.steps import Step
-from api.groups import Group
-from api.users import User
 from api.subscriptions import Subscription
+from api.users import User
+from api.groups import Group
+from api.steps import Step
 
 
 class Lesson:
@@ -37,23 +37,15 @@ class Lesson:
 
 
     @property
-    def steps(self) -> ResourcesList[Step]:
-        return ResourcesList[Step]\
-            (Step, self._stepik, holder=self, field_with_ids='steps_ids')
-
-
-    @property
     def subscriptions(self) -> ResourcesList[Subscription]:
         return ResourcesList[Subscription]\
             (Subscription, self._stepik, holder=self, field_with_ids='subscriptions_ids')
 
 
-    def learners_group(self) -> Group:
-        return Group(self._stepik, self._stepik._fetch_object(Group, self.learners_group_id))
-
-
-    def owner(self) -> User:
-        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
+    @property
+    def steps(self) -> ResourcesList[Step]:
+        return ResourcesList[Step]\
+            (Step, self._stepik, holder=self, field_with_ids='steps_ids')
 
 
     def teachers_group(self) -> Group:
@@ -64,12 +56,20 @@ class Lesson:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.moderators_group_id))
 
 
+    def owner(self) -> User:
+        return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
+
+
     def admins_group(self) -> Group:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
 
 
     def testers_group(self) -> Group:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.testers_group_id))
+
+
+    def learners_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.learners_group_id))
 
 
     @readonly
@@ -374,6 +374,60 @@ class Lesson:
         self._data['lti_private_profile'] = value
 
 
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['teachers_group']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['moderators_group']
+
+
+    @readonly
+    @property
+    def owner_id(self) -> int:
+        """
+        :class:`User`'s id of the lesson's owner
+        """
+        return self._data['owner']
+
+
+    @readonly
+    @property
+    def subscriptions_ids(self) -> str:
+        """
+        List[int]
+        """
+        return self._data['subscriptions']
+
+
+    @readonly
+    @property
+    def admins_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['admins_group']
+
+
+    @readonly
+    @property
+    def testers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['testers_group']
+
+
     @required
     @property
     def steps_ids(self) -> List[int]:
@@ -398,60 +452,6 @@ class Lesson:
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
         """
         return self._data['learners_group']
-
-
-    @readonly
-    @property
-    def owner_id(self) -> int:
-        """
-        :class:`User`'s id of the lesson's owner
-        """
-        return self._data['owner']
-
-
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['teachers_group']
-
-
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['moderators_group']
-
-
-    @readonly
-    @property
-    def admins_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['admins_group']
-
-
-    @readonly
-    @property
-    def subscriptions_ids(self) -> str:
-        """
-        List[int]
-        """
-        return self._data['subscriptions']
-
-
-    @readonly
-    @property
-    def testers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['testers_group']
 
 
 
@@ -578,4 +578,18 @@ class ListOfLessons:
     def delete(self, id: int) -> dict:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('lessons', id)
+
+
+    def update(self, obj: Lesson) -> Lesson:
+        required = ['title', 'steps', 'cover_url', 'is_comments_enabled', 'language', 'is_public', 'lti_consumer_key', 'lti_secret_key', 'lti_private_profile']
+        vars = obj._data
+        data = {'lesson':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'lessons/{ obj.id }', data)
+        if 'lessons' not in response:
+            raise StepikError(response)
+
+        return Lesson(self._stepik, response['lessons'][0])
 

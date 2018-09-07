@@ -5,8 +5,8 @@ from errors import StepikError
 from common import required, readonly
 from resources_list import ResourcesList
 from api.tags import Tag
-from api.groups import Group
 from api.sections import Section
+from api.groups import Group
 from api.users import User
 
 
@@ -54,10 +54,6 @@ class Course:
             (Section, self._stepik, holder=self, field_with_ids='sections_ids')
 
 
-    def admins_group(self) -> Group:
-        return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
-
-
     def owner(self) -> User:
         return User(self._stepik, self._stepik._fetch_object(User, self.owner_id))
 
@@ -76,6 +72,10 @@ class Course:
 
     def teachers_group(self) -> Group:
         return Group(self._stepik, self._stepik._fetch_object(Group, self.teachers_group_id))
+
+
+    def admins_group(self) -> Group:
+        return Group(self._stepik, self._stepik._fetch_object(Group, self.admins_group_id))
 
 
     @readonly
@@ -1130,6 +1130,51 @@ class Course:
 
     @readonly
     @property
+    def owner_id(self) -> int:
+        """
+        :class:`User`'s id of the lesson's owner
+        """
+        return self._data['owner']
+
+
+    @readonly
+    @property
+    def learners_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['learners_group']
+
+
+    @readonly
+    @property
+    def testers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['testers_group']
+
+
+    @readonly
+    @property
+    def moderators_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['moderators_group']
+
+
+    @readonly
+    @property
+    def teachers_group_id(self) -> int:
+        """
+        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
+        """
+        return self._data['teachers_group']
+
+
+    @readonly
+    @property
     def admins_group_id(self) -> int:
         """
         :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
@@ -1192,51 +1237,6 @@ class Course:
         Type: List[int]
         """
         self._data['sections'] = value
-
-
-    @readonly
-    @property
-    def owner_id(self) -> int:
-        """
-        :class:`User`'s id of the lesson's owner
-        """
-        return self._data['owner']
-
-
-    @readonly
-    @property
-    def learners_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['learners_group']
-
-
-    @readonly
-    @property
-    def testers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['testers_group']
-
-
-    @readonly
-    @property
-    def moderators_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['moderators_group']
-
-
-    @readonly
-    @property
-    def teachers_group_id(self) -> int:
-        """
-        :class:`Group`'s id. Equals ``None`` if user isn't lesson's owner or admin.
-        """
-        return self._data['teachers_group']
 
 
 
@@ -1383,6 +1383,20 @@ class ListOfCourses:
                      if k != 'self' and v is not None}}
 
         response = self._stepik._post('courses', data)
+        if 'courses' not in response:
+            raise StepikError(response)
+
+        return Course(self._stepik, response['courses'][0])
+
+
+    def update(self, obj: Course) -> Course:
+        required = ['title', 'summary', 'workload', 'intro', 'course_format', 'target_audience', 'is_certificate_auto_issued', 'certificate_regular_threshold', 'certificate_distinction_threshold', 'instructors', 'certificate', 'requirements', 'description', 'sections', 'is_adaptive', 'is_idea_compatible', 'intro_video', 'authors', 'tags', 'is_enabled', 'language', 'is_public', 'begin_date_source', 'end_date_source', 'soft_deadline_source', 'hard_deadline_source', 'grading_policy_source', 'lti_consumer_key', 'lti_secret_key', 'lti_private_profile']
+        vars = obj._data
+        data = {'course':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'courses/{ obj.id }', data)
         if 'courses' not in response:
             raise StepikError(response)
 

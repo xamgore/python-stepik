@@ -571,3 +571,17 @@ class ListOfStepSources:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('step-sources', id)
 
+
+    def update(self, obj: StepSource) -> StepSource:
+        required = ['lesson', 'block', 'position', 'is_solutions_unlocked', 'solutions_unlocked_attempts', 'has_submissions_restrictions', 'max_submissions_count', 'cost']
+        vars = obj._data
+        data = {'step-source':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'step-sources/{ obj.id }', data)
+        if 'step-sources' not in response:
+            raise StepikError(response)
+
+        return StepSource(self._stepik, response['step-sources'][0])
+

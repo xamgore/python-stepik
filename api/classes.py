@@ -228,3 +228,17 @@ class ListOfClasses:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('classes', id)
 
+
+    def update(self, obj: Class) -> Class:
+        required = ['course', 'title', 'description']
+        vars = obj._data
+        data = {'class':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'classes/{ obj.id }', data)
+        if 'classes' not in response:
+            raise StepikError(response)
+
+        return Class(self._stepik, response['classes'][0])
+

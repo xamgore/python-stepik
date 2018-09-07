@@ -469,3 +469,17 @@ class ListOfAnnouncements:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('announcements', id)
 
+
+    def update(self, obj: Announcement) -> Announcement:
+        required = ['subject', 'text', 'course', 'user', 'is_restricted_by_score', 'score_percent_min', 'score_percent_max', 'email_template', 'is_scheduled', 'start_date', 'mail_period_days', 'mail_quantity', 'is_infinite', 'on_enroll']
+        vars = obj._data
+        data = {'announcement':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'announcements/{ obj.id }', data)
+        if 'announcements' not in response:
+            raise StepikError(response)
+
+        return Announcement(self._stepik, response['announcements'][0])
+

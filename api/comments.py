@@ -451,3 +451,17 @@ class ListOfComments:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('comments', id)
 
+
+    def update(self, obj: Comment) -> Comment:
+        required = ['target', 'parent', 'text', 'is_pinned', 'is_reported', 'attachments', 'thread', 'submission']
+        vars = obj._data
+        data = {'comment':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'comments/{ obj.id }', data)
+        if 'comments' not in response:
+            raise StepikError(response)
+
+        return Comment(self._stepik, response['comments'][0])
+

@@ -224,3 +224,17 @@ class ListOfInstructions:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('instructions', id)
 
+
+    def update(self, obj: Instruction) -> Instruction:
+        required = ['step', 'min_reviews', 'strategy_type', 'rubrics', 'text']
+        vars = obj._data
+        data = {'instruction':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'instructions/{ obj.id }', data)
+        if 'instructions' not in response:
+            raise StepikError(response)
+
+        return Instruction(self._stepik, response['instructions'][0])
+

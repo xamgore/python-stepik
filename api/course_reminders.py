@@ -192,3 +192,17 @@ class ListOfCourseReminders:
         """Delete the object by its id. Returns the server's response"""
         return self._stepik._delete('course-reminders', id)
 
+
+    def update(self, obj: CourseReminder) -> CourseReminder:
+        required = ['course', 'is_active']
+        vars = obj._data
+        data = {'course-reminder':
+                    {k: v for k, v in vars.items()
+                     if k != 'self' and v is not None and k in required }}
+
+        response = self._stepik._put(f'course-reminders/{ obj.id }', data)
+        if 'course-reminders' not in response:
+            raise StepikError(response)
+
+        return CourseReminder(self._stepik, response['course-reminders'][0])
+
