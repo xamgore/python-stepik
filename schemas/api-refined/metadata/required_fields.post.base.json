@@ -1,0 +1,155 @@
+{
+  "/api/submissions": [
+    "attempt"
+  ],
+  "/api/storage-records": [],
+  "/api/review-sessions": null,
+  "/api/videos": null,
+  "/api/ws": [],
+  "/api/announcements": [
+    "subject",
+    "text"
+  ],
+  "/api/attempts": [
+    "step"
+  ],
+  "/api/user-code-runs": [
+    "user",
+    "step",
+    "language",
+    "code",
+    "stdin"
+  ],
+  "/api/search-reactions": [
+    "result"
+  ],
+  "/api/sections": [
+    "course",
+    "title"
+  ],
+  "/api/instructions": [
+    "step"
+  ],
+  "/api/goal-metrics": [
+    "goal_name"
+  ],
+  "/api/scripts": [
+    "code"
+  ],
+  "/api/devices": [
+    "registration_id",
+    "description"
+  ],
+  "/api/rubrics": [
+    "instruction",
+    "text",
+    "cost"
+  ],
+  "/api/score-files": [
+    "session",
+    "file"
+  ],
+  "/api/invites": [
+    "invite_key"
+  ],
+  "/api/followers": [
+    "followee"
+  ],
+  "/api/recommendation-reactions": [
+    "user",
+    "lesson",
+    "reaction"
+  ],
+  "/api/short-urls": [
+    "url"
+  ],
+  "/api/course-payments": [
+    "course"
+  ],
+  "/api/members": [
+    "group"
+  ],
+  "/api/course-reminders": [
+    "course"
+  ],
+  "/api/classes": [
+    "course"
+  ],
+  "/api/social-accounts": [
+    "provider",
+    "uid"
+  ],
+  "/api/email-addresses": [
+    "email"
+  ],
+  "/api/course-reviews": [
+    "course",
+    "score"
+  ],
+  "/api/views": [
+    "step"
+  ],
+  "/api/metrics": [
+    "name"
+  ],
+  "/api/social-profiles": [
+    "provider",
+    "name"
+  ],
+  "/api/enrollments": [
+    "course"
+  ],
+  "/api/students": [
+    "klass",
+    "invitation_key"
+  ],
+  "/api/assistants": [
+    "klass",
+    "user"
+  ],
+  "/api/exam-sessions": [
+    "section"
+  ],
+  "/api/long-tasks": [
+    "type"
+  ],
+  "/api/service-requests": [
+    "target",
+    "method"
+  ],
+  "/api/reviews": [
+    "session"
+  ],
+  "/api/proctor-sessions": [
+    "section"
+  ],
+  "/api/lessons": [
+    "title"
+  ],
+  "/api/invitations": [
+    "group"
+  ],
+  "/api/attachments": [
+    "file"
+  ],
+  "/api/units": [
+    "section",
+    "lesson"
+  ],
+  "/api/comments": [
+    "target"
+  ],
+  "/api/favorite-courses": [
+    "course"
+  ],
+  "/api/courses": [
+    "title"
+  ],
+  "/api/users": [
+    "email"
+  ],
+  "/api/step-sources": [
+    "lesson",
+    "block"
+  ]
+}

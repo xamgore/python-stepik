@@ -1,0 +1,134 @@
+{
+  "/api/announcements": [],
+  "/api/attempts": [],
+  "/api/user-code-runs": [],
+  "/api/platform-news": [],
+  "/api/sections": [],
+  "/api/step-issues": [],
+  "/api/instructions": [],
+  "/api/user-courses": [
+    "course",
+    "id",
+    "is_favorite",
+    "last_viewed"
+  ],
+  "/api/email-templates": [],
+  "/api/queries": [],
+  "/api/devices": [],
+  "/api/rubrics": [],
+  "/api/storage-records": [],
+  "/api/todo-items": [],
+  "/api/course-purchases": [],
+  "/api/score-files": [],
+  "/api/review-sessions": [],
+  "/api/tags": [],
+  "/api/countries": [],
+  "/api/certificates": [
+    "id"
+  ],
+  "/api/stripe-subscriptions": [],
+  "/api/followers": [],
+  "/api/specializations": [],
+  "/api/course-grades": [],
+  "/api/course-ranks": [],
+  "/api/recommendation-reactions": [],
+  "/api/profiles": [],
+  "/api/course-period-statistics": [],
+  "/api/short-urls": [],
+  "/api/course-payments": [],
+  "/api/achievement-progresses": [
+    "create_date",
+    "id",
+    "update_date",
+    "obtain_date",
+    "score"
+  ],
+  "/api/members": [],
+  "/api/recommendations": [],
+  "/api/course-reminders": [],
+  "/api/events": [],
+  "/api/classes": [],
+  "/api/social-accounts": [],
+  "/api/cities": [],
+  "/api/email-addresses": [],
+  "/api/course-subscriptions": [
+    "id",
+    "course"
+  ],
+  "/api/course-reviews": [
+    "create_date",
+    "id",
+    "update_date",
+    "score"
+  ],
+  "/api/stripe-coupons": [],
+  "/api/subscriptions": [],
+  "/api/social-profiles": [
+    "id"
+  ],
+  "/api/adaptivity-parameters-changes": [],
+  "/api/rubric-scores": [],
+  "/api/course-progress-changes": [],
+  "/api/students": [],
+  "/api/assistants": [],
+  "/api/course-review-summaries": [
+    "id",
+    "average",
+    "count"
+  ],
+  "/api/exam-sessions": [],
+  "/api/long-tasks": [],
+  "/api/stripe-plans": [],
+  "/api/class-plans": [],
+  "/api/reviews": [],
+  "/api/notifications": [],
+  "/api/proctor-sessions": [],
+  "/api/lessons": [
+    "vote_epic",
+    "create_date",
+    "id",
+    "update_date",
+    "vote_delta",
+    "vote_abuse"
+  ],
+  "/api/invitations": [],
+  "/api/attachments": [],
+  "/api/achievements": [],
+  "/api/steps": [
+    "id",
+    "update_date",
+    "create_date"
+  ],
+  "/api/assignments": [],
+  "/api/story-templates": [],
+  "/api/units": [],
+  "/api/submissions": [
+    "desc"
+  ],
+  "/api/regions": [],
+  "/api/comments": [
+    "time",
+    "id",
+    "last_time",
+    "vote_delta"
+  ],
+  "/api/favorite-courses": [],
+  "/api/course-by-language-statistics": [],
+  "/api/courses": [
+    "create_date",
+    "id",
+    "popularity",
+    "update_date",
+    "activity"
+  ],
+  "/api/course-lists": [],
+  "/api/users": [
+    "id",
+    "reputation",
+    "knowledge_rank",
+    "knowledge",
+    "reputation_rank"
+  ],
+  "/api/course-total-statistics": [],
+  "/api/step-sources": []
+}
