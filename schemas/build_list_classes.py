@@ -1,7 +1,7 @@
 import json
 from jinja2 import Template
 
-from common import to_camel_case, to_dash_case
+from schemas.common import to_camel_case, to_dash_case
 from schemas.build_data_classes import main as build_data_classes
 from schemas.schema import load_schemas, Schema
 from schemas.structure import base_methods, pk_methods
@@ -136,5 +136,5 @@ if __name__ == '__main__':
 
     for schema in load_schemas():
         output = gen_with_model(schema) if schema.model else ''  # gen_with_object(schema)
-        with open(f'api/{schema.py_module_name}.py', 'a') as f:
+        with open(f'stepik/api/{schema.py_module_name}.py', 'a') as f:
             f.write(output)

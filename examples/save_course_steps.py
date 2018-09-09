@@ -6,7 +6,7 @@
 from time import time
 from os.path import dirname
 
-from api.steps import Step
+from stepik.api.steps import Step
 from stepik import Stepik
 
 

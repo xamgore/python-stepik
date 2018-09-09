@@ -4,8 +4,6 @@ from typing import Dict, List
 
 from jsonmerge import merge
 
-from common import run_once
-
 
 def schemas():
     for path in pathlib.Path('schemas/api').iterdir():

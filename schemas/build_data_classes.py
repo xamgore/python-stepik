@@ -3,7 +3,7 @@ from typing import Set, Dict
 
 from jinja2 import Template
 
-from common import run_once
+from schemas.common import run_once
 from schemas.schema import load_schemas, Model, Property, Schema
 
 
@@ -47,7 +47,7 @@ def get_imports_to_types(schema: Schema):
         .intersection(models().keys())
 
     # TODO topological sort :(
-    return {m: f'api.{models()[m].schema.py_module_name}' for m in models_to_import}
+    return {m: f'.{models()[m].schema.py_module_name}' for m in models_to_import}
 
 
 def improve_doc_string(p: Property):
@@ -80,7 +80,7 @@ def main():
 
         output = template.render(models=schema.models, imports=get_imports_to_types(schema))
 
-        with open(f'api/{schema.py_module_name}.py', 'w') as out:
+        with open(f'stepik/api/{schema.py_module_name}.py', 'w') as out:
             out.write(output)
 
 

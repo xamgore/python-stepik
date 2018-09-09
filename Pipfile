@@ -8,6 +8,7 @@ name = "pypi"
 jsonmerge = "*"
 requests = "*"
 progress = "*"
+twine = "*"
 
 [dev-packages]
 

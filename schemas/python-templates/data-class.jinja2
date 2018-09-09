@@ -1,9 +1,9 @@
 # This file is generated
 from typing import List, Iterable, Any, Optional
 
-from errors import StepikError
-from common import required, readonly
-from resources_list import ResourcesList
+from stepik.errors import StepikError
+from stepik.common import required, readonly
+from stepik.resources_list import ResourcesList
 {% for model_name, py_module_name in imports.items() if model_name not in models %}
 from {{ py_module_name }} import {{ model_name }}
 {% endfor %}
